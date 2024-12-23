@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'cubits/onboarding_cubit/onboarding_cubit.dart';
-import 'ui/screens/onboarding/onboarding.dart';
+import 'utils/routes/router.dart';
 
 void main() {
   runApp(
@@ -14,22 +12,27 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: BlocProvider(
-        create: (BuildContext context) => OnboardingCubit(),
-        child: Onboarding(),
-      ),
+      routerConfig: Routerapp.instance.router,
     );
+
+    // MaterialApp(
+    //   title: 'Flutter Demo',
+    //   debugShowCheckedModeBanner: false,
+    //   theme: ThemeData(
+    //     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    //     useMaterial3: true,
+    //   ),
+    //   home: BlocProvider(
+    //     create: (BuildContext context) => OnboardingCubit(),
+    //     child: Onboarding(),
+    //   ),
+    // );
   }
 }
-
-//  DevicePreview(
-//       enabled: true,
-//       builder: (context) => MyApp(),
-//     ),

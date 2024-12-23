@@ -19,7 +19,7 @@ class FirstDayOfLastPeriod extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             GlobalText(
-              text: 'Period müddəti',
+              text: 'Period muddetini secin',
               fontSize: 14,
               fontWeight: FontWeight.w500,
               color: Color(0xff667085),
@@ -44,11 +44,15 @@ class FirstDayOfLastPeriod extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GlobalText(
-                      text: 'Period müddəti seçin...',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
+                    BlocBuilder<QuestionsCubit, QuestionsState>(
+                      builder: (context, state) {
+                        return GlobalText(
+                          text: questionsCubit.selectedPeriodTime,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                        );
+                      },
                     ),
                     BlocBuilder<QuestionsCubit, QuestionsState>(
                       builder: (context, state) {
@@ -104,6 +108,7 @@ class FirstDayOfLastPeriod extends StatelessWidget {
                           onSelectedItemChanged: (i) {
                             // log(' hefte: $i');
                             // questionsCubit.updateFocusedWeekIndex(i);
+                            questionsCubit.updatePeriodTime(i.toString());
                           },
                           itemExtent: 57,
                           children: [
@@ -115,7 +120,6 @@ class FirstDayOfLastPeriod extends StatelessWidget {
                                   children: [
                                     BlocBuilder<QuestionsCubit, QuestionsState>(
                                       builder: (context, state) {
-                                        // log('$i index change its color updated');
                                         return GlobalText(
                                           text: '$i',
                                           fontSize: 32,

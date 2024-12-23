@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:burla_xatun/ui/screens/main/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../ui/screens/main/views/home_page/home/home_page.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/calculate_birth.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/calculation_result_dialog.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/first_day_of_last_period.dart';
@@ -38,6 +38,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   bool showDays = false;
   bool showCalendar = false;
   String selectedCalculateOption = 'hesablama usulunu secin...';
+  String selectedPeriodTime = 'Period muddetini secin...';
   DateTime selectedDay = DateTime.now();
 
   final List questionViews = [
@@ -62,6 +63,11 @@ class QuestionsCubit extends Cubit<QuestionsState> {
 
   void updateSelectedDay(DateTime v) {
     selectedDay = v;
+    emit(QuestionsInitial());
+  }
+
+  void updatePeriodTime(String v) {
+    selectedPeriodTime = v;
     emit(QuestionsInitial());
   }
 
@@ -155,7 +161,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
       MaterialPageRoute(
         builder: (_) => BlocProvider(
           create: (context) => MainnCubit(),
-          child: MainPage(),
+          child: HomePage(),
         ),
       ),
       (route) => false,

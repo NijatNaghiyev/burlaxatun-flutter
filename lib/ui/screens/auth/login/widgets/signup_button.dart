@@ -1,9 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../cubits/login_cubit/login_cubit.dart';
 import '../../../../../utils/constants/color_constants.dart';
 
 class SignupButton extends StatelessWidget {
@@ -11,7 +10,6 @@ class SignupButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginCubit = context.read<LoginCubit>();
     return RichText(
       text: TextSpan(
         children: <TextSpan>[
@@ -33,7 +31,7 @@ class SignupButton extends StatelessWidget {
               height: 1.1,
             ),
             recognizer: TapGestureRecognizer()
-              ..onTap = () => loginCubit.goToSignUp(context),
+              ..onTap = () => context.push('/sign_up'),
           ),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/global_text.dart';
@@ -8,16 +9,14 @@ class ArticleBox extends StatelessWidget {
   const ArticleBox({
     super.key,
     this.playButton,
-    this.onTap,
   });
 
   final Widget? playButton;
-  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () => context.push('/article_details'),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: DecoratedBox(

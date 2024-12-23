@@ -1,9 +1,8 @@
-import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../../../../cubits/main/mainn_cubit.dart';
+import '../../../../../../../utils/extensions/context_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
 
 class HomePageAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -11,7 +10,7 @@ class HomePageAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainnCubit>();
+    // final mainCubit = context.read<MainnCubit>();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20) +
           EdgeInsets.only(top: context.statusBarTopHeight + 14),
@@ -39,7 +38,7 @@ class HomePageAppbar extends StatelessWidget implements PreferredSizeWidget {
                     child:
                         SvgPicture.asset('assets/icons/notification_bing.svg'),
                     onTap: () {
-                      mainCubit.changeHomeView('Notification');
+                      context.push('/notification');
                     },
                   ),
                   SizedBox(width: 25),

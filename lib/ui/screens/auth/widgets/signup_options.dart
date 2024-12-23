@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-import '../../../../utils/constants/asset_constants.dart';
 import '../../../../utils/constants/text_constants.dart';
 import '../../../../utils/extensions/num_extensions.dart';
 import '../../../widgets/global_text.dart';
@@ -22,12 +20,20 @@ class SignupOptions extends StatelessWidget {
         24.h,
         OptionWidget(
           optionName: TextConstants.signUpWithGoogle,
-          optionIcon: AssetConstants.googleIcon,
+          child: Image.asset(
+            'assets/png/google_logo.png',
+            width: 25,
+            height: 25,
+          ),
         ),
         10.h,
         OptionWidget(
           optionName: TextConstants.videoDoktor,
-          optionIcon: AssetConstants.videoDoctor,
+          child: Image.asset(
+            'assets/png/videodoctor_logo.png',
+            width: 25,
+            height: 25,
+          ),
         ),
       ],
     );
@@ -38,11 +44,11 @@ class OptionWidget extends StatelessWidget {
   const OptionWidget({
     super.key,
     required this.optionName,
-    required this.optionIcon,
+    required this.child,
   });
 
   final String optionName;
-  final String optionIcon;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +69,7 @@ class OptionWidget extends StatelessWidget {
             spacing: 15,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SvgPicture.asset(optionIcon),
+              child,
               GlobalText(
                 text: optionName,
                 fontSize: 12,

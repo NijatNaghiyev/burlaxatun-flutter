@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../cubits/main/mainn_cubit.dart';
 import '../../../../../../utils/extensions/num_extensions.dart';
 import 'widgets/baby_information.dart';
 import 'widgets/home_page_appbar.dart';
@@ -15,12 +13,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainnCubit>();
-    final controller = mainCubit.homePageScrollController;
+    // final mainCubit = context.read<MainnCubit>();
     return Scaffold(
       appBar: HomePageAppbar(),
       body: SingleChildScrollView(
-        controller: controller,
         child: Center(
           child: Column(
             children: [

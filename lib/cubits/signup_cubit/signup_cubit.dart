@@ -1,8 +1,5 @@
-import 'package:burla_xatun/cubits/questions_cubit/questions_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../ui/screens/questions/questions.dart';
 
 part 'signup_cubit_state.dart';
 
@@ -15,15 +12,15 @@ class SignupCubit extends Cubit<SignupCubitState> {
     emit(SignupCubitInitial(v));
   }
 
-  void goToQuestions(context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => BlocProvider(
-          create: (context) => QuestionsCubit(),
-          child: Questions(),
-        ),
-      ),
-    );
-  }
+  // void goToQuestions(context) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (_) => BlocProvider(
+  //         create: (context) => QuestionsCubit(),
+  //         child: Questions(),
+  //       ),
+  //     ),
+  //   );
+  // }
 }

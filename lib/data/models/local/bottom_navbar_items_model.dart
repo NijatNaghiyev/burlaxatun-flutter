@@ -24,5 +24,5 @@ class BottomNavbarItemsModel {
       icon: 'assets/svgs/profile_icon.svg',
       iconTitle: 'Profil',
     ),
-  ];
+  ];  
 }

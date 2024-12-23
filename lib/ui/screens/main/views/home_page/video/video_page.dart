@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../../../cubits/main/mainn_cubit.dart';
 import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/global_appbar.dart';
 import 'widgets/video_box.dart';
@@ -11,13 +10,12 @@ class VideoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainnCubit>();
+    // final mainCubit = context.read<MainnCubit>();
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Video',
         onTap: () {
-          mainCubit.changeHomeView('Home');
-          mainCubit.scrollLatestPositionHomePage();
+          context.pop();
         },
       ),
       body: SingleChildScrollView(

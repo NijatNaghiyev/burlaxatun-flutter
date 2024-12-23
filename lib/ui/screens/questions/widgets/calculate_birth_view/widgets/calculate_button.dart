@@ -15,7 +15,9 @@ class CalculateButton extends StatelessWidget {
       buttonName: 'Hesabla',
       buttonColor: ColorConstants.primaryColor,
       textColor: Colors.white,
-      onPressed: () => questionsCubit.calculate(context),
+      onPressed: () {
+        questionsCubit.calculate(context);
+      },
     );
   }
 }

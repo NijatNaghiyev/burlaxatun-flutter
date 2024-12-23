@@ -1,8 +1,9 @@
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../cubits/questions_cubit/questions_cubit.dart';
+import '../../../utils/extensions/num_extensions.dart';
 import '../../widgets/global_appbar.dart';
 import '../../widgets/global_dots.dart';
 import 'widgets/question_views/davam_et_button.dart';
@@ -17,9 +18,7 @@ class Questions extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Qeydiyyat',
-        onTap: () {
-          Navigator.pop(context);
-        },
+        onTap: () => context.pop(),
       ),
       body: Center(
         child: Column(
@@ -28,13 +27,13 @@ class Questions extends StatelessWidget {
               builder: (context, state) {
                 return questionsCubit.questionPageIndex < 3
                     ? Column(
-                      children: [
-                        36.h,
-                        GlobalDots(
+                        children: [
+                          36.h,
+                          GlobalDots(
                             controller: questionsCubit.pageController,
                           ),
-                      ],
-                    )
+                        ],
+                      )
                     : SizedBox.shrink();
               },
             ),
@@ -45,7 +44,9 @@ class Questions extends StatelessWidget {
                 builder: (context, state) {
                   return DavamEt(
                     isActive: questionsCubit.currentIndex != null,
-                    onPressed: () => questionsCubit.davamEtButton(context),
+                    onPressed: () {
+                      questionsCubit.davamEtButton(context);
+                    },
                   );
                 },
               ),

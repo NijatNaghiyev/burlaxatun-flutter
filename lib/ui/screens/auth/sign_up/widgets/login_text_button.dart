@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../utils/constants/color_constants.dart';
@@ -29,10 +30,7 @@ class LoginTextButton extends StatelessWidget {
               fontWeight: FontWeight.w400,
               height: 1.1,
             ),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                Navigator.pop(context);
-              },
+            recognizer: TapGestureRecognizer()..onTap = () => context.pop(),
           ),
         ],
       ),
