@@ -1,9 +1,10 @@
-import '../../../../utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class OnboardDots extends StatelessWidget {
-  const OnboardDots({
+import '../../utils/constants/color_constants.dart';
+
+class GlobalDots extends StatelessWidget {
+  const GlobalDots({
     super.key,
     required this.controller,
   });

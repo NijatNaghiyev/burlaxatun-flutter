@@ -1,5 +1,6 @@
-import '../../../widgets/global_text.dart';
 import 'package:flutter/material.dart';
+
+import '../../../widgets/global_text.dart';
 
 class OnboardTitle extends StatelessWidget {
   const OnboardTitle({

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/models/local/onboarding_items_model.dart';
 import '../../ui/screens/auth/login/login.dart';
+import '../login_cubit/login_cubit.dart';
 
 class OnboardingCubit extends Cubit<double> {
   OnboardingCubit() : super(0);
@@ -20,7 +21,12 @@ class OnboardingCubit extends Cubit<double> {
     if (indexOfPage == onboardingItems.length - 1) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Login()),
+        MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => LoginCubit(),
+            child: Login(),
+          ),
+        ),
       );
     } else {
       pageController.animateToPage(

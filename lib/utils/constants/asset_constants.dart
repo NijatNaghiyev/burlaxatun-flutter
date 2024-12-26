@@ -9,4 +9,11 @@ class AssetConstants {
 
   static const String iconsPath = 'assets/icons';
   static const String emailIcon = '$iconsPath/email_icon.svg';
+  static const String eyeSlashedIcon = '$iconsPath/eye_slashed_icon.svg';
+  static const String eyeOpenIcon = '$iconsPath/open_eye_icon.svg';
+  static const String lockIcon = '$iconsPath/lock_icon.svg';
+  static const String videoDoctor = '$iconsPath/video_doktor_icon.svg';
+  static const String googleIcon = '$iconsPath/google_icon.svg';
+  static const String backArrowIcon = '$iconsPath/back_arrow.svg';
+  static const String userIcon = '$iconsPath/user_icon.svg';
 }

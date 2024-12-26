@@ -1,12 +1,13 @@
-import 'global_text.dart';
 import 'package:flutter/material.dart';
+
+import 'global_text.dart';
 
 class GlobalButton extends StatelessWidget {
   const GlobalButton({
     super.key,
     required this.buttonName,
     required this.buttonColor,
-    required this.borderColor,
+    this.borderColor = Colors.transparent,
     required this.textColor,
     required this.onPressed,
   });
@@ -21,8 +22,7 @@ class GlobalButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        fixedSize: WidgetStatePropertyAll(
-            Size(MediaQuery.of(context).size.width - 40, 56)),
+        fixedSize: WidgetStatePropertyAll(Size(double.maxFinite, 56)),
         shadowColor: const WidgetStatePropertyAll(Colors.transparent),
         backgroundColor: WidgetStatePropertyAll(buttonColor),
         foregroundColor: WidgetStatePropertyAll(Colors.white),
