@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'global_text.dart';
 
 class GlobalAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const GlobalAppbar({super.key});
+  const GlobalAppbar({
+    super.key,
+    required this.title,
+  });
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +17,7 @@ class GlobalAppbar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         centerTitle: true,
         leading: GestureDetector(
-          onTap: (){
+          onTap: () {
             Navigator.pop(context);
           },
           child: Icon(
@@ -21,7 +26,7 @@ class GlobalAppbar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
         title: GlobalText(
-          text: 'Qeydiyyat',
+          text: title,
           fontSize: 20,
           fontWeight: FontWeight.w500,
           color: Color(0xff344054),

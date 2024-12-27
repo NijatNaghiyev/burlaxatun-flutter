@@ -5,7 +5,7 @@ import 'cubits/onboarding_cubit/onboarding_cubit.dart';
 import 'ui/screens/onboarding/onboarding.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

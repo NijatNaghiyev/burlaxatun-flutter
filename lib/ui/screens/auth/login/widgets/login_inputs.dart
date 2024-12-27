@@ -7,7 +7,7 @@ import '../../../../../cubits/login_cubit/login_cubit.dart';
 import '../../../../../utils/constants/asset_constants.dart';
 import '../../../../../utils/constants/text_constants.dart';
 import '../../../../../utils/extensions/num_extensions.dart';
-import '../../widgets/auth_text_field.dart';
+import '../../../../widgets/global_input.dart';
 
 class LoginInputs extends StatelessWidget {
   const LoginInputs({super.key});
@@ -17,7 +17,7 @@ class LoginInputs extends StatelessWidget {
     final loginCubit = context.read<LoginCubit>();
     return Column(
       children: [
-        AuthTextField(
+        GlobalInput(
           inputName: TextConstants.email,
           prefixIcon: AssetConstants.emailIcon,
           hintText: TextConstants.emailiniziDaxilEdin,
@@ -27,7 +27,7 @@ class LoginInputs extends StatelessWidget {
           builder: (context, state) {
             if (state is LoginCubitInitial) {
               log('password field build');
-              return AuthTextField(
+              return GlobalInput(
                 inputName: TextConstants.sifre,
                 prefixIcon: AssetConstants.lockIcon,
                 hintText: TextConstants.sifreniziDaxilEdin,

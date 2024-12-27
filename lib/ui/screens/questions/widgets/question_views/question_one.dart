@@ -31,6 +31,7 @@ class QuestionOne extends StatelessWidget {
           for (int i = 0; i < 3; i++)
             BlocBuilder<QuestionsCubit, QuestionsState>(
               builder: (context, state) {
+                log('build getdi figer yerde');
                 if (state is QuestionsInitial) {
                   return QuestionOneButton(
                     buttonName: QuestionOneOptionsModel.options[i].option,

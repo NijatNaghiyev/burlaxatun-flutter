@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../utils/constants/color_constants.dart';
-import '../../../../utils/extensions/num_extensions.dart';
-import '../../../widgets/global_text.dart';
+import '../../utils/constants/color_constants.dart';
+import '../../utils/extensions/num_extensions.dart';
+import 'global_text.dart';
 
-class AuthTextField extends StatelessWidget {
-  const AuthTextField({
+class GlobalInput extends StatelessWidget {
+  const GlobalInput({
     super.key,
     required this.inputName,
     required this.prefixIcon,
@@ -27,7 +27,6 @@ class AuthTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final loginCubit = context.read<LoginCubit>();
     return Column(
       children: [
         Row(
@@ -88,13 +87,13 @@ class AuthTextField extends StatelessWidget {
                     ),
                   ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(14)),
+              borderRadius: BorderRadius.all(Radius.circular(34)),
               borderSide: BorderSide(
                 color: ColorConstants.enabledInputColor,
               ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(14)),
+              borderRadius: BorderRadius.all(Radius.circular(34)),
               borderSide: BorderSide(
                 color: ColorConstants.enabledInputColor,
               ),

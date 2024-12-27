@@ -1,6 +1,7 @@
-import 'package:burla_xatun/cubits/questions_cubit/questions_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../cubits/questions_cubit/questions_cubit.dart';
 
 class QuestionsPageView extends StatelessWidget {
   const QuestionsPageView({super.key});

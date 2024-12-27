@@ -15,7 +15,7 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GlobalAppbar(),
+      appBar: GlobalAppbar(title: 'Qeydiyyat',),
       body: Padding(
         padding: PaddingConstants.h20,
         child: Column(
