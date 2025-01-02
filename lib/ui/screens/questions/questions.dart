@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,12 +22,11 @@ class Questions extends StatelessWidget {
             36.h,
             BlocBuilder<QuestionsCubit, QuestionsState>(
               builder: (context, state) {
-                if (questionsCubit.questionPageIndex < 3) {
-                  return GlobalDots(
-                    controller: questionsCubit.pageController,
-                  );
-                }
-                return SizedBox.shrink();
+                return questionsCubit.questionPageIndex < 3
+                    ? GlobalDots(
+                        controller: questionsCubit.pageController,
+                      )
+                    : SizedBox.shrink();
               },
             ),
             56.h,
@@ -40,13 +37,7 @@ class Questions extends StatelessWidget {
                 builder: (context, state) {
                   return DavamEt(
                     isActive: questionsCubit.currentIndex != null,
-                    onPressed: () {
-                      questionsCubit.currentIndex != null
-                          ? questionsCubit.iDontKnow
-                              ? questionsCubit.goToCalculateView(context)
-                              : questionsCubit.nextQuestion()
-                          : null;
-                    },
+                    onPressed: () => questionsCubit.davamEtButton(context),
                   );
                 },
               ),

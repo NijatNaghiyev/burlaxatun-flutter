@@ -57,18 +57,21 @@ class OptionWidget extends StatelessWidget {
           ),
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
-        child: Row(
-          spacing: 15,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(optionIcon),
-            GlobalText(
-              text: optionName,
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(left: 99),
+          child: Row(
+            spacing: 15,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SvgPicture.asset(optionIcon),
+              GlobalText(
+                text: optionName,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              )
+            ],
+          ),
         ),
       ),
     );

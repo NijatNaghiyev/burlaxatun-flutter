@@ -27,59 +27,66 @@ class QuestionTwo extends StatelessWidget {
           width: double.maxFinite,
           child: ListWheelScrollView(
             overAndUnderCenterOpacity: 0.5,
-            onSelectedItemChanged: (week) {
-              log(' hefte: $week');
+            onSelectedItemChanged: (i) {
+              log(' hefte: $i');
+              questionsCubit.updateFocusedWeekIndex(i);
             },
             itemExtent: 58,
             children: [
               for (int i = 0; i < 10; i++)
-                Padding(
-                  padding: const EdgeInsets.only(left: 55),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GlobalText(
-                        text: '$i',
-                        fontSize: 32,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black38,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: GlobalText(
-                          text: 'həftəlik',
-                          fontSize: 15,
+                SizedBox(
+                  width: double.maxFinite,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 55),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GlobalText(
+                          text: '$i',
+                          fontSize: 32,
                           fontWeight: FontWeight.w500,
                           color: Colors.black38,
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: GlobalText(
+                            text: 'həftəlik',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black38,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
             ],
           ),
         ),
-        Row(
-          children: [
-            BlocBuilder<QuestionsCubit, QuestionsState>(
-              builder: (context, state) {
-                return Radio(
-                  toggleable: true,
-                  value: questionsCubit.iDontKnow,
-                  groupValue: true,
-                  onChanged: (v) {
-                    questionsCubit.iDontKnowToggle(v ?? true);
-                  },
-                );
-              },
-            ),
-            GlobalText(
-              text: 'Bilmirəm',
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-            )
-          ],
+        Padding(
+          padding: const EdgeInsets.only(left: 20, top: 74),
+          child: Row(
+            children: [
+              BlocBuilder<QuestionsCubit, QuestionsState>(
+                builder: (context, state) {
+                  return Radio(
+                    toggleable: true,
+                    value: questionsCubit.iDontKnow,
+                    groupValue: true,
+                    onChanged: (v) {
+                      questionsCubit.iDontKnowToggle(v ?? true);
+                    },
+                  );
+                },
+              ),
+              GlobalText(
+                text: 'Bilmirəm',
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              )
+            ],
+          ),
         ),
       ],
     );

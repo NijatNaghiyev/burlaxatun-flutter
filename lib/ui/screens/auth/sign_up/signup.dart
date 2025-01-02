@@ -15,22 +15,25 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GlobalAppbar(title: 'Qeydiyyat',),
-      body: Padding(
-        padding: PaddingConstants.h20,
-        child: Column(
-          children: [
-            51.h,
-            SignupInputs(),
-            15.h,
-            AcceptPolicyCheckBox(),
-            29.h,
-            GoOnButton(),
-            20.h,
-            LoginTextButton(),
-            16.h,
-            SignupOptions()
-          ],
+      appBar: GlobalAppbar(title: 'Qeydiyyat'),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: PaddingConstants.h20,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              51.h,
+              SignupInputs(),
+              15.h,
+              AcceptPolicyCheckBox(),
+              29.h,
+              GoOnButton(),
+              20.h,
+              LoginTextButton(),
+              16.h,
+              SignupOptions()
+            ],
+          ),
         ),
       ),
     );

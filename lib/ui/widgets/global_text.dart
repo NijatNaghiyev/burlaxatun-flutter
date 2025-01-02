@@ -9,6 +9,8 @@ class GlobalText extends StatelessWidget {
     this.height = 1.1,
     required this.fontWeight,
     required this.color,
+    this.textAlign = TextAlign.center,
+    this.maxLines = 20,
   });
 
   final double fontSize;
@@ -16,11 +18,15 @@ class GlobalText extends StatelessWidget {
   final String text;
   final FontWeight fontWeight;
   final Color color;
+  final TextAlign textAlign;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      textAlign: TextAlign.center,
+      overflow: TextOverflow.ellipsis,
+      maxLines: maxLines,
+      textAlign: textAlign,
       text,
       style: GoogleFonts.poppins(
         fontSize: fontSize,
@@ -31,3 +37,14 @@ class GlobalText extends StatelessWidget {
     );
   }
 }
+
+
+// Column(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 SvgPicture.asset(
+//                   prefixIcon,
+//                   fit: BoxFit.cover,
+//                 ),
+//               ],
+//             ),

@@ -26,3 +26,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+//  DevicePreview(
+//       enabled: true,
+//       builder: (context) => MyApp(),
+//     ),

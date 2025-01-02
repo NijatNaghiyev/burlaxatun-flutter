@@ -14,25 +14,21 @@ class OnboardPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final onboardingCubit = context.read<OnboardingCubit>();
-    return BlocBuilder<OnboardingCubit, double>(
-      builder: (context, state) {
-        return PageView.builder(
-          controller: onboardingCubit.pageController,
-          itemCount: onboardingCubit.onboardingItems.length,
-          onPageChanged: (value) => onboardingCubit.updateIndexOfPage(value.toDouble()),
-          itemBuilder: (_, index) {
-            OnboardItemsModel item = onboardingCubit.onboardingItems[index];
-            return Column(
-              children: [
-                OnboardImage(onboardImage: item.onboardImage),
-                113.h,
-                Padding(
-                  padding: PaddingConstants.h18,
-                  child: OnboardTitle(onboardTitle: item.onboardTitle),
-                )
-              ],
-            );
-          },
+    return PageView.builder(
+      controller: onboardingCubit.pageController,
+      itemCount: onboardingCubit.onboardingItems.length,
+      onPageChanged: (value) => onboardingCubit.updateIndexOfPage(value.toDouble()),
+      itemBuilder: (_, index) {
+        OnboardItemsModel item = onboardingCubit.onboardingItems[index];
+        return Column(
+          children: [
+            OnboardImage(onboardImage: item.onboardImage),
+            113.h,
+            Padding(
+              padding: PaddingConstants.h18,
+              child: OnboardTitle(onboardTitle: item.onboardTitle),
+            )
+          ],
         );
       },
     );

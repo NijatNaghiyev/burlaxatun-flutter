@@ -50,6 +50,7 @@ class GlobalInput extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 18),
             hintText: hintText,
             hintStyle: GoogleFonts.poppins(
               fontSize: 14,
@@ -57,18 +58,13 @@ class GlobalInput extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
             prefixIcon: Padding(
-              padding: const EdgeInsets.only(
-                  left: 25, right: 15, bottom: 21, top: 21),
+              padding: const EdgeInsets.only(left: 16, right: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: SvgPicture.asset(
-                      prefixIcon,
-                      fit: BoxFit.cover,
-                    ),
+                  SvgPicture.asset(
+                    prefixIcon,
+                    fit: BoxFit.cover,
                   ),
                 ],
               ),
@@ -95,7 +91,7 @@ class GlobalInput extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(34)),
               borderSide: BorderSide(
-                color: ColorConstants.enabledInputColor,
+                color: ColorConstants.primaryColor,
               ),
             ),
             errorBorder: OutlineInputBorder(

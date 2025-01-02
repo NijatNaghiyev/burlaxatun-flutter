@@ -1,4 +1,8 @@
+import 'dart:developer';
+
+import 'package:burla_xatun/cubits/questions_cubit/questions_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../utils/constants/color_constants.dart';
 import '../../../../widgets/global_button.dart';
@@ -7,28 +11,44 @@ class QuestionOneButton extends StatelessWidget {
   const QuestionOneButton({
     super.key,
     required this.buttonName,
-    required this.onPressed,
+    // required this.onPressed,
     // required this.optionIndex,
-    required this.buttonColor,
-    required this.borderColor,
+    // required this.buttonColor,
+    // required this.borderColor,
+    required this.optionIndex,
   });
 
   final String buttonName;
-  final void Function() onPressed;
-  // final int optionIndex;
-  final Color buttonColor;
-  final Color borderColor;
+  // final void Function() onPressed;
+  final int optionIndex;
+  // final Color buttonColor;
+  // final Color borderColor;
 
-  @override
+  @override 
   Widget build(BuildContext context) {
+    final questionsCubit = context.read<QuestionsCubit>();
     return Padding(
       padding: const EdgeInsets.only(bottom: 14),
-      child: GlobalButton(
-        buttonName: buttonName,
-        buttonColor: buttonColor,
-        borderColor: borderColor,
-        textColor: ColorConstants.primaryColor,
-        onPressed: onPressed,
+      child: BlocBuilder<QuestionsCubit, QuestionsState>(
+        builder: (context, state) {
+          if (state is QuestionsInitial) {
+            log('button builded');
+            return GlobalButton(
+              buttonName: buttonName,
+              buttonColor: state.currentIndex != null &&
+                      optionIndex == state.currentIndex!
+                  ? Color(0xffFFD3E2)
+                  : Colors.white,
+              borderColor: state.currentIndex != null &&
+                      optionIndex == state.currentIndex!
+                  ? Colors.transparent
+                  : ColorConstants.primaryColor,
+              textColor: ColorConstants.primaryColor,
+              onPressed: () => questionsCubit.selectOption(optionIndex),
+            );
+          }
+          return SizedBox.shrink();
+        },
       ),
     );
   }

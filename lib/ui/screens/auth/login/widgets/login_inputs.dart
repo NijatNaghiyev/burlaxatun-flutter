@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,10 +24,9 @@ class LoginInputs extends StatelessWidget {
         BlocBuilder<LoginCubit, LoginCubitState>(
           builder: (context, state) {
             if (state is LoginCubitInitial) {
-              log('password field build');
               return GlobalInput(
                 inputName: TextConstants.sifre,
-                prefixIcon: AssetConstants.lockIcon,
+                prefixIcon: 'assets/icons/lock_2.svg',
                 hintText: TextConstants.sifreniziDaxilEdin,
                 isObsecure: state.isObsecure,
                 suffixIcon: state.isObsecure

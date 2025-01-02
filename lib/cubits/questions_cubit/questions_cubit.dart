@@ -1,10 +1,16 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:burla_xatun/cubits/main/main_cubit.dart';
+import 'package:burla_xatun/ui/screens/main/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../ui/screens/questions/widgets/calculate_birth_view/calculate_birth.dart';
+import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/calculation_result_dialog.dart';
+import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/first_day_of_last_period.dart';
+import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ivf.dart';
+import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ultrasound.dart';
 import '../../ui/screens/questions/widgets/question_views/add_your_child.dart';
 import '../../ui/screens/questions/widgets/question_views/question_one.dart';
 import '../../ui/screens/questions/widgets/question_views/question_three.dart';
@@ -26,8 +32,10 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   int? currentIndex;
   int? selectedOptionIndex;
   int questionPageIndex = 0;
+  int focusedWeekIndex = 0;
   bool iDontKnow = false;
   bool showOptions = false;
+  bool showDays = false;
   bool showCalendar = false;
   String selectedCalculateOption = 'hesablama usulunu secin...';
   DateTime selectedDay = DateTime.now();
@@ -40,13 +48,25 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     AddYourChild(),
   ];
 
+  final List calculationOptions = [
+    SizedBox.shrink(),
+    FirstDayOfLastPeriod(),
+    Ivf(),
+    Ultrasound(),
+  ];
+
   void selectOption(int v) {
     currentIndex = v;
     emit(QuestionsInitial(currentIndex: currentIndex));
   }
 
-  void updateSelectedDay(DateTime v){
+  void updateSelectedDay(DateTime v) {
     selectedDay = v;
+    emit(QuestionsInitial());
+  }
+
+  void updateFocusedWeekIndex(int v) {
+    focusedWeekIndex = v;
     emit(QuestionsInitial());
   }
 
@@ -70,27 +90,40 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     emit(QuestionsInitial(iDontKnow: iDontKnow));
   }
 
-  void goToCalculateView(context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => BlocProvider(
-          create: (context) => QuestionsCubit(),
-          child: CalculateBirth(),
-        ),
-      ),
-    );
+  void davamEtButton(context) {
+    currentIndex != null
+        ? iDontKnow
+            ? Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => BlocProvider(
+                    create: (context) => QuestionsCubit(),
+                    child: CalculateBirth(),
+                  ),
+                ),
+              )
+            : nextQuestion()
+        : null;
   }
 
   void showOptionsToggle() {
     showCalendar = false;
+    showDays = false;
     showOptions = !showOptions;
     emit(QuestionsInitial(showOptions: showOptions));
   }
 
   void showCalendarToggle() {
     showOptions = false;
+    showDays = false;
     showCalendar = !showCalendar;
+    emit(QuestionsInitial());
+  }
+
+  void showDaysToggle() {
+    showOptions = false;
+    showCalendar = false;
+    showDays = !showDays;
     emit(QuestionsInitial());
   }
 
@@ -102,6 +135,31 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   void updateCalculateOption(String v) {
     selectedCalculateOption = v;
     emit(QuestionsInitial(selectedCalculateOption: selectedCalculateOption));
+  }
+
+  void calculate(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) {
+        return BlocProvider(
+          create: (context) => QuestionsCubit(),
+          child: CalculationResultDialog(),
+        );
+      },
+    );
+  }
+
+  void goToMainPage(context) {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (_) => BlocProvider(
+          create: (context) => MainCubit(),
+          child: MainPage(),
+        ),
+      ),
+      (route) => false,
+    );
   }
 
   @override

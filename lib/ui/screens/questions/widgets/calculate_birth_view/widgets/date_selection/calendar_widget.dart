@@ -1,12 +1,10 @@
-import 'dart:developer';
-
-import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../../../../cubits/questions_cubit/questions_cubit.dart';
+import '../../../../../../../utils/constants/color_constants.dart';
 
 class CalendarWidget extends StatelessWidget {
   const CalendarWidget({
@@ -31,16 +29,14 @@ class CalendarWidget extends StatelessWidget {
           firstDay: DateTime.utc(2010, 10, 16),
           lastDay: DateTime.utc(2030, 3, 14),
           selectedDayPredicate: (day) {
-            log('DAY: $day');
             return isSameDay(questionsCubit.selectedDay, day);
           },
           onDaySelected: (selectedDay, focusedDay) {
             questionsCubit.updateSelectedDay(selectedDay);
-            // log('selected day: $selectedDay');
-            // log('focused day: $focusedDay');
           },
           headerStyle: HeaderStyle(
             formatButtonVisible: false,
+            
           ),
           calendarStyle: CalendarStyle(
               outsideDaysVisible: false,
