@@ -1,0 +1,22 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../cubits/main/main_state.dart';
+import '../../../../../cubits/main/mainn_cubit.dart';
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final mainCubit = context.read<MainnCubit>();
+    return BlocBuilder<MainnCubit, MainInitial>(
+      buildWhen: (previous, current) {
+        return previous.viewName != current.viewName;
+      },
+      builder: (context, state) {
+        return mainCubit.homePageViews[state.viewName]!;
+      },
+    );
+  }
+}
