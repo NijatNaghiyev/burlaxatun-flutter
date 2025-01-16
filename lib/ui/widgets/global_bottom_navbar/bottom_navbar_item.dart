@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../cubits/main/main_cubit.dart';
+import '../../../cubits/main/main_state.dart';
+import '../../../cubits/main/mainn_cubit.dart';
 import '../../../utils/constants/color_constants.dart';
 import '../../../utils/extensions/num_extensions.dart';
 import '../global_text.dart';
@@ -17,12 +18,12 @@ class BottomNavbarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainCubit>();
+    final mainCubit = context.read<MainnCubit>();
     return GestureDetector(
       onTap: () {
-        mainCubit.changeView(i);
+        mainCubit.changeMainView(i);
       },
-      child: BlocBuilder<MainCubit, int>(
+      child: BlocBuilder<MainnCubit, MainInitial>(
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -31,7 +32,7 @@ class BottomNavbarItem extends StatelessWidget {
                 SvgPicture.asset(
                   mainCubit.navbarItems[i].icon,
                   colorFilter: ColorFilter.mode(
-                    mainCubit.indexOfView == i
+                    state.indexOfView == i
                         ? ColorConstants.primaryColor
                         : Color(0xff667085),
                     BlendMode.srcIn,
@@ -43,7 +44,7 @@ class BottomNavbarItem extends StatelessWidget {
                   fontSize: 12,
                   height: 1.5,
                   fontWeight: FontWeight.w500,
-                  color: mainCubit.indexOfView == i
+                  color: state.indexOfView == i
                       ? ColorConstants.primaryColor
                       : Color(0xff667085),
                 ),

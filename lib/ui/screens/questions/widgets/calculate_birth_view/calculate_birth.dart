@@ -17,7 +17,12 @@ class CalculateBirth extends StatelessWidget {
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
     return Scaffold(
-      appBar: GlobalAppbar(title: 'Doğuşu hesabla'),
+      appBar: GlobalAppbar(
+        title: 'Doğuşu hesabla',
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 80, left: 15, right: 15),

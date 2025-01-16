@@ -36,6 +36,7 @@ class BabyInformation extends StatelessWidget {
             SvgPicture.asset('assets/svgs/baby_size.svg'),
             40.h,
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               spacing: 17,
               children: [
                 for (int i = 0; i < 3; i++) BabyInfoBox(),

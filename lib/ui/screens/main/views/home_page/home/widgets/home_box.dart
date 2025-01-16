@@ -33,11 +33,15 @@ class HomeBox extends StatelessWidget {
             children: [
               SvgPicture.asset(boxIcon),
               10.h,
-              GlobalText(
-                text: boxName,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Colors.black,
+              SizedBox(
+                width: 137,
+                child: GlobalText(
+                  height: 1.2,
+                  text: boxName,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
               ),
             ],
           ),

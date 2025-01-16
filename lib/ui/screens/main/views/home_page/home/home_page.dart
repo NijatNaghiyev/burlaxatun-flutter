@@ -1,21 +1,26 @@
-import 'package:burla_xatun/ui/screens/main/views/home_page/home/widgets/baby_information.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/home/widgets/home_page_boxes.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/home/widgets/home_page_daily_advise.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/home/widgets/pregnancy_guide.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../cubits/main/mainn_cubit.dart';
 import '../../../../../../utils/extensions/num_extensions.dart';
+import 'widgets/baby_information.dart';
 import 'widgets/home_page_appbar.dart';
+import 'widgets/home_page_boxes.dart';
+import 'widgets/home_page_daily_advise.dart';
 import 'widgets/horizontal_calendar.dart';
+import 'widgets/pregnancy_guide.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final mainCubit = context.read<MainnCubit>();
+    final controller = mainCubit.homePageScrollController;
     return Scaffold(
       appBar: HomePageAppbar(),
       body: SingleChildScrollView(
+        controller: controller,
         child: Center(
           child: Column(
             children: [

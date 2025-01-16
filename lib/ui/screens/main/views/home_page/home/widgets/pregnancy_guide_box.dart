@@ -11,7 +11,7 @@ class PregnancyGuideBox extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.8,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: Color(0xffEFEFEF),
+          color: Color(0xffF8F8F8),
           borderRadius: BorderRadius.all(Radius.circular(7)),
         ),
         child: Padding(

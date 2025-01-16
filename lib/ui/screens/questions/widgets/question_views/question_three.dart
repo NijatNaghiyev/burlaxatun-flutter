@@ -12,7 +12,7 @@ class QuestionThree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: PaddingConstants.h20,
+      padding: PaddingConstants.h20 + EdgeInsets.only(top: 56),
       child: Column(
         children: [
           GlobalText(

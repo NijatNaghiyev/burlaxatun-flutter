@@ -6,20 +6,20 @@ class GlobalAppbar extends StatelessWidget implements PreferredSizeWidget {
   const GlobalAppbar({
     super.key,
     required this.title,
+    required this.onTap,
   });
 
   final String title;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.only(top: 40),
+      minimum: EdgeInsets.only(top: 32),
       child: AppBar(
         centerTitle: true,
         leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
+          onTap: onTap,
           child: Icon(
             Icons.arrow_back_ios_new,
             color: Color(0xff344054),
@@ -36,5 +36,5 @@ class GlobalAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(double.maxFinite, kToolbarHeight);
+  Size get preferredSize => Size(double.maxFinite, 70);
 }

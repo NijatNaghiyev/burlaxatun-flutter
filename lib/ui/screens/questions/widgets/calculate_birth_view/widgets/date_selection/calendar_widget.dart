@@ -25,6 +25,7 @@ class CalendarWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: TableCalendar(
+          rowHeight: 48,
           focusedDay: focusedDay,
           firstDay: DateTime.utc(2010, 10, 16),
           lastDay: DateTime.utc(2030, 3, 14),
@@ -36,29 +37,30 @@ class CalendarWidget extends StatelessWidget {
           },
           headerStyle: HeaderStyle(
             formatButtonVisible: false,
-            
           ),
           calendarStyle: CalendarStyle(
-              outsideDaysVisible: false,
-              selectedDecoration: BoxDecoration(
-                color: ColorConstants.primaryColor,
-              ),
-              todayTextStyle: GoogleFonts.poppins(
-                fontSize: 20,
-                color: Color(0xff667085),
-                fontWeight: FontWeight.w400,
-              ),
-              weekendTextStyle: GoogleFonts.poppins(
-                fontSize: 20,
-                color: Color(0xff667085),
-                fontWeight: FontWeight.w400,
-              ),
-              defaultTextStyle: GoogleFonts.poppins(
-                fontSize: 20,
-                color: Color(0xff667085),
-                fontWeight: FontWeight.w400,
-              ),
-              cellMargin: EdgeInsets.all(9)),
+            cellPadding: EdgeInsets.zero,
+            outsideDaysVisible: false,
+            selectedDecoration: BoxDecoration(
+              color: ColorConstants.primaryColor,
+            ),
+            todayTextStyle: GoogleFonts.poppins(
+              fontSize: 20,
+              color: Color(0xff667085),
+              fontWeight: FontWeight.w400,
+            ),
+            weekendTextStyle: GoogleFonts.poppins(
+              fontSize: 20,
+              color: Color(0xff667085),
+              fontWeight: FontWeight.w400,
+            ),
+            defaultTextStyle: GoogleFonts.poppins(
+              fontSize: 20,
+              color: Color(0xff667085),
+              fontWeight: FontWeight.w400,
+            ),
+            cellMargin: EdgeInsets.all(5),
+          ),
           daysOfWeekStyle: DaysOfWeekStyle(
             weekdayStyle: GoogleFonts.poppins(
               fontSize: 13,

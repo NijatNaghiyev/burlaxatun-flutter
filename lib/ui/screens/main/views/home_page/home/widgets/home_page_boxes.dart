@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../../cubits/main/main_cubit.dart';
+import '../../../../../../../cubits/main/mainn_cubit.dart';
 import 'home_box.dart';
 
 class HomePageBoxes extends StatelessWidget {
@@ -11,7 +11,7 @@ class HomePageBoxes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainCubit>();
+    final mainCubit = context.read<MainnCubit>();
     return GridView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -27,7 +27,7 @@ class HomePageBoxes extends StatelessWidget {
           boxIcon: 'assets/icons/email_icon.svg',
           onTap: () {
             log('${mainCubit.boxItems[i].boxName}');
-            mainCubit.goToTappedView(mainCubit.boxItems[i].boxName, context);
+            mainCubit.changeHomeView(mainCubit.boxItems[i].boxName);
           },
         );
       },

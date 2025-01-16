@@ -9,7 +9,7 @@ import 'global_text.dart';
 class GlobalInput extends StatelessWidget {
   const GlobalInput({
     super.key,
-    required this.inputName,
+    this.inputName,
     required this.prefixIcon,
     this.suffixIcon,
     required this.hintText,
@@ -17,7 +17,7 @@ class GlobalInput extends StatelessWidget {
     this.onSuffixIcon,
   });
 
-  final String inputName;
+  final String? inputName;
   final String hintText;
   final String prefixIcon;
   final String? suffixIcon;
@@ -29,19 +29,25 @@ class GlobalInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            GlobalText(
-              text: inputName,
-              fontSize: 14,
-              height: 1.1,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-            ),
-          ],
-        ),
-        16.h,
+        inputName != null
+            ? Column(
+                children: [
+                  16.h,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      GlobalText(
+                        text: inputName!,
+                        fontSize: 14,
+                        height: 1.1,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            : SizedBox.shrink(),
         TextFormField(
           obscureText: isObsecure,
           style: GoogleFonts.poppins(
@@ -54,7 +60,7 @@ class GlobalInput extends StatelessWidget {
             hintText: hintText,
             hintStyle: GoogleFonts.poppins(
               fontSize: 14,
-              color: ColorConstants.hintTextColor,
+              color: Color(0xff595959),
               fontWeight: FontWeight.w500,
             ),
             prefixIcon: Padding(

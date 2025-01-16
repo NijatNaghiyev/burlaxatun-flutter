@@ -38,12 +38,21 @@ class HomePageDailyAdvise extends StatelessWidget {
               child: Image.asset('assets/png/advise_image.png'),
             ),
             16.h,
-            GlobalText(
-              textAlign: TextAlign.left,
-              text: 'Dırnaqlarınıza dırnaq boyası çəkmək olarmı, yoxsa yox?',
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: GlobalText(
+                    textAlign: TextAlign.left,
+                    text:
+                        'Dırnaqlarınıza dırnaq boyası çəkmək olarmı, yoxsa yox?',
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
             11.h,
             Padding(

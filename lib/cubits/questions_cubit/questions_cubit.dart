@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:burla_xatun/cubits/main/main_cubit.dart';
 import 'package:burla_xatun/ui/screens/main/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +15,7 @@ import '../../ui/screens/questions/widgets/question_views/question_one.dart';
 import '../../ui/screens/questions/widgets/question_views/question_three.dart';
 import '../../ui/screens/questions/widgets/question_views/question_two.dart';
 import '../../ui/screens/questions/widgets/question_views/register_success.dart';
+import '../main/mainn_cubit.dart';
 
 part 'questions_state.dart';
 
@@ -154,7 +154,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
       context,
       MaterialPageRoute(
         builder: (_) => BlocProvider(
-          create: (context) => MainCubit(),
+          create: (context) => MainnCubit(),
           child: MainPage(),
         ),
       ),

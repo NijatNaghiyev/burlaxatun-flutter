@@ -69,50 +69,72 @@ class FirstDayOfLastPeriod extends StatelessWidget {
         BlocBuilder<QuestionsCubit, QuestionsState>(
           builder: (context, state) {
             return questionsCubit.showDays
-                ? SizedBox(
-                    height: 300,
-                    width: double.infinity,
-                    child: ListWheelScrollView(
-                      overAndUnderCenterOpacity: 0.5,
-                      onSelectedItemChanged: (i) {
-                        // questionsCubit.updateFocusedWeekIndex(i);
-                      },
-                      itemExtent: 58,
-                      children: [
-                        for (int i = 0; i < 10; i++)
-                          ColoredBox(
-                            color: questionsCubit.focusedWeekIndex == i
-                                ? Color(0xffFFECF2)
-                                : Colors.transparent,
-                            child: SizedBox(
-                              width: double.maxFinite,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 55),
+                ? Stack(
+                    children: [
+                      Positioned(
+                        top: 129,
+                        child: ColoredBox(
+                          color: Color(0xffFFECF2),
+                          child: SizedBox(
+                            height: 58,
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 50),
+                                  child: GlobalText(
+                                    text: 'gün',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xffEC407A),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 318,
+                        width: double.maxFinite,
+                        child: ListWheelScrollView(
+                          physics: FixedExtentScrollPhysics(),
+                          overAndUnderCenterOpacity: 0.3,
+                          onSelectedItemChanged: (i) {
+                            // log(' hefte: $i');
+                            // questionsCubit.updateFocusedWeekIndex(i);
+                          },
+                          itemExtent: 57,
+                          children: [
+                            for (int i = 0; i < 10; i++)
+                              SizedBox(
+                                width: double.maxFinite,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    GlobalText(
-                                      text: '$i',
-                                      fontSize: 32,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black38,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 20),
-                                      child: GlobalText(
-                                        text: 'Gün',
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black38,
-                                      ),
+                                    BlocBuilder<QuestionsCubit, QuestionsState>(
+                                      builder: (context, state) {
+                                        // log('$i index change its color updated');
+                                        return GlobalText(
+                                          text: '$i',
+                                          fontSize: 32,
+                                          fontWeight: FontWeight.w500,
+                                          color:
+                                              questionsCubit.focusedWeekIndex ==
+                                                      i
+                                                  ? Colors.pink
+                                                  : Colors.black,
+                                        );
+                                      },
                                     ),
                                   ],
                                 ),
                               ),
-                            ),
-                          ),
-                      ],
-                    ),
+                          ],
+                        ),
+                      ),
+                    ],
                   )
                 : SizedBox.shrink();
           },

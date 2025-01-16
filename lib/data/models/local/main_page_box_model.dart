@@ -13,7 +13,7 @@ class MainPageBoxModel {
       boxIcon: 'assets/icons/medicine_icon.svg',
     ),
     MainPageBoxModel(
-      boxName: 'Gündəlik \nTövsiyyələr',
+      boxName: 'Gündəlik Tövsiyyələr',
       boxIcon: 'assets/icons/pregnan_icon.svg',
     ),
     MainPageBoxModel(

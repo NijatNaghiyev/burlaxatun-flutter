@@ -1,8 +1,8 @@
-import '../../../../../utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../cubits/signup_cubit/signup_cubit.dart';
+import '../../../../../utils/constants/color_constants.dart';
 import '../../../../widgets/global_text.dart';
 
 class AcceptPolicyCheckBox extends StatelessWidget {
@@ -17,6 +17,14 @@ class AcceptPolicyCheckBox extends StatelessWidget {
           builder: (context, state) {
             if (state is SignupCubitInitial) {
               return Checkbox(
+                visualDensity: VisualDensity(
+                  horizontal: VisualDensity.minimumDensity,
+                  vertical: VisualDensity.minimumDensity,
+                ),
+                side: BorderSide(
+                  width: 2,
+                  color: Colors.grey,
+                ),
                 splashRadius: 0,
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 activeColor: ColorConstants.primaryColor,
@@ -30,8 +38,10 @@ class AcceptPolicyCheckBox extends StatelessWidget {
             }
           },
         ),
+        SizedBox(width: 9),
         GlobalText(
-          text: 'İstifadı qaydalalrı və məxfilik siyasəti ilə razıyam',
+          textAlign: TextAlign.left,
+          text: 'İstifadə qaydalalrı və məxfilik siyasəti ilə razıyam',
           fontSize: 12,
           fontWeight: FontWeight.w400,
           color: Color(0xff8D8D8D),

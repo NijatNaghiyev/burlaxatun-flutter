@@ -13,7 +13,7 @@ class QuestionOne extends StatelessWidget {
   Widget build(BuildContext context) {
     // final questionsCubit = context.read<QuestionsCubit>();
     return Padding(
-      padding: PaddingConstants.h20,
+      padding: PaddingConstants.h20 + EdgeInsets.only(top: 56),
       child: Column(
         children: [
           GlobalText(

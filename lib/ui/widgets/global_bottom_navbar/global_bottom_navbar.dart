@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../cubits/main/main_cubit.dart';
+import '../../../cubits/main/mainn_cubit.dart';
 import 'bottom_navbar_item.dart';
 
 class GlobalBottomNavbar extends StatelessWidget {
@@ -9,7 +9,7 @@ class GlobalBottomNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainCubit>();
+    final mainCubit = context.read<MainnCubit>();
     return SizedBox(
       width: double.maxFinite,
       height: 84,

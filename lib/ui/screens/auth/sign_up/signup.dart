@@ -15,7 +15,12 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GlobalAppbar(title: 'Qeydiyyat'),
+      appBar: GlobalAppbar(
+        title: 'Qeydiyyat',
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: PaddingConstants.h20,
