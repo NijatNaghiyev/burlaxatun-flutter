@@ -19,27 +19,25 @@ class SingleOption extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        width: 150,
+        width: 140,
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: boxColors,
             borderRadius: BorderRadius.all(Radius.circular(100)),
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  child: GlobalText(
-                    text: boxTitle,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
-                  ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: GlobalText(
+                  text: boxTitle,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

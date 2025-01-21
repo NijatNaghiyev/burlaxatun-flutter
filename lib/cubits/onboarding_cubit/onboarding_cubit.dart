@@ -4,28 +4,34 @@ import 'package:go_router/go_router.dart';
 
 import '../../data/models/local/onboarding_items_model.dart';
 
-class OnboardingCubit extends Cubit<double> {
+class OnboardingCubit extends Cubit<int> {
   OnboardingCubit() : super(0);
 
-  double indexOfPage = 0;
-  final pageController = PageController();
+  int indexOfPage = 0;
+  late final PageController pageController;
   final onboardingItems = OnboardItemsModel.items;
 
-  void updateIndexOfPage(double value) {
+  void updateIndexOfPage(int value) {
     indexOfPage = value;
     emit(indexOfPage);
   }
 
   void jumptTo(BuildContext context) {
     if (indexOfPage == onboardingItems.length - 1) {
-      // context.go('/login');
-      context.pushReplacement('/login');
+      context.go('/login');
     } else {
+      indexOfPage += 1;
       pageController.animateToPage(
-        (indexOfPage + 1).toInt(),
+        indexOfPage,
         duration: Durations.medium2,
         curve: Curves.bounceInOut,
       );
     }
+  }
+
+  @override
+  Future<void> close() {
+    pageController.dispose();
+    return super.close();
   }
 }

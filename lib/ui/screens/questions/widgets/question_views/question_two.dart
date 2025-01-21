@@ -25,65 +25,69 @@ class QuestionTwo extends StatelessWidget {
             color: Colors.black,
           ),
           36.h,
-          Stack(
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Positioned(
-                top: 129,
-                child: ColoredBox(
-                  color: Color(0xffFFECF2),
-                  child: SizedBox(
-                    height: 58,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 120),
-                          child: GlobalText(
-                            text: 'həftəlik',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xffEC407A),
+              SizedBox(
+                height: 252,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Positioned(
+                      child: ColoredBox(
+                        color: Color(0xffFFECF2),
+                        child: SizedBox(
+                          height: 58,
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 120),
+                                child: GlobalText(
+                                  text: 'həftəlik',
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xffEC407A),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
+                      ),
+                    ),
+                    ListWheelScrollView(
+                      physics: FixedExtentScrollPhysics(),
+                      onSelectedItemChanged: (i) {
+                        log(' hefte: $i');
+                        questionsCubit.updateFocusedWeekIndex(i);
+                      },
+                      itemExtent: 57,
+                      children: [
+                        for (int i = 0; i < 10; i++)
+                          SizedBox(
+                            width: double.maxFinite,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                BlocBuilder<QuestionsCubit, QuestionsState>(
+                                  builder: (context, state) {
+                                    log('$i index change its color updated');
+                                    return GlobalText(
+                                      text: '$i',
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.w500,
+                                      color: questionsCubit.focusedWeekIndex == i
+                                          ? Colors.pink
+                                          : Color(0xffACACAC),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
                       ],
                     ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 318,
-                width: double.maxFinite,
-                child: ListWheelScrollView(
-                  physics: FixedExtentScrollPhysics(),
-                  onSelectedItemChanged: (i) {
-                    log(' hefte: $i');
-                    questionsCubit.updateFocusedWeekIndex(i);
-                  },
-                  itemExtent: 57,
-                  children: [
-                    for (int i = 0; i < 10; i++)
-                      SizedBox(
-                        width: double.maxFinite,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            BlocBuilder<QuestionsCubit, QuestionsState>(
-                              builder: (context, state) {
-                                log('$i index change its color updated');
-                                return GlobalText(
-                                  text: '$i',
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.w500,
-                                  color: questionsCubit.focusedWeekIndex == i
-                                      ? Colors.pink
-                                      : Color(0xffACACAC),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
                   ],
                 ),
               ),

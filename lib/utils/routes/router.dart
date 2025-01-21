@@ -37,6 +37,7 @@ class Routerapp {
   // static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   final GoRouter router = GoRouter(
+    // initialLocation: '/',
     // navigatorKey: _rootNavigatorKey,
     routes: [
       GoRoute(
@@ -76,7 +77,8 @@ class Routerapp {
         },
         branches: [
           StatefulShellBranch(
-            preload: true,
+            // initialLocation: '/home',
+            // preload: true,
             routes: [
               GoRoute(
                 path: '/home',
@@ -141,6 +143,7 @@ class Routerapp {
             ],
           ),
           StatefulShellBranch(
+            // initialLocation: '/daily_advices',
             routes: [
               GoRoute(
                 path: '/daily_advices',
@@ -149,6 +152,7 @@ class Routerapp {
             ],
           ),
           StatefulShellBranch(
+            // initialLocation: '/forum_page',
             routes: [
               GoRoute(
                 path: '/forum_page',
@@ -157,6 +161,7 @@ class Routerapp {
             ],
           ),
           StatefulShellBranch(
+            // initialLocation: 'profile_page',
             routes: [
               GoRoute(
                 path: '/profile_page',

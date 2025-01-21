@@ -21,18 +21,13 @@ class MyApp extends StatelessWidget {
       ),
       routerConfig: Routerapp.instance.router,
     );
-
-    // MaterialApp(
-    //   title: 'Flutter Demo',
-    //   debugShowCheckedModeBanner: false,
-    //   theme: ThemeData(
-    //     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-    //     useMaterial3: true,
-    //   ),
-    //   home: BlocProvider(
-    //     create: (BuildContext context) => OnboardingCubit(),
-    //     child: Onboarding(),
-    //   ),
-    // );
   }
 }
+
+// DevicePreview(
+//       enabled: !kReleaseMode,
+//       builder: (BuildContext context) {
+//         return MyApp();
+//       },
+//       // child: MyApp(),
+//     ),

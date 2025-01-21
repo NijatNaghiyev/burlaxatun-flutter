@@ -29,6 +29,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
         ));
 
   final pageController = PageController();
+  final scrollController = ScrollController();
   int? currentIndex;
   int? selectedOptionIndex;
   int questionPageIndex = 0;
@@ -55,6 +56,21 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     Ivf(),
     Ultrasound(),
   ];
+
+  void scrollBottom() {
+    if (!showDays) {
+      showDaysToggle();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.bounceInOut,
+        );
+      });
+    } else {
+      showDaysToggle();
+    }
+  }
 
   void selectOption(int v) {
     currentIndex = v;
@@ -171,6 +187,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   @override
   Future<void> close() {
     pageController.dispose();
+    scrollController.dispose();
     return super.close();
   }
 }

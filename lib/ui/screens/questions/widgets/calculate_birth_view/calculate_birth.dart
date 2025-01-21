@@ -24,6 +24,7 @@ class CalculateBirth extends StatelessWidget {
         },
       ),
       body: SingleChildScrollView(
+        controller: questionsCubit.scrollController,
         child: Padding(
           padding: const EdgeInsets.only(top: 80, left: 15, right: 15),
           child: Column(
