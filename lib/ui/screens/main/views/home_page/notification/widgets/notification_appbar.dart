@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../../../../cubits/main/mainn_cubit.dart';
 import '../../../../../../widgets/global_appbar.dart';
 
 class NotificationAppbar extends StatelessWidget
@@ -10,12 +9,12 @@ class NotificationAppbar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainnCubit>();
+    // final mainCubit = context.read<MainnCubit>();
     return GlobalAppbar(
       title: 'Bildirişlər',
-      onTap: () async {
-        mainCubit.changeHomeView('Home');
-        mainCubit.scrollLatestPositionHomePage();
+      onTap: () {
+        // mainCubit.changeHomeView('Home');
+        context.pop();
       },
     );
   }

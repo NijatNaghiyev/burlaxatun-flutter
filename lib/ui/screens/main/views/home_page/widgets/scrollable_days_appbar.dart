@@ -1,9 +1,8 @@
-import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../../../cubits/main/mainn_cubit.dart';
 import '../../../../../../utils/constants/color_constants.dart';
+import '../../../../../../utils/extensions/context_extensions.dart';
 import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/global_text.dart';
 
@@ -18,7 +17,7 @@ class ScrollableDaysAppbar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainnCubit>();
+    // final mainCubit = context.read<MainnCubit>();
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 3.9,
@@ -42,8 +41,7 @@ class ScrollableDaysAppbar extends StatelessWidget
                   children: [
                     GestureDetector(
                       onTap: () {
-                        mainCubit.changeHomeView('Home');
-                        mainCubit.scrollLatestPositionHomePage();
+                        context.pop();
                       },
                       child: SizedBox(
                         width: 44,
@@ -84,7 +82,7 @@ class ScrollableDaysAppbar extends StatelessWidget
                   height: 66,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 50,  
+                    itemCount: 50,
                     itemBuilder: (_, i) {
                       return i == 10
                           ? SizedBox(

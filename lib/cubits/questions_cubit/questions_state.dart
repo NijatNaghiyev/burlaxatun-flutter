@@ -12,6 +12,7 @@ class QuestionsInitial extends QuestionsState {
     this.showCalendar = false,
     this.selectedOptionIndex,
     this.selectedCalculateOption = 'Hesablama usulunu secin...',
+    this.isActiveGoOnButton = false,
   });
 
   final int? currentIndex;
@@ -21,4 +22,5 @@ class QuestionsInitial extends QuestionsState {
   final bool showOptions;
   final bool showCalendar;
   final String selectedCalculateOption;
+  final bool isActiveGoOnButton;
 }

@@ -8,6 +8,7 @@
 // extends MainnState
 import 'package:burla_xatun/cubits/main/mainn_cubit.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 class MainInitial extends Equatable {
   const MainInitial({
@@ -22,19 +23,21 @@ class MainInitial extends Equatable {
     required this.isFirstChild,
     required this.isShowQuestion,
     required this.selectedQuestionBox,
+    required this.navigationShellContext,
   });
 
   final int carouselIndex;
   final int indexOfView;
   final int selectedQuestionBox;
+  final double latestScrollPosition;
   final String viewName;
   final String profileViewName;
   final UltrasoundFormat ultrasoundFormat;
   final NameViewOption nameViewOptions;
   final GenderOption genderOption;
-  final double latestScrollPosition;
   final bool isFirstChild;
   final bool isShowQuestion;
+  final BuildContext? navigationShellContext;
 
   @override
   List<Object?> get props => [
@@ -49,6 +52,7 @@ class MainInitial extends Equatable {
         isFirstChild,
         isShowQuestion,
         selectedQuestionBox,
+        navigationShellContext,
       ];
 
   MainInitial copyWith({
@@ -63,6 +67,7 @@ class MainInitial extends Equatable {
     double? latestScrollPosition,
     bool? isFirstChild,
     bool? isShowQuestion,
+    BuildContext? navigationShellContext,
   }) {
     return MainInitial(
       indexOfView: indexOfView ?? this.indexOfView,
@@ -76,6 +81,7 @@ class MainInitial extends Equatable {
       isFirstChild: isFirstChild ?? this.isFirstChild,
       isShowQuestion: isShowQuestion ?? this.isShowQuestion,
       selectedQuestionBox: selectedQuestionBox ?? this.selectedQuestionBox,
+      navigationShellContext: navigationShellContext ?? this.navigationShellContext,
     );
   }
 }

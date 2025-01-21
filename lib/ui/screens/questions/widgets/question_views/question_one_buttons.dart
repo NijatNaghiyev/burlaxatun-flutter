@@ -11,18 +11,12 @@ class QuestionOneButton extends StatelessWidget {
   const QuestionOneButton({
     super.key,
     required this.buttonName,
-    // required this.onPressed,
-    // required this.optionIndex,
-    // required this.buttonColor,
-    // required this.borderColor,
     required this.optionIndex,
   });
 
   final String buttonName;
-  // final void Function() onPressed;
   final int optionIndex;
-  // final Color buttonColor;
-  // final Color borderColor;
+
 
   @override 
   Widget build(BuildContext context) {

@@ -32,7 +32,6 @@ class GlobalInput extends StatelessWidget {
         inputName != null
             ? Column(
                 children: [
-                  16.h,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -45,6 +44,7 @@ class GlobalInput extends StatelessWidget {
                       ),
                     ],
                   ),
+                  16.h,
                 ],
               )
             : SizedBox.shrink(),

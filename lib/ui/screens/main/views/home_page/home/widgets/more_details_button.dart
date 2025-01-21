@@ -16,8 +16,9 @@ class MoreDetailsButton extends StatelessWidget {
       buttonName: 'Daha ətraflı',
       buttonColor: Color(0xffFFD3E2),
       textColor: ColorConstants.primaryColor,
-      onPressed: () =>
-          mainCubit.showBottomSheet(context, BabyInfoBottomSheet()),
+      onPressed: () {
+        mainCubit.showBottomSheetAboutChild(BabyInfoBottomSheet());
+      },
     );
   }
 }

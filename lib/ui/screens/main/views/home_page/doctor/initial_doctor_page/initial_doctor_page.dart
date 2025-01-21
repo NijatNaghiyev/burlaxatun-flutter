@@ -1,11 +1,10 @@
-import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/doctor_box.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/doctor_categories.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../../../../cubits/main/mainn_cubit.dart';
+import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_appbar.dart';
+import 'widgets/doctor_box.dart';
+import 'widgets/doctor_categories.dart';
 import 'widgets/search_and_notification.dart';
 
 class InitialDoctorPage extends StatelessWidget {
@@ -13,14 +12,13 @@ class InitialDoctorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainnCubit>();
+    // final mainCubit = context.read<MainnCubit>();
     return Scaffold(
       backgroundColor: Color(0xffFCFCFD),
       appBar: GlobalAppbar(
         title: 'Həkimlər',
         onTap: () {
-          mainCubit.changeHomeView('Home');
-          mainCubit.scrollLatestPositionHomePage();
+          context.pop();
         },
       ),
       body: SingleChildScrollView(
@@ -36,7 +34,7 @@ class InitialDoctorPage extends StatelessWidget {
                 spacing: 24,
                 children: [
                   DoctorBox(),
-                  DoctorBox()
+                  DoctorBox(),
                 ],
               ),
             ),

@@ -14,7 +14,7 @@ class DoctorRegisterButton extends StatelessWidget {
       buttonColor: Color(0xffFDECF2),
       textColor: ColorConstants.primaryColor,
       onPressed: () {
-        context.push('/registration_doctor');
+        context.push('/doctor_register');
       },
     );
   }

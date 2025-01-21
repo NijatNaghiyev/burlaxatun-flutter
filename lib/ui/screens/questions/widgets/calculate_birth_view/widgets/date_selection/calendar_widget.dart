@@ -36,13 +36,25 @@ class CalendarWidget extends StatelessWidget {
             questionsCubit.updateSelectedDay(selectedDay);
           },
           headerStyle: HeaderStyle(
+            titleCentered: true,
             formatButtonVisible: false,
+            titleTextStyle: GoogleFonts.poppins(
+              fontSize: 14,
+              color: Color(0xffEC407A),
+              fontWeight: FontWeight.w500,
+            ),
           ),
           calendarStyle: CalendarStyle(
             cellPadding: EdgeInsets.zero,
             outsideDaysVisible: false,
             selectedDecoration: BoxDecoration(
+              shape: BoxShape.circle,
               color: ColorConstants.primaryColor,
+            ),
+            selectedTextStyle: GoogleFonts.poppins(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
             ),
             todayTextStyle: GoogleFonts.poppins(
               fontSize: 20,
@@ -59,7 +71,7 @@ class CalendarWidget extends StatelessWidget {
               color: Color(0xff667085),
               fontWeight: FontWeight.w400,
             ),
-            cellMargin: EdgeInsets.all(5),
+            cellMargin: EdgeInsets.all(6),
           ),
           daysOfWeekStyle: DaysOfWeekStyle(
             weekdayStyle: GoogleFonts.poppins(
