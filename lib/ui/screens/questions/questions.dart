@@ -20,39 +20,38 @@ class Questions extends StatelessWidget {
         title: 'Qeydiyyat',
         onTap: () => context.pop(),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            BlocBuilder<QuestionsCubit, QuestionsState>(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          BlocBuilder<QuestionsCubit, QuestionsState>(
+            builder: (context, state) {
+              return questionsCubit.questionPageIndex < 3
+                  ? Column(
+                      children: [
+                        36.h,
+                        GlobalDots(
+                          controller: questionsCubit.pageController,
+                        ),
+                      ],
+                    )
+                  : SizedBox.shrink();
+            },
+          ),
+          QuestionsPageView(),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 24),
+            child: BlocBuilder<QuestionsCubit, QuestionsState>(
               builder: (context, state) {
-                return questionsCubit.questionPageIndex < 3
-                    ? Column(
-                        children: [
-                          36.h,
-                          GlobalDots(
-                            controller: questionsCubit.pageController,
-                          ),
-                        ],
-                      )
-                    : SizedBox.shrink();
+                return DavamEt(
+                  isActive: questionsCubit.currentIndex != null,
+                  onPressed: () {
+                    questionsCubit.davamEtButton(context);
+                  },
+                );
               },
             ),
-            QuestionsPageView(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 24),
-              child: BlocBuilder<QuestionsCubit, QuestionsState>(
-                builder: (context, state) {
-                  return DavamEt(
-                    isActive: questionsCubit.currentIndex != null,
-                    onPressed: () {
-                      questionsCubit.davamEtButton(context);
-                    },
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

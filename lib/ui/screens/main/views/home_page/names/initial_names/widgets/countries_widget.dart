@@ -7,32 +7,28 @@ class CountriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.65,
-        child: ListView.separated(
-          itemCount: 20,
-          itemBuilder: (_, i) {
-            return ListTile(
-              leading: Image.asset(
-                'assets/png/flag.png',
-                width: 46,
-                height: 46,
-              ),
-              title: Text('Country name'),
-              trailing: SvgPicture.asset('assets/icons/arrow_right.svg'),
-              onTap: () {
-                context.push('/gender_names');
-              },
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return Divider(
-              color: Color(0xffDADADA),
-            );
-          },
-        ),
+    return Expanded(
+      child: ListView.separated(
+        itemCount: 20,
+        itemBuilder: (_, i) {
+          return ListTile(
+            leading: Image.asset(
+              'assets/png/flag.png',
+              width: 46,
+              height: 46,
+            ),
+            title: Text('Country name'),
+            trailing: SvgPicture.asset('assets/icons/arrow_right.svg'),
+            onTap: () {
+              context.push('/gender_names');
+            },
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider(
+            color: Color(0xffDADADA),
+          );
+        },
       ),
     );
   }

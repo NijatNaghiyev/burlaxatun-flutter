@@ -13,7 +13,7 @@ class SelectOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // width: context.deviceWidth,
+      width: MediaQuery.of(context).size.width,
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Color(0xffE4E7EC),

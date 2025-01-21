@@ -23,3 +23,11 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// DevicePreview(
+//       enabled: !kReleaseMode,
+//       builder: (BuildContext context) {
+//         return MyApp();
+//       },
+//       // child: MyApp(),
+//     ),

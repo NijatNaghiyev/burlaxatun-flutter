@@ -39,12 +39,16 @@ class AcceptPolicyCheckBox extends StatelessWidget {
           },
         ),
         SizedBox(width: 9),
-        GlobalText(
-          textAlign: TextAlign.left,
-          text: 'İstifadə qaydalalrı və məxfilik siyasəti ilə razıyam',
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
-          color: Color(0xff8D8D8D),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: GlobalText(
+            height: 1.2,
+            textAlign: TextAlign.left,
+            text: 'İstifadə qaydalalrı və məxfilik siyasəti ilə razıyam',
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            color: Color(0xff8D8D8D),
+          ),
         )
       ],
     );

@@ -10,20 +10,26 @@ class Onboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(top: 121, bottom: 67),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              OnboardPageView(),
-              Positioned(
-                top: 330,
-                child: OnboardDots(),
-              ),
-            ],
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 484,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Positioned(
+                  // top: 100,
+                  child: OnboardPageView(),
+                ),
+                Positioned(
+                  top: 330,
+                  child: OnboardDots(),
+                )
+              ],
+            ),
           ),
-        ),
+        ],
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 25, left: 20, right: 20),

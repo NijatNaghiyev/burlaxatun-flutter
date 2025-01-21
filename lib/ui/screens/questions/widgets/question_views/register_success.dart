@@ -11,8 +11,9 @@ class RegisterSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 92),
+      padding: const EdgeInsets.only(top: 0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ColoredBox(
             color: Colors.transparent,
