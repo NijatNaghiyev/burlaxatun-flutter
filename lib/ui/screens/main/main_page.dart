@@ -30,11 +30,3 @@ class MainPage extends StatelessWidget {
 }
 
 // indexed stack ve ya go router shell route
-
-
-// BlocBuilder<MainnCubit, MainInitial>(
-        //   builder: (context, state) {
-
-        //     return mainCubit.views[state.indexOfView];
-        //   },
-        // ),
