@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../cubits/onboarding_cubit/onboarding_cubit.dart';
-import '../../widgets/global_dots.dart';
 import 'widgets/onboard_button.dart';
+import 'widgets/onboard_dots.dart';
 import 'widgets/onboard_page_view.dart';
 
 class Onboarding extends StatelessWidget {
@@ -11,20 +9,17 @@ class Onboarding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final onboardingCubit = context.read<OnboardingCubit>();
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(top: 121, bottom: 67),
           child: Stack(
-            alignment: Alignment.topCenter,
+            alignment: Alignment.center,
             children: [
-              Positioned(
-                child: OnboardPageView(),
-              ),
+              OnboardPageView(),
               Positioned(
                 top: 330,
-                child: GlobalDots(controller: onboardingCubit.pageController),
+                child: OnboardDots(),
               ),
             ],
           ),
