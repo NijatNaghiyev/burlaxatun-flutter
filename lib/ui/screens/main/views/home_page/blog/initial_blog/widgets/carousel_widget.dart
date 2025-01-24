@@ -13,31 +13,42 @@ class CarouselWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final mainCubit = context.read<MainnCubit>();
     return Stack(
+      alignment: Alignment.bottomCenter,
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width,
+          width: MediaQuery.of(context).size.width ,
           child: BlocBuilder<MainnCubit, MainInitial>(
             builder: (context, state) {
               return CarouselSlider(
                 options: CarouselOptions(
+                  aspectRatio: 1,
                   initialPage: state.carouselIndex,
                   viewportFraction: 1,
+                  height: 172,
+                  enableInfiniteScroll: true,
+                  autoPlay: true,
                   onPageChanged: (index, reason) {
                     mainCubit.updateCarouselIndex(index);
                   },
-                  height: 173,
-                  enableInfiniteScroll: true,
-                  autoPlay: true,
                 ),
                 items: [
-                  Image.asset(
-                    'assets/png/banner.png',
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Image.asset(
+                      'assets/png/banner.png',
+                    ),
                   ),
-                  Image.asset(
-                    'assets/png/banner.png',
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Image.asset(
+                      'assets/png/banner.png',
+                    ),
                   ),
-                  Image.asset(
-                    'assets/png/banner.png',
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Image.asset(
+                      'assets/png/banner.png',
+                    ),
                   ),
                 ],
               );
@@ -50,8 +61,7 @@ class CarouselWidget extends StatelessWidget {
           },
           builder: (context, state) {
             return Positioned(
-              top: 152,
-              left: 158,
+              bottom: 13,
               child: AnimatedSmoothIndicator(
                 activeIndex: state.carouselIndex,
                 count: 3,

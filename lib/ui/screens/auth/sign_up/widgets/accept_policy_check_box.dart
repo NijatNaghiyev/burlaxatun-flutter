@@ -40,7 +40,7 @@ class AcceptPolicyCheckBox extends StatelessWidget {
         ),
         SizedBox(width: 9),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.8,
+          width: MediaQuery.of(context).size.width * 0.75,
           child: GlobalText(
             height: 1.2,
             textAlign: TextAlign.left,

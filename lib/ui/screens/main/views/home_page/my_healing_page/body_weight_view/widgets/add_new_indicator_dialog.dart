@@ -1,9 +1,10 @@
-import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/body_weight_view/widgets/add_indicator_input.dart';
-import 'package:burla_xatun/ui/widgets/global_text.dart';
-import 'package:burla_xatun/utils/constants/color_constants.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../../../../../../../utils/constants/color_constants.dart';
+import '../../../../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../../../widgets/global_text.dart';
+import 'add_indicator_input.dart';
 
 class AddNewIndicatorDialog extends StatelessWidget {
   const AddNewIndicatorDialog({super.key});
@@ -12,7 +13,7 @@ class AddNewIndicatorDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: 350,
+        width: MediaQuery.of(context).size.width * 0.9,
         height: 480,
         child: Material(
           type: MaterialType.transparency,

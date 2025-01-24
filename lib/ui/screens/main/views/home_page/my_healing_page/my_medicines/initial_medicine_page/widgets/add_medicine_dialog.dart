@@ -13,7 +13,7 @@ class AddMedicineDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: 350,
+        width: MediaQuery.of(context).size.width * 0.9,
         height: 521,
         child: Material(
           type: MaterialType.transparency,

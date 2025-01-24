@@ -1,8 +1,9 @@
-import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/doctor_info.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/doctor_notification_status.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/re_registration_button.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../../../utils/extensions/num_extensions.dart';
+import 'doctor_info.dart';
+import 'doctor_notification_status.dart';
+import 're_registration_button.dart';
 
 class DoctorsNotificationBoxWidget extends StatelessWidget {
   const DoctorsNotificationBoxWidget({super.key});

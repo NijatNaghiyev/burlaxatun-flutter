@@ -16,16 +16,16 @@ class FormatBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: SizedBox(
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: boxColors,
             borderRadius: BorderRadius.all(Radius.circular(18)),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 59.5, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 57, vertical: 8),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

@@ -43,7 +43,7 @@ class GlobalButton extends StatelessWidget {
         child: GlobalText(
           text: buttonName,
           fontSize: 16,
-          height: 1.1,
+          height: 1.3,
           fontWeight: FontWeight.w500,
           color: textColor,
         ),
