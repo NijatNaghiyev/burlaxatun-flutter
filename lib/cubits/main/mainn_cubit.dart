@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/data/models/local/settings_items_model.dart';
 import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/my_medicines/initial_medicine_page/widgets/add_medicine_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +10,7 @@ import '../../data/models/local/main_page_box_model.dart';
 import '../../data/models/local/my_healing_card_items_model.dart';
 import '../../data/models/local/profile_sections_items_model.dart';
 import '../../ui/screens/main/views/daily_advise_page/advises_page.dart';
-import '../../ui/screens/main/views/forum_page/forum_page.dart';
+import '../../ui/screens/main/views/forum_page/main_forum_page.dart/forum_page.dart';
 import '../../ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/doctors_notification.dart';
 import '../../ui/screens/main/views/home_page/home.dart';
 import '../../ui/screens/main/views/home_page/home/home_page.dart';
@@ -25,7 +26,6 @@ import '../../ui/screens/main/views/profie_page/contact_us/contact_us_view.dart'
 import '../../ui/screens/main/views/profie_page/faq/faq_view.dart';
 import '../../ui/screens/main/views/profie_page/initial_profile/initial_profile_page.dart';
 import '../../ui/screens/main/views/profie_page/pricavy_policy/privacy_policy_view.dart';
-import '../../ui/screens/main/views/profie_page/profile_page.dart';
 import '../../ui/screens/main/views/profie_page/settings/setting_view.dart';
 import '../../ui/screens/main/views/profie_page/special_thanks/special_thanks_view.dart';
 import '../../ui/screens/main/views/profie_page/terms_of_use/terms_of_use_view.dart';
@@ -62,12 +62,13 @@ class MainnCubit extends Cubit<MainInitial> {
   final boxItems = MainPageBoxModel.items;
   final profileSectionItems = ProfileSectionsItemsModel.items;
   final myHealingCardItems = MyHealingCardItemsModel.items;
+  final settingItems = SettingsItemModel.items;
 
   final List views = [
     Home(),
-    ForumPage(),
+    MainForumPage(),
     MyHealingPage(),
-    ProfilePage(),
+    InitialProfilePage(),
   ];
 
   final Map<String, Widget> profileViews = {

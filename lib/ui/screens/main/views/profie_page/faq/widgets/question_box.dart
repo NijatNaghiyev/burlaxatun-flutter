@@ -26,7 +26,7 @@ class QuestionBox extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(50)),
-            color: Colors.blueGrey,
+            color: Colors.white,
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),

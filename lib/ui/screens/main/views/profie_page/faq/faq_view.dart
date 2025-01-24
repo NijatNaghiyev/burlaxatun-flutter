@@ -1,22 +1,20 @@
-import 'package:burla_xatun/cubits/main/mainn_cubit.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/faq/widgets/question_box.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../widgets/global_appbar.dart';
+import 'widgets/question_box.dart';
 
 class FaqView extends StatelessWidget {
   const FaqView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainnCubit>();
     return Scaffold(
       backgroundColor: Color(0xffF7F8FA),
       appBar: GlobalAppbar(
         title: 'Tez-tez verilən suallar',
         onTap: () {
-          mainCubit.goBackInitialProfileView();
+          context.pop();
         },
       ),
       body: Padding(

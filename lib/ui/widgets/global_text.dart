@@ -11,6 +11,8 @@ class GlobalText extends StatelessWidget {
     required this.color,
     this.textAlign = TextAlign.center,
     this.maxLines = 20,
+    this.fontStyle = FontStyle.normal,
+    this.decoration = TextDecoration.none,
   });
 
   final double fontSize;
@@ -20,6 +22,8 @@ class GlobalText extends StatelessWidget {
   final Color color;
   final TextAlign textAlign;
   final int maxLines;
+  final FontStyle fontStyle;
+  final TextDecoration decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,9 @@ class GlobalText extends StatelessWidget {
       textAlign: textAlign,
       text,
       style: GoogleFonts.poppins(
+        decorationThickness: 2,
+        decoration: decoration,
+        fontStyle: fontStyle,
         fontSize: fontSize,
         color: color,
         fontWeight: fontWeight,
