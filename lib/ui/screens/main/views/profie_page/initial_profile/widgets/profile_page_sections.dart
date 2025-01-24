@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../../../cubits/main/mainn_cubit.dart';
 import 'section_box.dart';
@@ -21,8 +22,7 @@ class ProfilePageSections extends StatelessWidget {
             sectionName: mainCubit.profileSectionItems[i].sectionName,
             onTap: () {
               log(mainCubit.profileSectionItems[i].sectionRoute);
-              mainCubit.changeProfileView(
-                  mainCubit.profileSectionItems[i].sectionRoute);
+              context.push(mainCubit.profileSectionItems[i].sectionRoute);
             },
           ),
       ],

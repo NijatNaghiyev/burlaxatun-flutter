@@ -1,3 +1,10 @@
+import 'package:burla_xatun/ui/screens/main/views/profie_page/about_us/about_us_view.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/contact_us/contact_us_view.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/faq/faq_view.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/pricavy_policy/privacy_policy_view.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_view.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/special_thanks/special_thanks_view.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/terms_of_use/terms_of_use_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,7 +16,7 @@ import '../../ui/screens/auth/login/login.dart';
 import '../../ui/screens/auth/sign_up/signup.dart';
 import '../../ui/screens/main/main_page.dart';
 import '../../ui/screens/main/views/daily_advise_page/advises_page.dart';
-import '../../ui/screens/main/views/forum_page/forum_page.dart';
+import '../../ui/screens/main/views/forum_page/main_forum_page.dart/forum_page.dart';
 import '../../ui/screens/main/views/home_page/blog/article_details/article_details_page.dart';
 import '../../ui/screens/main/views/home_page/blog/initial_blog/initial_blog_page.dart';
 import '../../ui/screens/main/views/home_page/blog/see_all_articles/see_all_articles_page.dart';
@@ -37,8 +44,6 @@ class Routerapp {
   // static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   final GoRouter router = GoRouter(
-    // initialLocation: '/',
-    // navigatorKey: _rootNavigatorKey,
     routes: [
       GoRoute(
         path: '/',
@@ -77,8 +82,6 @@ class Routerapp {
         },
         branches: [
           StatefulShellBranch(
-            // initialLocation: '/home',
-            // preload: true,
             routes: [
               GoRoute(
                 path: '/home',
@@ -143,7 +146,6 @@ class Routerapp {
             ],
           ),
           StatefulShellBranch(
-            // initialLocation: '/daily_advices',
             routes: [
               GoRoute(
                 path: '/daily_advices',
@@ -152,20 +154,46 @@ class Routerapp {
             ],
           ),
           StatefulShellBranch(
-            // initialLocation: '/forum_page',
             routes: [
               GoRoute(
                 path: '/forum_page',
-                builder: (context, state) => ForumPage(),
+                builder: (context, state) => MainForumPage(),
               ),
             ],
           ),
           StatefulShellBranch(
-            // initialLocation: 'profile_page',
             routes: [
               GoRoute(
                 path: '/profile_page',
                 builder: (context, state) => InitialProfilePage(),
+              ),
+              GoRoute(
+                path: '/about_us',
+                builder: (context, state) => AboutUsView(),
+              ),
+              GoRoute(
+                path: '/contact_us',
+                builder: (context, state) => ContactUsView(),
+              ),
+              GoRoute(
+                path: '/faq',
+                builder: (context, state) => FaqView(),
+              ),
+              GoRoute(
+                path: '/privacy_policy',
+                builder: (context, state) => PrivacyPolicyView(),
+              ),
+              GoRoute(
+                path: '/settings',
+                builder: (context, state) => SettingView(),
+              ),
+              GoRoute(
+                path: '/special_thanks',
+                builder: (context, state) => SpecialThanksView(),
+              ),
+              GoRoute(
+                path: '/terms_of_use',
+                builder: (context, state) => TermsOfUseView(),
               ),
             ],
           )

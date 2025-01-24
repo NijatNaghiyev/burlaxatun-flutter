@@ -15,7 +15,6 @@ class FirstDayOfLastPeriod extends StatefulWidget {
   @override
   State<FirstDayOfLastPeriod> createState() => _FirstDayOfLastPeriodState();
 }
-
 class _FirstDayOfLastPeriodState extends State<FirstDayOfLastPeriod> {
   // late final ScrollController _scrollController;
   // @override
