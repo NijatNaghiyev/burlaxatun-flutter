@@ -20,7 +20,7 @@ class SelectableUltrasoundFormat extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(40)),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 21.5, vertical: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

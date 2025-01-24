@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -29,7 +30,7 @@ class QuestionBox extends StatelessWidget {
             color: Colors.white,
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
             child: Column(
               children: [
                 GestureDetector(
@@ -41,7 +42,7 @@ class QuestionBox extends StatelessWidget {
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 270,
+                        width: context.deviceWidth * 0.69,
                         child: GlobalText(
                           height: 1.5,
                           textAlign: TextAlign.left,

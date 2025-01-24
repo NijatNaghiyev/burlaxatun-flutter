@@ -13,24 +13,25 @@ class SearchAndNotification extends StatelessWidget {
     final mainCubit = context.read<MainnCubit>();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.82,
-            child: GlobalInput(
-              prefixIcon: 'assets/icons/search_icon.svg',
-              hintText: 'Axtarış...',
+      child: SizedBox(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.82,
+              child: GlobalInput(
+                prefixIcon: 'assets/icons/search_icon.svg',
+                hintText: 'Axtarış...',
+              ),
             ),
-          ),
-          SizedBox(width: 10),
-          GestureDetector(
-            onTap: () {
-              mainCubit.showDoctorsNotification();
-            },
-            child: SvgPicture.asset('assets/icons/notification_bing.svg'),
-          ),
-        ],
+            GestureDetector(
+              onTap: () {
+                mainCubit.showDoctorsNotification();
+              },
+              child: SvgPicture.asset('assets/icons/notification_bing.svg'),
+            ),
+          ],
+        ),
       ),
     );
   }

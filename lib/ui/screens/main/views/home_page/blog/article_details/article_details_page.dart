@@ -10,9 +10,10 @@ class ArticleDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffE4C0ED),
-      body: SafeArea(
-        child: ArticleDetailsAppbar(),
-      ),
+      appBar: ArticleDetailsAppbar(),
+      // body: SafeArea(
+      //   child: ArticleDetailsAppbar(),
+      // ),
       bottomSheet: ArticleDetail(),
     );
   }

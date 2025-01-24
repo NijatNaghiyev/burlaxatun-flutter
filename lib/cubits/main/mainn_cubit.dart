@@ -154,13 +154,10 @@ class MainnCubit extends Cubit<MainInitial> {
 
   void showDoctorsNotification() {
     showModalBottomSheet(
+      showDragHandle: true,
       context: state.navigationShellContext!,
       builder: (BuildContext context) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.6,
-          width: MediaQuery.of(context).size.width,
-          child: DoctorsNotification(),
-        );
+        return DoctorsNotification();
       },
     );
   }

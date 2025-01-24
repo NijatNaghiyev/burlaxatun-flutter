@@ -11,7 +11,7 @@ class CalendarDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: 350,
+        width: MediaQuery.of(context).size.width * 0.9,
         height: 480,
         child: DecoratedBox(
           decoration: BoxDecoration(
@@ -34,12 +34,15 @@ class CalendarDialog extends StatelessWidget {
                   ],
                 ),
               ),
-              36.h,
+              20.h,
               Material(
                 type: MaterialType.card,
                 child: TableCalendar(
+                  calendarStyle: CalendarStyle(
+                  ),
                   headerStyle: HeaderStyle(
                     formatButtonVisible: false,
+                    titleCentered: true
                   ),
                   focusedDay: DateTime.now(),
                   firstDay: DateTime.utc(2010, 10, 16),

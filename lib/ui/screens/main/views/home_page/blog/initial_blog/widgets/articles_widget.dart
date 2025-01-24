@@ -48,7 +48,7 @@ class ArticlesWidget extends StatelessWidget {
                   GestureDetector(
                     onTap: () => context.push('/article_details'),
                     child: SizedBox(
-                      width: 146,
+                      width: MediaQuery.of(context).size.width * 0.37,
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -84,9 +84,6 @@ class ArticlesWidget extends StatelessWidget {
                 ],
               );
             },
-            // separatorBuilder: (BuildContext context, int index) {
-            //   return SizedBox(width: 12);
-            // },
           ),
         ),
       ],

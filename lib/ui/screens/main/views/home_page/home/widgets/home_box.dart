@@ -34,7 +34,7 @@ class HomeBox extends StatelessWidget {
               SvgPicture.asset(boxIcon),
               10.h,
               SizedBox(
-                width: 137,
+                width: 90,
                 child: GlobalText(
                   height: 1.2,
                   text: boxName,
