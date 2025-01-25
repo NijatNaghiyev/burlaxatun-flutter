@@ -61,7 +61,7 @@ class CarouselWidget extends StatelessWidget {
           },
           builder: (context, state) {
             return Positioned(
-              bottom: 13,
+              bottom: 20,
               child: AnimatedSmoothIndicator(
                 activeIndex: state.carouselIndex,
                 count: 3,

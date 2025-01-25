@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../utils/constants/asset_constants.dart';
@@ -15,10 +16,11 @@ class AddYourChild extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 10),
           child: Column(
-            spacing: 20,
+            spacing: context.deviceHeight < 700 ? 15 : 20,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 28),
+                padding: EdgeInsets.symmetric(
+                    vertical: context.deviceHeight < 710 ? 14 : 28),
                 child: GlobalText(
                   text: 'Övladınızı əlavə edin',
                   fontSize: 24,

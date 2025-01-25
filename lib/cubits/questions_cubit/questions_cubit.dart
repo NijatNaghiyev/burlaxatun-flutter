@@ -16,31 +16,30 @@ import '../../ui/screens/questions/widgets/question_views/question_three.dart';
 import '../../ui/screens/questions/widgets/question_views/question_two.dart';
 import '../../ui/screens/questions/widgets/question_views/register_success.dart';
 import '../main/mainn_cubit.dart';
+import 'questions_state.dart';
 
-part 'questions_state.dart';
-
-class QuestionsCubit extends Cubit<QuestionsState> {
+class QuestionsCubit extends Cubit<QuestionsInitial> {
   QuestionsCubit()
       : super(QuestionsInitial(
-          currentIndex: null,
-          currentPageIndex: 0,
+          currentQuestionOneOptionIndex: null,
+          selectedCalculateOptionIndex: null,
+          questionPageIndex: 0,
+          focusedWeekIndex: 0,
           iDontKnow: false,
           showOptions: false,
+          showDays: false,
+          showCalendar: false,
+          selectedCalculateOptionString: 'Hesablama üsulunu seçin...',
+          selectedPeriodTimeString: 'Period muddetini secin...',
+          selectedDay: DateTime.now(),
+          isActiveButton: false,
+          isFirstChild: null,
         ));
 
   final pageController = PageController();
   final scrollController = ScrollController();
-  int? currentIndex;
-  int? selectedOptionIndex;
-  int questionPageIndex = 0;
-  int focusedWeekIndex = 0;
-  bool iDontKnow = false;
-  bool showOptions = false;
-  bool showDays = false;
-  bool showCalendar = false;
-  String selectedCalculateOption = 'hesablama usulunu secin...';
-  String selectedPeriodTime = 'Period muddetini secin...';
-  DateTime selectedDay = DateTime.now();
+  final ValueNotifier<int?> questionOneButtonNotifier =
+      ValueNotifier<int?>(null);
 
   final List questionViews = [
     QuestionOne(),
@@ -58,13 +57,13 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   ];
 
   void scrollBottom() {
-    if (!showDays) {
+    if (!state.showDays) {
       showDaysToggle();
       WidgetsBinding.instance.addPostFrameCallback((_) {
         scrollController.animateTo(
           scrollController.position.maxScrollExtent,
           duration: const Duration(milliseconds: 300),
-          curve: Curves.bounceInOut,
+          curve: Curves.ease,
         );
       });
     } else {
@@ -72,49 +71,82 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     }
   }
 
-  void selectOption(int v) {
-    currentIndex = v;
-    emit(QuestionsInitial(currentIndex: currentIndex));
-  }
-
-  void updateSelectedDay(DateTime v) {
-    selectedDay = v;
-    emit(QuestionsInitial());
-  }
-
-  void updatePeriodTime(String v) {
-    selectedPeriodTime = v;
-    emit(QuestionsInitial());
-  }
-
-  void updateFocusedWeekIndex(int v) {
-    focusedWeekIndex = v;
-    emit(QuestionsInitial());
-  }
-
-  void nextQuestion() {
-    log('question page: $questionPageIndex');
-    if (questionPageIndex < 4) {
-      questionPageIndex = questionPageIndex + 1;
-      emit(QuestionsInitial());
-      questionPageIndex < 3
-          ? pageController.animateToPage(
-              questionPageIndex,
-              duration: Durations.medium2,
-              curve: Curves.linear,
-            )
-          : pageController.jumpToPage(questionPageIndex);
+  void updateIsActiveButton({int? v}) {
+    switch (state.questionPageIndex) {
+      case 0:
+        if (questionOneButtonNotifier.value != null) {
+          emit(state.copyWith(
+            isActiveButton: true,
+          ));
+        }
+        break;
+      case 1:
+        if (state.iDontKnow || state.focusedWeekIndex != 0) {
+          emit(state.copyWith(isActiveButton: true));
+        } else {
+          emit(state.copyWith(isActiveButton: false));
+        }
+        break;
+      case 2:
+        if (state.isFirstChild != null) {
+          emit(state.copyWith(isActiveButton: true));
+        }
+        break;
+      default:
+        log('default');
     }
   }
 
-  void iDontKnowToggle(bool v) {
-    iDontKnow = !v;
-    emit(QuestionsInitial(iDontKnow: iDontKnow));
+  void updateCurrentQuestionOneOption(int v) {
+    emit(state.copyWith(currentQuestionOneOptionIndex: v));
+  }
+
+  void updateSelectedDay(DateTime v) {
+    emit(state.copyWith(selectedDay: v));
+  }
+
+  void updateQuestionThreeAnswer(bool v) {
+    emit(state.copyWith(isFirstChild: v));
+  }
+
+  void updatePeriodTime(String v) {
+    emit(state.copyWith(selectedPeriodTimeString: v));
+  }
+
+  void updateFocusedWeekIndex(int v) {
+    emit(state.copyWith(focusedWeekIndex: v));
+  }
+
+  void nextQuestion() {
+    if (state.questionPageIndex <= 2) {
+      emit(state.copyWith(questionPageIndex: state.questionPageIndex + 1));
+      log('question page: ${state.questionPageIndex}');
+      if (state.questionPageIndex < 3) {
+        pageController.animateToPage(
+          state.questionPageIndex,
+          duration: Durations.medium2,
+          curve: Curves.linear,
+        );
+        emit(state.copyWith(isActiveButton: false));
+      } else if (state.isFirstChild! && state.questionPageIndex < 4) {
+        pageController.jumpToPage(state.questionPageIndex);
+      } else if (!state.isFirstChild! && state.questionPageIndex < 4) {
+        emit(state.copyWith(questionPageIndex: state.questionPageIndex + 1));
+        pageController.jumpToPage(state.questionPageIndex);
+      }
+      // }
+    } else if (state.questionPageIndex == 3) {
+      log('THIS WAS SUCCESS REGISTER AND GO TO MAIN PAGE');
+    } else {
+      log('THIS WAS ADD UR CHILD AND GO TO MAIN PAGE');
+    }
   }
 
   void davamEtButton(context) {
-    currentIndex != null
-        ? iDontKnow
+    log('${state.isActiveButton}');
+
+    state.isActiveButton
+        ? state.iDontKnow
             ? Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -128,35 +160,41 @@ class QuestionsCubit extends Cubit<QuestionsState> {
         : null;
   }
 
+  void iDontKnowToggle(bool v) {
+    emit(state.copyWith(iDontKnow: !v));
+  }
+
   void showOptionsToggle() {
-    showCalendar = false;
-    showDays = false;
-    showOptions = !showOptions;
-    emit(QuestionsInitial(showOptions: showOptions));
+    log('${state.showOptions}');
+    emit(state.copyWith(
+      showOptions: !state.showOptions,
+      showDays: false,
+      showCalendar: false,
+    ));
   }
 
   void showCalendarToggle() {
-    showOptions = false;
-    showDays = false;
-    showCalendar = !showCalendar;
-    emit(QuestionsInitial());
+    emit(state.copyWith(
+      showOptions: false,
+      showDays: false,
+      showCalendar: !state.showCalendar,
+    ));
   }
 
   void showDaysToggle() {
-    showOptions = false;
-    showCalendar = false;
-    showDays = !showDays;
-    emit(QuestionsInitial());
+    emit(state.copyWith(
+      showOptions: false,
+      showDays: !state.showDays,
+      showCalendar: false,
+    ));
   }
 
   void selectCalculateOption(int v) {
-    selectedOptionIndex = v;
-    emit(QuestionsInitial(selectedOptionIndex: selectedOptionIndex));
+    emit(state.copyWith(selectedCalculateOptionIndex: v));
   }
 
-  void updateCalculateOption(String v) {
-    selectedCalculateOption = v;
-    emit(QuestionsInitial(selectedCalculateOption: selectedCalculateOption));
+  void updateCalculateOptionName(String v) {
+    emit(state.copyWith(selectedCalculateOptionString: v));
   }
 
   void calculate(BuildContext context) {
@@ -188,6 +226,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   Future<void> close() {
     pageController.dispose();
     scrollController.dispose();
+    questionOneButtonNotifier.dispose();
     return super.close();
   }
 }

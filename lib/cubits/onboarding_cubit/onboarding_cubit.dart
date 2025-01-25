@@ -24,7 +24,7 @@ class OnboardingCubit extends Cubit<int> {
       pageController.animateToPage(
         indexOfPage,
         duration: Durations.medium2,
-        curve: Curves.bounceInOut,
+        curve: Curves.linear,
       );
     }
   }

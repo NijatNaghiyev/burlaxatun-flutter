@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../cubits/questions_cubit/questions_cubit.dart';
+import '../../../cubits/questions_cubit/questions_state.dart';
 import '../../../utils/extensions/num_extensions.dart';
 import '../../widgets/global_appbar.dart';
 import '../../widgets/global_dots.dart';
@@ -23,9 +24,9 @@ class Questions extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          BlocBuilder<QuestionsCubit, QuestionsState>(
+          BlocBuilder<QuestionsCubit, QuestionsInitial>(
             builder: (context, state) {
-              return questionsCubit.questionPageIndex < 3
+              return state.questionPageIndex < 3
                   ? Column(
                       children: [
                         36.h,
@@ -40,10 +41,10 @@ class Questions extends StatelessWidget {
           QuestionsPageView(),
           Padding(
             padding: const EdgeInsets.only(bottom: 24),
-            child: BlocBuilder<QuestionsCubit, QuestionsState>(
+            child: BlocBuilder<QuestionsCubit, QuestionsInitial>(
               builder: (context, state) {
                 return DavamEt(
-                  isActive: questionsCubit.currentIndex != null,
+                  isActive: state.isActiveButton,
                   onPressed: () {
                     questionsCubit.davamEtButton(context);
                   },

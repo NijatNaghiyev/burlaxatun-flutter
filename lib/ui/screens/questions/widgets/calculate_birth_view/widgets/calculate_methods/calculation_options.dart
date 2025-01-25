@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../../cubits/questions_cubit/questions_cubit.dart';
+import '../../../../../../../cubits/questions_cubit/questions_state.dart';
 import '../../../../../../../data/models/local/calculation_options_model.dart';
 import 'single_option.dart';
 
@@ -29,18 +28,17 @@ class CalculationOptions extends StatelessWidget {
               for (int i = 0; i < 4; i++)
                 GestureDetector(
                   onTap: () {
-                    log('$i');
                     questionsCubit.selectCalculateOption(i);
-                    questionsCubit.updateCalculateOption(
+                    questionsCubit.updateCalculateOptionName(
                         CalculationOptionsModel.options[i].optionName);
                   },
-                  child: BlocBuilder<QuestionsCubit, QuestionsState>(
+                  child: BlocBuilder<QuestionsCubit, QuestionsInitial>(
                     builder: (context, state) {
                       return SingleOption(
                         optionName:
                             CalculationOptionsModel.options[i].optionName,
                         isSelectedOption:
-                            questionsCubit.selectedOptionIndex == i,
+                            state.selectedCalculateOptionIndex == i,
                       );
                     },
                   ),
