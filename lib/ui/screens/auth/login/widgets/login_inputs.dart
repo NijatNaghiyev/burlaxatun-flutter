@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +21,7 @@ class LoginInputs extends StatelessWidget {
           prefixIcon: AssetConstants.emailIcon,
           hintText: TextConstants.emailiniziDaxilEdin,
         ),
-        26.h,
+        context.deviceHeight < 750 ? 10.h : 26.h,
         BlocBuilder<LoginCubit, LoginCubitState>(
           builder: (context, state) {
             if (state is LoginCubitInitial) {

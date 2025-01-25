@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/constants/text_constants.dart';
@@ -17,7 +18,7 @@ class SignupOptions extends StatelessWidget {
           fontWeight: FontWeight.w400,
           color: Colors.black,
         ),
-        24.h,
+        context.deviceHeight < 710 ? 10.h : 24.h,
         OptionWidget(
           optionName: TextConstants.signUpWithGoogle,
           child: Image.asset(
@@ -28,6 +29,7 @@ class SignupOptions extends StatelessWidget {
         ),
         10.h,
         OptionWidget(
+          paddingRight: 39,
           optionName: TextConstants.videoDoktor,
           child: Image.asset(
             'assets/png/videodoctor_logo.png',
@@ -45,10 +47,12 @@ class OptionWidget extends StatelessWidget {
     super.key,
     required this.optionName,
     required this.child,
+    this.paddingRight = 0,
   });
 
   final String optionName;
   final Widget child;
+  final double paddingRight;
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +72,14 @@ class OptionWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             child,
-            GlobalText(
-              text: optionName,
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
+            Padding(
+              padding: EdgeInsets.only(right: paddingRight),
+              child: GlobalText(
+                text: optionName,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
             )
           ],
         ),

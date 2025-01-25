@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../utils/constants/asset_constants.dart';
@@ -9,7 +10,7 @@ class SignupInputs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 26,
+      spacing: context.deviceHeight < 740 ? 13 : 26,
       children: [
         GlobalInput(
           inputName: 'Ad, soyad və ata adı qeyd edin',

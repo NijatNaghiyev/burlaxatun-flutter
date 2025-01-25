@@ -16,10 +16,9 @@ class SingleOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: SizedBox(
-        width: 140,
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: boxColors,

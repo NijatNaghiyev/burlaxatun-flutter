@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../cubits/questions_cubit/questions_cubit.dart';
+import '../../../../../cubits/questions_cubit/questions_state.dart';
 import '../../../../../utils/extensions/num_extensions.dart';
 import '../../../../widgets/global_appbar.dart';
 import 'widgets/calculate_button.dart';
@@ -30,9 +31,12 @@ class CalculateBirth extends StatelessWidget {
           child: Column(
             children: [
               CalculationMethodWidget(),
-              BlocBuilder<QuestionsCubit, QuestionsState>(
+              BlocBuilder<QuestionsCubit, QuestionsInitial>(
+                buildWhen: (previous, current) {
+                  return previous.showOptions != current.showOptions;
+                },
                 builder: (context, state) {
-                  return questionsCubit.showOptions
+                  return state.showOptions
                       ? Padding(
                           padding: const EdgeInsets.only(top: 14),
                           child: CalculationOptions(),
@@ -42,22 +46,21 @@ class CalculateBirth extends StatelessWidget {
               ),
               20.h,
               SelectDateWidget(),
-              BlocBuilder<QuestionsCubit, QuestionsState>(
+              BlocBuilder<QuestionsCubit, QuestionsInitial>(
                 builder: (context, state) {
-                  return questionsCubit.showCalendar
+                  return state.showCalendar
                       ? Padding(
                           padding: const EdgeInsets.only(top: 14),
-                          child: CalendarWidget(
-                              focusedDay: questionsCubit.selectedDay),
+                          child: CalendarWidget(focusedDay: state.selectedDay),
                         )
                       : SizedBox.shrink();
                 },
               ),
               20.h,
-              BlocBuilder<QuestionsCubit, QuestionsState>(
+              BlocBuilder<QuestionsCubit, QuestionsInitial>(
                 builder: (context, state) {
                   return questionsCubit.calculationOptions[
-                      questionsCubit.selectedOptionIndex ?? 0];
+                      state.selectedCalculateOptionIndex ?? 0];
                 },
               )
             ],

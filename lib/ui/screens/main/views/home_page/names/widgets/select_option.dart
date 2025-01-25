@@ -12,31 +12,20 @@ class SelectOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Color(0xffE4E7EC),
-          borderRadius: BorderRadius.all(Radius.circular(40)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              optionOne,
-              SizedBox(width: 18),
-              ColoredBox(
-                color: Color(0xffD0D5DD),
-                child: SizedBox(
-                  width: 1,
-                  height: 18,
-                ),
-              ),
-              SizedBox(width: 18),
-              optionTwo,
-            ],
-          ),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Color(0xffE4E7EC),
+        borderRadius: BorderRadius.all(Radius.circular(40)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(5),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            optionOne,
+            SizedBox(width: 5),
+            optionTwo,
+          ],
         ),
       ),
     );

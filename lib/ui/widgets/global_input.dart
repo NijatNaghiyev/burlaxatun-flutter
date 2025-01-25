@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,7 +45,7 @@ class GlobalInput extends StatelessWidget {
                       ),
                     ],
                   ),
-                  16.h,
+                  context.deviceHeight < 750 ? 8.h : 16.h,
                 ],
               )
             : SizedBox.shrink(),

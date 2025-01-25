@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../../../../cubits/questions_cubit/questions_state.dart';
 import '../../../../../../../utils/constants/asset_constants.dart';
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
@@ -28,6 +29,9 @@ class CalculationMethodWidget extends StatelessWidget {
         ),
         10.h,
         GestureDetector(
+          onTap: () {
+            questionsCubit.showOptionsToggle();
+          },
           child: SizedBox(
             height: 56,
             width: double.maxFinite,
@@ -41,20 +45,24 @@ class CalculationMethodWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    BlocBuilder<QuestionsCubit, QuestionsState>(
+                    BlocBuilder<QuestionsCubit, QuestionsInitial>(
+                      buildWhen: (previous, current) {
+                        return previous.selectedCalculateOptionString !=
+                            current.selectedCalculateOptionString;
+                      },
                       builder: (context, state) {
                         return GlobalText(
-                            text: questionsCubit.selectedCalculateOption,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          );
+                          text: state.selectedCalculateOptionString,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                        );
                       },
                     ),
-                    BlocBuilder<QuestionsCubit, QuestionsState>(
+                    BlocBuilder<QuestionsCubit, QuestionsInitial>(
                       builder: (context, state) {
                         return SvgPicture.asset(
-                          questionsCubit.showOptions
+                          state.showOptions
                               ? AssetConstants.arrowUpIcon
                               : AssetConstants.arrowDownIcon,
                         );
@@ -65,9 +73,6 @@ class CalculationMethodWidget extends StatelessWidget {
               ),
             ),
           ),
-          onTap: () {
-            questionsCubit.showOptionsToggle();
-          },
         ),
       ],
     );

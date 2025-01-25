@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/constants/padding_constants.dart';
@@ -22,18 +23,16 @@ class Login extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
-                  Padding(
-                    padding: PaddingConstants.t24,
-                    child: LoginImage(),
-                  ),
-                  30.h,
+                  context.deviceHeight < 750 ? 11.h : 26.h,
+                  LoginImage(),
+                  context.deviceHeight < 750 ? 13.h : 30.h,
                   LoginInputs(),
                   ForgotPasswordButton(),
-                  10.h,
+                  context.deviceHeight < 750 ? 3.h : 10.h,
                   LoginButton(),
-                  26.h,
+                  context.deviceHeight < 750 ? 11.h : 26.h,
                   SignupButton(),
-                  25.h,
+                  context.deviceHeight < 750 ? 10.h : 25.h,
                   SignupOptions(),
                 ],
               ),

@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,17 +25,17 @@ class SignUp extends StatelessWidget {
         child: Padding(
           padding: PaddingConstants.h20,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              51.h,
+              context.deviceHeight < 710 ? 10.h : 51.h,
               SignupInputs(),
-              15.h,
+              context.deviceHeight < 710 ? 17.h : 15.h,
               AcceptPolicyCheckBox(),
-              29.h,
+              context.deviceHeight < 710 ? 14.h : 29.h,
               GoOnButton(),
-              20.h,
+              context.deviceHeight < 710 ? 10.h : 20.h,
               LoginTextButton(),
-              16.h,
+              context.deviceHeight < 710 ? 8.h : 16.h,
               SignupOptions()
             ],
           ),

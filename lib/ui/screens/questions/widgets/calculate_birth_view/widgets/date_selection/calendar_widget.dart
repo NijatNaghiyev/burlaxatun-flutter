@@ -29,9 +29,9 @@ class CalendarWidget extends StatelessWidget {
           focusedDay: focusedDay,
           firstDay: DateTime.utc(2010, 10, 16),
           lastDay: DateTime.utc(2030, 3, 14),
-          selectedDayPredicate: (day) {
-            return isSameDay(questionsCubit.selectedDay, day);
-          },
+          // selectedDayPredicate: (day) {
+            // return isSameDay(questionsCubit.selectedDay, day);
+          // },
           onDaySelected: (selectedDay, focusedDay) {
             questionsCubit.updateSelectedDay(selectedDay);
           },

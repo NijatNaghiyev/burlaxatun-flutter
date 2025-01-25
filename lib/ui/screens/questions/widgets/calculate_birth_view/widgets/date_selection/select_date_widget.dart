@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../../cubits/questions_cubit/questions_cubit.dart';
+import '../../../../../../../cubits/questions_cubit/questions_state.dart';
 import '../../../../../../../utils/constants/asset_constants.dart';
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
@@ -50,10 +51,10 @@ class SelectDateWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       color: Colors.black,
                     ),
-                    BlocBuilder<QuestionsCubit, QuestionsState>(
+                    BlocBuilder<QuestionsCubit, QuestionsInitial>(
                       builder: (context, state) {
                         return SvgPicture.asset(
-                          questionsCubit.showCalendar
+                          state.showCalendar
                               ? AssetConstants.arrowUpIcon
                               : AssetConstants.arrowDownIcon,
                         );

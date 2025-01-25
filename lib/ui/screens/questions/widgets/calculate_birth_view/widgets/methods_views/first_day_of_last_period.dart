@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../../cubits/questions_cubit/questions_cubit.dart';
+import '../../../../../../../cubits/questions_cubit/questions_state.dart';
 import '../../../../../../../utils/constants/asset_constants.dart';
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
@@ -15,6 +16,7 @@ class FirstDayOfLastPeriod extends StatefulWidget {
   @override
   State<FirstDayOfLastPeriod> createState() => _FirstDayOfLastPeriodState();
 }
+
 class _FirstDayOfLastPeriodState extends State<FirstDayOfLastPeriod> {
   // late final ScrollController _scrollController;
   // @override
@@ -48,7 +50,6 @@ class _FirstDayOfLastPeriodState extends State<FirstDayOfLastPeriod> {
         10.h,
         GestureDetector(
           onTap: () {
-            // questionsCubit.showDaysToggle();
             questionsCubit.scrollBottom();
           },
           child: SizedBox(
@@ -64,20 +65,24 @@ class _FirstDayOfLastPeriodState extends State<FirstDayOfLastPeriod> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    BlocBuilder<QuestionsCubit, QuestionsState>(
+                    BlocBuilder<QuestionsCubit, QuestionsInitial>(
+                      buildWhen: (previous, current) {
+                        return previous.selectedPeriodTimeString !=
+                            current.selectedPeriodTimeString;
+                      },
                       builder: (context, state) {
                         return GlobalText(
-                          text: questionsCubit.selectedPeriodTime,
+                          text: state.selectedPeriodTimeString,
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
                         );
                       },
                     ),
-                    BlocBuilder<QuestionsCubit, QuestionsState>(
+                    BlocBuilder<QuestionsCubit, QuestionsInitial>(
                       builder: (context, state) {
                         return SvgPicture.asset(
-                          questionsCubit.showDays
+                          state.showDays
                               ? AssetConstants.arrowUpIcon
                               : AssetConstants.arrowDownIcon,
                         );
@@ -90,9 +95,9 @@ class _FirstDayOfLastPeriodState extends State<FirstDayOfLastPeriod> {
           ),
         ),
         10.h,
-        BlocBuilder<QuestionsCubit, QuestionsState>(
+        BlocBuilder<QuestionsCubit, QuestionsInitial>(
           builder: (context, state) {
-            return questionsCubit.showDays
+            return state.showDays
                 ? Column(
                     children: [
                       SizedBox(
@@ -129,6 +134,7 @@ class _FirstDayOfLastPeriodState extends State<FirstDayOfLastPeriod> {
                               onSelectedItemChanged: (i) {
                                 log(' hefte: $i');
                                 questionsCubit.updateFocusedWeekIndex(i);
+                                questionsCubit.updatePeriodTime(i.toString());
                               },
                               itemExtent: 57,
                               children: [
@@ -140,16 +146,14 @@ class _FirstDayOfLastPeriodState extends State<FirstDayOfLastPeriod> {
                                           MainAxisAlignment.center,
                                       children: [
                                         BlocBuilder<QuestionsCubit,
-                                            QuestionsState>(
+                                            QuestionsInitial>(
                                           builder: (context, state) {
                                             log('$i index change its color updated');
                                             return GlobalText(
                                               text: '$i',
                                               fontSize: 32,
                                               fontWeight: FontWeight.w500,
-                                              color: questionsCubit
-                                                          .focusedWeekIndex ==
-                                                      i
+                                              color: state.focusedWeekIndex == i
                                                   ? Colors.pink
                                                   : Color(0xffACACAC),
                                             );

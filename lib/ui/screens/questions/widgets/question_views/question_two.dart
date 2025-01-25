@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../cubits/questions_cubit/questions_cubit.dart';
+import '../../../../../cubits/questions_cubit/questions_state.dart';
 import '../../../../../utils/constants/color_constants.dart';
 import '../../../../../utils/extensions/num_extensions.dart';
 import '../../../../widgets/global_text.dart';
@@ -59,8 +60,9 @@ class QuestionTwo extends StatelessWidget {
                     ListWheelScrollView(
                       physics: FixedExtentScrollPhysics(),
                       onSelectedItemChanged: (i) {
-                        log(' hefte: $i');
+                        // log(' hefte: $i');
                         questionsCubit.updateFocusedWeekIndex(i);
+                        questionsCubit.updateIsActiveButton();
                       },
                       itemExtent: 57,
                       children: [
@@ -70,14 +72,18 @@ class QuestionTwo extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                BlocBuilder<QuestionsCubit, QuestionsState>(
+                                BlocBuilder<QuestionsCubit, QuestionsInitial>(
+                                  buildWhen: (previous, current) {
+                                    return previous.focusedWeekIndex !=
+                                        current.focusedWeekIndex;
+                                  },
                                   builder: (context, state) {
-                                    log('$i index change its color updated');
+                                    log('builded scroll wheel index: $i');
                                     return GlobalText(
                                       text: '$i',
                                       fontSize: 32,
                                       fontWeight: FontWeight.w500,
-                                      color: questionsCubit.focusedWeekIndex == i
+                                      color: state.focusedWeekIndex == i
                                           ? Colors.pink
                                           : Color(0xffACACAC),
                                     );
@@ -98,7 +104,10 @@ class QuestionTwo extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 28, left: 24),
             child: Row(
               children: [
-                BlocBuilder<QuestionsCubit, QuestionsState>(
+                BlocBuilder<QuestionsCubit, QuestionsInitial>(
+                  buildWhen: (previous, current) {
+                    return previous.iDontKnow != current.iDontKnow;
+                  },
                   builder: (context, state) {
                     return Radio(
                       visualDensity: VisualDensity(
@@ -109,10 +118,12 @@ class QuestionTwo extends StatelessWidget {
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       toggleable: true,
                       splashRadius: 0,
-                      value: questionsCubit.iDontKnow,
+                      value: state.iDontKnow,
                       groupValue: true,
                       onChanged: (v) {
+                        log('builded radio button');
                         questionsCubit.iDontKnowToggle(v ?? true);
+                        questionsCubit.updateIsActiveButton();
                       },
                     );
                   },
