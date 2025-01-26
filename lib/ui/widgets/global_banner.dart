@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../../../../../../cubits/main/main_state.dart';
-import '../../../../../../../../cubits/main/mainn_cubit.dart';
+import '../../cubits/main/main_state.dart';
+import '../../cubits/main/mainn_cubit.dart';
 
-class CarouselWidget extends StatelessWidget {
-  const CarouselWidget({super.key});
+class GlobalBanner extends StatelessWidget {
+  const GlobalBanner({super.key});
 
   @override
   Widget build(BuildContext context) {
