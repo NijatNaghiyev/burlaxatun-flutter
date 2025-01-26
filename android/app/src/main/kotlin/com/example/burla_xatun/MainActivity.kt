@@ -1,4 +1,4 @@
-package com.example.burla_xatun
+package com.aastudio.burlaxatunapp
 
 import io.flutter.embedding.android.FlutterActivity
 
