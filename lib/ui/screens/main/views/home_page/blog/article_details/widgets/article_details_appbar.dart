@@ -69,6 +69,5 @@ class ArticleDetailsAppbar extends StatelessWidget
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => Size(double.maxFinite, 175);
 }

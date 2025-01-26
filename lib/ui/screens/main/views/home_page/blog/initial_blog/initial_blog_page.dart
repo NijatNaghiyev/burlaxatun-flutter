@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_appbar.dart';
 import 'widgets/articles_widget.dart';
-import 'widgets/carousel_widget.dart';
+import '../../../../../../widgets/global_banner.dart';
 import 'widgets/search_input.dart';
 
 class InitialBlogPage extends StatelessWidget {
@@ -28,7 +28,7 @@ class InitialBlogPage extends StatelessWidget {
               child: SearchInput(),
             ),
             24.h,
-            CarouselWidget(),
+            GlobalBanner(),
             24.h,
             ArticlesWidget(),
             24.h,

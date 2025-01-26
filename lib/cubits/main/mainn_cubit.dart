@@ -124,7 +124,7 @@ class MainnCubit extends Cubit<MainInitial> {
   }
 
   void updateCarouselIndex(int v) {
-    log('$v');
+    // log('$v');
     emit(state.copyWith(carouselIndex: v));
   }
 

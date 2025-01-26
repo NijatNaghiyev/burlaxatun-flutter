@@ -20,28 +20,30 @@ class MyMedicinesPage extends StatelessWidget {
         title: 'Dərmanlarım',
         onTap: () => context.pop(),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            children: [
-              Stack(
-                alignment: AlignmentDirectional.bottomEnd,
-                children: [
-                  MedicineList(),
-                  Positioned(
-                    bottom: 68,
-                    right: 5,
-                    child: AddButton(
-                      onPressed: () {
-                        log('message');
-                        mainCubit.showAddMedicine(context);
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              children: [
+                Stack(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  children: [
+                    MedicineList(),
+                    Positioned(
+                      bottom: 68,
+                      right: 5,
+                      child: AddButton(
+                        onPressed: () {
+                          log('message');
+                          mainCubit.showAddMedicine(context);
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
