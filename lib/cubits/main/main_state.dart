@@ -68,6 +68,7 @@ class MainInitial extends Equatable {
     bool? isFirstChild,
     bool? isShowQuestion,
     BuildContext? navigationShellContext,
+    Offset? commentTapUpBox,
   }) {
     return MainInitial(
       indexOfView: indexOfView ?? this.indexOfView,
@@ -81,7 +82,8 @@ class MainInitial extends Equatable {
       isFirstChild: isFirstChild ?? this.isFirstChild,
       isShowQuestion: isShowQuestion ?? this.isShowQuestion,
       selectedQuestionBox: selectedQuestionBox ?? this.selectedQuestionBox,
-      navigationShellContext: navigationShellContext ?? this.navigationShellContext,
+      navigationShellContext:
+          navigationShellContext ?? this.navigationShellContext,
     );
   }
 }

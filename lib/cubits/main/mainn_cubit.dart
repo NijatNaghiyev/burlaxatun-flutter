@@ -1,7 +1,3 @@
-import 'dart:developer';
-
-import 'package:burla_xatun/data/models/local/settings_items_model.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/my_medicines/initial_medicine_page/widgets/add_medicine_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,7 +5,9 @@ import '../../data/models/local/bottom_navbar_items_model.dart';
 import '../../data/models/local/main_page_box_model.dart';
 import '../../data/models/local/my_healing_card_items_model.dart';
 import '../../data/models/local/profile_sections_items_model.dart';
+import '../../data/models/local/settings_items_model.dart';
 import '../../ui/screens/main/views/daily_advise_page/advises_page.dart';
+import '../../ui/screens/main/views/forum_page/forum_comments/forum_comments_page.dart';
 import '../../ui/screens/main/views/forum_page/main_forum_page.dart/forum_page.dart';
 import '../../ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/doctors_notification.dart';
 import '../../ui/screens/main/views/home_page/home.dart';
@@ -18,6 +16,7 @@ import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/w
 import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/widgets/calendar_dialog.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/initial_my_healing_page/my_healing_page.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/my_medicines/initial_medicine_page/my_medicines_page.dart';
+import '../../ui/screens/main/views/home_page/my_healing_page/my_medicines/initial_medicine_page/widgets/add_medicine_dialog.dart';
 import '../../ui/screens/main/views/home_page/notification/notification_page.dart';
 import '../../ui/screens/main/views/home_page/ultrasound/ultrasound_page.dart';
 import '../../ui/screens/main/views/home_page/video/video_page.dart';
@@ -91,6 +90,8 @@ class MainnCubit extends Cubit<MainInitial> {
     'Dərmanlar': MyHealingPage(),
   };
 
+ 
+
   void setShellContext(v) {
     emit(state.copyWith(navigationShellContext: v));
   }
@@ -152,6 +153,19 @@ class MainnCubit extends Cubit<MainInitial> {
     );
   }
 
+  void pushScaffoldForumComments() {
+    // state.navigationShellContext!.pushReplacement('location');
+    Navigator.push(
+      state.navigationShellContext!,
+      MaterialPageRoute(
+        builder: (_) => BlocProvider(
+          create: (context) => MainnCubit(),
+          child: ForumCommentsPage(),
+        ),
+      ),
+    );
+  }
+
   void showDoctorsNotification() {
     showModalBottomSheet(
       showDragHandle: true,
@@ -200,6 +214,14 @@ class MainnCubit extends Cubit<MainInitial> {
       emit(state.copyWith(isShowQuestion: !state.isShowQuestion));
     }
   }
+
+  // void showCommentTapUpBox(Offset v) {
+  //   if (state.commentTapUpBoxPosition == null) {
+  //     emit(state.copyWith(commentTapUpBox: v));
+  //   } else {
+  //     emit(state.copyWith(commentTapUpBox: null));
+  //   }
+  // }
 
   void updateSelectedQuestionBox(int v) {
     emit(state.copyWith(selectedQuestionBox: v));

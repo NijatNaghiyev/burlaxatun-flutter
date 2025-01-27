@@ -1,11 +1,10 @@
+import 'package:burla_xatun/ui/screens/main/views/forum_page/forum_comments/widgets/forum_comments_custom_scroll.dart';
+import 'package:burla_xatun/ui/widgets/global_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../widgets/global_appbar.dart';
-import 'widgets/secondary_forum_page_custom_scroll.dart';
-
-class SecondaryForumPage extends StatelessWidget {
-  const SecondaryForumPage({super.key});
+class ForumCommentsPage extends StatelessWidget {
+  const ForumCommentsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class SecondaryForumPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: SecondaryForumPageCustomScroll(),
+        child: ForumCommentsCustomScroll(),
       ),
     );
   }

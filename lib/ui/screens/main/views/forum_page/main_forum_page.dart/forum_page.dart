@@ -1,6 +1,7 @@
-import 'package:burla_xatun/ui/screens/main/views/forum_page/main_forum_page.dart/widgets/main_forum_custom_scroll.dart';
-import 'package:burla_xatun/ui/widgets/global_appbar.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../widgets/global_appbar.dart';
+import 'widgets/main_forum_custom_scroll.dart';
 
 class MainForumPage extends StatelessWidget {
   const MainForumPage({super.key});
@@ -8,6 +9,7 @@ class MainForumPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: GlobalAppbar(
         title: 'Əsas forum',
         onTap: () {},
