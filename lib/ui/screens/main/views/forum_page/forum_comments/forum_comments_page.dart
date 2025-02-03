@@ -1,3 +1,4 @@
+import 'package:burla_xatun/ui/screens/main/views/forum_page/forum_comments/widgets/comment_input.dart';
 import 'package:burla_xatun/ui/screens/main/views/forum_page/forum_comments/widgets/forum_comments_custom_scroll.dart';
 import 'package:burla_xatun/ui/widgets/global_appbar.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class ForumCommentsPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: ForumCommentsCustomScroll(),
       ),
+      bottomSheet: CommentInput(),
     );
   }
 }

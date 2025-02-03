@@ -23,7 +23,7 @@ class SingleIndicatorTile extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           if (item.route == '/my_medicines') {
-            mainCubit.pushScaffoldMyMedicinesPage();
+            mainCubit.pushScaffoldMyMedicinesPage(context);
           } else {
             context.push(item.route);
           }

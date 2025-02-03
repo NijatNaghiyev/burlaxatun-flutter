@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,6 +10,7 @@ import '../../data/models/local/profile_sections_items_model.dart';
 import '../../data/models/local/settings_items_model.dart';
 import '../../ui/screens/main/views/daily_advise_page/advises_page.dart';
 import '../../ui/screens/main/views/forum_page/forum_comments/forum_comments_page.dart';
+import '../../ui/screens/main/views/forum_page/forum_comments/widgets/menu_and_emoji_dialog.dart';
 import '../../ui/screens/main/views/forum_page/main_forum_page.dart/forum_page.dart';
 import '../../ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/doctors_notification.dart';
 import '../../ui/screens/main/views/home_page/home.dart';
@@ -36,6 +39,8 @@ enum NameViewOption { countries, selecteds }
 
 enum GenderOption { boy, girl }
 
+enum CommentDialog { copy, reply, delete, emoji }
+
 class MainnCubit extends Cubit<MainInitial> {
   MainnCubit()
       : super(
@@ -52,10 +57,14 @@ class MainnCubit extends Cubit<MainInitial> {
             isShowQuestion: false,
             selectedQuestionBox: -1,
             navigationShellContext: null,
+            isOverlayVisible: false,
+            commentBoxIndex: -1,
+            // menuOption: null,
           ),
         );
 
   final ScrollController homePageScrollController = ScrollController();
+  final FocusNode commentInputFocusNode = FocusNode();
 
   final navbarItems = BottomNavbarItemsModel.items;
   final boxItems = MainPageBoxModel.items;
@@ -90,7 +99,28 @@ class MainnCubit extends Cubit<MainInitial> {
     'Dərmanlar': MyHealingPage(),
   };
 
- 
+  void showMenuDialogAndEmojis(BuildContext context, double v) {
+    showDialog<CommentDialog>(
+      barrierColor: Colors.transparent,
+      context: context,
+      builder: (context) {
+        return MenuAndEmojiDialog(fromTop: v);
+      },
+    ).then((onValue) {
+      emit(state.copyWith(commentBoxIndex: -1));
+      log('$onValue');
+      if (onValue != null) {
+        switch (onValue) {
+          case CommentDialog.copy:
+          case CommentDialog.delete:
+          case CommentDialog.reply:
+            commentInputFocusNode.requestFocus();
+
+          case CommentDialog.emoji:
+        }
+      }
+    });
+  }
 
   void setShellContext(v) {
     emit(state.copyWith(navigationShellContext: v));
@@ -102,6 +132,10 @@ class MainnCubit extends Cubit<MainInitial> {
 
   void changeHomeView(String v) {
     emit(state.copyWith(viewName: v));
+  }
+
+  void setIsOverlayVisible(bool v) {
+    emit(state.copyWith(isOverlayVisible: v));
   }
 
   void changeProfileView(String v) {
@@ -125,52 +159,43 @@ class MainnCubit extends Cubit<MainInitial> {
   }
 
   void updateCarouselIndex(int v) {
-    // log('$v');
     emit(state.copyWith(carouselIndex: v));
   }
 
-  void showBottomSheetAboutChild(Widget widget) {
+  void showBottomSheetAboutChild(Widget widget, BuildContext context) {
     showModalBottomSheet(
+      useRootNavigator: true,
       showDragHandle: true,
       isScrollControlled: true,
-      context: state.navigationShellContext!,
+      context: context,
       builder: (_) {
         return widget;
       },
     );
   }
 
-  void pushScaffoldMyMedicinesPage() {
-    // state.navigationShellContext!.pushReplacement('location');
-    Navigator.push(
-      state.navigationShellContext!,
+  void pushScaffoldMyMedicinesPage(BuildContext context) {
+    Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(
-        builder: (_) => BlocProvider(
-          create: (context) => MainnCubit(),
-          child: MyMedicinesPage(),
-        ),
+        builder: (_) => MyMedicinesPage(),
       ),
     );
   }
 
-  void pushScaffoldForumComments() {
-    // state.navigationShellContext!.pushReplacement('location');
-    Navigator.push(
-      state.navigationShellContext!,
+  void pushScaffoldForumComments(BuildContext context) {
+    Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(
-        builder: (_) => BlocProvider(
-          create: (context) => MainnCubit(),
-          child: ForumCommentsPage(),
-        ),
+        builder: (_) => ForumCommentsPage(),
       ),
     );
   }
 
-  void showDoctorsNotification() {
+  void showDoctorsNotification(BuildContext context) {
     showModalBottomSheet(
+      useRootNavigator: true,
       showDragHandle: true,
-      context: state.navigationShellContext!,
-      builder: (BuildContext context) {
+      context: context,
+      builder: (_) {
         return DoctorsNotification();
       },
     );
@@ -215,16 +240,12 @@ class MainnCubit extends Cubit<MainInitial> {
     }
   }
 
-  // void showCommentTapUpBox(Offset v) {
-  //   if (state.commentTapUpBoxPosition == null) {
-  //     emit(state.copyWith(commentTapUpBox: v));
-  //   } else {
-  //     emit(state.copyWith(commentTapUpBox: null));
-  //   }
-  // }
-
   void updateSelectedQuestionBox(int v) {
     emit(state.copyWith(selectedQuestionBox: v));
+  }
+
+  void updateCommentBoxIndex(int v) {
+    emit(state.copyWith(commentBoxIndex: v));
   }
 
   @override

@@ -15,14 +15,13 @@ class ForumBox extends StatelessWidget {
     final mainCubit = context.read<MainnCubit>();
     return GestureDetector(
       onTap: () {
-        mainCubit.pushScaffoldForumComments();
+        mainCubit.pushScaffoldForumComments(context);
       },
       child: DecoratedBox(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            color: Colors.amberAccent
-            // Color(0xffF7F7F7),
-            ),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: Color(0xffF7F7F7),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(14),
           child: Column(
