@@ -1,7 +1,15 @@
-import 'package:burla_xatun/utils/extensions/context_extensions.dart';
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
+import 'package:burla_xatun/cubits/questions_cubit/questions_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../../../../cubits/questions_cubit/questions_cubit.dart';
 import '../../../../../utils/constants/asset_constants.dart';
+import '../../../../../utils/constants/color_constants.dart';
+import '../../../../../utils/extensions/context_extensions.dart';
+import '../../../../../utils/extensions/num_extensions.dart';
 import '../../../../widgets/global_input.dart';
 import '../../../../widgets/global_text.dart';
 
@@ -10,6 +18,7 @@ class AddYourChild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final questionCubit = context.read<QuestionsCubit>();
     return SingleChildScrollView(
       child: ColoredBox(
         color: Colors.transparent,
@@ -33,10 +42,58 @@ class AddYourChild extends StatelessWidget {
                 prefixIcon: 'assetsicon/child_user.svg',
                 hintText: 'Tam adını qeyd edin',
               ),
-              GlobalInput(
-                inputName: 'Dogum Tarixi',
-                prefixIcon: AssetConstants.calendarIcon,
-                hintText: 'Doğum tarixini qeyd edin',
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GlobalText(
+                    text: 'Doğum Tarixi',
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey,
+                  ),
+                  context.deviceHeight < 750 ? 8.h : 16.h,
+                  GestureDetector(
+                    onTap: () {
+                      questionCubit.showBirthDateBottomSheet(context);
+                    },
+                    child: SizedBox(
+                      width: context.deviceWidth,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(34)),
+                          border: Border.all(
+                            color: ColorConstants.enabledInputColor,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16) +
+                              EdgeInsets.only(left: 16),
+                          child: Row(
+                            children: [
+                              SvgPicture.asset('assets/icons/calendar_svg.svg'),
+                              SizedBox(width: 12),
+                              BlocBuilder<QuestionsCubit, QuestionsInitial>(
+                                buildWhen: (previous, current) {
+                                  return previous.birthDateString !=
+                                      current.birthDateString;
+                                },
+                                builder: (context, state) {
+                                  log('build');
+                                  return GlobalText(
+                                    text: state.birthDateString,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.grey,
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               GlobalInput(
                 inputName: 'Çəki',

@@ -1,11 +1,12 @@
-import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/registration_doctor_page/widgets/registration_date_and_time_widget.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/registration_doctor_page/widgets/registration_doctor_info.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/registration_doctor_page/widgets/registration_price_and_time.dart';
-import 'package:burla_xatun/ui/widgets/global_button.dart';
-import 'package:burla_xatun/utils/constants/color_constants.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../../../../utils/constants/color_constants.dart';
+import '../../../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../../widgets/global_button.dart';
+import 'widgets/registration_date_and_time_widget.dart';
+import 'widgets/registration_doctor_info.dart';
+import 'widgets/registration_price_and_time.dart';
 
 class RegistrationDoctorPage extends StatelessWidget {
   const RegistrationDoctorPage({super.key});

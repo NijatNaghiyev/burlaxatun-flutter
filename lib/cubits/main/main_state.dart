@@ -24,19 +24,25 @@ class MainInitial extends Equatable {
     required this.isShowQuestion,
     required this.selectedQuestionBox,
     required this.navigationShellContext,
+    required this.isOverlayVisible,
+    required this.commentBoxIndex,
+    // required this.menuOption,
   });
 
   final int carouselIndex;
   final int indexOfView;
   final int selectedQuestionBox;
+  final int commentBoxIndex;
   final double latestScrollPosition;
   final String viewName;
   final String profileViewName;
   final UltrasoundFormat ultrasoundFormat;
   final NameViewOption nameViewOptions;
+  // final MenuOption menuOption;
   final GenderOption genderOption;
   final bool isFirstChild;
   final bool isShowQuestion;
+  final bool isOverlayVisible;
   final BuildContext? navigationShellContext;
 
   @override
@@ -53,12 +59,15 @@ class MainInitial extends Equatable {
         isShowQuestion,
         selectedQuestionBox,
         navigationShellContext,
+        isOverlayVisible,
+        commentBoxIndex,
       ];
 
   MainInitial copyWith({
     int? indexOfView,
     int? carouselIndex,
     int? selectedQuestionBox,
+    int? commentBoxIndex,
     String? viewName,
     String? profileViewName,
     UltrasoundFormat? ultrasoundFormat,
@@ -67,6 +76,7 @@ class MainInitial extends Equatable {
     double? latestScrollPosition,
     bool? isFirstChild,
     bool? isShowQuestion,
+    bool? isOverlayVisible,
     BuildContext? navigationShellContext,
     Offset? commentTapUpBox,
   }) {
@@ -84,6 +94,8 @@ class MainInitial extends Equatable {
       selectedQuestionBox: selectedQuestionBox ?? this.selectedQuestionBox,
       navigationShellContext:
           navigationShellContext ?? this.navigationShellContext,
+      isOverlayVisible: isOverlayVisible ?? this.isOverlayVisible,
+      commentBoxIndex: commentBoxIndex ?? this.commentBoxIndex,
     );
   }
 }

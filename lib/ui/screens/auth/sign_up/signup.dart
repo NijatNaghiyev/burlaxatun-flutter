@@ -25,7 +25,6 @@ class SignUp extends StatelessWidget {
         child: Padding(
           padding: PaddingConstants.h20,
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               context.deviceHeight < 710 ? 10.h : 51.h,
               SignupInputs(),

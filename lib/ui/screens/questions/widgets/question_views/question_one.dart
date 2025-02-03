@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../cubits/questions_cubit/questions_cubit.dart';
 import '../../../../../data/models/local/question_one_options_model.dart';
 import '../../../../../utils/constants/padding_constants.dart';
 import '../../../../../utils/extensions/num_extensions.dart';
@@ -11,6 +13,8 @@ class QuestionOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final questionsCubit = context.read<QuestionsCubit>();
+
     return Padding(
       padding: PaddingConstants.h20 + EdgeInsets.only(top: 56),
       child: Column(
@@ -22,11 +26,18 @@ class QuestionOne extends StatelessWidget {
             color: Colors.black,
           ),
           59.h,
-          for (int i = 0; i < 3; i++)
-            QuestionOneButton(
-              buttonName: QuestionOneOptionsModel.options[i].option,
-              optionIndex: i,
-            )
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: 3,
+            itemBuilder: (context, i) {
+              return QuestionOneButton(
+                buttonName: QuestionOneOptionsModel.options[i].option,
+                optionIndex: i,
+                questionsCubit: questionsCubit,
+              );
+            },
+          ),
         ],
       ),
     );

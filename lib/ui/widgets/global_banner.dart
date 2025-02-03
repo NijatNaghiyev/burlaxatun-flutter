@@ -21,7 +21,7 @@ class GlobalBanner extends StatelessWidget {
             builder: (context, state) {
               return CarouselSlider(
                 options: CarouselOptions(
-                  aspectRatio: 1,
+                  aspectRatio: 9/16,
                   initialPage: state.carouselIndex,
                   viewportFraction: 1,
                   height: 172,

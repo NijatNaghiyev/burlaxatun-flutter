@@ -26,7 +26,7 @@ class SearchAndNotification extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                mainCubit.showDoctorsNotification();
+                mainCubit.showDoctorsNotification(context);
               },
               child: SvgPicture.asset('assets/icons/notification_bing.svg'),
             ),

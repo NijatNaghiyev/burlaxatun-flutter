@@ -11,11 +11,11 @@ import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ivf.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ultrasound.dart';
 import '../../ui/screens/questions/widgets/question_views/add_your_child.dart';
+import '../../ui/screens/questions/widgets/question_views/pick_birth_date_widget.dart';
 import '../../ui/screens/questions/widgets/question_views/question_one.dart';
 import '../../ui/screens/questions/widgets/question_views/question_three.dart';
 import '../../ui/screens/questions/widgets/question_views/question_two.dart';
 import '../../ui/screens/questions/widgets/question_views/register_success.dart';
-import '../main/mainn_cubit.dart';
 import 'questions_state.dart';
 
 class QuestionsCubit extends Cubit<QuestionsInitial> {
@@ -31,6 +31,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
           showCalendar: false,
           selectedCalculateOptionString: 'Hesablama üsulunu seçin...',
           selectedPeriodTimeString: 'Period muddetini secin...',
+          birthDateString: 'Dogum tarixini qeyd edinnn',
           selectedDay: DateTime.now(),
           isActiveButton: false,
           isFirstChild: null,
@@ -209,14 +210,30 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
     );
   }
 
+  void showBirthDateBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return BlocProvider(
+          create: (context) => QuestionsCubit(),
+          child: PickBirthDateWidget(),
+        );
+      },
+    ).then((onValue) {
+      updateBirthDate(onValue);
+    });
+  }
+
+  void updateBirthDate(String v) {
+    emit(state.copyWith(birthDateString: v));
+    log(state.birthDateString);
+  }
+
   void goToMainPage(context) {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
-        builder: (_) => BlocProvider(
-          create: (context) => MainnCubit(),
-          child: HomePage(),
-        ),
+        builder: (_) => HomePage(),
       ),
       (route) => false,
     );

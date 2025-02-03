@@ -20,6 +20,7 @@ class QuestionsInitial extends Equatable {
     required this.selectedPeriodTimeString,
     required this.selectedDay,
     required this.isFirstChild,
+    required this.birthDateString,
   });
 
   final int? currentQuestionOneOptionIndex;
@@ -34,8 +35,8 @@ class QuestionsInitial extends Equatable {
   final bool? isFirstChild;
   final String selectedCalculateOptionString;
   final String selectedPeriodTimeString;
+  final String birthDateString;
   final DateTime selectedDay;
-  
 
   @override
   List<Object?> get props => [
@@ -52,6 +53,7 @@ class QuestionsInitial extends Equatable {
         selectedDay,
         isActiveButton,
         isFirstChild,
+        birthDateString,
       ];
 
   QuestionsInitial copyWith({
@@ -67,6 +69,7 @@ class QuestionsInitial extends Equatable {
     bool? isFirstChild,
     String? selectedCalculateOptionString,
     String? selectedPeriodTimeString,
+    String? birthDateString,
     DateTime? selectedDay,
   }) {
     return QuestionsInitial(
@@ -86,6 +89,7 @@ class QuestionsInitial extends Equatable {
       selectedDay: selectedDay ?? this.selectedDay,
       isActiveButton: isActiveButton ?? this.isActiveButton,
       isFirstChild: isFirstChild ?? this.isFirstChild,
+      birthDateString: birthDateString ?? this.birthDateString,
     );
   }
 }

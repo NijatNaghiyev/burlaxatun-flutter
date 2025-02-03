@@ -17,7 +17,7 @@ class MoreDetailsButton extends StatelessWidget {
       buttonColor: Color(0xffFFD3E2),
       textColor: ColorConstants.primaryColor,
       onPressed: () {
-        mainCubit.showBottomSheetAboutChild(BabyInfoBottomSheet());
+        mainCubit.showBottomSheetAboutChild(BabyInfoBottomSheet(), context);
       },
     );
   }
