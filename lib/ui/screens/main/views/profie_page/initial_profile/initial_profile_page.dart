@@ -1,6 +1,6 @@
-import 'package:burla_xatun/ui/screens/main/views/profie_page/initial_profile/widgets/log_out_button.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/initial_profile/widgets/my_profile_box.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/initial_profile/widgets/profile_pregnancy_box.dart';
+import 'widgets/log_out_button.dart';
+import 'widgets/my_profile_box.dart';
+import 'widgets/profile_pregnancy_box.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../utils/extensions/num_extensions.dart';

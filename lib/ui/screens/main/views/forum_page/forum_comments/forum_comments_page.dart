@@ -1,8 +1,9 @@
-import 'package:burla_xatun/ui/screens/main/views/forum_page/forum_comments/widgets/comment_input.dart';
-import 'package:burla_xatun/ui/screens/main/views/forum_page/forum_comments/widgets/forum_comments_custom_scroll.dart';
-import 'package:burla_xatun/ui/widgets/global_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../../widgets/global_appbar.dart';
+import 'widgets/comment_input.dart';
+import 'widgets/forum_comments_custom_scroll.dart';
 
 class ForumCommentsPage extends StatelessWidget {
   const ForumCommentsPage({super.key});

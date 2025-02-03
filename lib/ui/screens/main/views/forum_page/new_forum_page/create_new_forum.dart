@@ -1,5 +1,6 @@
-import 'package:burla_xatun/ui/widgets/global_appbar.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../widgets/global_appbar.dart';
 
 class CreateNewForum extends StatelessWidget {
   const CreateNewForum({super.key});

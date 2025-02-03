@@ -1,4 +1,4 @@
-import 'package:burla_xatun/utils/extensions/context_extensions.dart';
+import '../../utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,6 +16,10 @@ class GlobalInput extends StatelessWidget {
     required this.hintText,
     this.isObsecure = false,
     this.onSuffixIcon,
+    this.focusNode,
+    this.onFieldSubmitted,
+    this.validator,
+    this.textController,
   });
 
   final String? inputName;
@@ -24,7 +28,10 @@ class GlobalInput extends StatelessWidget {
   final String? suffixIcon;
   final bool isObsecure;
   final void Function()? onSuffixIcon;
-  // final textController = TextEditingController();
+  final TextEditingController? textController;
+  final FocusNode? focusNode;
+  final void Function(String v)? onFieldSubmitted;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +57,10 @@ class GlobalInput extends StatelessWidget {
               )
             : SizedBox.shrink(),
         TextFormField(
+          controller: textController,
+          validator: validator,
+          onFieldSubmitted: onFieldSubmitted,
+          focusNode: focusNode,
           obscureText: isObsecure,
           style: GoogleFonts.poppins(
             fontSize: 14,

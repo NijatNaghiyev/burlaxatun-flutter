@@ -1,6 +1,7 @@
-import 'package:burla_xatun/ui/widgets/global_text.dart';
-import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../../utils/constants/color_constants.dart';
+import '../../../../../../widgets/global_text.dart';
 
 class HorizontalCalendar extends StatelessWidget {
   const HorizontalCalendar({super.key});

@@ -1,8 +1,9 @@
-import 'package:burla_xatun/ui/widgets/global_text.dart';
-import 'package:burla_xatun/utils/extensions/context_extensions.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../../../../../../utils/extensions/context_extensions.dart';
+import '../../../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../../widgets/global_text.dart';
 
 class BabyText extends StatelessWidget {
   const BabyText({super.key});

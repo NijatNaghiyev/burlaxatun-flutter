@@ -1,10 +1,10 @@
-import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/body_weight_view/widgets/calendar_and_add_buttons.dart';
-import 'package:burla_xatun/ui/widgets/global_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../../widgets/global_appbar.dart';
 import 'widgets/body_weight_chart.dart';
+import 'widgets/calendar_and_add_buttons.dart';
 import 'widgets/time_intervals_widget.dart';
 
 class BodyWeightPage extends StatelessWidget {

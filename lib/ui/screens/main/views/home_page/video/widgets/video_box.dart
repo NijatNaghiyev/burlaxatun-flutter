@@ -1,4 +1,4 @@
-import 'package:burla_xatun/ui/screens/main/views/home_page/widgets/article_box.dart';
+import '../../widgets/article_box.dart';
 import 'package:flutter/material.dart';
 
 class VideoBox extends StatelessWidget {

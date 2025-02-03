@@ -5,10 +5,12 @@ abstract class LoginCubitState {}
 
 class LoginCubitInitial extends LoginCubitState {
   LoginCubitInitial({
-    this.isObsecure = true,
+    this.isObsecure,
+    this.isActiveButton,
   });
 
-  final bool isObsecure;
+  final bool? isObsecure;
+  final bool? isActiveButton;
 }
 
 class LoginCubitLoading extends LoginCubitState {}

@@ -1,6 +1,7 @@
-import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/registration_doctor_page/widgets/date_or_price_box.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../../../utils/extensions/num_extensions.dart';
+import 'date_or_price_box.dart';
 
 class RegistrationPriceAndTime extends StatelessWidget {
   const RegistrationPriceAndTime({super.key});

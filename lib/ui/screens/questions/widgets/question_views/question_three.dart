@@ -1,11 +1,10 @@
-import 'package:burla_xatun/cubits/questions_cubit/questions_cubit.dart';
-import 'package:burla_xatun/cubits/questions_cubit/questions_state.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../utils/constants/padding_constants.dart';
-import 'package:flutter/material.dart';
-
+import '../../../../../cubits/questions_cubit/questions_cubit.dart';
+import '../../../../../cubits/questions_cubit/questions_state.dart';
 import '../../../../../utils/constants/color_constants.dart';
+import '../../../../../utils/constants/padding_constants.dart';
 import '../../../../../utils/extensions/num_extensions.dart';
 import '../../../../widgets/global_button.dart';
 import '../../../../widgets/global_text.dart';

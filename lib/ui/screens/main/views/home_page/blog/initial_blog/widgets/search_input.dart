@@ -1,5 +1,6 @@
-import 'package:burla_xatun/ui/widgets/global_input.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../../widgets/global_input.dart';
 
 class SearchInput extends StatelessWidget {
   const SearchInput({super.key});

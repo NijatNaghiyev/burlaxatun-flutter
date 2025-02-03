@@ -1,9 +1,9 @@
-import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/doctor_register_button.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/time_and_price_box.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../../../utils/extensions/num_extensions.dart';
 import 'doctor_info.dart';
+import 'doctor_register_button.dart';
+import 'time_and_price_box.dart';
 
 class DoctorBox extends StatelessWidget {
   const DoctorBox({super.key});

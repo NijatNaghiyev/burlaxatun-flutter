@@ -1,6 +1,7 @@
-import '../../../../../../../widgets/global_text.dart';
-import '../../../../../../../../utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../../../widgets/global_text.dart';
 
 class DoctorInfo extends StatelessWidget {
   const DoctorInfo({super.key});

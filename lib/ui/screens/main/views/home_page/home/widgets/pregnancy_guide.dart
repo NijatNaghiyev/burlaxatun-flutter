@@ -1,7 +1,8 @@
-import 'package:burla_xatun/ui/screens/main/views/home_page/home/widgets/pregnancy_guide_box.dart';
-import 'package:burla_xatun/ui/widgets/global_text.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../../widgets/global_text.dart';
+import 'pregnancy_guide_box.dart';
 
 class PregnancyGuide extends StatelessWidget {
   const PregnancyGuide({super.key});
@@ -35,7 +36,8 @@ class PregnancyGuide extends StatelessWidget {
               Column(
                 spacing: 24,
                 children: [
-                  for (int i = 0; i < 3; i++) PregnancyGuideBox(),
+                  for (int i = 0; i < 3; i++)
+                    PregnancyGuideBox(),
                 ],
               )
             ],

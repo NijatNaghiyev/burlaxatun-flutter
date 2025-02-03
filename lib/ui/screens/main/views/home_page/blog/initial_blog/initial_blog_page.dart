@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_appbar.dart';
-import 'widgets/articles_widget.dart';
 import '../../../../../../widgets/global_banner.dart';
+import 'widgets/articles_widget.dart';
 import 'widgets/search_input.dart';
 
 class InitialBlogPage extends StatelessWidget {

@@ -1,5 +1,6 @@
-import 'package:burla_xatun/ui/widgets/global_banner.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../widgets/global_banner.dart';
 
 class MainForumBanner extends StatelessWidget {
   const MainForumBanner({super.key});

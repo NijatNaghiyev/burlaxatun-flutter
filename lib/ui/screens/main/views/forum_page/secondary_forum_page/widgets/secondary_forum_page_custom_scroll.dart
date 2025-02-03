@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/forum_box.dart';
 import 'add_new_forum_button.dart';
 import 'forum_title.dart';
-import '../../widgets/forum_box.dart';
 import 'secondary_forum_search_input.dart';
 
 class SecondaryForumPageCustomScroll extends StatelessWidget {
