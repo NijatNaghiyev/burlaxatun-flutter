@@ -1,9 +1,9 @@
-import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/widgets/setting_boxes.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/global_appbar.dart';
+import 'widgets/setting_boxes.dart';
 
 class SettingView extends StatelessWidget {
   const SettingView({super.key});

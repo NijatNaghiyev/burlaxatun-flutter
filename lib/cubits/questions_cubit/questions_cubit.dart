@@ -7,9 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../ui/screens/main/views/home_page/home/home_page.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/calculate_birth.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/calculation_result_dialog.dart';
-import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/first_day_of_last_period.dart';
-import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ivf.dart';
-import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ultrasound.dart';
+import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/first_day_of_last_period_component/first_day_of_last_period.dart';
+import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ivf_component/ivf.dart';
+import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ultrasound_component/ultrasound.dart';
 import '../../ui/screens/questions/widgets/question_views/add_your_child.dart';
 import '../../ui/screens/questions/widgets/question_views/pick_birth_date_widget.dart';
 import '../../ui/screens/questions/widgets/question_views/question_one.dart';
@@ -20,25 +20,37 @@ import 'questions_state.dart';
 
 class QuestionsCubit extends Cubit<QuestionsInitial> {
   QuestionsCubit()
-      : super(QuestionsInitial(
-          currentQuestionOneOptionIndex: null,
-          selectedCalculateOptionIndex: null,
-          questionPageIndex: 0,
-          focusedWeekIndex: 0,
-          iDontKnow: false,
-          showOptions: false,
-          showDays: false,
-          showCalendar: false,
-          selectedCalculateOptionString: 'Hesablama üsulunu seçin...',
-          selectedPeriodTimeString: 'Period muddetini secin...',
-          birthDateString: 'Dogum tarixini qeyd edinnn',
-          selectedDay: DateTime.now(),
-          isActiveButton: false,
-          isFirstChild: null,
-        ));
+      : super(
+          QuestionsInitial(
+            currentQuestionOneOptionIndex: null,
+            selectedCalculateOptionIndex: null,
+            questionPageIndex: 0,
+            focusedWeekIndex: 0,
+            iDontKnow: false,
+            showOptions: false,
+            showDays: false,
+            showCalendar: false,
+            selectedCalculateOptionString: 'Hesablama üsulunu seçin...',
+            selectedPeriodTimeString: 'Period muddetini secin...',
+            birthDateString: 'Dogum tarixini qeyd edinnn',
+            selectedDay: DateTime.now(),
+            isActiveButton: false,
+            isFirstChild: null,
+            initialDateTime: DateTime(DateTime.now().year - 10,
+                DateTime.now().month, DateTime.now().day),
+            ultrasoundRadioValue: 'initialValue',
+            ultrasoundDayCountString: 'Gun sayi',
+            ultrasoundWeekCountString: 'Hefte sayi',
+            isShowUltrasoundDays: false,
+            isShowUltrasoundWeeks: false,
+          ),
+        );
 
   final pageController = PageController();
   final scrollController = ScrollController();
+  final childNameFocusNode = FocusNode();
+  final childWeightFocusNode = FocusNode();
+  final childHeightFocusNode = FocusNode();
   final ValueNotifier<int?> questionOneButtonNotifier =
       ValueNotifier<int?>(null);
 
@@ -70,6 +82,10 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
     } else {
       showDaysToggle();
     }
+  }
+
+  void updateRadioValue(String v) {
+    emit(state.copyWith(ultrasoundRadioValue: v));
   }
 
   void updateIsActiveButton({int? v}) {
@@ -210,6 +226,45 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
     );
   }
 
+  void showWeekCount(BuildContext context, Widget widget) {
+    emit(state.copyWith(isShowUltrasoundWeeks: !state.isShowUltrasoundWeeks));
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return BlocProvider.value(
+          value: context.read<QuestionsCubit>(),
+          child: widget,
+        );
+      },
+    ).then((onValue) {
+      emit(state.copyWith(isShowUltrasoundWeeks: !state.isShowUltrasoundWeeks));
+    });
+  }
+
+  void updateUltrasoundWeekCount(int v) {
+    emit(state.copyWith(ultrasoundWeekCountString: v.toString()));
+  }
+
+  void showDayCount(BuildContext context, Widget widget) {
+    emit(state.copyWith(isShowUltrasoundDays: !state.isShowUltrasoundDays));
+    showModalBottomSheet(
+      useRootNavigator: true,
+      context: context,
+      builder: (_) {
+        return BlocProvider.value(
+          value: context.read<QuestionsCubit>(),
+          child: widget,
+        );
+      },
+    ).then((onValue) {
+      emit(state.copyWith(isShowUltrasoundDays: !state.isShowUltrasoundDays));
+    });
+  }
+
+  void updateUltrasoundDaysCount(int v) {
+    emit(state.copyWith(ultrasoundDayCountString: v.toString()));
+  }
+
   void showBirthDateBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -220,13 +275,13 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
         );
       },
     ).then((onValue) {
-      updateBirthDate(onValue);
+      updateBirthDate(onValue[0], onValue[1]);
     });
   }
 
-  void updateBirthDate(String v) {
-    emit(state.copyWith(birthDateString: v));
-    log(state.birthDateString);
+  void updateBirthDate(String v, DateTime initialTime) {
+    emit(state.copyWith(birthDateString: v, initialDateTime: initialTime));
+    log('${state.initialDateTime}');
   }
 
   void goToMainPage(context) {
@@ -243,6 +298,9 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   Future<void> close() {
     pageController.dispose();
     scrollController.dispose();
+    childHeightFocusNode.dispose();
+    childWeightFocusNode.dispose();
+    childNameFocusNode.dispose();
     questionOneButtonNotifier.dispose();
     return super.close();
   }

@@ -1,12 +1,13 @@
-import 'package:burla_xatun/cubits/main/main_state.dart';
-import 'package:burla_xatun/cubits/main/mainn_cubit.dart';
-import 'package:burla_xatun/ui/widgets/global_text.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../../../../../../cubits/main/main_state.dart';
+import '../../../../../../../cubits/main/mainn_cubit.dart';
+import '../../../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../../widgets/global_text.dart';
 
 class ProfilePregnancyBox extends StatelessWidget {
   const ProfilePregnancyBox({super.key});

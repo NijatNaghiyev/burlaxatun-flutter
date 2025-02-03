@@ -1,5 +1,6 @@
-import 'package:burla_xatun/ui/widgets/global_text.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../widgets/global_text.dart';
 
 class LastDays extends StatelessWidget {
   const LastDays({super.key});

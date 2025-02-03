@@ -1,13 +1,13 @@
-import 'package:burla_xatun/ui/screens/main/views/profie_page/terms_of_use/widgets/last_version_text.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/terms_of_use/widgets/terms_of_use_description.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/terms_of_use/widgets/terms_of_use_header_text.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/terms_of_use/widgets/terms_of_use_title.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/global_appbar.dart';
 import '../widgets/text_board_widget.dart';
+import 'widgets/last_version_text.dart';
+import 'widgets/terms_of_use_description.dart';
+import 'widgets/terms_of_use_header_text.dart';
+import 'widgets/terms_of_use_title.dart';
 
 class TermsOfUseView extends StatelessWidget {
   const TermsOfUseView({super.key});

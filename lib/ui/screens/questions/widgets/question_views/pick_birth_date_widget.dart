@@ -29,7 +29,10 @@ class PickBirthDateWidget extends StatelessWidget {
               Text('Doğum Tarixini secin'),
               TextButton(
                 onPressed: () {
-                  context.pop(questionCubit.state.birthDateString);
+                  context.pop([
+                    questionCubit.state.birthDateString,
+                    questionCubit.state.initialDateTime
+                  ]);
                 },
                 child: Text('Seç'),
               ),
@@ -39,14 +42,12 @@ class PickBirthDateWidget extends StatelessWidget {
           SizedBox(
             height: 230,
             child: CupertinoDatePicker(
+              initialDateTime: questionCubit.state.initialDateTime,
               mode: CupertinoDatePickerMode.date,
               onDateTimeChanged: (onDateTimeChanged) {
-                // log('Day: ${onDateTimeChanged.day}');
-                // log('Month: ${onDateTimeChanged.month}');
-                // log('Year: ${onDateTimeChanged.year}');
                 questionCubit.updateBirthDate(
-                  '${onDateTimeChanged.day}/${onDateTimeChanged.month}/${onDateTimeChanged.year}',
-                );
+                    '${onDateTimeChanged.day}/${onDateTimeChanged.month}/${onDateTimeChanged.year}',
+                    onDateTimeChanged);
               },
             ),
           ),

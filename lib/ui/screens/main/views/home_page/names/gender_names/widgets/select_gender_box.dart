@@ -1,4 +1,4 @@
-import 'package:burla_xatun/cubits/main/main_state.dart';
+import '../../../../../../../../cubits/main/main_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

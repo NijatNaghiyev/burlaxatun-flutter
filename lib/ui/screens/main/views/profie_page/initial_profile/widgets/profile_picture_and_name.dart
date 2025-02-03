@@ -1,5 +1,5 @@
-import 'package:burla_xatun/ui/widgets/global_text.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
+import '../../../../../../widgets/global_text.dart';
+import '../../../../../../../utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

@@ -56,7 +56,7 @@ class CalculateBirth extends StatelessWidget {
                       : SizedBox.shrink();
                 },
               ),
-              20.h,
+              // 35.h,
               BlocBuilder<QuestionsCubit, QuestionsInitial>(
                 builder: (context, state) {
                   return questionsCubit.calculationOptions[

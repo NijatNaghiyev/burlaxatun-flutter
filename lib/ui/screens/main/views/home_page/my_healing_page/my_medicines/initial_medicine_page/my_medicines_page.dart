@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import 'package:burla_xatun/cubits/main/mainn_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../../../cubits/main/mainn_cubit.dart';
 import '../../../../../../../widgets/global_appbar.dart';
 import '../../widgets/add_button.dart';
 import 'widgets/medicine_list.dart';

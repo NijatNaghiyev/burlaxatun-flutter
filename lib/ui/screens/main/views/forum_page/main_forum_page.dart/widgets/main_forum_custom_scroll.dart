@@ -1,6 +1,7 @@
-import 'package:burla_xatun/ui/screens/main/views/forum_page/main_forum_page.dart/widgets/main_forum_banner.dart';
-import 'package:burla_xatun/ui/screens/main/views/forum_page/main_forum_page.dart/widgets/main_forum_title_box.dart';
 import 'package:flutter/material.dart';
+
+import 'main_forum_banner.dart';
+import 'main_forum_title_box.dart';
 
 class MainForumCustomScroll extends StatelessWidget {
   const MainForumCustomScroll({super.key});

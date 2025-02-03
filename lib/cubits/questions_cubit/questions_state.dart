@@ -21,22 +21,34 @@ class QuestionsInitial extends Equatable {
     required this.selectedDay,
     required this.isFirstChild,
     required this.birthDateString,
+    required this.initialDateTime,
+    required this.ultrasoundRadioValue,
+    required this.ultrasoundDayCountString,
+    required this.ultrasoundWeekCountString,
+    required this.isShowUltrasoundDays,
+    required this.isShowUltrasoundWeeks,
   });
 
   final int? currentQuestionOneOptionIndex;
   final int? selectedCalculateOptionIndex;
   final int questionPageIndex;
   final int focusedWeekIndex;
+  final String ultrasoundWeekCountString;
+  final String ultrasoundDayCountString;
   final bool iDontKnow;
   final bool showOptions;
   final bool showDays;
   final bool showCalendar;
   final bool isActiveButton;
   final bool? isFirstChild;
+  final bool isShowUltrasoundDays;
+  final bool isShowUltrasoundWeeks;
   final String selectedCalculateOptionString;
   final String selectedPeriodTimeString;
   final String birthDateString;
+  final String? ultrasoundRadioValue;
   final DateTime selectedDay;
+  final DateTime initialDateTime;
 
   @override
   List<Object?> get props => [
@@ -54,6 +66,12 @@ class QuestionsInitial extends Equatable {
         isActiveButton,
         isFirstChild,
         birthDateString,
+        initialDateTime,
+        ultrasoundRadioValue,
+        ultrasoundDayCountString,
+        ultrasoundWeekCountString,
+        isShowUltrasoundDays,
+        isShowUltrasoundWeeks,
       ];
 
   QuestionsInitial copyWith({
@@ -61,16 +79,22 @@ class QuestionsInitial extends Equatable {
     int? selectedCalculateOptionIndex,
     int? questionPageIndex,
     int? focusedWeekIndex,
+    String? ultrasoundWeekCountString,
+    String? ultrasoundDayCountString,
     bool? iDontKnow,
     bool? showOptions,
     bool? showDays,
     bool? showCalendar,
     bool? isActiveButton,
     bool? isFirstChild,
+    bool? isShowUltrasoundDays,
+    bool? isShowUltrasoundWeeks,
     String? selectedCalculateOptionString,
     String? selectedPeriodTimeString,
     String? birthDateString,
+    String? ultrasoundRadioValue,
     DateTime? selectedDay,
+    DateTime? initialDateTime,
   }) {
     return QuestionsInitial(
       currentQuestionOneOptionIndex: currentQuestionOneOptionIndex,
@@ -90,6 +114,15 @@ class QuestionsInitial extends Equatable {
       isActiveButton: isActiveButton ?? this.isActiveButton,
       isFirstChild: isFirstChild ?? this.isFirstChild,
       birthDateString: birthDateString ?? this.birthDateString,
+      initialDateTime: initialDateTime ?? this.initialDateTime,
+      ultrasoundRadioValue: ultrasoundRadioValue ?? this.ultrasoundRadioValue,
+      ultrasoundDayCountString:
+          ultrasoundDayCountString ?? this.ultrasoundDayCountString,
+      ultrasoundWeekCountString:
+          ultrasoundWeekCountString ?? this.ultrasoundWeekCountString,
+      isShowUltrasoundDays: isShowUltrasoundDays ?? this.isShowUltrasoundDays,
+      isShowUltrasoundWeeks:
+          isShowUltrasoundWeeks ?? this.isShowUltrasoundWeeks,
     );
   }
 }

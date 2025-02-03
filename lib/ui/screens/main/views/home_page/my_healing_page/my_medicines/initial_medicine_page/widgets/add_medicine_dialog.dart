@@ -1,8 +1,8 @@
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../../../../utils/constants/color_constants.dart';
+import '../../../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../../../widgets/global_text.dart';
 import '../../../body_weight_view/widgets/add_indicator_input.dart';
 

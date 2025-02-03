@@ -8,6 +8,7 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final loginCubit = context.read<LoginCubit>();
     return GlobalButton(
       buttonName: 'Daxil ol',
       buttonColor: ColorConstants.primaryColor,

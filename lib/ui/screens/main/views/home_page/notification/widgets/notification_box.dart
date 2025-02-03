@@ -1,7 +1,8 @@
-import 'package:burla_xatun/ui/widgets/global_text.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../../widgets/global_text.dart';
 
 class NotificationBox extends StatelessWidget {
   const NotificationBox({super.key});

@@ -1,8 +1,8 @@
-import 'package:burla_xatun/cubits/main/main_state.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/names/gender_names/widgets/boy_names.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/names/gender_names/widgets/girl_names.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/names/gender_names/widgets/select_gender_box.dart';
-import 'package:burla_xatun/utils/constants/padding_constants.dart';
+import '../../../../../../../cubits/main/main_state.dart';
+import 'widgets/boy_names.dart';
+import 'widgets/girl_names.dart';
+import 'widgets/select_gender_box.dart';
+import '../../../../../../../utils/constants/padding_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

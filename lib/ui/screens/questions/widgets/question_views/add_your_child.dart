@@ -1,11 +1,9 @@
-import 'dart:developer';
-
-import 'package:burla_xatun/cubits/questions_cubit/questions_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../cubits/questions_cubit/questions_cubit.dart';
+import '../../../../../cubits/questions_cubit/questions_state.dart';
 import '../../../../../utils/constants/asset_constants.dart';
 import '../../../../../utils/constants/color_constants.dart';
 import '../../../../../utils/extensions/context_extensions.dart';
@@ -38,6 +36,9 @@ class AddYourChild extends StatelessWidget {
                 ),
               ),
               GlobalInput(
+                onFieldSubmitted: (v) {
+                  questionCubit.showBirthDateBottomSheet(context);
+                },
                 inputName: 'Tam Ad',
                 prefixIcon: 'assetsicon/child_user.svg',
                 hintText: 'Tam adını qeyd edin',
@@ -78,7 +79,6 @@ class AddYourChild extends StatelessWidget {
                                       current.birthDateString;
                                 },
                                 builder: (context, state) {
-                                  log('build');
                                   return GlobalText(
                                     text: state.birthDateString,
                                     fontSize: 15,
@@ -96,11 +96,16 @@ class AddYourChild extends StatelessWidget {
                 ],
               ),
               GlobalInput(
+                focusNode: questionCubit.childWeightFocusNode,
                 inputName: 'Çəki',
                 prefixIcon: AssetConstants.weightIcon,
                 hintText: 'Çəkisini qeyd edin',
+                onFieldSubmitted: (v) {
+                  questionCubit.childHeightFocusNode.requestFocus();
+                },
               ),
               GlobalInput(
+                focusNode: questionCubit.childHeightFocusNode,
                 inputName: 'Boy',
                 prefixIcon: AssetConstants.heightIcon,
                 hintText: 'Boyunu qeyd edin',

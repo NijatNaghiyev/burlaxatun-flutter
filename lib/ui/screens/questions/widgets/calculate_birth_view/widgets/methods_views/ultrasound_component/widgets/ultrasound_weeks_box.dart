@@ -1,40 +1,38 @@
+import 'package:burla_xatun/ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ultrasound_component/widgets/ultrasound_weeks_bottomsheet.dart';
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
+import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../../../cubits/questions_cubit/questions_cubit.dart';
-import '../../../../../../../cubits/questions_cubit/questions_state.dart';
-import '../../../../../../../utils/constants/asset_constants.dart';
-import '../../../../../../../utils/extensions/num_extensions.dart';
-import '../../../../../../widgets/global_text.dart';
+import '../../../../../../../../../cubits/questions_cubit/questions_cubit.dart';
+import '../../../../../../../../../cubits/questions_cubit/questions_state.dart';
+import '../../../../../../../../../utils/constants/asset_constants.dart';
+import '../../../../../../../../widgets/global_text.dart';
 
-class CalculationMethodWidget extends StatelessWidget {
-  const CalculationMethodWidget({super.key});
+class UltrasoundWeeksBox extends StatelessWidget {
+  const UltrasoundWeeksBox({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final questionsCubit = context.read<QuestionsCubit>();
+    final questionCubit = context.read<QuestionsCubit>();
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            GlobalText(
-              text: 'Hesablama',
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Color(0xff667085),
-            ),
-          ],
+        GlobalText(
+          text: 'Hefte',
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: Color(0xff667085),
         ),
         10.h,
         GestureDetector(
           onTap: () {
-            questionsCubit.showOptionsToggle();
+            questionCubit.showWeekCount(context, UltrasoundWeeksBottomsheet());
           },
           child: SizedBox(
             height: 56,
-            width: double.maxFinite,
+            width: context.deviceWidth * 0.44,
             child: DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(34)),
@@ -46,13 +44,9 @@ class CalculationMethodWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     BlocBuilder<QuestionsCubit, QuestionsInitial>(
-                      buildWhen: (previous, current) {
-                        return previous.selectedCalculateOptionString !=
-                            current.selectedCalculateOptionString;
-                      },
                       builder: (context, state) {
                         return GlobalText(
-                          text: state.selectedCalculateOptionString,
+                          text: state.ultrasoundWeekCountString,
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
@@ -60,9 +54,13 @@ class CalculationMethodWidget extends StatelessWidget {
                       },
                     ),
                     BlocBuilder<QuestionsCubit, QuestionsInitial>(
+                      buildWhen: (previous, current) {
+                        return previous.isShowUltrasoundWeeks !=
+                            current.isShowUltrasoundWeeks;
+                      },
                       builder: (context, state) {
                         return SvgPicture.asset(
-                          state.showOptions
+                          state.isShowUltrasoundWeeks
                               ? AssetConstants.arrowUpIcon
                               : AssetConstants.arrowDownIcon,
                         );

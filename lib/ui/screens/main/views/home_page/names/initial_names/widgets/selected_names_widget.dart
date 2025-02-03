@@ -1,6 +1,7 @@
-import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../../../../../../../utils/constants/color_constants.dart';
 
 class SelectedNamesWidget extends StatelessWidget {
   const SelectedNamesWidget({super.key});

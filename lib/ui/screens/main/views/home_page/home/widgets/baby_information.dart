@@ -1,10 +1,10 @@
-import 'package:burla_xatun/ui/screens/main/views/home_page/home/widgets/baby_info_box.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/home/widgets/more_details_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
+import 'baby_info_box.dart';
+import 'more_details_button.dart';
 
 class BabyInformation extends StatelessWidget {
   const BabyInformation({super.key});
