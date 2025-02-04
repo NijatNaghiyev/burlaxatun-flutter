@@ -1,3 +1,6 @@
+import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_language/change_language_view.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_password/change_password_view.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -204,6 +207,18 @@ class Routerapp {
               GoRoute(
                 path: '/terms_of_use',
                 builder: (context, state) => TermsOfUseView(),
+              ),
+              GoRoute(
+                path: '/change_language',
+                builder: (context, state) => ChangeLanguageView(),
+              ),
+              GoRoute(
+                path: '/change_password',
+                builder: (context, state) => ChangePasswordView(),
+              ),
+              GoRoute(
+                path: '/change_number',
+                builder: (context, state) => ChangePhoneNumberView(),
               ),
             ],
           )

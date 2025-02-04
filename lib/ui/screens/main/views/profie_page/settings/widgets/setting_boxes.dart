@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../../../cubits/main/mainn_cubit.dart';
 import 'setting_box.dart';
@@ -18,9 +19,6 @@ class SettingBoxes extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 12),
             child: SettingBox(
-              onTap: () {},
-              boxIcon: mainCubit.settingItems[i].icon,
-              boxName: mainCubit.settingItems[i].settingName,
               rightWidget: i != 0
                   ? SvgPicture.asset('assets/icons/arrow_right.svg')
                   : CupertinoSwitch(
@@ -28,6 +26,11 @@ class SettingBoxes extends StatelessWidget {
                       value: true,
                       onChanged: (v) {},
                     ),
+              boxIcon: mainCubit.settingItems[i].icon,
+              boxName: mainCubit.settingItems[i].settingName,
+              onTap: () {
+                context.push(mainCubit.settingItems[i].route!);
+              },
             ),
           ),
       ],
