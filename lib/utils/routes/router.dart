@@ -169,10 +169,6 @@ class Routerapp {
                 path: '/create_new_forum',
                 builder: (context, state) => CreateNewForum(),
               ),
-              // GoRoute(
-              //   path: '/forum_comments',
-              //   builder: (context, state) => ForumCommentsPage(),
-              // ),
             ],
           ),
           StatefulShellBranch(

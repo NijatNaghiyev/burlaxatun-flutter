@@ -26,6 +26,7 @@ class MainInitial extends Equatable {
     required this.navigationShellContext,
     required this.isOverlayVisible,
     required this.commentBoxIndex,
+    required this.userTag,
     // required this.menuOption,
   });
 
@@ -36,6 +37,7 @@ class MainInitial extends Equatable {
   final double latestScrollPosition;
   final String viewName;
   final String profileViewName;
+  final String? userTag;
   final UltrasoundFormat ultrasoundFormat;
   final NameViewOption nameViewOptions;
   // final MenuOption menuOption;
@@ -61,6 +63,7 @@ class MainInitial extends Equatable {
         navigationShellContext,
         isOverlayVisible,
         commentBoxIndex,
+        userTag,
       ];
 
   MainInitial copyWith({
@@ -70,6 +73,7 @@ class MainInitial extends Equatable {
     int? commentBoxIndex,
     String? viewName,
     String? profileViewName,
+    String? userTag,
     UltrasoundFormat? ultrasoundFormat,
     NameViewOption? nameViewOptions,
     GenderOption? genderOption,
@@ -96,6 +100,7 @@ class MainInitial extends Equatable {
           navigationShellContext ?? this.navigationShellContext,
       isOverlayVisible: isOverlayVisible ?? this.isOverlayVisible,
       commentBoxIndex: commentBoxIndex ?? this.commentBoxIndex,
+      userTag: userTag ?? this.userTag,
     );
   }
 }

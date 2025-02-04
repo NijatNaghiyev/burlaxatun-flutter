@@ -1,3 +1,4 @@
+import 'package:burla_xatun/ui/screens/main/views/forum_page/forum_comments/widgets/comment_datas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,15 +26,11 @@ class SingleCommentBox extends StatelessWidget {
         },
         builder: (context, state) {
           return Material(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(20)),
             color:
                 i == state.commentBoxIndex ? Color(0xffFCE4EC) : Colors.white,
             child: SizedBox(
               width: context.deviceWidth,
-              height: 100,
               child: Ink(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
@@ -45,17 +42,15 @@ class SingleCommentBox extends StatelessWidget {
                               color: Color(0xffE4E7EC),
                             ),
                           ),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
                   child: InkWell(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
                     onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: CommentDatas(),
+                    ),
                   ),
                 ),
               ),
