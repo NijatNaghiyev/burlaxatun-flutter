@@ -8,7 +8,6 @@ class Ultrasound extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final questionCubit = context.read<QuestionsCubit>();
     return Padding(
       padding: const EdgeInsets.only(top: 30),
       child: Row(

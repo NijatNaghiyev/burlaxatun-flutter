@@ -6,12 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../ui/screens/main/views/home_page/home/home_page.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/calculate_birth.dart';
-import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/calculation_result_dialog.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/first_day_of_last_period_component/first_day_of_last_period.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ivf_component/ivf.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ultrasound_component/ultrasound.dart';
 import '../../ui/screens/questions/widgets/question_views/add_your_child.dart';
-import '../../ui/screens/questions/widgets/question_views/pick_birth_date_widget.dart';
 import '../../ui/screens/questions/widgets/question_views/question_one.dart';
 import '../../ui/screens/questions/widgets/question_views/question_three.dart';
 import '../../ui/screens/questions/widgets/question_views/question_two.dart';
@@ -159,7 +157,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
     }
   }
 
-  void davamEtButton(context) {
+  void davamEtButton(BuildContext context) {
     log('${state.isActiveButton}');
 
     state.isActiveButton
@@ -168,8 +166,8 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
                 context,
                 MaterialPageRoute(
                   builder: (_) => BlocProvider(
-                    create: (context) => QuestionsCubit(),
-                    child: CalculateBirth(),
+                    create: (context) => QuestionsCubit(), 
+                    child: CalculateBirth(), 
                   ),
                 ),
               )
@@ -214,14 +212,11 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
     emit(state.copyWith(selectedCalculateOptionString: v));
   }
 
-  void calculate(BuildContext context) {
+  void calculate(BuildContext context, Widget widget) {
     showDialog(
       context: context,
       builder: (_) {
-        return BlocProvider(
-          create: (context) => QuestionsCubit(),
-          child: CalculationResultDialog(),
-        );
+        return widget;
       },
     );
   }
@@ -265,13 +260,13 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
     emit(state.copyWith(ultrasoundDayCountString: v.toString()));
   }
 
-  void showBirthDateBottomSheet(BuildContext context) {
+  void showBirthDateBottomSheet(BuildContext context, Widget widget) {
     showModalBottomSheet(
       context: context,
       builder: (_) {
-        return BlocProvider(
-          create: (context) => QuestionsCubit(),
-          child: PickBirthDateWidget(),
+        return BlocProvider.value(
+          value: context.read<QuestionsCubit>(),
+          child: widget,
         );
       },
     ).then((onValue) {

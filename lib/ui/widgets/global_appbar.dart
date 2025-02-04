@@ -17,6 +17,8 @@ class GlobalAppbar extends StatelessWidget implements PreferredSizeWidget {
     return SafeArea(
       minimum: EdgeInsets.only(top: 32),
       child: AppBar(
+        backgroundColor: Colors.transparent,
+        scrolledUnderElevation: 0,
         centerTitle: true,
         leading: GestureDetector(
           onTap: onTap,

@@ -11,7 +11,7 @@ class GlobalInput extends StatelessWidget {
   const GlobalInput({
     super.key,
     this.inputName,
-    required this.prefixIcon,
+    this.prefixIcon,
     this.suffixIcon,
     required this.hintText,
     this.isObsecure = false,
@@ -24,7 +24,7 @@ class GlobalInput extends StatelessWidget {
 
   final String? inputName;
   final String hintText;
-  final String prefixIcon;
+  final String? prefixIcon;
   final String? suffixIcon;
   final bool isObsecure;
   final void Function()? onSuffixIcon;
@@ -75,18 +75,20 @@ class GlobalInput extends StatelessWidget {
               color: Color(0xff595959),
               fontWeight: FontWeight.w500,
             ),
-            prefixIcon: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    prefixIcon,
-                    fit: BoxFit.cover,
+            prefixIcon: prefixIcon == null
+                ? SizedBox.shrink()
+                : Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          prefixIcon!,
+                          fit: BoxFit.cover,
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ),
-            ),
             suffixIcon: suffixIcon == null
                 ? SizedBox.shrink()
                 : Padding(

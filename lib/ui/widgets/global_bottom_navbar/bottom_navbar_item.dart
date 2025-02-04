@@ -27,6 +27,9 @@ class BottomNavbarItem extends StatelessWidget {
         mainCubit.changeView(i);
         navigationShell.goBranch(i);
       },
+      onLongPress: () {
+        i == 3 ? mainCubit.showChangeBabyBottomSheet(context) : null;
+      },
       child: BlocBuilder<MainnCubit, MainInitial>(
         builder: (context, state) {
           return Padding(
@@ -60,13 +63,3 @@ class BottomNavbarItem extends StatelessWidget {
     );
   }
 }
-
- // if (i == 0) {
-        //   context.go('/home');
-        // } else if (i == 1) {
-        //   context.go('/daily_advices');
-        // } else if (i == 2) {
-        //   context.go('/forum_page');
-        // } else if (i == 3) {
-        //   context.go('/profile_page');
-        // }

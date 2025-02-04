@@ -10,6 +10,7 @@ import '../../../../../utils/extensions/context_extensions.dart';
 import '../../../../../utils/extensions/num_extensions.dart';
 import '../../../../widgets/global_input.dart';
 import '../../../../widgets/global_text.dart';
+import 'pick_birth_date_widget.dart';
 
 class AddYourChild extends StatelessWidget {
   const AddYourChild({super.key});
@@ -37,7 +38,7 @@ class AddYourChild extends StatelessWidget {
               ),
               GlobalInput(
                 onFieldSubmitted: (v) {
-                  questionCubit.showBirthDateBottomSheet(context);
+                  questionCubit.showBirthDateBottomSheet(context, PickBirthDateWidget());
                 },
                 inputName: 'Tam Ad',
                 prefixIcon: 'assetsicon/child_user.svg',
@@ -55,7 +56,8 @@ class AddYourChild extends StatelessWidget {
                   context.deviceHeight < 750 ? 8.h : 16.h,
                   GestureDetector(
                     onTap: () {
-                      questionCubit.showBirthDateBottomSheet(context);
+                      questionCubit.showBirthDateBottomSheet(
+                          context, PickBirthDateWidget());
                     },
                     child: SizedBox(
                       width: context.deviceWidth,

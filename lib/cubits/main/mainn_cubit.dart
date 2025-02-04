@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/data/models/local/medicine_detail_items_model.dart';
+import 'package:burla_xatun/ui/widgets/change_baby_bottomsheet/global_change_baby_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -59,18 +61,21 @@ class MainnCubit extends Cubit<MainInitial> {
             navigationShellContext: null,
             isOverlayVisible: false,
             commentBoxIndex: -1,
+            userTag: null,
             // menuOption: null,
           ),
         );
 
   final ScrollController homePageScrollController = ScrollController();
   final FocusNode commentInputFocusNode = FocusNode();
+  late TextEditingController commentInputTextController;
 
   final navbarItems = BottomNavbarItemsModel.items;
   final boxItems = MainPageBoxModel.items;
   final profileSectionItems = ProfileSectionsItemsModel.items;
   final myHealingCardItems = MyHealingCardItemsModel.items;
   final settingItems = SettingsItemModel.items;
+  final medicineDetailItems = MedicineDetailItemsModel.items;
 
   final List views = [
     Home(),
@@ -114,6 +119,8 @@ class MainnCubit extends Cubit<MainInitial> {
           case CommentDialog.copy:
           case CommentDialog.delete:
           case CommentDialog.reply:
+            emit(state.copyWith(userTag: '@Nihad '));
+            commentInputTextController.text = state.userTag!;
             commentInputFocusNode.requestFocus();
 
           case CommentDialog.emoji:
@@ -162,18 +169,6 @@ class MainnCubit extends Cubit<MainInitial> {
     emit(state.copyWith(carouselIndex: v));
   }
 
-  void showBottomSheetAboutChild(Widget widget, BuildContext context) {
-    showModalBottomSheet(
-      useRootNavigator: true,
-      showDragHandle: true,
-      isScrollControlled: true,
-      context: context,
-      builder: (_) {
-        return widget;
-      },
-    );
-  }
-
   void pushScaffoldMyMedicinesPage(BuildContext context) {
     Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(
@@ -190,10 +185,32 @@ class MainnCubit extends Cubit<MainInitial> {
     );
   }
 
-  void showDoctorsNotification(BuildContext context) {
+  void showBottomSheetAboutChild(Widget widget, BuildContext context) {
     showModalBottomSheet(
       useRootNavigator: true,
       showDragHandle: true,
+      isScrollControlled: true,
+      context: context,
+      builder: (_) {
+        return widget;
+      },
+    );
+  }
+
+  void showChangeBabyBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (_) {
+        return GlobalChangeBabyBottomsheet();
+      },
+    );
+  }
+
+  void showDoctorsNotification(BuildContext context) {
+    showModalBottomSheet(
+      showDragHandle: true,
+      isScrollControlled: true,
       context: context,
       builder: (_) {
         return DoctorsNotification();
@@ -251,6 +268,8 @@ class MainnCubit extends Cubit<MainInitial> {
   @override
   Future<void> close() {
     homePageScrollController.dispose();
+    commentInputFocusNode.dispose();
+    // commentInputTextController.dispose();
     return super.close();
   }
 }
