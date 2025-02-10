@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../cubits/main/main_state.dart';
-import '../../../cubits/main/mainn_cubit.dart';
+import '../../../cubits/main_cubit/main_state.dart';
+import '../../../cubits/main_cubit/mainn_cubit.dart';
 import '../../../utils/constants/color_constants.dart';
 import '../../../utils/extensions/num_extensions.dart';
 import '../global_text.dart';

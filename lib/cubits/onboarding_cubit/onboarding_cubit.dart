@@ -8,7 +8,7 @@ class OnboardingCubit extends Cubit<int> {
   OnboardingCubit() : super(0);
 
   int indexOfPage = 0;
-  late final PageController pageController;
+  final pageController = PageController();
   final onboardingItems = OnboardItemsModel.items;
 
   void updateIndexOfPage(int value) {

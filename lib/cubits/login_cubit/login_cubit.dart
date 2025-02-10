@@ -4,7 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'login_cubit_state.dart';
 
 class LoginCubit extends Cubit<LoginCubitState> {
-  LoginCubit() : super(LoginCubitInitial(isObsecure: true));
+  LoginCubit()
+      : super(LoginCubitInitial(
+          isObsecure: true,
+          isActiveButton: false,
+        ));
 
   bool isObsecure = true;
   bool isActiveButton = false;
@@ -19,15 +23,12 @@ class LoginCubit extends Cubit<LoginCubitState> {
     emit(LoginCubitInitial(isObsecure: isObsecure));
   }
 
-  // void isActivateButton() {
-  //   if (loginEmailController.text.isNotEmpty &&
-  //       loginPasswordController.text.isNotEmpty) {
-  //     isActiveButton = true;
-  //   } else {
-  //     isActiveButton = false;
-  //   }
-  //   emit(LoginCubitInitial(isActiveButton: isActiveButton));
-  // }
+  void updateIsValid() {
+    isActiveButton = loginEmailController.text.isNotEmpty &&
+        loginPasswordController.text.isNotEmpty;
+
+    emit(LoginCubitInitial(isActiveButton: isActiveButton));
+  }
 
   @override
   Future<void> close() {

@@ -15,9 +15,11 @@ class OnboardTitle extends StatelessWidget {
     return GlobalText(
       text: onboardTitle,
       fontSize: 34,
-      height: 1.1,
+      height: 1.2,
       fontWeight: FontWeight.w600,
       color: Colors.black,
     );
   }
 }
+
+

@@ -106,6 +106,7 @@ class MainnCubit extends Cubit<MainInitial> {
 
   void showMenuDialogAndEmojis(BuildContext context, double v) {
     showDialog<CommentDialog>(
+      useSafeArea: false,
       barrierColor: Colors.transparent,
       context: context,
       builder: (context) {

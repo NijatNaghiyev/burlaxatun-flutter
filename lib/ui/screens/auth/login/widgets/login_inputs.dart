@@ -26,7 +26,9 @@ class LoginInputs extends StatelessWidget {
             hintText: TextConstants.emailiniziDaxilEdin,
             onFieldSubmitted: (p0) =>
                 loginCubit.loginPasswordFocusNode.requestFocus(),
-          
+            onChanged: (v) {
+              loginCubit.updateIsValid();
+            },
           ),
           context.deviceHeight < 750 ? 10.h : 26.h,
           BlocBuilder<LoginCubit, LoginCubitState>(
@@ -42,7 +44,9 @@ class LoginInputs extends StatelessWidget {
                     ? AssetConstants.eyeSlashedIcon
                     : AssetConstants.eyeOpenIcon,
                 onSuffixIcon: () => loginCubit.isObsecureToggle(),
-               
+                onChanged: (v) {
+                  loginCubit.updateIsValid();
+                },
               );
             },
           ),

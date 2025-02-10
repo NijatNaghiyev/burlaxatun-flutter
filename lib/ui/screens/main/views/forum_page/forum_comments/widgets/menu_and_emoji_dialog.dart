@@ -1,9 +1,10 @@
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../../../cubits/main/mainn_cubit.dart';
+import '../../../../../../../cubits/main_cubit/mainn_cubit.dart';
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
 
@@ -18,9 +19,10 @@ class MenuAndEmojiDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final mainCubit = context.read<MainnCubit>();
     return Stack(
+      alignment: Alignment.topCenter,
       children: [
         Positioned(
-          left: 135,
+          right: context.deviceWidth * 0.05,
           top: fromTop,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +36,9 @@ class MenuAndEmojiDialog extends StatelessWidget {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                            blurRadius: 8, color: Color.fromARGB(130, 0, 0, 0)),
+                          blurRadius: 8,
+                          color: Color.fromARGB(130, 0, 0, 0),
+                        ),
                       ],
                       color: Color(0xffFCD2EC),
                       border: Border.all(width: 1, color: Colors.white),

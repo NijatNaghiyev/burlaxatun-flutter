@@ -1,4 +1,4 @@
-import 'package:burla_xatun/cubits/language/language_cubit.dart';
+import 'package:burla_xatun/cubits/language_cubit/language_cubit.dart';
 import 'package:burla_xatun/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

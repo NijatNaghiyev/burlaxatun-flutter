@@ -1,10 +1,12 @@
-import 'package:burla_xatun/ui/screens/main/views/forum_page/forum_comments/widgets/comment_datas.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../../cubits/main/main_state.dart';
-import '../../../../../../../cubits/main/mainn_cubit.dart';
+import '../../../../../../../cubits/main_cubit/main_state.dart';
+import '../../../../../../../cubits/main_cubit/mainn_cubit.dart';
 import '../../../../../../../utils/extensions/context_extensions.dart';
+import 'comment_datas.dart';
 
 class SingleCommentBox extends StatelessWidget {
   const SingleCommentBox({super.key, required this.i});
@@ -16,7 +18,10 @@ class SingleCommentBox extends StatelessWidget {
     final mainCubit = context.read<MainnCubit>();
     return GestureDetector(
       onLongPressStart: (details) {
-        double fromTop = details.globalPosition.dy - 132;
+        log('${details.globalPosition.dy}');
+        double fromTop = details.globalPosition.dy > 160
+            ? details.globalPosition.dy - 160
+            : 10;
         mainCubit.showMenuDialogAndEmojis(context, fromTop);
         mainCubit.updateCommentBoxIndex(i);
       },
