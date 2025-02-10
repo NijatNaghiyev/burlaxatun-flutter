@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../../../cubits/main/mainn_cubit.dart';
+import '../../../../../../../cubits/main_cubit/mainn_cubit.dart';
 import 'setting_box.dart';
 
 class SettingBoxes extends StatelessWidget {

@@ -1,10 +1,11 @@
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../cubits/main/main_state.dart';
-import '../../cubits/main/mainn_cubit.dart';
+import '../../cubits/main_cubit/main_state.dart';
+import '../../cubits/main_cubit/mainn_cubit.dart';
 
 class GlobalBanner extends StatelessWidget {
   const GlobalBanner({super.key});
@@ -13,47 +14,48 @@ class GlobalBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final mainCubit = context.read<MainnCubit>();
     return Stack(
+      fit: StackFit.passthrough,
       alignment: Alignment.bottomCenter,
       children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width ,
-          child: BlocBuilder<MainnCubit, MainInitial>(
-            builder: (context, state) {
-              return CarouselSlider(
-                options: CarouselOptions(
-                  aspectRatio: 9/16,
-                  initialPage: state.carouselIndex,
-                  viewportFraction: 1,
-                  height: 172,
-                  enableInfiniteScroll: true,
-                  autoPlay: true,
-                  onPageChanged: (index, reason) {
-                    mainCubit.updateCarouselIndex(index);
-                  },
+        BlocBuilder<MainnCubit, MainInitial>(
+          builder: (context, state) {
+            return CarouselSlider(
+              options: CarouselOptions(
+                initialPage: state.carouselIndex,
+                viewportFraction: 1,
+                height: context.deviceHeight * 0.215,
+                enableInfiniteScroll: true,
+                autoPlay: true,
+                onPageChanged: (index, reason) {
+                  mainCubit.updateCarouselIndex(index);
+                },
+              ),
+              items: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Image.asset(
+                    'assets/png/banner.png',
+                    fit: BoxFit.contain,
+                  ),
                 ),
-                items: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Image.asset(
-                      'assets/png/banner.png',
-                    ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Image.asset(
+                    'assets/png/banner.png',
+                    fit: BoxFit.contain,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Image.asset(
-                      'assets/png/banner.png',
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Image.asset(
+                    'assets/png/banner.png',
+                    width: context.deviceWidth ,
+                    fit: BoxFit.contain,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Image.asset(
-                      'assets/png/banner.png',
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
+                ),
+              ],
+            );
+          },
         ),
         BlocBuilder<MainnCubit, MainInitial>(
           buildWhen: (previous, current) {

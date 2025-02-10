@@ -6,7 +6,7 @@
 //   List<Object?> get props => [];
 // }
 // extends MainnState
-import 'package:burla_xatun/cubits/main/mainn_cubit.dart';
+import 'package:burla_xatun/cubits/main_cubit/mainn_cubit.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

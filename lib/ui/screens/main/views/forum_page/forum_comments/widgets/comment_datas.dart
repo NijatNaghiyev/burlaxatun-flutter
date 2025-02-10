@@ -1,7 +1,6 @@
-import 'package:burla_xatun/utils/extensions/context_extensions.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
 
 class CommentDatas extends StatelessWidget {
@@ -10,7 +9,7 @@ class CommentDatas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Image.asset(
           'assets/png/comment_user_pic.png',
@@ -18,10 +17,10 @@ class CommentDatas extends StatelessWidget {
           height: 44,
         ),
         SizedBox(width: 10),
-        SizedBox(
-          width: context.deviceWidth * 0.69,
+        Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

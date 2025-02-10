@@ -1,4 +1,4 @@
-import '../../../../../../../cubits/main/main_state.dart';
+import '../../../../../../../cubits/main_cubit/main_state.dart';
 import 'widgets/boy_names.dart';
 import 'widgets/girl_names.dart';
 import 'widgets/select_gender_box.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../../../cubits/main/mainn_cubit.dart';
+import '../../../../../../../cubits/main_cubit/mainn_cubit.dart';
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_appbar.dart';
 

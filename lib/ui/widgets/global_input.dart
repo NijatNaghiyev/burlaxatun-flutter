@@ -20,6 +20,7 @@ class GlobalInput extends StatelessWidget {
     this.onFieldSubmitted,
     this.validator,
     this.textController,
+    this.onChanged,
   });
 
   final String? inputName;
@@ -27,10 +28,11 @@ class GlobalInput extends StatelessWidget {
   final String? prefixIcon;
   final String? suffixIcon;
   final bool isObsecure;
-  final void Function()? onSuffixIcon;
   final TextEditingController? textController;
   final FocusNode? focusNode;
+  final void Function()? onSuffixIcon;
   final void Function(String v)? onFieldSubmitted;
+  final void Function(String v)? onChanged;
   final String? Function(String?)? validator;
 
   @override
@@ -60,6 +62,7 @@ class GlobalInput extends StatelessWidget {
           controller: textController,
           validator: validator,
           onFieldSubmitted: onFieldSubmitted,
+          onChanged: onChanged,
           focusNode: focusNode,
           obscureText: isObsecure,
           style: GoogleFonts.poppins(

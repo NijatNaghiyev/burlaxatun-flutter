@@ -1,10 +1,10 @@
-import 'package:burla_xatun/cubits/language/language_cubit.dart';
+import 'package:burla_xatun/cubits/language_cubit/language_cubit.dart';
 import 'package:burla_xatun/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'cubits/main/mainn_cubit.dart';
+import 'cubits/main_cubit/mainn_cubit.dart';
 import 'utils/routes/router.dart';
 
 void main() {
