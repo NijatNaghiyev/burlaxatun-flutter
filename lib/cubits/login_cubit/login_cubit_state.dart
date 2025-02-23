@@ -1,16 +1,16 @@
 part of 'login_cubit.dart';
 
 @immutable
-abstract class LoginCubitState {}
+class LoginCubitState {}
 
 class LoginCubitInitial extends LoginCubitState {
   LoginCubitInitial({
-    this.isObsecure,
-    this.isActiveButton,
+    required this.isActiveButton,
+    required this.isObsecure,
   });
 
-  final bool? isObsecure;
-  final bool? isActiveButton;
+  final bool isActiveButton;
+  final bool isObsecure;
 }
 
 class LoginCubitLoading extends LoginCubitState {}
