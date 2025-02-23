@@ -5,11 +5,6 @@ class ChangePhoneNumberView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Change number'),
-      ),
-      body: Container(),
-    );
+    return Text('data');
   }
 }
