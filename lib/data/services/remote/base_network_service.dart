@@ -16,5 +16,11 @@ class BaseNetwork {
             'Authorization': 'Bearer $token',
           },
         ),
-      )..interceptors.add(PrettyDioLogger());
+      )..interceptors.add(
+          PrettyDioLogger(
+            requestHeader: true,
+            requestBody: true,
+            responseHeader: true,
+          ),
+        );
 }
