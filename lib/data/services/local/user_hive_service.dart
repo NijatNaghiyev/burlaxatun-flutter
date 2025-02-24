@@ -22,7 +22,7 @@ class UserHiveService {
       await _userBox!.put('user', user);
       return true;
     } catch (e) {
-      log('hive error: $e');
+      log('user hive error: $e');
       return false;
     }
   }

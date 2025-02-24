@@ -16,25 +16,28 @@ class SignupInputs extends StatelessWidget {
       spacing: context.deviceHeight < 740 ? 13 : 26,
       children: [
         GlobalInput(
-          focusNode: signUpCubit.signUpEmailFocusNode,
+          focusNode: signUpCubit.signFullNameFocusNode,
+          textController: signUpCubit.signFullNameController,
           inputName: 'Ad, soyad və ata adı qeyd edin',
           prefixIcon: AssetConstants.userIcon,
           hintText: 'Adınızı qeyd edin',
+          onFieldSubmitted: (v) {
+            signUpCubit.signUpEmailFocusNode.requestFocus();
+          },
+        ),
+        GlobalInput(
+          textController: signUpCubit.signUpEmailController,
+          focusNode: signUpCubit.signUpEmailFocusNode,
+          inputName: 'Email',
+          prefixIcon: AssetConstants.emailIcon,
+          hintText: 'Email qeyd edin',
           onFieldSubmitted: (v) {
             signUpCubit.signUpPasswordFocusNode.requestFocus();
           },
         ),
         GlobalInput(
+          textController: signUpCubit.signUpPasswordController,
           focusNode: signUpCubit.signUpPasswordFocusNode,
-          inputName: 'Email',
-          prefixIcon: AssetConstants.emailIcon,
-          hintText: 'Email qeyd edin',
-          onFieldSubmitted: (v) {
-            signUpCubit.signUpConfirmPasswordFocusNode.requestFocus();
-          },
-        ),
-        GlobalInput(
-          focusNode: signUpCubit.signUpConfirmPasswordFocusNode,
           inputName: 'Şifrə',
           prefixIcon: AssetConstants.lockIcon,
           hintText: 'Şifrənizi qeyd edin',

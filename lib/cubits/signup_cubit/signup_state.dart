@@ -8,3 +8,9 @@ class SignupCubitInitial extends SignupCubitState {
 
   final bool isChecked;
 }
+
+class SignupCubitLoading extends SignupCubitState {}
+
+class SignupCubitSuccess extends SignupCubitState {}
+
+class SignupCubitError extends SignupCubitState {}

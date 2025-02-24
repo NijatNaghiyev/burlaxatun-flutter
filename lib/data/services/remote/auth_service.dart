@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/data/models/remote/response/register_response_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../../utils/constants/endpoints_constants.dart';
@@ -27,8 +28,8 @@ class AuthService {
       final response =
           await BaseNetwork.instance.getDio().post(url, data: body);
       if (response.statusCode == 200) {
-        final loginData = LoginResponseModel.fromJson(response.data);
-        return loginData.data.token;
+        final loginResponseData = LoginResponseModel.fromJson(response.data);
+        return loginResponseData.data.token;
       }
       throw Exception('Something has happened while logged in');
     } on DioException catch (e) {
@@ -61,5 +62,30 @@ class AuthService {
       log('Stack Trace: $s');
       throw Exception();
     }
+  }
+
+  Future<String> register(
+    String name,
+    String surname,
+    String fatherName,
+    String email,
+    String password,
+  ) async {
+    log('register request');
+    final url = EndpointsConstants.register;
+    final body = {
+      'name': name,
+      'surname': surname,
+      'fathername': fatherName,
+      'email': email,
+      'password': password,
+    };
+    final response = await BaseNetwork.instance.getDio().post(url, data: body);
+    if (response.statusCode == 200) {
+      final registerResponseData =
+          RegisterResponseModel.fromJson(response.data);
+      return registerResponseData.data.token;
+    }
+    throw Exception('Something has happened while logged in');
   }
 }
