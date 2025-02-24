@@ -1,9 +1,8 @@
 import 'dart:developer';
 
-import 'package:burla_xatun/data/models/local/user_data_model.dart';
 import 'package:hive/hive.dart';
 
-import '../../models/remote/response/user_response_model.dart';
+import '../../models/local/user_data_model.dart';
 
 class UserHiveService {
   UserHiveService._();
