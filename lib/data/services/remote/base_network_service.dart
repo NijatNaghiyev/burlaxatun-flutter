@@ -20,7 +20,7 @@ class BaseNetwork {
           PrettyDioLogger(
             requestHeader: true,
             requestBody: true,
-            responseHeader: true,
+            responseHeader: false,
           ),
         );
 }
