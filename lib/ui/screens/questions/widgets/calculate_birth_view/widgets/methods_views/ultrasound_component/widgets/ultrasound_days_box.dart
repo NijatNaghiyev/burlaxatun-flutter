@@ -46,7 +46,9 @@ class UltrasoundDaysBox extends StatelessWidget {
                     BlocBuilder<QuestionsCubit, QuestionsInitial>(
                       builder: (context, state) {
                         return GlobalText(
-                          text: state.ultrasoundDayCountString,
+                          text: state.ultrasoundDayCount == null
+                              ? 'Gun sayi'
+                              : state.ultrasoundDayCount.toString(),
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: Colors.black,

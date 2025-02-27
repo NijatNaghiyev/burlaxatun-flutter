@@ -46,7 +46,9 @@ class UltrasoundWeeksBox extends StatelessWidget {
                     BlocBuilder<QuestionsCubit, QuestionsInitial>(
                       builder: (context, state) {
                         return GlobalText(
-                          text: state.ultrasoundWeekCountString,
+                          text: state.ultrasoundWeekCount == null
+                              ? 'Hefte sayi'
+                              : state.ultrasoundWeekCount.toString(),
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: Colors.black,

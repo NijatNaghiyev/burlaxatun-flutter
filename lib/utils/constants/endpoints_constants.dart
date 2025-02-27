@@ -11,4 +11,13 @@ class EndpointsConstants {
   static const String tokenInfo = '';
   static const String tokenRefresh = '';
   static const String changePassword = '';
+
+  static const String pregnancyCalculateDetails =
+      '$baseUrl/pregnancy/calculate';
+
+  // Baby
+  static const String babyUrl = '$baseUrl/baby';
+  static const String countries = '$babyUrl/name_countries';
+  static const String names = '$babyUrl/names';
+  static const String selectedNames = '$names/select';
 }

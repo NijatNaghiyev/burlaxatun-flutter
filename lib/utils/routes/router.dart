@@ -1,13 +1,10 @@
-import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_language/change_language_view.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_password/change_password_view.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
+import 'package:burla_xatun/cubits/baby_names_cubit/baby_names_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../cubits/login_cubit/login_cubit.dart';
 import '../../cubits/onboarding_cubit/onboarding_cubit.dart';
 import '../../cubits/questions_cubit/questions_cubit.dart';
-import '../../cubits/signup_cubit/signup_cubit.dart';
 import '../../ui/screens/auth/login/login.dart';
 import '../../ui/screens/auth/sign_up/signup.dart';
 import '../../ui/screens/main/main_page.dart';
@@ -34,10 +31,14 @@ import '../../ui/screens/main/views/profie_page/faq/faq_view.dart';
 import '../../ui/screens/main/views/profie_page/initial_profile/initial_profile_page.dart';
 import '../../ui/screens/main/views/profie_page/pricavy_policy/privacy_policy_view.dart';
 import '../../ui/screens/main/views/profie_page/settings/setting_view.dart';
+import '../../ui/screens/main/views/profie_page/settings/setting_views/change_language/change_language_view.dart';
+import '../../ui/screens/main/views/profie_page/settings/setting_views/change_password/change_password_view.dart';
+import '../../ui/screens/main/views/profie_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
 import '../../ui/screens/main/views/profie_page/special_thanks/special_thanks_view.dart';
 import '../../ui/screens/main/views/profie_page/terms_of_use/terms_of_use_view.dart';
 import '../../ui/screens/onboarding/onboarding.dart';
 import '../../ui/screens/questions/questions.dart';
+import '../../ui/screens/questions/widgets/calculate_birth_view/calculate_birth.dart';
 
 class Routerapp {
   static Routerapp? _instance;
@@ -49,6 +50,7 @@ class Routerapp {
   // static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   final GoRouter router = GoRouter(
+    // initialLocation: '/home',
     routes: [
       GoRoute(
         path: '/',
@@ -66,17 +68,27 @@ class Routerapp {
       ),
       GoRoute(
         path: '/sign_up',
-        builder: (context, state) => BlocProvider(
-          create: (context) => SignupCubit(),
-          child: SignUp(),
-        ),
+        builder: (context, state) {
+          return SignUp();
+        },
       ),
       GoRoute(
         path: '/questions',
-        builder: (context, state) => BlocProvider(
-          create: (context) => QuestionsCubit(),
-          child: Questions(),
-        ),
+        builder: (context, state) {
+          return BlocProvider(
+            create: (context) => QuestionsCubit(),
+            child: Questions(),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/calculate',
+        builder: (context, state) {
+          return BlocProvider(
+            create: (context) => QuestionsCubit(),
+            child: CalculateBirth(),
+          );
+        },
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
@@ -108,10 +120,6 @@ class Routerapp {
                 path: '/body_weight',
                 builder: (context, state) => BodyWeightPage(),
               ),
-              // GoRoute(
-              //   path: '/my_medicines',
-              //   builder: (context, state) => MyMedicinesPage(),
-              // ),
               GoRoute(
                 path: '/initial_doctors',
                 builder: (context, state) => InitialDoctorPage(),
@@ -142,11 +150,20 @@ class Routerapp {
               ),
               GoRoute(
                 path: '/initial_names',
-                builder: (context, state) => InitialNamesPage(),
+                builder: (context, state) => BlocProvider(
+                  create: (context) => BabyNamesCubit()..getCountriesAndSelectedNames(),
+                  child: InitialNamesPage(),
+                ),
               ),
               GoRoute(
                 path: '/gender_names',
-                builder: (context, state) => GenderNames(),
+                builder: (context, state) {
+                  final id = state.extra as String;
+                  return BlocProvider(
+                    create: (context) => BabyNamesCubit()..getNames(id),
+                    child: GenderNames(),
+                  );
+                },
               ),
             ],
           ),

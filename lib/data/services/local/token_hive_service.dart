@@ -18,6 +18,7 @@ class TokenHiveService {
     try {
       await initBox();
       await _tokenBox!.put('token', token);
+      log('saved token is this: $token');
       return true;
     } catch (e) {
       log('token hive error: $e');

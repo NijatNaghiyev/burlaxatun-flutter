@@ -8,11 +8,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupCubitState> {
-  SignupCubit() : super(SignupCubitInitial(false));
+  SignupCubit()
+      : super(SignupCubitInitial(
+          isChecked: false,
+          isActiveButton: false,
+        ));
 
   bool isActiveButton = false;
   bool isChecked = false;
+  bool emailValidity = false;
   String fullName = '';
+  String name = '';
+  String surname = '';
+  String fatherName = '';
+  List<String> fullNameParts = [];
   final AuthService authService = AuthService();
   final signFullNameController = TextEditingController();
   final signUpEmailController = TextEditingController();
@@ -23,24 +32,54 @@ class SignupCubit extends Cubit<SignupCubitState> {
   final signUpPasswordFocusNode = FocusNode();
 
   void checkBoxToggle(bool v) {
-    emit(SignupCubitInitial(v));
+    isChecked = v;
+    emit(SignupCubitInitial(
+      isActiveButton: isActiveButton,
+      isChecked: isChecked,
+    ));
+  }
+
+  void splitFullName() {
+    fullName = signFullNameController.text;
+    if (fullName.contains(' ')) {
+      fullNameParts = fullName.split(' ');
+    }
+
+    if (fullNameParts.length == 3) {
+      name = fullNameParts[0];
+      surname = fullNameParts[1];
+      fatherName = fullNameParts[2];
+    }
+    // log('${fullNameParts.length}');
+    // log('$fullNameParts');
+  }
+
+  void checkEmailValidity() {
+    emailValidity = RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(signUpEmailController.text);
+
+    log('$emailValidity');
   }
 
   void updateIsValid() {
+    splitFullName();
+    checkEmailValidity();
     isActiveButton = signUpEmailController.text.isNotEmpty &&
-        signUpPasswordController.text.isNotEmpty;
+        signUpPasswordController.text.isNotEmpty &&
+        signFullNameController.text.isNotEmpty &&
+        fullNameParts.length == 3 &&
+        emailValidity;
+    emit(SignupCubitInitial(
+      isActiveButton: isActiveButton,
+      isChecked: isChecked,
+    ));
   }
 
-  void register() async {
+  Future<void> register() async {
     emit(SignupCubitLoading());
-    fullName = signFullNameController.text;
-    List<String> fullNameParts = fullName.split(' ');
-    final String name = fullNameParts[0];
-    final String surname = fullNameParts[1];
-    final String fatherName = fullNameParts[2];
     try {
       log('register button clicked');
-
       final token = await authService.register(
         name,
         surname,

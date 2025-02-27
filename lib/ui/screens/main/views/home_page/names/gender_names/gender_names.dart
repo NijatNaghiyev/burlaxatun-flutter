@@ -19,7 +19,7 @@ class GenderNames extends StatelessWidget {
     // final mainCubit = context.read<MainnCubit>();
     return Scaffold(
       appBar: GlobalAppbar(
-        title: 'Adlar',
+        title: 'Adlar2',
         onTap: () {
           context.pop();
         },

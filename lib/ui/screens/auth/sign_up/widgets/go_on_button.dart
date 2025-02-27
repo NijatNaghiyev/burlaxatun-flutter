@@ -15,7 +15,8 @@ class GoOnButton extends StatelessWidget {
     return BlocConsumer<SignupCubit, SignupCubitState>(
       listener: (context, state) {
         if (state is SignupCubitSuccess) {
-          context.push('/questions');
+          // context.push('/questions'); 
+          null;
         } else if (state is SignupCubitError) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Login failed!')),
@@ -28,10 +29,12 @@ class GoOnButton extends StatelessWidget {
         }
         return GlobalButton(
           buttonName: 'Davam et',
-          buttonColor: ColorConstants.primaryColor,
+          buttonColor: signupCubit.isActiveButton
+              ? ColorConstants.primaryColor
+              : ColorConstants.inactiveDotColor,
           textColor: Colors.white,
           onPressed: () {
-            signupCubit.register();
+            signupCubit.isActiveButton ? context.push('/questions') : null;
           },
         );
       },

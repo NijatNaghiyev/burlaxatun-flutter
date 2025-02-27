@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart' show PrettyDioLogger;
 
@@ -10,17 +12,17 @@ class BaseNetwork {
 
   Dio? _dio;
 
-  Dio getDio({String? token}) => _dio ??= Dio(
-        BaseOptions(
-          headers: {
-            'Authorization': 'Bearer $token',
-          },
-        ),
-      )..interceptors.add(
-          PrettyDioLogger(
-            requestHeader: true,
-            requestBody: true,
-            responseHeader: true,
-          ),
-        );
+  Dio getDio({String? token}) {
+    log('authorization token is this: $token');
+    _dio ??= Dio()
+      ..interceptors.add(
+        PrettyDioLogger(requestHeader: true),
+      );
+
+    if (token != null) {
+      _dio!.options.headers['Authorization'] = 'Bearer $token';
+    }
+
+    return _dio!;
+  }
 }

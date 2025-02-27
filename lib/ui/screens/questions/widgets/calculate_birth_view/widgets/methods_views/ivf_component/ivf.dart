@@ -14,12 +14,11 @@ class Ivf extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final questionCubit = context.read<QuestionsCubit>();
-    return BlocSelector<QuestionsCubit, QuestionsInitial, String>(
+    return BlocSelector<QuestionsCubit, QuestionsInitial, int>(
       selector: (state) {
-        return state.ultrasoundRadioValue!;
+        return state.ivfRadioValue!;
       },
       builder: (BuildContext context, state) {
-        log('message');
         return Padding(
           padding: const EdgeInsets.only(top: 35),
           child: Column(
@@ -35,10 +34,10 @@ class Ivf extends StatelessWidget {
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     toggleable: true,
                     splashRadius: 0,
-                    value: 'İVF 3 Gün Transfer günü',
+                    value: 1,
                     groupValue: state,
                     onChanged: (v) {
-                      log('first radio');
+                      log('$v');
                       questionCubit.updateRadioValue(v!);
                     },
                   ),
@@ -58,10 +57,10 @@ class Ivf extends StatelessWidget {
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     toggleable: true,
                     splashRadius: 0,
-                    value: 'İVF 5 Gün Transfer günü',
+                    value: 2,
                     groupValue: state,
                     onChanged: (v) {
-                      log('second radio');
+                      log('$v');
                       questionCubit.updateRadioValue(v!);
                     },
                   ),

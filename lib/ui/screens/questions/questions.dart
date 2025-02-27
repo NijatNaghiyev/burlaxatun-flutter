@@ -11,7 +11,11 @@ import 'widgets/question_views/davam_et_button.dart';
 import 'widgets/questions_page_view.dart';
 
 class Questions extends StatelessWidget {
-  const Questions({super.key});
+  const Questions({
+    super.key,
+    // required this.signupCubit,
+  });
+  // final SignupCubit signupCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +50,23 @@ class Questions extends StatelessWidget {
                 return DavamEt(
                   isActive: state.isActiveButton,
                   onPressed: () {
-                    questionsCubit.davamEtButton(context);
+                    state.isActiveButton
+                        ? state.iDontKnow
+                            ? 
+                            context.push('/calculate')
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => BlocProvider(
+                            //         create: (context) => QuestionsCubit(),
+                            //         child: CalculateBirth(
+                            //             signupCubit: signupCubit),
+                            //       ),
+                            //     ),
+                            //   )
+                            : questionsCubit.nextQuestion()
+                        : null;
+                    // questionsCubit.davamEtButton(context);
                   },
                 );
               },

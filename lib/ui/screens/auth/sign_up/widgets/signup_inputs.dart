@@ -24,6 +24,9 @@ class SignupInputs extends StatelessWidget {
           onFieldSubmitted: (v) {
             signUpCubit.signUpEmailFocusNode.requestFocus();
           },
+          onChanged: (v) {
+            signUpCubit.updateIsValid();
+          },
         ),
         GlobalInput(
           textController: signUpCubit.signUpEmailController,
@@ -34,6 +37,9 @@ class SignupInputs extends StatelessWidget {
           onFieldSubmitted: (v) {
             signUpCubit.signUpPasswordFocusNode.requestFocus();
           },
+          onChanged: (v) {
+            signUpCubit.updateIsValid();
+          },
         ),
         GlobalInput(
           textController: signUpCubit.signUpPasswordController,
@@ -41,6 +47,9 @@ class SignupInputs extends StatelessWidget {
           inputName: 'Şifrə',
           prefixIcon: AssetConstants.lockIcon,
           hintText: 'Şifrənizi qeyd edin',
+          onChanged: (v) {
+            signUpCubit.updateIsValid();
+          },
         ),
       ],
     );
