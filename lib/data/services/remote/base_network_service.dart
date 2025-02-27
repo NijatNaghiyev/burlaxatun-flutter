@@ -16,7 +16,10 @@ class BaseNetwork {
     log('authorization token is this: $token');
     _dio ??= Dio()
       ..interceptors.add(
-        PrettyDioLogger(requestHeader: true),
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+        ),
       );
 
     if (token != null) {
