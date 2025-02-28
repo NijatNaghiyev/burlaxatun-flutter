@@ -12,12 +12,12 @@ class GirlNames extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BabyNamesCubit, BabyNamesState>(
+    return BlocBuilder<BabyNamesCubit, BabyNamesInitial>(
       builder: (context, state) {
-        if (state is BabyNamesLoading) {
+        if (state.nameStateStatus == NameStateStatus.loading) {
           log('GIRL PAGE LOADING');
           return CircularProgressIndicator.adaptive();
-        } else if (state is BabyNamesSuccess) {
+        } else if (state.nameStateStatus == NameStateStatus.success) {
           log('GIRL PAGE SUCCESS');
           return Expanded(
             child: ListView.separated(
@@ -44,7 +44,7 @@ class GirlNames extends StatelessWidget {
               },
             ),
           );
-        } else if (state is BabyNamesError) {
+        } else if (state.nameStateStatus == NameStateStatus.error) {
           log('GIRL PAGE ERROR');
           return Text('melumat tapilmadi');
         }

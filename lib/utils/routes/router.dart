@@ -148,19 +148,36 @@ class Routerapp {
                 path: '/ultrasound',
                 builder: (context, state) => UltrasoundPage(),
               ),
+
+              // GoRoute(
+              //   path: '/initial_names',
+              //   builder: (context, state) => InitialNamesPage(),
+              // ),
+              // GoRoute(
+              //   path: '/gender_names',
+              //   builder: (context, state) {
+              //     final id = state.extra as String;
+              //     return GenderNames(id: id);
+              //   },
+              // ),
               GoRoute(
                 path: '/initial_names',
                 builder: (context, state) => BlocProvider(
-                  create: (context) => BabyNamesCubit()..getCountriesAndSelectedNames(),
+                  create: (context) =>
+                      BabyNamesCubit()..getCountriesAndSelectedNames(),
                   child: InitialNamesPage(),
                 ),
               ),
               GoRoute(
                 path: '/gender_names',
                 builder: (context, state) {
-                  final id = state.extra as String;
-                  return BlocProvider(
-                    create: (context) => BabyNamesCubit()..getNames(id),
+                  final extra = state.extra as Map;
+                  final cubit = extra['cubit'] as BabyNamesCubit;
+                  final id = extra['id'];
+                  cubit.stateLoading();
+                  cubit.getNames(id);
+                  return BlocProvider.value(
+                    value: cubit,
                     child: GenderNames(),
                   );
                 },

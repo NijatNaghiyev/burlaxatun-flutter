@@ -11,11 +11,7 @@ import 'widgets/question_views/davam_et_button.dart';
 import 'widgets/questions_page_view.dart';
 
 class Questions extends StatelessWidget {
-  const Questions({
-    super.key,
-    // required this.signupCubit,
-  });
-  // final SignupCubit signupCubit;
+  const Questions({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +19,9 @@ class Questions extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Qeydiyyat',
-        onTap: () => context.pop(),
+        onTap: () {
+          questionsCubit.goBack();
+        },
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -52,8 +50,7 @@ class Questions extends StatelessWidget {
                   onPressed: () {
                     state.isActiveButton
                         ? state.iDontKnow
-                            ? 
-                            context.push('/calculate')
+                            ? context.push('/calculate')
                             // Navigator.push(
                             //     context,
                             //     MaterialPageRoute(

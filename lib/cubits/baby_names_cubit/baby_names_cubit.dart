@@ -10,41 +10,76 @@ import '../../data/services/remote/baby_names_service.dart';
 
 part 'baby_names_state.dart';
 
-class BabyNamesCubit extends Cubit<BabyNamesState> {
-  BabyNamesCubit() : super(BabyNamesInitial());
+enum NameStateStatus { initial, loading, error, success }
+
+class BabyNamesCubit extends Cubit<BabyNamesInitial> {
+  BabyNamesCubit()
+      : super(BabyNamesInitial(
+          selectedNames: null,
+          countryList: null,
+          names: null,
+          nameStateStatus: NameStateStatus.initial,
+        ));
+
   final BabyNamesService babyNamesService = BabyNamesService();
 
   // List<CountryData> countryList = [];
+  // selectde istifade olunacaq bir list yaratmaliyiq o listden istifade etmeliyik
 
-  void getCountriesAndSelectedNames() async {
+  void stateLoading() {
+    emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
+  }
+
+  Future<void> getCountriesAndSelectedNames() async {
     try {
-      emit(BabyNamesLoading());
+      emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
       final countriesData = await babyNamesService.getCountries();
       final selectedNames = await babyNamesService.getSelectedNames();
-      emit(BabyNamesSuccess(
-          countryList: countriesData, selectedNames: selectedNames));
+      emit(state.copyWith(
+        countryList: countriesData,
+        selectedNames: selectedNames,
+        nameStateStatus: NameStateStatus.success,
+      ));
     } catch (e, s) {
-      emit(BabyNamesError());
+      emit(state.copyWith(nameStateStatus: NameStateStatus.error));
       log('Error: $e');
       log('Stack Trace: $s');
       throw Exception();
     }
   }
 
-  void getNames(String id) async {
+  Future<void> getNames(String id) async {
+    emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
+    log('state status: ${state.nameStateStatus}');
     try {
-      emit(BabyNamesLoading());
       final data = await babyNamesService.getGenderNames(id);
-      emit(BabyNamesSuccess(names: data));
+      emit(state.copyWith(
+        names: data,
+        nameStateStatus: NameStateStatus.success,
+      ));
     } catch (e, s) {
-      emit(BabyNamesError());
+      emit(state.copyWith(nameStateStatus: NameStateStatus.error));
       log('Error: $e');
       log('Stack Trace: $s');
       throw Exception();
     }
   }
 
-  void selectName(int nameId){
-    // emit(state);
+  void selectName(String nameId) async {
+    try {
+      emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
+      final isSuccess = await babyNamesService.selectName(nameId);
+      if (isSuccess) {
+        log('Name selected successfully');
+        emit(state.copyWith(nameStateStatus: NameStateStatus.success));
+      } else {
+        log('Name selection failed');
+        emit(state.copyWith(nameStateStatus: NameStateStatus.error));
+      }
+    } catch (e, s) {
+      log('Error: $e');
+      log('Stack Trace: $s');
+      throw Exception();
+    }
   }
 }

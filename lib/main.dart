@@ -1,10 +1,11 @@
-import 'package:burla_xatun/cubits/signup_cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'cubits/language_cubit/language_cubit.dart';
 import 'cubits/main_cubit/mainn_cubit.dart';
+import 'cubits/signup_cubit/signup_cubit.dart';
 import 'data/models/local/user_data_model.dart';
 import 'generated/l10n.dart';
 import 'utils/routes/router.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SignupCubit(),
         ),
+        // BlocProvider(
+        //   create: (context) => BabyNamesCubit(),
+        // )
       ],
       child: BlocBuilder<LanguageCubit, Locale>(
         builder: (context, state) {

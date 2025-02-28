@@ -51,7 +51,7 @@ class BabyNamesService {
     throw Exception('Something has happened while fetching selected names');
   }
 
-  Future<bool> selectName(int nameId) async {
+  Future<bool> selectName(String nameId) async {
     final token = await TokenHiveService.instance.getToken();
     final url = EndpointsConstants.selectedNames;
     final body = {
@@ -61,7 +61,6 @@ class BabyNamesService {
     final response =
         await BaseNetwork.instance.getDio(token: token).post(url, data: body);
 
-    // final selectedNames = SelectedNamesModel.fromJson(response.data).data;
     return response.statusCode == 200;
   }
 }

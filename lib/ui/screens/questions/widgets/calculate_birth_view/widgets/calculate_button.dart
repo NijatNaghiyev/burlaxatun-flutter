@@ -20,7 +20,7 @@ class CalculateButton extends StatelessWidget {
         if (state.stateStatus == StateStatus.success) {
           // log("this is cubit $signupCubit");
           showDialog(
-            barrierDismissible: false,
+            barrierDismissible: true,
             context: context,
             builder: (_) {
               return BlocProvider.value(
@@ -44,11 +44,13 @@ class CalculateButton extends StatelessWidget {
           buttonColor: ColorConstants.primaryColor,
           textColor: Colors.white,
           onPressed: () async {
-            state.selectedCalculateOptionIndex == null
-                ? questionsCubit.stateError()
-                : questionsCubit.stateLoading();
-            await signUpCubit.register();
-            await questionsCubit.calculate();
+            if (state.selectedCalculateOptionIndex == null) {
+              questionsCubit.stateError();
+            } else {
+              questionsCubit.stateLoading();
+              await signUpCubit.register();
+              await questionsCubit.calculate();
+            }
           },
         );
       },

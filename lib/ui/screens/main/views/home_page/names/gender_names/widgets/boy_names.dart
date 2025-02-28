@@ -12,29 +12,46 @@ class BoyNames extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BabyNamesCubit, BabyNamesState>(
+    final babyNamesCubit = context.read<BabyNamesCubit>();
+    return BlocBuilder<BabyNamesCubit, BabyNamesInitial>(
       builder: (context, state) {
-        if (state is BabyNamesLoading) {
+        if (state.nameStateStatus == NameStateStatus.loading) {
           log('BOY PAGE LOADING');
           return CircularProgressIndicator.adaptive();
-        } else if (state is BabyNamesSuccess) {
+        } else if (state.nameStateStatus == NameStateStatus.success) {
           log('BOY PAGE SUCCESS');
           return Expanded(
             child: ListView.separated(
-              itemCount: state.names?.boys.length ?? 1,
+              itemCount: state.names!.boys.length,
               itemBuilder: (_, i) {
+                final boyName = state.names!.boys[i];
                 return ListTile(
-                  title: Text(state.names!.boys[i].name),
-                  trailing: SvgPicture.asset(
-                    'assets/icons/favorite_icon.svg',
-                    colorFilter: ColorFilter.mode(
-                      state.names!.boys[i].selected == 1
-                          ? ColorConstants.primaryColor
-                          : ColorConstants.hintTextColor,
-                      BlendMode.srcIn,
-                    ),
+                  title: Text(boyName.name),
+                  trailing: BlocBuilder<BabyNamesCubit, BabyNamesInitial>(
+                    builder: (context, state) {
+                      if (state.nameStateStatus == NameStateStatus.loading) {
+                        return CircularProgressIndicator.adaptive();
+                      } else if (state.nameStateStatus ==
+                          NameStateStatus.success) {
+                        return SvgPicture.asset(
+                          'assets/icons/favorite_icon.svg',
+                          colorFilter: ColorFilter.mode(
+                            boyName.selected == 1
+                                ? ColorConstants.primaryColor
+                                : ColorConstants.hintTextColor,
+                            BlendMode.srcIn,
+                          ),
+                        );
+                      } else if (state.nameStateStatus ==
+                          NameStateStatus.error) {
+                        log('error');
+                      }
+                      return SizedBox.shrink();
+                    },
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    babyNamesCubit.selectName(boyName.id);
+                  },
                 );
               },
               separatorBuilder: (BuildContext context, int index) {
@@ -44,7 +61,7 @@ class BoyNames extends StatelessWidget {
               },
             ),
           );
-        } else if (state is BabyNamesError) {
+        } else if (state.nameStateStatus == NameStateStatus.error) {
           log('BOY PAGE ERROR');
           return Text('melumat tapilmadi');
         }

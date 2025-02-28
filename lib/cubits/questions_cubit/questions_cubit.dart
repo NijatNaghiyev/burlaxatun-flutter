@@ -77,9 +77,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   }
 
   void stateInitial() {
-    Future.delayed(Duration(milliseconds: 200), () {
-      emit(state.copyWith(stateStatus: StateStatus.initial));
-    });
+    emit(state.copyWith(stateStatus: StateStatus.initial));
   }
 
   void stateError() {
@@ -92,7 +90,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   Future<void> calculate() async {
     try {
       calculatedData = await pregnancyService.getCalculatedData(
-        type: (state.selectedCalculateOptionIndex??0 + 1),
+        type: (state.selectedCalculateOptionIndex ?? 0 + 1),
         date: '2023-10-01',
         period: state.focusedWeekIndex,
         ivf: state.ivfRadioValue,
@@ -210,6 +208,19 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
       log('THIS WAS SUCCESS REGISTER AND GO TO MAIN PAGE');
     } else {
       log('THIS WAS ADD UR CHILD AND GO TO MAIN PAGE');
+    }
+  }
+
+  void goBack() {
+    if (state.questionPageIndex == 0) {
+      log('back');
+    } else {
+      emit(state.copyWith(questionPageIndex: state.questionPageIndex - 1));
+      pageController.animateToPage(
+        state.questionPageIndex,
+        duration: Durations.medium2,
+        curve: Curves.linear,
+      );
     }
   }
 

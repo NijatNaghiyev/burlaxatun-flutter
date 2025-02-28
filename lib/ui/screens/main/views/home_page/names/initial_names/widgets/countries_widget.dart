@@ -1,25 +1,30 @@
 import 'dart:developer';
 
-import 'package:burla_xatun/cubits/baby_names_cubit/baby_names_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../../../../../cubits/baby_names_cubit/baby_names_cubit.dart';
 
 class CountriesWidget extends StatelessWidget {
   const CountriesWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-  
-    return BlocBuilder<BabyNamesCubit, BabyNamesState>(
+    final babyNamesCubit = context.read<BabyNamesCubit>();
+    return BlocBuilder<BabyNamesCubit, BabyNamesInitial>(
+      buildWhen: (previous, current) {
+        return previous.countryList != current.countryList;
+      },
       builder: (context, state) {
-        if (state is BabyNamesError) {
+        log('INITIAL PAGE BUILDED');
+        if (state.nameStateStatus == NameStateStatus.error) {
           log('ERROR');
           return Center(
             child: Text('Melumat tapilmadi'),
           );
-        } else if (state is BabyNamesSuccess) {
+        } else if (state.nameStateStatus == NameStateStatus.success) {
           log('SUCCESS initalpage');
           return Expanded(
             child: ListView.separated(
@@ -34,8 +39,10 @@ class CountriesWidget extends StatelessWidget {
                   title: Text(state.countryList![i].title),
                   trailing: SvgPicture.asset('assets/icons/arrow_right.svg'),
                   onTap: () {
-                    context.push('/gender_names',
-                        extra: state.countryList![i].id);
+                    context.push('/gender_names', extra: {
+                      'id': state.countryList![i].id,
+                      'cubit': babyNamesCubit,
+                    });
                   },
                 );
               },
@@ -46,7 +53,7 @@ class CountriesWidget extends StatelessWidget {
               },
             ),
           );
-        } else if (state is BabyNamesLoading) {
+        } else if (state.nameStateStatus == NameStateStatus.loading) {
           log('LOADING');
           return Center(child: CircularProgressIndicator.adaptive());
         }

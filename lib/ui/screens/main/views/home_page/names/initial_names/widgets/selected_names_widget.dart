@@ -9,11 +9,11 @@ class SelectedNamesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BabyNamesCubit, BabyNamesState>(
+    return BlocBuilder<BabyNamesCubit, BabyNamesInitial>(
       builder: (context, state) {
-        if (state is BabyNamesLoading) {
+        if (state.nameStateStatus == NameStateStatus.loading) {
           return CircularProgressIndicator.adaptive();
-        } else if (state is BabyNamesSuccess) {
+        } else if (state.nameStateStatus == NameStateStatus.success) {
           final nameList = state.selectedNames;
           return Expanded(
             child: ListView.separated(
@@ -28,7 +28,7 @@ class SelectedNamesWidget extends StatelessWidget {
               },
             ),
           );
-        } else if (state is BabyNamesError) {
+        } else if (state.nameStateStatus == NameStateStatus.error) {
           return Text('Beyenilen adlar tapilmadi');
         }
         return SizedBox.shrink();

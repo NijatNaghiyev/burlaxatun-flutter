@@ -20,9 +20,9 @@ class PregnancyService {
       'type': type,
       'date': date,
       'period': period,
-      'ivf': 1,
-      'week': week ?? 1,
-      'day': day ?? 1,
+      'ivf': ivf,
+      'week': week,
+      'day': day,
     };
     log('$body');
     final response =
