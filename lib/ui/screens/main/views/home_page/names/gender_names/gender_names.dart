@@ -1,3 +1,5 @@
+import 'package:burla_xatun/cubits/baby_names_cubit/baby_names_cubit.dart';
+
 import '../../../../../../../cubits/main_cubit/main_state.dart';
 import 'widgets/boy_names.dart';
 import 'widgets/girl_names.dart';
@@ -16,10 +18,9 @@ class GenderNames extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final mainCubit = context.read<MainnCubit>();
     return Scaffold(
       appBar: GlobalAppbar(
-        title: 'Adlar',
+        title: 'Adlar2',
         onTap: () {
           context.pop();
         },
@@ -33,6 +34,8 @@ class GenderNames extends StatelessWidget {
               SelectGenderBox(),
               24.h,
               BlocBuilder<MainnCubit, MainInitial>(
+                buildWhen: (previous, current) =>
+                    previous.genderOption != current.genderOption,
                 builder: (context, state) {
                   return state.genderOption == GenderOption.boy
                       ? BoyNames()

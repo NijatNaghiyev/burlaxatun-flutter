@@ -12,8 +12,13 @@ import 'widgets/date_selection/calendar_widget.dart';
 import 'widgets/date_selection/select_date_widget.dart';
 
 class CalculateBirth extends StatelessWidget {
-  const CalculateBirth({super.key});
-
+  const CalculateBirth({
+    super.key,
+    // required this.signupCubit,
+    // required this.questionsCubit,
+  });
+  // final SignupCubit signupCubit;
+  // final QuestionsCubit questionsCubit;
   @override
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
@@ -47,6 +52,8 @@ class CalculateBirth extends StatelessWidget {
               20.h,
               SelectDateWidget(),
               BlocBuilder<QuestionsCubit, QuestionsInitial>(
+                buildWhen: (previous, current) =>
+                    previous.showCalendar != current.showCalendar,
                 builder: (context, state) {
                   return state.showCalendar
                       ? Padding(
@@ -59,10 +66,15 @@ class CalculateBirth extends StatelessWidget {
               // 35.h,
               BlocBuilder<QuestionsCubit, QuestionsInitial>(
                 builder: (context, state) {
-                  return questionsCubit.calculationOptions[
-                      state.selectedCalculateOptionIndex ?? 0];
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 12),
+                    child: questionsCubit.calculationOptions[
+                        state.selectedCalculateOptionIndex ?? 0],
+                  );
                 },
-              )
+              ),
+              30.h,
+
             ],
           ),
         ),

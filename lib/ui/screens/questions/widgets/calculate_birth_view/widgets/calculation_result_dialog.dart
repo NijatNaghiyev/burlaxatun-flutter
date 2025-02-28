@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../cubits/questions_cubit/questions_cubit.dart';
 import '../../../../../../utils/constants/color_constants.dart';
 import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/global_button.dart';
@@ -9,10 +11,9 @@ import '../../../../../widgets/global_text.dart';
 
 class CalculationResultDialog extends StatelessWidget {
   const CalculationResultDialog({super.key});
-
   @override
   Widget build(BuildContext context) {
-    // final questionCubit = context.read<QuestionsCubit>();
+    final questionsCubit = context.read<QuestionsCubit>();
     return Center(
       child: SizedBox(
         width: 313,
@@ -31,7 +32,8 @@ class CalculationResultDialog extends StatelessWidget {
                 55.h,
                 GlobalText(
                   height: 1.4,
-                  text: 'Siz hamiləliyinizin 6-cı həftəsindəsiniz',
+                  text:
+                      'Siz hamiləliyinizin ${questionsCubit.calculatedData.weeks} həftəsindəsiniz',
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: Colors.black,

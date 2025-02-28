@@ -19,7 +19,9 @@ class Questions extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Qeydiyyat',
-        onTap: () => context.pop(),
+        onTap: () {
+          questionsCubit.goBack();
+        },
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +48,22 @@ class Questions extends StatelessWidget {
                 return DavamEt(
                   isActive: state.isActiveButton,
                   onPressed: () {
-                    questionsCubit.davamEtButton(context);
+                    state.isActiveButton
+                        ? state.iDontKnow
+                            ? context.push('/calculate')
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => BlocProvider(
+                            //         create: (context) => QuestionsCubit(),
+                            //         child: CalculateBirth(
+                            //             signupCubit: signupCubit),
+                            //       ),
+                            //     ),
+                            //   )
+                            : questionsCubit.nextQuestion()
+                        : null;
+                    // questionsCubit.davamEtButton(context);
                   },
                 );
               },

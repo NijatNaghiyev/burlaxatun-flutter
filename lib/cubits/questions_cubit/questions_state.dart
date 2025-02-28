@@ -3,6 +3,7 @@
 // @immutable
 // abstract class QuestionsState {}
 
+import 'package:burla_xatun/cubits/questions_cubit/questions_cubit.dart';
 import 'package:equatable/equatable.dart';
 
 class QuestionsInitial extends Equatable {
@@ -22,19 +23,20 @@ class QuestionsInitial extends Equatable {
     required this.isFirstChild,
     required this.birthDateString,
     required this.initialDateTime,
-    required this.ultrasoundRadioValue,
-    required this.ultrasoundDayCountString,
-    required this.ultrasoundWeekCountString,
+    required this.ivfRadioValue,
+    required this.ultrasoundDayCount,
+    required this.ultrasoundWeekCount,
     required this.isShowUltrasoundDays,
     required this.isShowUltrasoundWeeks,
+    required this.stateStatus,
   });
 
   final int? currentQuestionOneOptionIndex;
   final int? selectedCalculateOptionIndex;
   final int questionPageIndex;
   final int focusedWeekIndex;
-  final String ultrasoundWeekCountString;
-  final String ultrasoundDayCountString;
+  final int? ultrasoundWeekCount;
+  final int? ultrasoundDayCount;
   final bool iDontKnow;
   final bool showOptions;
   final bool showDays;
@@ -46,9 +48,10 @@ class QuestionsInitial extends Equatable {
   final String selectedCalculateOptionString;
   final String selectedPeriodTimeString;
   final String birthDateString;
-  final String? ultrasoundRadioValue;
+  final int? ivfRadioValue;
   final DateTime selectedDay;
   final DateTime initialDateTime;
+  final StateStatus stateStatus;
 
   @override
   List<Object?> get props => [
@@ -67,35 +70,36 @@ class QuestionsInitial extends Equatable {
         isFirstChild,
         birthDateString,
         initialDateTime,
-        ultrasoundRadioValue,
-        ultrasoundDayCountString,
-        ultrasoundWeekCountString,
+        ivfRadioValue,
+        ultrasoundDayCount,
+        ultrasoundWeekCount,
         isShowUltrasoundDays,
         isShowUltrasoundWeeks,
+        stateStatus,
       ];
 
-  QuestionsInitial copyWith({
-    int? currentQuestionOneOptionIndex,
-    int? selectedCalculateOptionIndex,
-    int? questionPageIndex,
-    int? focusedWeekIndex,
-    String? ultrasoundWeekCountString,
-    String? ultrasoundDayCountString,
-    bool? iDontKnow,
-    bool? showOptions,
-    bool? showDays,
-    bool? showCalendar,
-    bool? isActiveButton,
-    bool? isFirstChild,
-    bool? isShowUltrasoundDays,
-    bool? isShowUltrasoundWeeks,
-    String? selectedCalculateOptionString,
-    String? selectedPeriodTimeString,
-    String? birthDateString,
-    String? ultrasoundRadioValue,
-    DateTime? selectedDay,
-    DateTime? initialDateTime,
-  }) {
+  QuestionsInitial copyWith(
+      {int? currentQuestionOneOptionIndex,
+      int? selectedCalculateOptionIndex,
+      int? questionPageIndex,
+      int? focusedWeekIndex,
+      int? ultrasoundWeekCount,
+      int? ultrasoundDayCount,
+      bool? iDontKnow,
+      bool? showOptions,
+      bool? showDays,
+      bool? showCalendar,
+      bool? isActiveButton,
+      bool? isFirstChild,
+      bool? isShowUltrasoundDays,
+      bool? isShowUltrasoundWeeks,
+      String? selectedCalculateOptionString,
+      String? selectedPeriodTimeString,
+      String? birthDateString,
+      int? ultrasoundRadioValue,
+      DateTime? selectedDay,
+      DateTime? initialDateTime,
+      StateStatus? stateStatus}) {
     return QuestionsInitial(
       currentQuestionOneOptionIndex: currentQuestionOneOptionIndex,
       selectedCalculateOptionIndex:
@@ -115,14 +119,13 @@ class QuestionsInitial extends Equatable {
       isFirstChild: isFirstChild ?? this.isFirstChild,
       birthDateString: birthDateString ?? this.birthDateString,
       initialDateTime: initialDateTime ?? this.initialDateTime,
-      ultrasoundRadioValue: ultrasoundRadioValue ?? this.ultrasoundRadioValue,
-      ultrasoundDayCountString:
-          ultrasoundDayCountString ?? this.ultrasoundDayCountString,
-      ultrasoundWeekCountString:
-          ultrasoundWeekCountString ?? this.ultrasoundWeekCountString,
+      ivfRadioValue: ultrasoundRadioValue ?? this.ivfRadioValue,
+      ultrasoundDayCount: ultrasoundDayCount ?? this.ultrasoundDayCount,
+      ultrasoundWeekCount: ultrasoundWeekCount ?? this.ultrasoundWeekCount,
       isShowUltrasoundDays: isShowUltrasoundDays ?? this.isShowUltrasoundDays,
       isShowUltrasoundWeeks:
           isShowUltrasoundWeeks ?? this.isShowUltrasoundWeeks,
+      stateStatus: stateStatus ?? this.stateStatus,
     );
   }
 }

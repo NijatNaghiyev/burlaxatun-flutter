@@ -30,7 +30,8 @@ class SelectDateWidget extends StatelessWidget {
         10.h,
         GestureDetector(
           onTap: () {
-            questionsCubit.showCalendarToggle();
+            // questionsCubit.showCalendarToggle();
+            questionsCubit.scrollBottomCalendar();
           },
           child: SizedBox(
             width: double.maxFinite,

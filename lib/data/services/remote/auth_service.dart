@@ -1,17 +1,23 @@
 import 'dart:developer';
 
-import 'package:burla_xatun/data/models/remote/response/user_response_model.dart';
+import 'package:burla_xatun/data/models/remote/response/register_response_model.dart';
 import 'package:dio/dio.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../utils/constants/endpoints_constants.dart';
 import '../../models/remote/response/login_response_model.dart';
+import '../../models/remote/response/user_response_model.dart';
+import 'base_network_service.dart';
 
 class AuthService {
-  final Dio _dio = Dio();
+  // final Dio _dio = Dio(
+  //   BaseOptions(
+  //     headers: {
+  //       'Authorization': 'Bearer $token',
+  //     },
+  //   ),
+  // )..interceptors.add(PrettyDioLogger(requestHeader: true));
 
   Future<String> login(String email, String password) async {
-    _dio.interceptors.add(PrettyDioLogger());
     log('REQUEST');
     try {
       final url = EndpointsConstants.login;
@@ -19,10 +25,11 @@ class AuthService {
         'email': email,
         'password': password,
       };
-      final response = await _dio.post(url, data: body);
+      final response =
+          await BaseNetwork.instance.getDio().post(url, data: body);
       if (response.statusCode == 200) {
-        final loginData = LoginResponseModel.fromJson(response.data);
-        return loginData.data.token;
+        final loginResponseData = LoginResponseModel.fromJson(response.data);
+        return loginResponseData.data.token;
       }
       throw Exception('Something has happened while logged in');
     } on DioException catch (e) {
@@ -40,10 +47,10 @@ class AuthService {
       final headers = {
         'Authorization': 'Bearer $token',
       };
-      final response = await _dio.get(
-        url,
-        options: Options(headers: headers),
-      );
+      final response = await BaseNetwork.instance.getDio().get(
+            url,
+            options: Options(headers: headers),
+          );
       if (response.statusCode == 200) {
         final userData = UserResponseModel.fromJson(response.data);
         return userData.data;
@@ -55,5 +62,30 @@ class AuthService {
       log('Stack Trace: $s');
       throw Exception();
     }
+  }
+
+  Future<String> register(
+    String name,
+    String surname,
+    String fatherName,
+    String email,
+    String password,
+  ) async {
+    log('register request');
+    final url = EndpointsConstants.register;
+    final body = {
+      'name': name,
+      'surname': surname,
+      'fathername': fatherName,
+      'email': email,
+      'password': password,
+    };
+    final response = await BaseNetwork.instance.getDio().post(url, data: body);
+    if (response.statusCode == 200) {
+      final registerResponseData =
+          RegisterResponseModel.fromJson(response.data);
+      return registerResponseData.data.token;
+    }
+    throw Exception('Something has happened while logged in');
   }
 }

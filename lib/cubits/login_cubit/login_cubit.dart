@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/data/services/local/token_hive_service.dart';
 import 'package:burla_xatun/data/services/local/user_hive_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,13 +40,15 @@ class LoginCubit extends Cubit<LoginCubitState> {
       emit(LoginCubitLoading());
       final token = await authService.login(
           loginEmailController.text, loginPasswordController.text);
-      final userData = await authService.getUser(token);
-      final d = userData.toHiveModel();
-
-      bool isSuccess = await UserHiveService.instance.saveUserData(d);
-      log('$isSuccess');
-      if (isSuccess) {
-        emit(LoginCubitSuccess());
+      final isSavedToken = await TokenHiveService.instance.saveToken(token);
+      if (isSavedToken) {
+        final savedToken = await TokenHiveService.instance.getToken();
+        final userData = await authService.getUser(savedToken!);
+        final data = userData.toHiveModel();
+        bool isSuccess = await UserHiveService.instance.saveUserData(data);
+        if (isSuccess) {
+          emit(LoginCubitSuccess());
+        }
       }
     } catch (e, s) {
       emit(LoginCubitError());
@@ -59,6 +62,8 @@ class LoginCubit extends Cubit<LoginCubitState> {
   Future<void> close() {
     loginEmailFocusNode.dispose();
     loginPasswordFocusNode.dispose();
+    loginEmailController.dispose();
+    loginPasswordController.dispose();
     return super.close();
   }
 }

@@ -4,8 +4,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/models/remote/response/calculate_birth_response_model.dart';
+import '../../data/services/remote/pregnancy_service.dart';
 import '../../ui/screens/main/views/home_page/home/home_page.dart';
-import '../../ui/screens/questions/widgets/calculate_birth_view/calculate_birth.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/first_day_of_last_period_component/first_day_of_last_period.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ivf_component/ivf.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ultrasound_component/ultrasound.dart';
@@ -15,6 +16,8 @@ import '../../ui/screens/questions/widgets/question_views/question_three.dart';
 import '../../ui/screens/questions/widgets/question_views/question_two.dart';
 import '../../ui/screens/questions/widgets/question_views/register_success.dart';
 import 'questions_state.dart';
+
+enum StateStatus { initial, success, error, loading }
 
 class QuestionsCubit extends Cubit<QuestionsInitial> {
   QuestionsCubit()
@@ -30,17 +33,18 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
             showCalendar: false,
             selectedCalculateOptionString: 'Hesablama üsulunu seçin...',
             selectedPeriodTimeString: 'Period muddetini secin...',
-            birthDateString: 'Dogum tarixini qeyd edinnn',
+            birthDateString: 'Dogum tarixini qeyd edinn',
             selectedDay: DateTime.now(),
             isActiveButton: false,
             isFirstChild: null,
             initialDateTime: DateTime(DateTime.now().year - 10,
                 DateTime.now().month, DateTime.now().day),
-            ultrasoundRadioValue: 'initialValue',
-            ultrasoundDayCountString: 'Gun sayi',
-            ultrasoundWeekCountString: 'Hefte sayi',
+            ivfRadioValue: -1,
+            ultrasoundDayCount: null,
+            ultrasoundWeekCount: null,
             isShowUltrasoundDays: false,
             isShowUltrasoundWeeks: false,
+            stateStatus: StateStatus.initial,
           ),
         );
 
@@ -51,6 +55,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   final childHeightFocusNode = FocusNode();
   final ValueNotifier<int?> questionOneButtonNotifier =
       ValueNotifier<int?>(null);
+  final PregnancyService pregnancyService = PregnancyService();
 
   final List questionViews = [
     QuestionOne(),
@@ -67,6 +72,41 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
     Ultrasound(),
   ];
 
+  void stateLoading() {
+    emit(state.copyWith(stateStatus: StateStatus.loading));
+  }
+
+  void stateInitial() {
+    emit(state.copyWith(stateStatus: StateStatus.initial));
+  }
+
+  void stateError() {
+    emit(state.copyWith(stateStatus: StateStatus.error));
+    stateInitial();
+  }
+
+  late CalculatedData calculatedData;
+
+  Future<void> calculate() async {
+    try {
+      calculatedData = await pregnancyService.getCalculatedData(
+        type: (state.selectedCalculateOptionIndex ?? 0 + 1),
+        date: '2023-10-01',
+        period: state.focusedWeekIndex,
+        ivf: state.ivfRadioValue,
+        week: state.ultrasoundWeekCount,
+        day: state.ultrasoundDayCount,
+      );
+      emit(state.copyWith(stateStatus: StateStatus.success));
+      stateInitial();
+    } catch (e, s) {
+      log('Stack Trace: $s');
+      log('calculation error: $e');
+      stateError();
+      throw Exception('calculated error: $e');
+    }
+  }
+
   void scrollBottom() {
     if (!state.showDays) {
       showDaysToggle();
@@ -82,7 +122,22 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
     }
   }
 
-  void updateRadioValue(String v) {
+  void scrollBottomCalendar() {
+    if (!state.showDays) {
+      showCalendarToggle();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.ease,
+        );
+      });
+    } else {
+      showCalendarToggle();
+    }
+  }
+
+  void updateRadioValue(int v) {
     emit(state.copyWith(ultrasoundRadioValue: v));
   }
 
@@ -149,7 +204,6 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
         emit(state.copyWith(questionPageIndex: state.questionPageIndex + 1));
         pageController.jumpToPage(state.questionPageIndex);
       }
-      // }
     } else if (state.questionPageIndex == 3) {
       log('THIS WAS SUCCESS REGISTER AND GO TO MAIN PAGE');
     } else {
@@ -157,22 +211,35 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
     }
   }
 
+  void goBack() {
+    if (state.questionPageIndex == 0) {
+      log('back');
+    } else {
+      emit(state.copyWith(questionPageIndex: state.questionPageIndex - 1));
+      pageController.animateToPage(
+        state.questionPageIndex,
+        duration: Durations.medium2,
+        curve: Curves.linear,
+      );
+    }
+  }
+
   void davamEtButton(BuildContext context) {
     log('${state.isActiveButton}');
 
-    state.isActiveButton
-        ? state.iDontKnow
-            ? Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => BlocProvider(
-                    create: (context) => QuestionsCubit(), 
-                    child: CalculateBirth(), 
-                  ),
-                ),
-              )
-            : nextQuestion()
-        : null;
+    // state.isActiveButton
+    //     ? state.iDontKnow
+    //         ? Navigator.push(
+    //             context,
+    //             MaterialPageRoute(
+    //               builder: (context) => BlocProvider(
+    //                 create: (context) => QuestionsCubit(),
+    //                 child: CalculateBirth(),
+    //               ),
+    //             ),
+    //           )
+    //         : nextQuestion()
+    //     : null;
   }
 
   void iDontKnowToggle(bool v) {
@@ -212,15 +279,6 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
     emit(state.copyWith(selectedCalculateOptionString: v));
   }
 
-  void calculate(BuildContext context, Widget widget) {
-    showDialog(
-      context: context,
-      builder: (_) {
-        return widget;
-      },
-    );
-  }
-
   void showWeekCount(BuildContext context, Widget widget) {
     emit(state.copyWith(isShowUltrasoundWeeks: !state.isShowUltrasoundWeeks));
     showModalBottomSheet(
@@ -237,7 +295,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   }
 
   void updateUltrasoundWeekCount(int v) {
-    emit(state.copyWith(ultrasoundWeekCountString: v.toString()));
+    emit(state.copyWith(ultrasoundWeekCount: v));
   }
 
   void showDayCount(BuildContext context, Widget widget) {
@@ -257,7 +315,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   }
 
   void updateUltrasoundDaysCount(int v) {
-    emit(state.copyWith(ultrasoundDayCountString: v.toString()));
+    emit(state.copyWith(ultrasoundDayCount: v));
   }
 
   void showBirthDateBottomSheet(BuildContext context, Widget widget) {
