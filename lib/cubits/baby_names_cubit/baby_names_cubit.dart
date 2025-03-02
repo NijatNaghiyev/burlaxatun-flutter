@@ -26,10 +26,7 @@ class BabyNamesCubit extends Cubit<BabyNamesInitial> {
   // List<CountryData> countryList = [];
   // selectde istifade olunacaq bir list yaratmaliyiq o listden istifade etmeliyik
 
-  void stateLoading() {
-    emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
-  }
-
+//
   Future<void> getCountriesAndSelectedNames() async {
     try {
       emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
@@ -48,15 +45,15 @@ class BabyNamesCubit extends Cubit<BabyNamesInitial> {
     }
   }
 
-  Future<void> getNames(String id) async {
-    emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
-    log('state status: ${state.nameStateStatus}');
+  Future<void> getNames(String countryId) async {
     try {
-      final data = await babyNamesService.getGenderNames(id);
+      emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
+      final data = await babyNamesService.getGenderNames(countryId);
       emit(state.copyWith(
         names: data,
         nameStateStatus: NameStateStatus.success,
       ));
+      log('AFTER SUCCESS: ${state.nameStateStatus}');
     } catch (e, s) {
       emit(state.copyWith(nameStateStatus: NameStateStatus.error));
       log('Error: $e');
@@ -65,18 +62,34 @@ class BabyNamesCubit extends Cubit<BabyNamesInitial> {
     }
   }
 
-  void selectName(String nameId) async {
+  Future<void> updateSelectedNames() async {
+    try {
+      emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
+      final selecteds = await babyNamesService.getSelectedNames();
+      emit(state.copyWith(
+          selectedNames: selecteds, nameStateStatus: NameStateStatus.success));
+    } catch (e, s) {
+      emit(state.copyWith(nameStateStatus: NameStateStatus.error));
+      log('Error: $e');
+      log('Stack Trace: $s');
+      throw Exception();
+    }
+  }
+
+  Future<void> selectName(String nameId) async {
     try {
       emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
       final isSuccess = await babyNamesService.selectName(nameId);
       if (isSuccess) {
         log('Name selected successfully');
+        await updateSelectedNames();
         emit(state.copyWith(nameStateStatus: NameStateStatus.success));
       } else {
         log('Name selection failed');
         emit(state.copyWith(nameStateStatus: NameStateStatus.error));
       }
     } catch (e, s) {
+      emit(state.copyWith(nameStateStatus: NameStateStatus.error));
       log('Error: $e');
       log('Stack Trace: $s');
       throw Exception();

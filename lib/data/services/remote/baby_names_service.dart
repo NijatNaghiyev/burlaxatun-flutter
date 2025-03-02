@@ -19,11 +19,11 @@ class BabyNamesService {
     throw Exception('Something has happened while fetching countries data');
   }
 
-  Future<NamesData> getGenderNames(String id) async {
+  Future<NamesData> getGenderNames(String countryId) async {
     final token = await TokenHiveService.instance.getToken();
     final url = EndpointsConstants.names;
     final body = {
-      "id": id,
+      "id": countryId,
       "limit": 10,
       "start": 0,
     };
