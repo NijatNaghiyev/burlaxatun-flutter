@@ -18,14 +18,14 @@ class CountriesWidget extends StatelessWidget {
         return previous.countryList != current.countryList;
       },
       builder: (context, state) {
-        log('INITIAL PAGE BUILDED');
+        // log('INITIAL PAGE BUILDED');
         if (state.nameStateStatus == NameStateStatus.error) {
-          log('ERROR');
+          log('COUNTRY PAGE STATE: ${state.nameStateStatus}');
           return Center(
             child: Text('Melumat tapilmadi'),
           );
         } else if (state.nameStateStatus == NameStateStatus.success) {
-          log('SUCCESS initalpage');
+          log('COUNTRY PAGE STATE: ${state.nameStateStatus}');
           return Expanded(
             child: ListView.separated(
               itemCount: state.countryList!.length,
@@ -54,10 +54,10 @@ class CountriesWidget extends StatelessWidget {
             ),
           );
         } else if (state.nameStateStatus == NameStateStatus.loading) {
-          log('LOADING');
+          log('COUNTRY PAGE STATE: ${state.nameStateStatus}');
           return Center(child: CircularProgressIndicator.adaptive());
         }
-        log('INITIAL');
+        log('COUNTRY PAGE STATE: ${state.nameStateStatus}');
         return SizedBox.shrink();
       },
     );

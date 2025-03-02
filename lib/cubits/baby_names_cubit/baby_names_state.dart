@@ -20,7 +20,7 @@ class BabyNamesInitial extends Equatable {
         names,
         selectedNames,
         countryList,
-        nameStateStatus
+        nameStateStatus,
       ];
 
   BabyNamesInitial copyWith({
