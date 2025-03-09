@@ -56,7 +56,7 @@ class Routerapp {
         path: '/',
         builder: (context, state) => BlocProvider(
           create: (context) => OnboardingCubit(),
-          child: Onboarding(),
+          child: HomePage(),
         ),
       ),
       GoRoute(
