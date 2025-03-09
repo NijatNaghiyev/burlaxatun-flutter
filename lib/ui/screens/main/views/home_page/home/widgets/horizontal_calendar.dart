@@ -1,19 +1,31 @@
+import 'package:burla_xatun/ui/screens/main/views/home_page/home/mixins/horizontal_calendar_mixin.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../utils/constants/color_constants.dart';
 import '../../../../../../widgets/global_text.dart';
 
-class HorizontalCalendar extends StatelessWidget {
+class HorizontalCalendar extends StatefulWidget {
   const HorizontalCalendar({super.key});
 
   @override
+  State<HorizontalCalendar> createState() => _HorizontalCalendarState();
+}
+
+class _HorizontalCalendarState extends State<HorizontalCalendar>
+    with HorizontalCalendarMixin {
+  @override
   Widget build(BuildContext context) {
+    ///* Get current date index for the selected date
+    ///* This is used to highlight the selected date
+    final currentDateIndex = allDates.indexOf(selectedDate);
+
     return SizedBox(
       height: 70,
       child: Padding(
         padding: const EdgeInsets.only(left: 15),
         child: ListView.builder(
-          itemCount: 20,
+          controller: scrollController,
+          itemCount: allDates.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, i) {
             return Row(
@@ -22,8 +34,9 @@ class HorizontalCalendar extends StatelessWidget {
                   width: 43.33,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                      color:
-                          i == 3 ? ColorConstants.primaryColor : Colors.white,
+                      color: i == currentDateIndex
+                          ? ColorConstants.primaryColor
+                          : Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(5)),
                     ),
                     child: Center(
@@ -32,16 +45,20 @@ class HorizontalCalendar extends StatelessWidget {
                         spacing: 10,
                         children: [
                           GlobalText(
-                            text: 'Wed',
+                            text: getDayName(allDates[i]),
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
-                            color: i == 3 ? Colors.white : Colors.black,
+                            color: i == currentDateIndex
+                                ? Colors.white
+                                : Colors.black,
                           ),
                           GlobalText(
-                            text: '$i',
+                            text: allDates[i].day.toString(),
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
-                            color: i == 3 ? Colors.white : Colors.black,
+                            color: i == currentDateIndex
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ],
                       ),
