@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../../../cubits/main_cubit/mainn_cubit.dart';
 import 'setting_box.dart';
@@ -28,9 +27,7 @@ class SettingBoxes extends StatelessWidget {
                     ),
               boxIcon: mainCubit.settingItems[i].icon,
               boxName: mainCubit.settingItems[i].settingName,
-              onTap: () {
-                context.push(mainCubit.settingItems[i].route!);
-              },
+              onTap: () => mainCubit.tapSettingTile(context, i),
             ),
           ),
       ],

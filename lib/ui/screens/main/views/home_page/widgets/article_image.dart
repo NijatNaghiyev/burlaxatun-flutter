@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ArticleImage extends StatelessWidget {
   const ArticleImage({
@@ -28,24 +27,7 @@ class ArticleImage extends StatelessWidget {
               height: 180,
               width: 180,
             ),
-            playButton != null
-                ? SizedBox(
-                    width: 44,
-                    height: 44,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset('assets/icons/play_icon.svg'),
-                        ],
-                      ),
-                    ),
-                  )
-                : SizedBox.shrink(),
+            playButton == null ? SizedBox.shrink() : playButton!,
           ],
         ),
       ),

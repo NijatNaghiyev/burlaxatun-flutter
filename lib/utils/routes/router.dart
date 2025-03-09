@@ -1,7 +1,8 @@
-import 'package:burla_xatun/cubits/baby_names_cubit/baby_names_cubit.dart';
+import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../cubits/baby_names_cubit/baby_names_cubit.dart';
 import '../../cubits/login_cubit/login_cubit.dart';
 import '../../cubits/onboarding_cubit/onboarding_cubit.dart';
 import '../../cubits/questions_cubit/questions_cubit.dart';
@@ -32,28 +33,39 @@ import '../../ui/screens/main/views/profie_page/initial_profile/initial_profile_
 import '../../ui/screens/main/views/profie_page/pricavy_policy/privacy_policy_view.dart';
 import '../../ui/screens/main/views/profie_page/settings/setting_view.dart';
 import '../../ui/screens/main/views/profie_page/settings/setting_views/change_language/change_language_view.dart';
-import '../../ui/screens/main/views/profie_page/settings/setting_views/change_password/change_password_view.dart';
+import '../../ui/screens/main/views/profie_page/settings/setting_views/change_password/change_password_page/change_password_page.dart';
+import '../../ui/screens/main/views/profie_page/settings/setting_views/change_password/otp_page/otp_page.dart';
+import '../../ui/screens/main/views/profie_page/settings/setting_views/change_password/reset_password/reset_password_page.dart';
+import '../../ui/screens/main/views/profie_page/settings/setting_views/change_password/success_change_password/success_change_password.dart';
 import '../../ui/screens/main/views/profie_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
 import '../../ui/screens/main/views/profie_page/special_thanks/special_thanks_view.dart';
 import '../../ui/screens/main/views/profie_page/terms_of_use/terms_of_use_view.dart';
 import '../../ui/screens/onboarding/onboarding.dart';
 import '../../ui/screens/questions/questions.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/calculate_birth.dart';
+import '../../ui/screens/splash/splash_screen.dart';
 
 class Routerapp {
   static Routerapp? _instance;
-  // Avoid self instance
+
   Routerapp._();
   static Routerapp get instance => _instance ??= Routerapp._();
 
-  // static final _rootNavigatorKey = GlobalKey<NavigatorState>();
+  // static final navigatorKey = GlobalKey<NavigatorState>();
   // static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   final GoRouter router = GoRouter(
-    // initialLocation: '/home',
+    initialLocation: '/splash',
     routes: [
       GoRoute(
-        path: '/',
+        path: '/splash',
+        builder: (context, state) => BlocProvider(
+          create: (context) => SplashCubit(),
+          child: SplashScreen(),
+        ),
+      ),
+      GoRoute(
+        path: '/onboarding',
         builder: (context, state) => BlocProvider(
           create: (context) => OnboardingCubit(),
           child: Onboarding(),
@@ -221,6 +233,22 @@ class Routerapp {
                 builder: (context, state) => SettingView(),
               ),
               GoRoute(
+                path: '/change_password',
+                builder: (context, state) => ChangePasswordPage(),
+              ),
+              GoRoute(
+                path: '/change_password_otp',
+                builder: (context, state) => OtpPage(),
+              ),
+              GoRoute(
+                path: '/reset_password',
+                builder: (context, state) => ResetPasswordPage(),
+              ),
+              GoRoute(
+                path: '/change_password_success',
+                builder: (context, state) => SuccessChangePassword(),
+              ),
+              GoRoute(
                 path: '/special_thanks',
                 builder: (context, state) => SpecialThanksView(),
               ),
@@ -231,10 +259,6 @@ class Routerapp {
               GoRoute(
                 path: '/change_language',
                 builder: (context, state) => ChangeLanguageView(),
-              ),
-              GoRoute(
-                path: '/change_password',
-                builder: (context, state) => ChangePasswordView(),
               ),
               GoRoute(
                 path: '/change_number',

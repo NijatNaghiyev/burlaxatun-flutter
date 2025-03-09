@@ -32,6 +32,8 @@ class InitialNamesPage extends StatelessWidget {
               CountriesAndSelectedsBox(),
               24.h,
               BlocBuilder<MainnCubit, MainInitial>(
+                buildWhen: (previous, current) =>
+                    previous.nameViewOptions != current.nameViewOptions,
                 builder: (context, state) {
                   return state.nameViewOptions == NameViewOption.countries
                       ? CountriesWidget()

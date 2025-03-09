@@ -1,9 +1,12 @@
 import 'dart:developer';
 
 import 'package:burla_xatun/data/models/local/medicine_detail_items_model.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_password/change_password_page/change_password_page.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
 import 'package:burla_xatun/ui/widgets/change_baby_bottomsheet/global_change_baby_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../data/models/local/bottom_navbar_items_model.dart';
 import '../../data/models/local/main_page_box_model.dart';
@@ -184,6 +187,27 @@ class MainnCubit extends Cubit<MainInitial> {
         builder: (_) => ForumCommentsPage(),
       ),
     );
+  }
+
+  void tapSettingTile(BuildContext context, int i) {
+    switch (i) {
+      case 1:
+        Navigator.of(context, rootNavigator: true).push(
+          MaterialPageRoute(
+            builder: (_) => ChangePasswordPage(),
+          ),
+        );
+      case 2:
+        Navigator.of(context, rootNavigator: true).push(
+          MaterialPageRoute(
+            builder: (_) => ChangePhoneNumberView(),
+          ),
+        );
+      case 3:
+        context.push('/change_language');
+      default:
+        null;
+    }
   }
 
   void showBottomSheetAboutChild(Widget widget, BuildContext context) {

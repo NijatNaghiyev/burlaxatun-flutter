@@ -17,8 +17,7 @@ class CalculateButton extends StatelessWidget {
     final signUpCubit = context.read<SignupCubit>();
     return BlocConsumer<QuestionsCubit, QuestionsInitial>(
       listener: (context, state) async {
-        if (state.stateStatus == StateStatus.success) {
-          // log("this is cubit $signupCubit");
+        if (state.stateStatus == CalculateStateStatus.success) {
           showDialog(
             barrierDismissible: true,
             context: context,
@@ -29,14 +28,14 @@ class CalculateButton extends StatelessWidget {
               );
             },
           );
-        } else if (state.stateStatus == StateStatus.error) {
+        } else if (state.stateStatus == CalculateStateStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Error while calculating')),
           );
         }
       },
       builder: (context, state) {
-        if (state.stateStatus == StateStatus.loading) {
+        if (state.stateStatus == CalculateStateStatus.loading) {
           return CircularProgressIndicator.adaptive();
         }
         return GlobalButton(

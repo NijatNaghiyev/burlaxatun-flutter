@@ -19,6 +19,7 @@ class BabyNamesCubit extends Cubit<BabyNamesInitial> {
           countryList: null,
           names: null,
           nameStateStatus: NameStateStatus.initial,
+          selectedNameIndex: -1,
         ));
 
   final BabyNamesService babyNamesService = BabyNamesService();
@@ -26,7 +27,10 @@ class BabyNamesCubit extends Cubit<BabyNamesInitial> {
   // List<CountryData> countryList = [];
   // selectde istifade olunacaq bir list yaratmaliyiq o listden istifade etmeliyik
 
-//
+  void updateSelectedNameIndex(int v) {
+    emit(state.copyWith(selectedNameIndex: v));
+  }
+
   Future<void> getCountriesAndSelectedNames() async {
     try {
       emit(state.copyWith(nameStateStatus: NameStateStatus.loading));

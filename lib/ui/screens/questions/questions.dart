@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:burla_xatun/cubits/signup_cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +19,7 @@ class Questions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
+    final signUpCubit = context.read<SignupCubit>();
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Qeydiyyat',
@@ -42,33 +46,37 @@ class Questions extends StatelessWidget {
           ),
           QuestionsPageView(),
           Padding(
-            padding: const EdgeInsets.only(bottom: 24),
-            child: BlocBuilder<QuestionsCubit, QuestionsInitial>(
-              builder: (context, state) {
-                return DavamEt(
-                  isActive: state.isActiveButton,
-                  onPressed: () {
-                    state.isActiveButton
-                        ? state.iDontKnow
-                            ? context.push('/calculate')
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => BlocProvider(
-                            //         create: (context) => QuestionsCubit(),
-                            //         child: CalculateBirth(
-                            //             signupCubit: signupCubit),
-                            //       ),
-                            //     ),
-                            //   )
-                            : questionsCubit.nextQuestion()
-                        : null;
-                    // questionsCubit.davamEtButton(context);
-                  },
-                );
-              },
-            ),
-          ),
+              padding: const EdgeInsets.only(bottom: 24),
+              child: BlocConsumer<SignupCubit, SignupCubitState>(
+                listener: (context, state) {
+                  if (state is SignupCubitSuccess) {
+                    log('success register');
+                  }
+                },
+                builder: (context, state) {
+                  if (state is SignupCubitLoading) {
+                    return CircularProgressIndicator.adaptive();
+                  }
+                  return BlocBuilder<QuestionsCubit, QuestionsInitial>(
+                    builder: (context, state) {
+                      return DavamEt(
+                        isActive: state.isActiveButton,
+                        onPressed: () async {
+                          state.isActiveButton
+                              ? questionsCubit
+                                          .questionOneButtonNotifier.value ==
+                                      0
+                                  ? state.iDontKnow
+                                      ? context.push('/calculate')
+                                      : questionsCubit.nextQuestion()
+                                  : await signUpCubit.register()
+                              : null;
+                        },
+                      );
+                    },
+                  );
+                },
+              )),
         ],
       ),
     );

@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:burla_xatun/cubits/login_cubit/login_cubit_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -12,28 +15,29 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginCubit = context.read<LoginCubit>();
-    return BlocConsumer<LoginCubit, LoginCubitState>(
-      listener: (BuildContext context, LoginCubitState state) {
-        if (state is LoginCubitSuccess) {
+    return BlocConsumer<LoginCubit, LoginCubitInitial>(
+      buildWhen: (previous, current) =>
+          previous.loginStatus != current.loginStatus ||
+          previous.isActiveButton != current.isActiveButton,
+      listener: (BuildContext context, LoginCubitInitial state) {
+        if (state.loginStatus == LoginStatus.success) {
           context.go('/home');
-        } else if (state is LoginCubitError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Login failed!')),
-          );
+        } else if (state.loginStatus == LoginStatus.error) {
+          loginCubit.errorState();
         }
       },
       builder: (context, state) {
-        if (state is LoginCubitLoading) {
+        log('button builded');
+        if (state.loginStatus == LoginStatus.loading) {
           return CircularProgressIndicator.adaptive();
         }
         return GlobalButton(
           buttonName: 'Daxil ol',
-          buttonColor: loginCubit.isActiveButton
-              ? ColorConstants.primaryColor
-              : Colors.grey,
+          buttonColor:
+              state.isActiveButton ? ColorConstants.primaryColor : Colors.grey,
           textColor: Colors.white,
           onPressed: () {
-            loginCubit.isActiveButton ? loginCubit.login() : null;
+            state.isActiveButton ? loginCubit.login() : null;
           },
         );
       },

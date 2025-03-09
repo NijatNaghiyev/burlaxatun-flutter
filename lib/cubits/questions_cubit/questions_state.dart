@@ -51,7 +51,7 @@ class QuestionsInitial extends Equatable {
   final int? ivfRadioValue;
   final DateTime selectedDay;
   final DateTime initialDateTime;
-  final StateStatus stateStatus;
+  final CalculateStateStatus stateStatus;
 
   @override
   List<Object?> get props => [
@@ -99,7 +99,7 @@ class QuestionsInitial extends Equatable {
       int? ultrasoundRadioValue,
       DateTime? selectedDay,
       DateTime? initialDateTime,
-      StateStatus? stateStatus}) {
+      CalculateStateStatus? stateStatus}) {
     return QuestionsInitial(
       currentQuestionOneOptionIndex: currentQuestionOneOptionIndex,
       selectedCalculateOptionIndex:

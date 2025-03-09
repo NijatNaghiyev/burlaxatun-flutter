@@ -17,7 +17,7 @@ import '../../ui/screens/questions/widgets/question_views/question_two.dart';
 import '../../ui/screens/questions/widgets/question_views/register_success.dart';
 import 'questions_state.dart';
 
-enum StateStatus { initial, success, error, loading }
+enum CalculateStateStatus { initial, success, error, loading }
 
 class QuestionsCubit extends Cubit<QuestionsInitial> {
   QuestionsCubit()
@@ -44,7 +44,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
             ultrasoundWeekCount: null,
             isShowUltrasoundDays: false,
             isShowUltrasoundWeeks: false,
-            stateStatus: StateStatus.initial,
+            stateStatus: CalculateStateStatus.initial,
           ),
         );
 
@@ -73,15 +73,15 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   ];
 
   void stateLoading() {
-    emit(state.copyWith(stateStatus: StateStatus.loading));
+    emit(state.copyWith(stateStatus: CalculateStateStatus.loading));
   }
 
   void stateInitial() {
-    emit(state.copyWith(stateStatus: StateStatus.initial));
+    emit(state.copyWith(stateStatus: CalculateStateStatus.initial));
   }
 
   void stateError() {
-    emit(state.copyWith(stateStatus: StateStatus.error));
+    emit(state.copyWith(stateStatus: CalculateStateStatus.error));
     stateInitial();
   }
 
@@ -97,7 +97,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
         week: state.ultrasoundWeekCount,
         day: state.ultrasoundDayCount,
       );
-      emit(state.copyWith(stateStatus: StateStatus.success));
+      emit(state.copyWith(stateStatus: CalculateStateStatus.success));
       stateInitial();
     } catch (e, s) {
       log('Stack Trace: $s');
@@ -190,7 +190,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   void nextQuestion() {
     if (state.questionPageIndex <= 2) {
       emit(state.copyWith(questionPageIndex: state.questionPageIndex + 1));
-      log('question page: ${state.questionPageIndex}');
+
       if (state.questionPageIndex < 3) {
         pageController.animateToPage(
           state.questionPageIndex,

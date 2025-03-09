@@ -8,12 +8,14 @@ class BabyNamesInitial extends Equatable {
     required this.names,
     required this.countryList,
     required this.nameStateStatus,
+    required this.selectedNameIndex,
   });
 
   final NameStateStatus? nameStateStatus;
   final List<CountryData>? countryList;
   final List<SelectedNameData>? selectedNames;
   final NamesData? names;
+  final int? selectedNameIndex;
 
   @override
   List<Object?> get props => [
@@ -21,6 +23,7 @@ class BabyNamesInitial extends Equatable {
         selectedNames,
         countryList,
         nameStateStatus,
+        selectedNameIndex,
       ];
 
   BabyNamesInitial copyWith({
@@ -28,12 +31,14 @@ class BabyNamesInitial extends Equatable {
     List<CountryData>? countryList,
     List<SelectedNameData>? selectedNames,
     NamesData? names,
+    final int? selectedNameIndex,
   }) {
     return BabyNamesInitial(
       selectedNames: selectedNames ?? this.selectedNames,
       names: names ?? this.names,
       countryList: countryList ?? this.countryList,
       nameStateStatus: nameStateStatus ?? this.nameStateStatus,
+      selectedNameIndex: selectedNameIndex ?? this.selectedNameIndex,
     );
   }
 }
