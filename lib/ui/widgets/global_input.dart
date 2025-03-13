@@ -21,6 +21,7 @@ class GlobalInput extends StatelessWidget {
     this.validator,
     this.textController,
     this.onChanged,
+    this.isError = false,
   });
 
   final String? inputName;
@@ -28,6 +29,7 @@ class GlobalInput extends StatelessWidget {
   final String? prefixIcon;
   final String? suffixIcon;
   final bool isObsecure;
+  final bool isError;
   final TextEditingController? textController;
   final FocusNode? focusNode;
   final void Function()? onSuffixIcon;
@@ -67,7 +69,7 @@ class GlobalInput extends StatelessWidget {
           obscureText: isObsecure,
           style: GoogleFonts.poppins(
             fontSize: 14,
-            color: Colors.black,
+            color: isError ? Color(0xffD62828) : Colors.black,
             fontWeight: FontWeight.w500,
           ),
           decoration: InputDecoration(
@@ -75,7 +77,7 @@ class GlobalInput extends StatelessWidget {
             hintText: hintText,
             hintStyle: GoogleFonts.poppins(
               fontSize: 14,
-              color: Color(0xff595959),
+              color: isError ? Color(0xffD62828) : Color(0xff595959),
               fontWeight: FontWeight.w500,
             ),
             prefixIcon: prefixIcon == null
@@ -88,6 +90,12 @@ class GlobalInput extends StatelessWidget {
                         SvgPicture.asset(
                           prefixIcon!,
                           fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                            isError
+                                ? Color(0xffD62828)
+                                : ColorConstants.enabledInputColor,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ],
                     ),
@@ -101,14 +109,24 @@ class GlobalInput extends StatelessWidget {
                       height: 24,
                       child: GestureDetector(
                         onTap: onSuffixIcon,
-                        child: SvgPicture.asset(suffixIcon!),
+                        child: SvgPicture.asset(
+                          suffixIcon!,
+                          colorFilter: ColorFilter.mode(
+                            isError
+                                ? Color(0xffD62828)
+                                : ColorConstants.enabledInputColor,
+                            BlendMode.srcIn,
+                          ),
+                        ),
                       ),
                     ),
                   ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(34)),
               borderSide: BorderSide(
-                color: ColorConstants.enabledInputColor,
+                color: isError
+                    ? Color(0xffD62828)
+                    : ColorConstants.enabledInputColor,
               ),
             ),
             focusedBorder: OutlineInputBorder(

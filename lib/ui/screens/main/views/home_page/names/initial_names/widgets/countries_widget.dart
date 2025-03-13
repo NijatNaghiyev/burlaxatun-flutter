@@ -18,7 +18,7 @@ class CountriesWidget extends StatelessWidget {
         return previous.countryList != current.countryList;
       },
       builder: (context, state) {
-        // log('INITIAL PAGE BUILDED');
+        
         if (state.nameStateStatus == NameStateStatus.error) {
           log('COUNTRY PAGE STATE: ${state.nameStateStatus}');
           return Center(

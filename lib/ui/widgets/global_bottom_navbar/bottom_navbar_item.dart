@@ -31,6 +31,8 @@ class BottomNavbarItem extends StatelessWidget {
         i == 3 ? mainCubit.showChangeBabyBottomSheet(context) : null;
       },
       child: BlocBuilder<MainnCubit, MainInitial>(
+        buildWhen: (previous, current) =>
+            previous.indexOfView != current.indexOfView,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10),

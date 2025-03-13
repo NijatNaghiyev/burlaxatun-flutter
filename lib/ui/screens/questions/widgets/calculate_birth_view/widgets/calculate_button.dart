@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../cubits/questions_cubit/questions_cubit.dart';
 import '../../../../../../cubits/questions_cubit/questions_state.dart';
-import '../../../../../../cubits/signup_cubit/signup_cubit.dart';
 import '../../../../../../utils/constants/color_constants.dart';
 import '../../../../../widgets/global_button.dart';
 import 'calculation_result_dialog.dart';
@@ -14,11 +13,9 @@ class CalculateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
-    final signUpCubit = context.read<SignupCubit>();
     return BlocConsumer<QuestionsCubit, QuestionsInitial>(
       listener: (context, state) async {
-        if (state.stateStatus == StateStatus.success) {
-          // log("this is cubit $signupCubit");
+        if (state.stateStatus == CalculateStateStatus.success) {
           showDialog(
             barrierDismissible: true,
             context: context,
@@ -29,18 +26,17 @@ class CalculateButton extends StatelessWidget {
               );
             },
           );
-        } else if (state.stateStatus == StateStatus.error) {
+        } else if (state.stateStatus == CalculateStateStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Error while calculating')),
           );
         }
       },
       builder: (context, state) {
-        if (state.stateStatus == StateStatus.loading) {
-          return CircularProgressIndicator.adaptive();
-        }
         return GlobalButton(
-          buttonName: 'Hesabla',
+          buttonName: state.stateStatus == CalculateStateStatus.loading
+              ? 'Hesablanır ...'
+              : 'Hesabla',
           buttonColor: ColorConstants.primaryColor,
           textColor: Colors.white,
           onPressed: () async {
@@ -48,7 +44,6 @@ class CalculateButton extends StatelessWidget {
               questionsCubit.stateError();
             } else {
               questionsCubit.stateLoading();
-              await signUpCubit.register();
               await questionsCubit.calculate();
             }
           },

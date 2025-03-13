@@ -16,11 +16,8 @@ class BoyNames extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<BabyNamesCubit, BabyNamesInitial>(
-      buildWhen: (previous, current) => 
-    previous.names != current.names || previous.nameStateStatus != current.nameStateStatus,
-
+      // buildWhen: (previous, current) => previous.names != current.names,
       builder: (context, state) {
         log('BUILDED');
         if (state.nameStateStatus == NameStateStatus.loading) {

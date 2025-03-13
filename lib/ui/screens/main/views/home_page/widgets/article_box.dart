@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/global_text.dart';
-import 'article_image.dart';
 
 class ArticleBox extends StatelessWidget {
   const ArticleBox({
     super.key,
     this.playButton,
+    required this.boxTitle,
+    required this.boxDescription,
+    this.onTap, required this.videoOrImage,
   });
 
   final Widget? playButton;
+  final void Function()? onTap;
+  final String boxTitle;
+  final String boxDescription;
+  final Widget videoOrImage;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.push('/article_details'),
+      onTap: onTap,
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: DecoratedBox(
@@ -30,14 +35,14 @@ class ArticleBox extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
             child: Column(
               children: [
-                ArticleImage(playButton: playButton),
+                videoOrImage,
                 22.h,
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: GlobalText(
                     height: 1.2,
                     textAlign: TextAlign.left,
-                    text: 'Doğuşdan Sonra Emosional və Fiziki Dəyişikliklər',
+                    text: boxTitle,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Color(0xff1D2939),
@@ -49,8 +54,7 @@ class ArticleBox extends StatelessWidget {
                   child: GlobalText(
                     height: 1.2,
                     textAlign: TextAlign.left,
-                    text:
-                        'Pregnancy Yoga helps alleviate the effect of common symptoms such as morning sickness, painful leg cramps, swollen ankles, and constipation.',
+                    text: boxDescription,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                     color: Color(0xff8C8A8A),

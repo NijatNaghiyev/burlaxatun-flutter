@@ -65,7 +65,6 @@ class _QuestionOneButtonState extends State<QuestionOneButton> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 14),
       child: GlobalButton(
-        key: ValueKey(widget.optionIndex),
         buttonName: widget.buttonName,
         buttonColor: isSelected ? Color(0xffFFD3E2) : Colors.white,
         borderColor: isSelected ? Colors.transparent : ColorConstants.primaryColor,
@@ -79,24 +78,3 @@ class _QuestionOneButtonState extends State<QuestionOneButton> {
   }
 }
 
-    // Padding(
-    //   padding: const EdgeInsets.only(bottom: 14),
-    //   child: ValueListenableBuilder(
-    //     valueListenable: questionsCubit.questionOneButtonNotifier,
-    //     builder: (context, value, child) {
-    //       bool isSelected = optionIndex == value;
-    //       log('index $value builded');
-    //       return GlobalButton(
-    //         buttonName: buttonName + '${DateTime.now()}',
-    //         buttonColor: isSelected ? Color(0xffFFD3E2) : Colors.white,
-    //         borderColor:
-    //             isSelected ? Colors.transparent : ColorConstants.primaryColor,
-    //         textColor: ColorConstants.primaryColor,
-    //         onPressed: () {
-    //           questionsCubit.questionOneButtonNotifier.value = optionIndex;
-    //           questionsCubit.updateIsActiveButton();
-    //         },
-    //       );
-    //     },
-    //   ),
-    // );

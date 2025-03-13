@@ -1,12 +1,13 @@
-import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../../cubits/main_cubit/mainn_cubit.dart';
+import '../../../../../../../utils/extensions/context_extensions.dart';
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
+import 'emoji_bar/emoji_widget.dart';
 
 class MenuAndEmojiDialog extends StatelessWidget {
   const MenuAndEmojiDialog({
@@ -27,32 +28,8 @@ class MenuAndEmojiDialog extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 43),
-                child: SizedBox(
-                  width: 200,
-                  height: 42,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 8,
-                          color: Color.fromARGB(130, 0, 0, 0),
-                        ),
-                      ],
-                      color: Color(0xffFCD2EC),
-                      border: Border.all(width: 1, color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(100)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        for (int i = 1; i < 6; i++) Text('$i'),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              EmojiWidget(
+                  textEditingController: mainCubit.commentInputTextController),
               71.h,
               SizedBox(
                 width: 228,
@@ -79,7 +56,7 @@ class MenuAndEmojiDialog extends StatelessWidget {
                             ),
                             onTap: () {
                               context.pop();
-                              mainCubit.updateCommentBoxIndex(-1);
+                              // mainCubit.updateCommentBoxIndex(-1);
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(

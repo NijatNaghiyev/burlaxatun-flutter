@@ -12,6 +12,8 @@ part 'baby_names_state.dart';
 
 enum NameStateStatus { initial, loading, error, success }
 
+enum SelectNameStatus { initial, loading, error, success }
+
 class BabyNamesCubit extends Cubit<BabyNamesInitial> {
   BabyNamesCubit()
       : super(BabyNamesInitial(
@@ -19,6 +21,9 @@ class BabyNamesCubit extends Cubit<BabyNamesInitial> {
           countryList: null,
           names: null,
           nameStateStatus: NameStateStatus.initial,
+          selectedNameIndex: -1,
+          selectNameStatus: SelectNameStatus.initial,
+          isSelected: -1,
         ));
 
   final BabyNamesService babyNamesService = BabyNamesService();
@@ -26,7 +31,16 @@ class BabyNamesCubit extends Cubit<BabyNamesInitial> {
   // List<CountryData> countryList = [];
   // selectde istifade olunacaq bir list yaratmaliyiq o listden istifade etmeliyik
 
-//
+  void updateSelectedNameIndex(int v) {
+    emit(state.copyWith(selectedNameIndex: v));
+  }
+
+  void changeIsSelected({int? v}) {
+    log('isSelected: ${state.isSelected}');
+    emit(state.copyWith(isSelected: v));
+    log('isSelected: ${state.isSelected}');
+  }
+
   Future<void> getCountriesAndSelectedNames() async {
     try {
       emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
@@ -64,32 +78,39 @@ class BabyNamesCubit extends Cubit<BabyNamesInitial> {
 
   Future<void> updateSelectedNames() async {
     try {
-      emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
+      // emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
       final selecteds = await babyNamesService.getSelectedNames();
+      // final updatedData = await babyNamesService.getGenderNames(countryId);
       emit(state.copyWith(
-          selectedNames: selecteds, nameStateStatus: NameStateStatus.success));
+        selectedNames: selecteds,
+        // nameStateStatus: NameStateStatus.success
+      ));
     } catch (e, s) {
-      emit(state.copyWith(nameStateStatus: NameStateStatus.error));
+      // emit(state.copyWith(nameStateStatus: NameStateStatus.error));
       log('Error: $e');
       log('Stack Trace: $s');
       throw Exception();
     }
   }
 
-  Future<void> selectName(String nameId) async {
+  Future<void> selectName({String? nameId, String? countryId}) async {
     try {
-      emit(state.copyWith(nameStateStatus: NameStateStatus.loading));
-      final isSuccess = await babyNamesService.selectName(nameId);
+      emit(state.copyWith(selectNameStatus: SelectNameStatus.loading));
+      final isSuccess = await babyNamesService.selectName(nameId!);
       if (isSuccess) {
         log('Name selected successfully');
         await updateSelectedNames();
-        emit(state.copyWith(nameStateStatus: NameStateStatus.success));
+        if (countryId != null) {
+          final data = await babyNamesService.getGenderNames(countryId);
+          emit(state.copyWith(names: data));
+        }
+        emit(state.copyWith(selectNameStatus: SelectNameStatus.success));
       } else {
         log('Name selection failed');
-        emit(state.copyWith(nameStateStatus: NameStateStatus.error));
+        emit(state.copyWith(selectNameStatus: SelectNameStatus.error));
       }
     } catch (e, s) {
-      emit(state.copyWith(nameStateStatus: NameStateStatus.error));
+      emit(state.copyWith(selectNameStatus: SelectNameStatus.error));
       log('Error: $e');
       log('Stack Trace: $s');
       throw Exception();

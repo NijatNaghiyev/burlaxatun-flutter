@@ -8,7 +8,7 @@ import '../../../../../../../../cubits/baby_names_cubit/baby_names_cubit.dart';
 import '../../../../../../../../data/models/remote/response/names_model.dart';
 import '../../../../../../../../utils/constants/color_constants.dart';
 
-class BoyNameTile extends StatelessWidget {
+class BoyNameTile extends StatefulWidget {
   const BoyNameTile({
     super.key,
     required this.boyName,
@@ -19,53 +19,81 @@ class BoyNameTile extends StatelessWidget {
   final String countryId;
 
   @override
+  State<BoyNameTile> createState() => _BoyNameTileState();
+}
+
+class _BoyNameTileState extends State<BoyNameTile> {
+  late final BabyNamesCubit babyNamesCubit;
+  @override
+  void initState() {
+    babyNamesCubit = context.read<BabyNamesCubit>();
+    // if (babyNamesCubit.state.isSelected == -1) {
+    babyNamesCubit.changeIsSelected(v: widget.boyName.selected);
+    // }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final babyNamesCubit = context.read<BabyNamesCubit>();
+    log('tile builded');
+    final BabyNamesCubit babyNamesCubit = context.read<BabyNamesCubit>();
+    // isNameSelected.value = boyName.selected == 1;
     return ListTile(
-      title: Text(boyName.name),
+      title: Text(widget.boyName.name),
       trailing: BlocBuilder<BabyNamesCubit, BabyNamesInitial>(
-        // buildWhen: (previous, current) {
-        //   return previous.names !=
-        //       current.names; // amma heart icon gec rengini deyisir
-        // },
+        buildWhen: (previous, current) {
+          return previous.isSelected != current.isSelected;
+          //  ||
+          // previous.names != current.names;
+        },
         builder: (context, state) {
-          if (state.nameStateStatus == NameStateStatus.loading) {
-            log('HEART STATUS ${state.nameStateStatus}');
-            return SvgPicture.asset(
-              'assets/icons/favorite_icon.svg',
-              colorFilter: ColorFilter.mode(
-                boyName.selected == 1
-                    ? ColorConstants.hintTextColor
-                    : ColorConstants.primaryColor,
-                BlendMode.srcIn,
-              ),
-            );
-          } else
-          if (state.nameStateStatus == NameStateStatus.success) {
-            log('HEART STATUS ${state.nameStateStatus}');
-            return GestureDetector(
-              onTap: () async {
-                await babyNamesCubit.selectName(boyName.id);
-                await babyNamesCubit.getNames(countryId);
-              },
-              child: SvgPicture.asset(
-                'assets/icons/favorite_icon.svg',
-                colorFilter: ColorFilter.mode(
-                  boyName.selected == 1
-                      ? ColorConstants.primaryColor
-                      : ColorConstants.hintTextColor,
-                  BlendMode.srcIn,
-                ),
-              ),
-            );
-          } else if (state.nameStateStatus == NameStateStatus.error) {
-            log('HEART STATUS ${state.nameStateStatus}');
+          if (state.selectNameStatus == SelectNameStatus.error) {
             log('error');
           }
           log('HEART STATUS ${state.nameStateStatus}');
-          return SizedBox.shrink();
+          return GestureDetector(
+            onTap: () async {
+              babyNamesCubit.changeIsSelected(
+                  v: widget.boyName.selected == 1 ? 0 : 1);
+              await babyNamesCubit.selectName(
+                  nameId: widget.boyName.id, countryId: widget.countryId);
+              // await babyNamesCubit.getNames(countryId);
+            },
+            child: SvgPicture.asset(
+              'assets/icons/favorite_icon.svg',
+              colorFilter: ColorFilter.mode(
+                state.isSelected == 1
+                    ? ColorConstants.primaryColor
+                    : ColorConstants.hintTextColor,
+                BlendMode.srcIn,
+              ),
+            ),
+          );
         },
       ),
     );
   }
 }
+
+
+  // trailing: GestureDetector(
+      //   onTap: () async {
+      //     isNameSelected.value = !isNameSelected.value;
+      //     await babyNamesCubit.selectName(boyName.id);
+      //     // await babyNamesCubit.getNames(countryId);
+      //   },
+      //   child: ValueListenableBuilder(
+      //     valueListenable: isNameSelected,
+      //     builder: (context, isSelected, child) {
+      //       return SvgPicture.asset(
+      //         'assets/icons/favorite_icon.svg',
+      //         colorFilter: ColorFilter.mode(
+      //           isSelected
+      //               ? ColorConstants.primaryColor
+      //               : ColorConstants.hintTextColor,
+      //           BlendMode.srcIn,
+      //         ),
+      //       );
+      //     },
+      //   ),
+      // ),

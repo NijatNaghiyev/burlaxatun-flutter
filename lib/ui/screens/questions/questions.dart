@@ -16,6 +16,7 @@ class Questions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
+    // final signUpCubit = context.read<SignupCubit>();
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Qeydiyyat',
@@ -49,21 +50,12 @@ class Questions extends StatelessWidget {
                   isActive: state.isActiveButton,
                   onPressed: () {
                     state.isActiveButton
-                        ? state.iDontKnow
-                            ? context.push('/calculate')
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => BlocProvider(
-                            //         create: (context) => QuestionsCubit(),
-                            //         child: CalculateBirth(
-                            //             signupCubit: signupCubit),
-                            //       ),
-                            //     ),
-                            //   )
-                            : questionsCubit.nextQuestion()
+                        ? questionsCubit.questionOneButtonNotifier.value == 0
+                            ? state.iDontKnow
+                                ? context.push('/calculate')
+                                : questionsCubit.nextQuestion()
+                            : context.go('/home')
                         : null;
-                    // questionsCubit.davamEtButton(context);
                   },
                 );
               },

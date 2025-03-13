@@ -1,20 +1,19 @@
 import 'dart:developer';
 
-import 'package:burla_xatun/data/services/local/token_hive_service.dart';
-import 'package:burla_xatun/data/services/local/user_hive_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/services/local/token_hive_service.dart';
+import '../../data/services/local/user_hive_service.dart';
 import '../../data/services/remote/auth_service.dart';
+import 'login_cubit_state.dart';
 
-part 'login_cubit_state.dart';
+enum LoginStatus { initial, loading, success, error }
 
-class LoginCubit extends Cubit<LoginCubitState> {
-  LoginCubit()
-      : super(LoginCubitInitial(isActiveButton: false, isObsecure: true));
+class LoginCubit extends Cubit<LoginCubitInitial> {
+  LoginCubit() : super(LoginCubitInitial());
 
-  bool isActiveButton = false;
-  bool isObsecure = true;
+
   final loginEmailFocusNode = FocusNode();
   final loginPasswordFocusNode = FocusNode();
   final loginEmailController = TextEditingController();
@@ -23,21 +22,22 @@ class LoginCubit extends Cubit<LoginCubitState> {
   final AuthService authService = AuthService();
 
   void isObsecureToggle() {
-    isObsecure = !isObsecure;
-    emit(LoginCubitInitial(
-        isActiveButton: isActiveButton, isObsecure: isObsecure));
+    emit(state.copyWith(isObsecure: !state.isObsecure));
   }
 
   void updateIsValid() {
-    isActiveButton = loginEmailController.text.isNotEmpty &&
+    final isActiveButton = loginEmailController.text.isNotEmpty &&
         loginPasswordController.text.isNotEmpty;
-    emit(LoginCubitInitial(
-        isActiveButton: isActiveButton, isObsecure: isObsecure));
+    emit(state.copyWith(isActiveButton: isActiveButton));
+  }
+
+  void errorState() {
+    emit(state.copyWith(isError: true));
   }
 
   void login() async {
     try {
-      emit(LoginCubitLoading());
+      emit(state.copyWith(loginStatus: LoginStatus.loading, isError: false));
       final token = await authService.login(
           loginEmailController.text, loginPasswordController.text);
       final isSavedToken = await TokenHiveService.instance.saveToken(token);
@@ -47,11 +47,11 @@ class LoginCubit extends Cubit<LoginCubitState> {
         final data = userData.toHiveModel();
         bool isSuccess = await UserHiveService.instance.saveUserData(data);
         if (isSuccess) {
-          emit(LoginCubitSuccess());
+          emit(state.copyWith(loginStatus: LoginStatus.success));
         }
       }
     } catch (e, s) {
-      emit(LoginCubitError());
+      emit(state.copyWith(loginStatus: LoginStatus.error));
       log('error: $e');
       log('Stack Trace: $s');
       throw Exception();
