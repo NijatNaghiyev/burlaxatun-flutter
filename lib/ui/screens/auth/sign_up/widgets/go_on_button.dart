@@ -15,8 +15,7 @@ class GoOnButton extends StatelessWidget {
     return BlocConsumer<SignupCubit, SignupCubitState>(
       listener: (context, state) {
         if (state is SignupCubitSuccess) {
-          // context.push('/questions'); 
-          null;
+          context.push('/questions');
         } else if (state is SignupCubitError) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Login failed!')),
@@ -34,7 +33,7 @@ class GoOnButton extends StatelessWidget {
               : ColorConstants.inactiveDotColor,
           textColor: Colors.white,
           onPressed: () {
-            signupCubit.isActiveButton ? context.push('/questions') : null;
+            signupCubit.register();
           },
         );
       },

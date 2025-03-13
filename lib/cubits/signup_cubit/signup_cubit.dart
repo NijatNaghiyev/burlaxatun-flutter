@@ -46,12 +46,10 @@ class SignupCubit extends Cubit<SignupCubitState> {
     }
 
     if (fullNameParts.length == 3) {
-      name = fullNameParts[0];
-      surname = fullNameParts[1];
-      fatherName = fullNameParts[2];
+      name = fullNameParts[0].trim();
+      surname = fullNameParts[1].trim();
+      fatherName = fullNameParts[2].trim();
     }
-    // log('${fullNameParts.length}');
-    // log('$fullNameParts');
   }
 
   void checkEmailValidity() {

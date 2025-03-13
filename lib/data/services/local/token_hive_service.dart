@@ -34,4 +34,14 @@ class TokenHiveService {
     }
     return token;
   }
+
+  Future<void> clearToken() async {
+    await initBox();
+    await _tokenBox!.clear();
+    if (_tokenBox!.isEmpty) {
+      log('Successfully cleared token box');
+    } else {
+      log('Error while clearing token');
+    }
+  }
 }

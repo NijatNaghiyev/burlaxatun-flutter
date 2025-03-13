@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../../cubits/baby_names_cubit/baby_names_cubit.dart';
 import '../../../../../../../cubits/main_cubit/main_state.dart';
 import '../../../../../../../cubits/main_cubit/mainn_cubit.dart';
 import '../../../../../../../utils/constants/padding_constants.dart';
@@ -21,11 +22,13 @@ class GenderNames extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final babyNamesCubit = context.read<BabyNamesCubit>();
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Adlar2',
         onTap: () {
           context.pop();
+          babyNamesCubit.changeIsSelected(v: -1);
         },
       ),
       body: Padding(

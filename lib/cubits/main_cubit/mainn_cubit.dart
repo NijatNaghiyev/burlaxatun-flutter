@@ -128,9 +128,15 @@ class MainnCubit extends Cubit<MainInitial> {
             commentInputFocusNode.requestFocus();
 
           case CommentDialog.emoji:
+            // commentInputTextController.text = state.userTag!;
+            commentInputFocusNode.requestFocus();
         }
       }
     });
+  }
+
+  void onEmoji(){
+    
   }
 
   void setShellContext(v) {

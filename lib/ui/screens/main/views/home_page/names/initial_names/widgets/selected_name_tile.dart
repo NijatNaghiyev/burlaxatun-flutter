@@ -37,7 +37,7 @@ class SelectedNameTile extends StatelessWidget {
           return GestureDetector(
             onTap: () async {
               babyNamesCubit.updateSelectedNameIndex(tileIndex);
-              await babyNamesCubit.selectName(nameId);
+              await babyNamesCubit.selectName(nameId: nameId);
               babyNamesCubit.updateSelectedNameIndex(-1);
             },
             child: SvgPicture.asset(

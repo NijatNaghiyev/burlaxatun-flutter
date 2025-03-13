@@ -74,7 +74,6 @@ class CalculateBirth extends StatelessWidget {
                 },
               ),
               30.h,
-
             ],
           ),
         ),

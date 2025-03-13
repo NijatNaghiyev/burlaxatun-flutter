@@ -22,5 +22,3 @@ class MainPage extends StatelessWidget {
     );
   }
 }
-
-
