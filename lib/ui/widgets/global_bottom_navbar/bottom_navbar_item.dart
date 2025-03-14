@@ -51,7 +51,7 @@ class BottomNavbarItem extends StatelessWidget {
                 GlobalText(
                   text: mainCubit.navbarItems[i].iconTitle,
                   fontSize: 12,
-                  height: 1.5,
+                  height: 1.4,
                   fontWeight: FontWeight.w500,
                   color: state.indexOfView == i
                       ? ColorConstants.primaryColor

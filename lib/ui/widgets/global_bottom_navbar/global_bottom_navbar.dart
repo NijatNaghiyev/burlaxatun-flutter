@@ -17,8 +17,7 @@ class GlobalBottomNavbar extends StatelessWidget {
   Widget build(BuildContext context) {
     final mainCubit = context.read<MainnCubit>();
     return SizedBox(
-      width: double.maxFinite,
-      height: 84,
+      height: 93,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 27),
         child: Row(
