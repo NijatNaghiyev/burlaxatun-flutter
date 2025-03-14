@@ -9,22 +9,48 @@ class CommentsBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
+    return DecoratedSliver(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         border: Border.all(width: 2, color: Color(0xffE4E7EC)),
       ),
-      child: Padding(
+      sliver: SliverPadding(
         padding: const EdgeInsets.all(2),
-        child: ListView.builder(
-          itemCount: 10,
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (_, i) {
-            return SingleCommentBox(i: i);
-          },
+        sliver: SliverList(
+          delegate: SliverChildBuilderDelegate(
+            childCount: 10,
+            (_, i) {
+              return SingleCommentBox(i: i);
+            },
+          ),
         ),
       ),
     );
+    // DecoratedBox(
+    //   decoration: BoxDecoration(
+    //     borderRadius: BorderRadius.all(Radius.circular(20)),
+    //     border: Border.all(width: 2, color: Color(0xffE4E7EC)),
+    //   ),
+    //   child: Padding(
+    //     padding: const EdgeInsets.all(2),
+    //     child:
+    //         // SliverList(
+    //         //   delegate: SliverChildBuilderDelegate(
+    //         //     childCount: 10,
+    //         //     (_, i) {
+    //         //       return SingleCommentBox(i: i);
+    //         //     },
+    //         //   ),
+    //         // )
+    //         ListView.builder(
+    //       itemCount: 10,
+    //       shrinkWrap: true,
+    //       physics: NeverScrollableScrollPhysics(),
+    //       itemBuilder: (_, i) {
+    //         return SingleCommentBox(i: i);
+    //       },
+    //     ),
+    //   ),
+    // );
   }
 }

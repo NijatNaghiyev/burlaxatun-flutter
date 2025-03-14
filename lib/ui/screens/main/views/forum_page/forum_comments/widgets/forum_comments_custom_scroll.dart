@@ -16,11 +16,9 @@ class ForumCommentsCustomScroll extends StatelessWidget {
             child: ForumBox(),
           ),
         ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 105),
-            child: CommentsBox(),
-          ),
+        SliverPadding(
+          padding: EdgeInsets.only(bottom: 105),
+          sliver: CommentsBox(),
         ),
       ],
     );
