@@ -16,7 +16,7 @@ class InitialBlogPage extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Blog',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
         },
       ),

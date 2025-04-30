@@ -29,7 +29,7 @@ class GoOnButton extends StatelessWidget {
         return GlobalButton(
           buttonName: 'Davam et',
           buttonColor: signupCubit.isActiveButton
-              ? ColorConstants.primaryColor
+              ? ColorConstants.primaryRedColor
               : ColorConstants.inactiveDotColor,
           textColor: Colors.white,
           onPressed: () {

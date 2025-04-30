@@ -69,7 +69,7 @@ class PregnancyGuideBox extends StatelessWidget {
                       ),
                       splashRadius: 0,
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      activeColor: ColorConstants.primaryColor,
+                      activeColor: ColorConstants.primaryRedColor,
                       value: value,
                       onChanged: (v) {
                         isCheckedGuideBoxNotifier.value = v!;

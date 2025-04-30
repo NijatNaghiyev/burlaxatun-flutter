@@ -20,7 +20,7 @@ class Questions extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Qeydiyyat',
-        onTap: () {
+        onLeadingTap: () {
           questionsCubit.goBack();
         },
       ),

@@ -19,7 +19,7 @@ class SignUp extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Qeydiyyat',
-        onTap: () => context.pop(),
+        onLeadingTap: () => context.pop(),
       ),
       body: SingleChildScrollView(
         child: Padding(

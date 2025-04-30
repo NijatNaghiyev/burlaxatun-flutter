@@ -25,7 +25,7 @@ class CalculateBirth extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Doğuşu hesabla',
-        onTap: () {
+        onLeadingTap: () {
           Navigator.pop(context);
         },
       ),

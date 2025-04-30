@@ -14,7 +14,7 @@ class MedicineDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Dərmanlarım',
-        onTap: () => context.pop(),
+        onLeadingTap: () => context.pop(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20) +

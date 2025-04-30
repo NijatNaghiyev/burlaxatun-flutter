@@ -20,7 +20,7 @@ class ScrollableDaysAppbar extends StatelessWidget
     // final mainCubit = context.read<MainnCubit>();
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: ColorConstants.primaryColor,
+        color: ColorConstants.primaryRedColor,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(16),
           bottomRight: Radius.circular(16),

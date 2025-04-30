@@ -45,7 +45,7 @@ class RegistrationDoctorPage extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: GlobalButton(
           buttonName: 'Qeydiyyat',
-          buttonColor: ColorConstants.primaryColor,
+          buttonColor: ColorConstants.primaryRedColor,
           textColor: Colors.white,
           onPressed: () {},
         ),

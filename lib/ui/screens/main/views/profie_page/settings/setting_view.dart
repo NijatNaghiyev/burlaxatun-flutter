@@ -13,7 +13,7 @@ class SettingView extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Tənzimləmələr',
-        onTap: () => context.pop(),
+        onLeadingTap: () => context.pop(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),

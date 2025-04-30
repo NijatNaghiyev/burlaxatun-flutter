@@ -27,7 +27,7 @@ class AcceptPolicyCheckBox extends StatelessWidget {
                 ),
                 splashRadius: 0,
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                activeColor: ColorConstants.primaryColor,
+                activeColor: ColorConstants.primaryRedColor,
                 value: state.isChecked,
                 onChanged: (v) {
                   signupCubit.checkBoxToggle(v!);

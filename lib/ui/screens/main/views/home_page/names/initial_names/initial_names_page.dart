@@ -19,7 +19,7 @@ class InitialNamesPage extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Adlar1',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
         },
       ),

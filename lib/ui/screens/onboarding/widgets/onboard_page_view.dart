@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,15 +21,41 @@ class OnboardPageView extends StatelessWidget {
       onPageChanged: (value) => onboardingCubit.updateIndexOfPage(value),
       itemBuilder: (_, index) {
         OnboardItemsModel item = onboardingCubit.onboardingItems[index];
-        return Column(
-          children: [
-            OnboardImage(onboardImage: item.onboardImage),
-            113.h,
-            Padding(
-              padding: PaddingConstants.h18,
-              child: OnboardTitle(onboardTitle: item.onboardTitle),
-            )
-          ],
+        return SafeArea(
+          child: Column(
+            children: [
+              (context.deviceHeight * 0.05).h,
+              Text(
+                item.onboardTitle,
+                style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  fontSize: 24,
+                ),
+              ),
+              Text(
+                item.onboardTitleBold,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                ),
+              ),
+              (context.deviceHeight * 0.05).h,
+              Expanded(
+                child: OnboardImage(
+                  onboardImage: item.onboardImage,
+                ),
+              ),
+              Spacer(),
+              // (context.deviceHeight * 0.05).h,
+              Padding(
+                padding: PaddingConstants.h18,
+                child: OnboardTitle(
+                  onboardTitle: item.onboardDescription,
+                ),
+              ),
+              (context.deviceHeight * 0.05).h,
+            ],
+          ),
         );
       },
     );

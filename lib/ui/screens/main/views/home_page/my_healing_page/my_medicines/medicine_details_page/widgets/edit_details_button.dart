@@ -16,7 +16,7 @@ class EditDetailsButton extends StatelessWidget {
           shadowColor: const WidgetStatePropertyAll(Colors.transparent),
           backgroundColor: WidgetStatePropertyAll(Colors.white),
           side: WidgetStatePropertyAll(
-            BorderSide(color: ColorConstants.primaryColor),
+            BorderSide(color: ColorConstants.primaryRedColor),
           ),
         ),
         onPressed: () {},
@@ -25,7 +25,7 @@ class EditDetailsButton extends StatelessWidget {
           fontSize: 14,
           height: 1.1,
           fontWeight: FontWeight.w500,
-          color: ColorConstants.primaryColor,
+          color: ColorConstants.primaryRedColor,
         ),
       ),
     );

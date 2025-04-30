@@ -108,7 +108,7 @@ class AddNewIndicatorDialog extends StatelessWidget {
                           fontSize: 14,
                           height: 1.1,
                           fontWeight: FontWeight.w500,
-                          color: ColorConstants.primaryColor,
+                          color: ColorConstants.primaryRedColor,
                         ),
                       ),
                     ),

@@ -6,7 +6,6 @@ import '../../../../../cubits/questions_cubit/questions_cubit.dart';
 import '../../../../../utils/constants/color_constants.dart';
 import '../../../../widgets/global_button.dart';
 
-
 class QuestionOneButton extends StatefulWidget {
   const QuestionOneButton({
     super.key,
@@ -34,7 +33,8 @@ class _QuestionOneButtonState extends State<QuestionOneButton> {
 
   @override
   void dispose() {
-    widget.questionsCubit.questionOneButtonNotifier.removeListener(_updateState);
+    widget.questionsCubit.questionOneButtonNotifier
+        .removeListener(_updateState);
     super.dispose();
   }
 
@@ -67,14 +67,15 @@ class _QuestionOneButtonState extends State<QuestionOneButton> {
       child: GlobalButton(
         buttonName: widget.buttonName,
         buttonColor: isSelected ? Color(0xffFFD3E2) : Colors.white,
-        borderColor: isSelected ? Colors.transparent : ColorConstants.primaryColor,
-        textColor: ColorConstants.primaryColor,
+        borderColor:
+            isSelected ? Colors.transparent : ColorConstants.primaryRedColor,
+        textColor: ColorConstants.primaryRedColor,
         onPressed: () {
-          widget.questionsCubit.questionOneButtonNotifier.value = widget.optionIndex;
+          widget.questionsCubit.questionOneButtonNotifier.value =
+              widget.optionIndex;
           widget.questionsCubit.updateIsActiveButton();
         },
       ),
     );
   }
 }
-

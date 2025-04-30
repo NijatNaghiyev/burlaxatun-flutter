@@ -12,8 +12,8 @@ class AddMedicineDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedPadding(
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom / 1.4),
+      padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom / 1.4),
       duration: const Duration(milliseconds: 300),
       child: Center(
         child: SizedBox(
@@ -132,7 +132,7 @@ class AddMedicineDialog extends StatelessWidget {
                             fontSize: 14,
                             height: 1.1,
                             fontWeight: FontWeight.w500,
-                            color: ColorConstants.primaryColor,
+                            color: ColorConstants.primaryRedColor,
                           ),
                         ),
                       ),

@@ -11,7 +11,7 @@ class ReRegistrationButton extends StatelessWidget {
       height: 50,
       buttonName: 'Yeni Qeydiyyat',
       buttonColor: Color(0xffFDECF2),
-      textColor: ColorConstants.primaryColor,
+      textColor: ColorConstants.primaryRedColor,
       onPressed: () {},
     );
   }

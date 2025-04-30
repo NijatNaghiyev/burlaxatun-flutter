@@ -17,7 +17,7 @@ class InitialDoctorPage extends StatelessWidget {
       backgroundColor: Color(0xffFCFCFD),
       appBar: GlobalAppbar(
         title: 'Həkimlər',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
         },
       ),

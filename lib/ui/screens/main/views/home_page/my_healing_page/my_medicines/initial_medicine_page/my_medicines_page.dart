@@ -18,7 +18,7 @@ class MyMedicinesPage extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Dərmanlarım',
-        onTap: () => context.pop(),
+        onLeadingTap: () => context.pop(),
       ),
       body: SingleChildScrollView(
         child: Center(

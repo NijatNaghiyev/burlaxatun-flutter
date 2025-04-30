@@ -35,7 +35,7 @@ class _HorizontalCalendarState extends State<HorizontalCalendar>
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       color: i == currentDateIndex
-                          ? ColorConstants.primaryColor
+                          ? ColorConstants.primaryRedColor
                           : Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(5)),
                     ),

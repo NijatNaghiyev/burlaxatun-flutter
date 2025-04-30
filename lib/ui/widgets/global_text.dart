@@ -5,30 +5,32 @@ class GlobalText extends StatelessWidget {
   const GlobalText({
     super.key,
     required this.text,
-    required this.fontSize,
-    this.height = 1.1,
-    required this.fontWeight,
-    required this.color,
-    this.textAlign = TextAlign.center,
-    this.maxLines = 20,
+    this.fontSize,
+    this.height,
+    this.fontWeight,
+    this.color,
+    this.textAlign,
+    this.maxLines,
     this.fontStyle = FontStyle.normal,
     this.decoration = TextDecoration.none,
+    this.overflow,
   });
 
-  final double fontSize;
-  final double height;
+  final double? fontSize;
+  final double? height;
   final String text;
-  final FontWeight fontWeight;
-  final Color color;
-  final TextAlign textAlign;
-  final int maxLines;
-  final FontStyle fontStyle;
-  final TextDecoration decoration;
+  final FontWeight? fontWeight;
+  final Color? color;
+  final TextAlign? textAlign;
+  final int? maxLines;
+  final FontStyle? fontStyle;
+  final TextDecoration? decoration;
+  final TextOverflow? overflow;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      overflow: TextOverflow.ellipsis,
+      overflow: overflow,
       maxLines: maxLines,
       textAlign: textAlign,
       text,
@@ -44,14 +46,3 @@ class GlobalText extends StatelessWidget {
     );
   }
 }
-
-
-// Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: [
-//                 SvgPicture.asset(
-//                   prefixIcon,
-//                   fit: BoxFit.cover,
-//                 ),
-//               ],
-//             ),
