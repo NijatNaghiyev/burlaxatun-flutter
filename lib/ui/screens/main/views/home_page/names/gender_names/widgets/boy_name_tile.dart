@@ -63,7 +63,7 @@ class _BoyNameTileState extends State<BoyNameTile> {
               'assets/icons/favorite_icon.svg',
               colorFilter: ColorFilter.mode(
                 state.isSelected == 1
-                    ? ColorConstants.primaryColor
+                    ? ColorConstants.primaryRedColor
                     : ColorConstants.hintTextColor,
                 BlendMode.srcIn,
               ),

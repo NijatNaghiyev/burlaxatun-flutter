@@ -37,7 +37,7 @@ class CalculateButton extends StatelessWidget {
           buttonName: state.stateStatus == CalculateStateStatus.loading
               ? 'Hesablanır ...'
               : 'Hesabla',
-          buttonColor: ColorConstants.primaryColor,
+          buttonColor: ColorConstants.primaryRedColor,
           textColor: Colors.white,
           onPressed: () async {
             if (state.selectedCalculateOptionIndex == null) {

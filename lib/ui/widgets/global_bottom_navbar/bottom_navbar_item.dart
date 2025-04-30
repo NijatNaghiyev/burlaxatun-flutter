@@ -42,7 +42,7 @@ class BottomNavbarItem extends StatelessWidget {
                   mainCubit.navbarItems[i].icon,
                   colorFilter: ColorFilter.mode(
                     state.indexOfView == i
-                        ? ColorConstants.primaryColor
+                        ? ColorConstants.primaryRedColor
                         : Color(0xff667085),
                     BlendMode.srcIn,
                   ),
@@ -54,7 +54,7 @@ class BottomNavbarItem extends StatelessWidget {
                   height: 1.5,
                   fontWeight: FontWeight.w500,
                   color: state.indexOfView == i
-                      ? ColorConstants.primaryColor
+                      ? ColorConstants.primaryRedColor
                       : Color(0xff667085),
                 ),
               ],

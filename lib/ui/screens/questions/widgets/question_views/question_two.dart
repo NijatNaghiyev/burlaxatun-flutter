@@ -114,7 +114,7 @@ class QuestionTwo extends StatelessWidget {
                         horizontal: VisualDensity.minimumDensity,
                         vertical: VisualDensity.minimumDensity,
                       ),
-                      activeColor: ColorConstants.primaryColor,
+                      activeColor: ColorConstants.primaryRedColor,
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       toggleable: true,
                       splashRadius: 0,

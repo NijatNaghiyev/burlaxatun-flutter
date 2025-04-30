@@ -56,12 +56,12 @@ class AddIndicatorInput extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(34)),
               borderSide: BorderSide(
-                color: ColorConstants.primaryColor,
+                color: ColorConstants.primaryRedColor,
               ),
             ),
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: ColorConstants.primaryColor,
+                color: ColorConstants.primaryRedColor,
               ),
             ),
           ),

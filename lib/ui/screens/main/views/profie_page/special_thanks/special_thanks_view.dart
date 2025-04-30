@@ -25,7 +25,7 @@ class _SpecialThanksViewState extends State<SpecialThanksView> {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'xususi teshekkurler',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
         },
       ),

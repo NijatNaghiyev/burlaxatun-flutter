@@ -26,7 +26,7 @@ class GenderNames extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Adlar2',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
           babyNamesCubit.changeIsSelected(v: -1);
         },

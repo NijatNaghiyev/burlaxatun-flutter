@@ -1,4 +1,8 @@
 import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
+import 'package:burla_xatun/ui/screens/auth/forgot_psw/email_request_screen.dart';
+import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_otp_screen.dart';
+import 'package:burla_xatun/ui/screens/auth/forgot_psw/reset_psw_screen.dart';
+import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_success_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -83,6 +87,28 @@ class Routerapp {
         builder: (context, state) {
           return SignUp();
         },
+      ),
+      GoRoute(
+        path: '/email_request',
+        builder: (context, state) {
+          return EmailRequestScreen();
+        },
+      ),
+      GoRoute(
+        path: '/forgot_psw_otp',
+        builder: (context, state) {
+          return ForgotPswOtpScreen();
+        },
+      ),
+      GoRoute(
+        path: '/reset_psw',
+        builder: (context, state) {
+          return ResetPswScreen();
+        },
+      ),
+      GoRoute(
+        path: '/forgot_psw_success',
+        builder: (context, state) => SuccessForgotPswScreen(),
       ),
       GoRoute(
         path: '/questions',

@@ -30,7 +30,7 @@ class CalendarWidget extends StatelessWidget {
           firstDay: DateTime.utc(2010, 10, 16),
           lastDay: DateTime.utc(2030, 3, 14),
           // selectedDayPredicate: (day) {
-            // return isSameDay(questionsCubit.selectedDay, day);
+          // return isSameDay(questionsCubit.selectedDay, day);
           // },
           onDaySelected: (selectedDay, focusedDay) {
             questionsCubit.updateSelectedDay(selectedDay);
@@ -49,7 +49,7 @@ class CalendarWidget extends StatelessWidget {
             outsideDaysVisible: false,
             selectedDecoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: ColorConstants.primaryColor,
+              color: ColorConstants.primaryRedColor,
             ),
             selectedTextStyle: GoogleFonts.poppins(
               fontSize: 20,

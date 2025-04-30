@@ -17,7 +17,7 @@ class TermsOfUseView extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'İstifade Qaydalari',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
         },
       ),
@@ -30,8 +30,8 @@ class TermsOfUseView extends StatelessWidget {
                 24.h,
                 TextBoardWidget(
                   text: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 19, horizontal: 12),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 19, horizontal: 12),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       spacing: 20,

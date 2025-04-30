@@ -21,7 +21,7 @@ class AddChildOrImPregnantButton extends StatelessWidget {
           children: [
             DecoratedBox(
               decoration: BoxDecoration(
-                color: ColorConstants.primaryColor,
+                color: ColorConstants.primaryRedColor,
                 shape: BoxShape.circle,
               ),
               child: Column(

@@ -26,7 +26,7 @@ class LoginTextButton extends StatelessWidget {
             text: ' Login',
             style: GoogleFonts.poppins(
               fontSize: 12,
-              color: ColorConstants.primaryColor,
+              color: ColorConstants.primaryRedColor,
               fontWeight: FontWeight.w400,
               height: 1.1,
             ),

@@ -31,7 +31,7 @@ class PinputWidget extends StatelessWidget {
       showCursor: false,
       defaultPinTheme: defaultPinTheme,
       focusedPinTheme: defaultPinTheme.copyDecorationWith(
-        border: Border.all(color: ColorConstants.primaryColor),
+        border: Border.all(color: ColorConstants.primaryRedColor),
       ),
     );
   }

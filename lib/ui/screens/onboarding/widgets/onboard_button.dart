@@ -14,7 +14,7 @@ class OnboardButton extends StatelessWidget {
     final onboardingCubit = context.read<OnboardingCubit>();
     return GlobalButton(
       buttonName: TextConstants.davamEt,
-      buttonColor: ColorConstants.primaryColor,
+      buttonColor: ColorConstants.primaryRedColor,
       textColor: Colors.white,
       onPressed: () => onboardingCubit.jumptTo(context),
     );

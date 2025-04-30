@@ -19,7 +19,7 @@ class OtpPage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: GlobalAppbar(
         title: ' ',
-        onTap: () => context.pop(),
+        onLeadingTap: () => context.pop(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -50,7 +50,7 @@ class OtpPage extends StatelessWidget {
         child: GlobalButton(
           height: 50,
           buttonName: 'Send code',
-          buttonColor: ColorConstants.primaryColor,
+          buttonColor: ColorConstants.primaryRedColor,
           textColor: Colors.white,
           onPressed: () {
             Navigator.push(

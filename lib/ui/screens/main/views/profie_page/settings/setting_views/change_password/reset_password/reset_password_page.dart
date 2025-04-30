@@ -18,7 +18,7 @@ class ResetPasswordPage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: GlobalAppbar(
         title: ' ',
-        onTap: () => context.pop(),
+        onLeadingTap: () => context.pop(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -56,7 +56,7 @@ class ResetPasswordPage extends StatelessWidget {
         child: GlobalButton(
           height: 50,
           buttonName: 'Reset password',
-          buttonColor: ColorConstants.primaryColor,
+          buttonColor: ColorConstants.primaryRedColor,
           textColor: Colors.white,
           onPressed: () {
             Navigator.push(

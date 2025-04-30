@@ -14,7 +14,7 @@ class SeeAllArticlesPage extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Doğuştan sonra Bərpa',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
         },
       ),
