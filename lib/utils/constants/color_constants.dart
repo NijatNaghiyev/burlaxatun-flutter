@@ -12,4 +12,5 @@ class ColorConstants {
   static const customBlack = Color(0xff292929);
   static const lightGray = Color(0xffD8DADC);
   static const textFieldTitleColor = Color(0xff767676);
+  static const disabledButtonColor = Color(0xffCDCDCD);
 }

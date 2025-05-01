@@ -1,17 +1,15 @@
 import 'package:burla_xatun/ui/widgets/global_text.dart';
 import 'package:flutter/material.dart';
 
-
 class CustomAuthButton extends StatelessWidget {
-  const CustomAuthButton({
-    super.key,
-     this.buttonColor,
-    this.borderColor = Colors.transparent,
-     this.textColor,
-     this.onPressed,
-    this.height = 55,
-    this.child
-  });
+  const CustomAuthButton(
+      {super.key,
+      this.buttonColor,
+      this.borderColor = Colors.transparent,
+      this.textColor,
+      this.onPressed,
+      this.height = 55,
+      this.child});
 
   final double height;
   final Color? buttonColor;

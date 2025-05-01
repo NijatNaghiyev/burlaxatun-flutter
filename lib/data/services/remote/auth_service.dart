@@ -29,28 +29,4 @@ class AuthService {
     }
   }
 
-  Future<String> register(
-    String name,
-    String surname,
-    String fatherName,
-    String email,
-    String password,
-  ) async {
-    log('register request');
-    final url = EndpointsConstants.register;
-    final body = {
-      'name': name,
-      'surname': surname,
-      'fathername': fatherName,
-      'email': email,
-      'password': password,
-    };
-    final response = await BaseNetwork.instance.getDio().post(url, data: body);
-    if (response.statusCode == 200) {
-      final registerResponseData =
-          RegisterResponseModel.fromJson(response.data);
-      return registerResponseData.data.token;
-    }
-    throw Exception('Something has happened while logged in');
-  }
 }

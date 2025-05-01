@@ -35,7 +35,7 @@ class LoginButton extends StatelessWidget {
         return CustomAuthButton(
           buttonColor: state.isActiveButton
               ? ColorConstants.primaryRedColor
-              : Colors.grey,
+              : ColorConstants.disabledButtonColor,
           textColor: ColorConstants.white,
           onPressed: () {
             if (loginCubit.loginEmailController.text.isNotEmpty &&

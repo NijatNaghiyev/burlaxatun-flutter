@@ -1,3 +1,7 @@
+import 'package:burla_xatun/ui/screens/auth/widgets/custom_auth_button.dart';
+import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
+import 'package:burla_xatun/ui/widgets/global_text.dart';
+import 'package:burla_xatun/utils/constants/text_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -12,34 +16,43 @@ class GoOnButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final signupCubit = context.read<SignupCubit>();
-    return BlocConsumer<SignupCubit, SignupCubitState>(
-      listener: (context, state) {
-        if (state is SignupCubitSuccess) {
+    return BlocConsumer<SignupCubit, SignupState>(
+      listener: (_, state) {
+        if (state is SignupSuccess) {
           context.push('/questions');
-        } else if (state is SignupCubitError) {
+        }
+        if (state is SignupError) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Login failed!')),
+            SnackBar(content: Text('Signup failed!')),
+          );
+        }
+        if (state is SignupNetworkError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Signup failed!')),
           );
         }
       },
-      builder: (context, state) {
-        if (state is SignupCubitLoading) {
-          return CircularProgressIndicator.adaptive();
-        }
-        return GlobalButton(
-          buttonName: 'Davam et',
+      builder: (_, state) {
+        return CustomAuthButton(
           buttonColor: signupCubit.isActiveButton
               ? ColorConstants.primaryRedColor
-              : ColorConstants.inactiveDotColor,
-          textColor: Colors.white,
-          onPressed: () {
-            if (signupCubit.signFullNameController.text.isNotEmpty &&
-                signupCubit.signUpEmailController.text.isNotEmpty &&
-                signupCubit.signUpPasswordController.text.isNotEmpty &&
-                signupCubit.isChecked) {
-              signupCubit.register();
-            }
-          },
+              : ColorConstants.disabledButtonColor,
+          textColor: ColorConstants.white,
+          onPressed: state is SignupLoading
+              ? () {}
+              : () {
+                  if (signupCubit.fullNameController.text.isNotEmpty &&
+                      signupCubit.emailController.text.isNotEmpty &&
+                      signupCubit.passwordController.text.isNotEmpty &&
+                      signupCubit.isChecked) {
+                    signupCubit.register();
+                  }
+                },
+          child: state is SignupLoading
+              ? CustomCircularProgressIndicator()
+              : GlobalText(
+                  text: TextConstants.davamEt,
+                ),
         );
       },
     );

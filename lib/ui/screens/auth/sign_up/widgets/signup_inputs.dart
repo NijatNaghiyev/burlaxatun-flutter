@@ -17,7 +17,7 @@ class SignupInputs extends StatelessWidget {
       children: [
         GlobalInput(
           focusNode: signUpCubit.signFullNameFocusNode,
-          textController: signUpCubit.signFullNameController,
+          textController: signUpCubit.fullNameController,
           inputName: 'Name, Surname',
           hintText: 'Enter your name and surname',
           onFieldSubmitted: (v) {
@@ -28,7 +28,7 @@ class SignupInputs extends StatelessWidget {
           },
         ),
         GlobalInput(
-          textController: signUpCubit.signUpEmailController,
+          textController: signUpCubit.emailController,
           focusNode: signUpCubit.signUpEmailFocusNode,
           inputName: TextConstants.email,
           hintText: TextConstants.enterYourEmail,
@@ -40,7 +40,7 @@ class SignupInputs extends StatelessWidget {
           },
         ),
         GlobalInput(
-          textController: signUpCubit.signUpPasswordController,
+          textController: signUpCubit.passwordController,
           focusNode: signUpCubit.signUpPasswordFocusNode,
           inputName: TextConstants.password,
           hintText: TextConstants.enterYourPsw,
