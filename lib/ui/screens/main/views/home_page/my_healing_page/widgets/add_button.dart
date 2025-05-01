@@ -31,7 +31,7 @@ class AddButton extends StatelessWidget {
               fontSize: 14,
               height: 1.1,
               fontWeight: FontWeight.w500,
-              color: ColorConstants.primaryColor,
+              color: ColorConstants.primaryRedColor,
             ),
             SvgPicture.asset('assets/icons/add_icon.svg'),
           ],

@@ -1,3 +1,5 @@
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
+import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/onboard_button.dart';
@@ -13,18 +15,17 @@ class Onboarding extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 0),
-            child: SizedBox(
-              height: 512,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 0),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   OnboardPageView(),
                   Positioned(
-                    top: 330,
+                    bottom: 160,
                     child: OnboardDots(),
-                  )
+                  ),
                 ],
               ),
             ),

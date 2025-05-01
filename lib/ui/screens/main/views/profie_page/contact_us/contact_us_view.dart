@@ -12,7 +12,7 @@ class ContactUsView extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Bizimle elaqe saxla',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
         },
       ),

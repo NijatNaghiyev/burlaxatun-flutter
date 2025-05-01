@@ -15,7 +15,7 @@ class BodyWeightPage extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Bədən çəkisi',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
         },
       ),

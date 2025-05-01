@@ -1,14 +1,15 @@
+import 'package:burla_xatun/utils/constants/asset_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginImage extends StatelessWidget {
   const LoginImage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      'assets/png/resume.png',
-      width: 129,
-      height: 126,
+    return SvgPicture.asset(
+      AssetConstants.onboard1,
+      height: 80,
     );
   }
 }

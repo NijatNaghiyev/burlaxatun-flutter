@@ -33,8 +33,9 @@ class LoginButton extends StatelessWidget {
         }
         return GlobalButton(
           buttonName: 'Daxil ol',
-          buttonColor:
-              state.isActiveButton ? ColorConstants.primaryColor : Colors.grey,
+          buttonColor: state.isActiveButton
+              ? ColorConstants.primaryRedColor
+              : Colors.grey,
           textColor: Colors.white,
           onPressed: () {
             state.isActiveButton ? loginCubit.login() : null;

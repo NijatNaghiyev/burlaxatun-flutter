@@ -17,7 +17,7 @@ class PrivacyPolicyView extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Mexvilik siyaseti',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
         },
       ),

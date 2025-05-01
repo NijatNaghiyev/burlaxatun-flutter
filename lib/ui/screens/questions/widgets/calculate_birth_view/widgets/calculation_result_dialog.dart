@@ -48,7 +48,7 @@ class CalculationResultDialog extends StatelessWidget {
                 17.h,
                 GlobalButton(
                   buttonName: 'Davam et',
-                  buttonColor: ColorConstants.primaryColor,
+                  buttonColor: ColorConstants.primaryRedColor,
                   textColor: Colors.white,
                   height: 44,
                   onPressed: () {

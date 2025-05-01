@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../utils/constants/color_constants.dart';
 import '../../../../../utils/constants/text_constants.dart';
@@ -13,15 +14,16 @@ class ForgotPasswordButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         TextButton(
-          onPressed: () {},
-          style: ButtonStyle(
-            padding: WidgetStatePropertyAll(EdgeInsets.all(0))
-          ),
+          onPressed: () {
+            context.go("/email_request");
+          },
+          style:
+              ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.all(0))),
           child: GlobalText(
-            text: TextConstants.sifreniziUnutmusunuzmu,
+            text: TextConstants.forgotPsw,
             fontSize: 12,
             fontWeight: FontWeight.w400,
-            color: ColorConstants.primaryColor,
+            color: ColorConstants.customBlue,
           ),
         ),
       ],

@@ -13,7 +13,7 @@ class FaqView extends StatelessWidget {
       backgroundColor: Color(0xffF7F8FA),
       appBar: GlobalAppbar(
         title: 'Tez-tez verilən suallar',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
         },
       ),

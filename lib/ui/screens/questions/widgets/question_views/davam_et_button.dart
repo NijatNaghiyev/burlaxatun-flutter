@@ -20,7 +20,7 @@ class DavamEt extends StatelessWidget {
       padding: PaddingConstants.h20,
       child: GlobalButton(
         buttonName: 'Davam et',
-        buttonColor: isActive ? ColorConstants.primaryColor : Colors.black38,
+        buttonColor: isActive ? ColorConstants.primaryRedColor : Colors.black38,
         textColor: Colors.white,
         onPressed: onPressed,
       ),

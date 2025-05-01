@@ -6,11 +6,13 @@ class GlobalAppbar extends StatelessWidget implements PreferredSizeWidget {
   const GlobalAppbar({
     super.key,
     required this.title,
-    required this.onTap,
+    this.leading,
+    this.onLeadingTap,
   });
 
   final String title;
-  final void Function() onTap;
+  final Widget? leading;
+  final void Function()? onLeadingTap;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +22,14 @@ class GlobalAppbar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
         centerTitle: true,
-        leading: GestureDetector(
-          onTap: onTap,
-          child: Icon(
-            Icons.arrow_back_ios_new,
-            color: Color(0xff344054),
-          ),
-        ),
+        leading: leading ??
+            GestureDetector(
+              onTap: onLeadingTap,
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                color: Color(0xff344054),
+              ),
+            ),
         title: GlobalText(
           text: title,
           fontSize: 20,

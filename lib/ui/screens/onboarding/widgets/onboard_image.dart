@@ -11,6 +11,8 @@ class OnboardImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(onboardImage);
+    return SvgPicture.asset(
+      onboardImage,
+    );
   }
 }

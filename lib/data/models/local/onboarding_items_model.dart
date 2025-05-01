@@ -2,26 +2,36 @@ import '../../../utils/constants/asset_constants.dart';
 import '../../../utils/constants/text_constants.dart';
 
 class OnboardItemsModel {
-  final String onboardImage;
-  final String onboardTitle;
-
   const OnboardItemsModel({
-    required this.onboardImage,
     required this.onboardTitle,
+    required this.onboardTitleBold,
+    required this.onboardImage,
+    required this.onboardDescription,
   });
+
+  final String onboardTitle;
+  final String onboardTitleBold;
+  final String onboardImage;
+  final String onboardDescription;
 
   static const List items = [
     OnboardItemsModel(
-      onboardImage: AssetConstants.trust,
-      onboardTitle: TextConstants.trust
+      onboardTitle: TextConstants.welcomeTo,
+      onboardTitleBold: TextConstants.burlaXatun,
+      onboardImage: AssetConstants.onboard1,
+      onboardDescription: TextConstants.trustedCompanion,
     ),
     OnboardItemsModel(
-      onboardImage: AssetConstants.sendMoneyAbroad,
-      onboardTitle: TextConstants.sendMoneyAbroad,
+      onboardTitle: TextConstants.navigatePregnancy,
+      onboardTitleBold: TextConstants.together,
+      onboardImage: AssetConstants.onboard2,
+      onboardDescription: TextConstants.addYourPartner,
     ),
     OnboardItemsModel(
-      onboardImage: AssetConstants.receiveMoney,
-      onboardTitle: TextConstants.receiveMoney,
+      onboardTitle: TextConstants.community,
+      onboardTitleBold: TextConstants.support,
+      onboardImage: AssetConstants.onboard3,
+      onboardDescription: TextConstants.companySupport,
     ),
   ];
 }

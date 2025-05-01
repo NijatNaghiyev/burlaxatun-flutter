@@ -35,8 +35,8 @@ class QuestionThree extends StatelessWidget {
                     : state.isFirstChild!
                         ? Color(0xffFFD3E2)
                         : Colors.white,
-                borderColor: ColorConstants.primaryColor,
-                textColor: ColorConstants.primaryColor,
+                borderColor: ColorConstants.primaryRedColor,
+                textColor: ColorConstants.primaryRedColor,
                 onPressed: () {
                   questionCubit.updateQuestionThreeAnswer(true);
                   questionCubit.updateIsActiveButton();
@@ -54,8 +54,8 @@ class QuestionThree extends StatelessWidget {
                     : !state.isFirstChild!
                         ? Color(0xffFFD3E2)
                         : Colors.white,
-                borderColor: ColorConstants.primaryColor,
-                textColor: ColorConstants.primaryColor,
+                borderColor: ColorConstants.primaryRedColor,
+                textColor: ColorConstants.primaryRedColor,
                 onPressed: () {
                   questionCubit.updateQuestionThreeAnswer(false);
                   questionCubit.updateIsActiveButton();

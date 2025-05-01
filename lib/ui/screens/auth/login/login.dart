@@ -24,7 +24,7 @@ class Login extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
-                  context.deviceHeight < 750 ? 11.h : 26.h,
+                  (context.deviceHeight * 0.07).h,
                   LoginImage(),
                   context.deviceHeight < 750 ? 13.h : 30.h,
                   LoginInputs(),

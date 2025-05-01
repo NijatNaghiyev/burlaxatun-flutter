@@ -28,8 +28,8 @@ class LoginInputs extends StatelessWidget {
               textController: loginCubit.loginEmailController,
               focusNode: loginCubit.loginEmailFocusNode,
               inputName: TextConstants.email,
-              prefixIcon: AssetConstants.emailIcon,
-              hintText: TextConstants.emailiniziDaxilEdin,
+              // prefixIcon: AssetConstants.emailIcon,
+              hintText: TextConstants.enterYourEmail,
               onFieldSubmitted: (p0) =>
                   loginCubit.loginPasswordFocusNode.requestFocus(),
               onChanged: (v) {
@@ -47,13 +47,13 @@ class LoginInputs extends StatelessWidget {
                   textController: loginCubit.loginPasswordController,
                   focusNode: loginCubit.loginPasswordFocusNode,
                   inputName: TextConstants.sifre,
-                  prefixIcon: 'assets/icons/lock_2.svg',
+                  // prefixIcon: 'assets/icons/lock_2.svg',
                   hintText: TextConstants.sifreniziDaxilEdin,
                   isObsecure: state.isObsecure,
                   suffixIcon: state.isObsecure
-                      ? AssetConstants.eyeSlashedIcon
-                      : AssetConstants.eyeOpenIcon,
-                  onSuffixIcon: () => loginCubit.isObsecureToggle(),
+                      ? AssetConstants.eyeClosedIcon
+                      : AssetConstants.eyeOpenedIcon,
+                  onSuffixIconTap: () => loginCubit.isObsecureToggle(),
                   onChanged: (v) {
                     loginCubit.updateIsValid();
                   },
@@ -69,13 +69,15 @@ class LoginInputs extends StatelessWidget {
                         color: Color(0xffD62828),
                       ),
                       SizedBox(width: 10),
-                      SizedBox(
-                        child: GlobalText(
-                          text:
-                              'Oops! Email or password incorrect try another one.',
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xffD62828),
+                      Expanded(
+                        child: SizedBox(
+                          child: GlobalText(
+                            text:
+                                'Oops! Email or password incorrect try another one.',
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xffD62828),
+                          ),
                         ),
                       ),
                     ],
