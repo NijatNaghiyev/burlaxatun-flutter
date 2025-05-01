@@ -20,4 +20,7 @@ class EndpointsConstants {
   static const String countries = '$babyUrl/name_countries';
   static const String names = '$babyUrl/names';
   static const String selectedNames = '$names/select';
+
+  // Extra
+  static const String dailyRec = '$baseUrl/extra/daily-recommendations/';
 }

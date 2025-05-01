@@ -1,4 +1,4 @@
-import 'package:burla_xatun/data/services/local/login_token_service.dart';
+import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
 import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +24,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
 
@@ -38,6 +39,10 @@ class MyApp extends StatelessWidget {
         BlocProvider<SignupCubit>(
           create: (context) => locator<SignupCubit>(),
         ),
+        BlocProvider(
+          create: (context) => locator<DailyRecCubit>()..getDailyRec(),
+        ),
+
         // BlocProvider(
         //   create: (context) => BabyNamesCubit(),
         // )
