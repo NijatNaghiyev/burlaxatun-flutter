@@ -1,4 +1,5 @@
 import 'package:burla_xatun/utils/constants/color_constants.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -14,6 +15,8 @@ import 'utils/routes/router.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  await init();
+  await setupLocator();
   Hive.registerAdapter(UserDataModelAdapter());
   runApp(MyApp());
 }

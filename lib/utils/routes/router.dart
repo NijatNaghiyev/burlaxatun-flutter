@@ -3,6 +3,7 @@ import 'package:burla_xatun/ui/screens/auth/forgot_psw/email_request_screen.dart
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_otp_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/reset_psw_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_success_screen.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -77,8 +78,8 @@ class Routerapp {
       ),
       GoRoute(
         path: '/login',
-        builder: (context, state) => BlocProvider(
-          create: (context) => LoginCubit(),
+        builder: (context, state) => BlocProvider<LoginCubit>(
+          create: (context) => locator<LoginCubit>(),
           child: Login(),
         ),
       ),

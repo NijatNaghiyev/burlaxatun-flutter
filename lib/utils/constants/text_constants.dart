@@ -31,4 +31,7 @@ class TextConstants {
   static const typeSomething = "Please type something you’ll remember";
   static const newPsw = "New password";
   static const confirmNewPsw = "Confirm new password";
+  static const password = 'Password';
+  static const enterYourPsw = 'Enter your password';
+  static const daxilOl = "Daxil ol";
 }

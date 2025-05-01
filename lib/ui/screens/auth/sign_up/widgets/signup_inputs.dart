@@ -1,8 +1,8 @@
+import 'package:burla_xatun/utils/constants/text_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../cubits/signup_cubit/signup_cubit.dart';
-import '../../../../../utils/constants/asset_constants.dart';
 import '../../../../../utils/extensions/context_extensions.dart';
 import '../../../../widgets/global_input.dart';
 
@@ -18,9 +18,8 @@ class SignupInputs extends StatelessWidget {
         GlobalInput(
           focusNode: signUpCubit.signFullNameFocusNode,
           textController: signUpCubit.signFullNameController,
-          inputName: 'Ad, soyad və ata adı qeyd edin',
-          prefixIcon: AssetConstants.userIcon,
-          hintText: 'Adınızı qeyd edin',
+          inputName: 'Name, Surname',
+          hintText: 'Enter your name and surname',
           onFieldSubmitted: (v) {
             signUpCubit.signUpEmailFocusNode.requestFocus();
           },
@@ -31,9 +30,8 @@ class SignupInputs extends StatelessWidget {
         GlobalInput(
           textController: signUpCubit.signUpEmailController,
           focusNode: signUpCubit.signUpEmailFocusNode,
-          inputName: 'Email',
-          prefixIcon: AssetConstants.emailIcon,
-          hintText: 'Email qeyd edin',
+          inputName: TextConstants.email,
+          hintText: TextConstants.enterYourEmail,
           onFieldSubmitted: (v) {
             signUpCubit.signUpPasswordFocusNode.requestFocus();
           },
@@ -44,9 +42,8 @@ class SignupInputs extends StatelessWidget {
         GlobalInput(
           textController: signUpCubit.signUpPasswordController,
           focusNode: signUpCubit.signUpPasswordFocusNode,
-          inputName: 'Şifrə',
-          prefixIcon: AssetConstants.lockIcon,
-          hintText: 'Şifrənizi qeyd edin',
+          inputName: TextConstants.password,
+          hintText: TextConstants.enterYourPsw,
           onChanged: (v) {
             signUpCubit.updateIsValid();
           },

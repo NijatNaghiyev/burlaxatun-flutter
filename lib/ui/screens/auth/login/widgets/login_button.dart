@@ -1,13 +1,14 @@
-import 'dart:developer';
-
 import 'package:burla_xatun/cubits/login_cubit/login_cubit_state.dart';
+import 'package:burla_xatun/ui/screens/auth/widgets/custom_auth_button.dart';
+import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
+import 'package:burla_xatun/ui/widgets/global_text.dart';
+import 'package:burla_xatun/utils/constants/text_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../cubits/login_cubit/login_cubit.dart';
 import '../../../../../utils/constants/color_constants.dart';
-import '../../../../widgets/global_button.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
@@ -19,28 +20,50 @@ class LoginButton extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.loginStatus != current.loginStatus ||
           previous.isActiveButton != current.isActiveButton,
-      listener: (BuildContext context, LoginCubitInitial state) {
+      listener: (_, state) {
         if (state.loginStatus == LoginStatus.success) {
           context.go('/home');
-        } else if (state.loginStatus == LoginStatus.error) {
+        }
+        if (state.loginStatus == LoginStatus.error) {
+          loginCubit.errorState();
+        }
+        if (state.loginStatus == LoginStatus.networkError) {
           loginCubit.errorState();
         }
       },
-      builder: (context, state) {
-        log('button builded');
-        if (state.loginStatus == LoginStatus.loading) {
-          return CircularProgressIndicator.adaptive();
-        }
-        return GlobalButton(
-          buttonName: 'Daxil ol',
+      builder: (_, state) {
+        return CustomAuthButton(
           buttonColor: state.isActiveButton
               ? ColorConstants.primaryRedColor
               : Colors.grey,
-          textColor: Colors.white,
+          textColor: ColorConstants.white,
           onPressed: () {
-            state.isActiveButton ? loginCubit.login() : null;
+            if (loginCubit.loginEmailController.text.isNotEmpty &&
+                loginCubit.loginPasswordController.text.isNotEmpty) {
+              state.isActiveButton ? loginCubit.login() : null;
+            }
           },
+          child: state.loginStatus == LoginStatus.loading
+              ? CustomCircularProgressIndicator()
+              : GlobalText(
+                  text: TextConstants.daxilOl,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
         );
+        //  GlobalButton(
+        //   buttonName: TextConstants.daxilOl,
+        // buttonColor: state.isActiveButton
+        //     ? ColorConstants.primaryRedColor
+        //     : Colors.grey,
+        //   textColor: Colors.white,
+        // onPressed: () {
+        //   if (loginCubit.loginEmailController.text.isNotEmpty &&
+        //       loginCubit.loginPasswordController.text.isNotEmpty) {
+        //     state.isActiveButton ? loginCubit.login() : null;
+        //   }
+        // },
+        // );
       },
     );
   }

@@ -33,7 +33,12 @@ class GoOnButton extends StatelessWidget {
               : ColorConstants.inactiveDotColor,
           textColor: Colors.white,
           onPressed: () {
-            signupCubit.register();
+            if (signupCubit.signFullNameController.text.isNotEmpty &&
+                signupCubit.signUpEmailController.text.isNotEmpty &&
+                signupCubit.signUpPasswordController.text.isNotEmpty &&
+                signupCubit.isChecked) {
+              signupCubit.register();
+            }
           },
         );
       },

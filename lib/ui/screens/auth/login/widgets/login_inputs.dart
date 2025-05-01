@@ -20,7 +20,7 @@ class LoginInputs extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isError != current.isError ||
           previous.loginStatus != current.loginStatus,
-      builder: (context, state) {
+      builder: (_, state) {
         return Column(
           children: [
             GlobalInput(
@@ -41,7 +41,7 @@ class LoginInputs extends StatelessWidget {
               buildWhen: (previous, current) =>
                   previous.isObsecure != current.isObsecure ||
                   previous.isError != current.isError,
-              builder: (context, state) {
+              builder: (_, state) {
                 return GlobalInput(
                   isError: state.isError,
                   textController: loginCubit.loginPasswordController,

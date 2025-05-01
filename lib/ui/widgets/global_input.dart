@@ -76,7 +76,7 @@ class GlobalInput extends StatelessWidget {
             contentPadding: EdgeInsets.symmetric(vertical: 18),
             hintText: hintText,
             hintStyle: GoogleFonts.poppins(
-              fontSize: 14,
+              fontSize: 12,
               color: isError
                   ? Color(0xffD62828)
                   : ColorConstants.enabledInputColor,

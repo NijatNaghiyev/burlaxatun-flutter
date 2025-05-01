@@ -1,12 +1,12 @@
 class EndpointsConstants {
   EndpointsConstants._();
 
-  static const String baseUrl = 'https://burla-api.secop.az';
+  static const String baseUrl = 'https://burla-backend-py.onrender.com';
 
   // Authentication
   static const String users = '$baseUrl/users';
 
-  static const String login = '$users/login';
+  static const String login = '$baseUrl/A/users/access-token/';
   static const String register = '$users/register';
   static const String tokenInfo = '';
   static const String tokenRefresh = '';
