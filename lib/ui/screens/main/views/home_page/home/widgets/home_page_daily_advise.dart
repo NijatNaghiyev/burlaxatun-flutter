@@ -1,6 +1,7 @@
 import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/custom_circular_progress_indicator.dart';
@@ -61,8 +62,15 @@ class HomePageDailyAdvise extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(17)),
                       ),
-                      child: Image.asset(
-                          data?.image ?? 'assets/png/advise_image.png'),
+                      child: data?.image != null
+                          ? SvgPicture.network(
+                              data!.image!,
+                              fit: BoxFit.cover,
+                            )
+                          : SvgPicture.asset(
+                              'assets/svg/advise_image.svg',
+                              fit: BoxFit.cover,
+                            ),
                     ),
                     16.h,
                     GlobalText(

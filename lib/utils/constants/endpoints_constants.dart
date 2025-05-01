@@ -22,5 +22,5 @@ class EndpointsConstants {
   static const String selectedNames = '$names/select';
 
   // Extra
-  static const String dailyRec = '$names/extra/daily-recommendations/';
+  static const String dailyRec = '$baseUrl/extra/daily-recommendations/';
 }
