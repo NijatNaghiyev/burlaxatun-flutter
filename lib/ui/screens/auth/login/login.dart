@@ -1,3 +1,4 @@
+import 'package:burla_xatun/ui/screens/main/views/home_page/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/constants/padding_constants.dart';
@@ -34,6 +35,19 @@ class Login extends StatelessWidget {
                   SignupButton(),
                   context.deviceHeight < 750 ? 10.h : 25.h,
                   SignupOptions(),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ),
+                        );
+                      },
+                      child: Text('Home')),
                 ],
               ),
             ),
