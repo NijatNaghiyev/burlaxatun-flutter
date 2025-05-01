@@ -13,9 +13,9 @@ class AcceptPolicyCheckBox extends StatelessWidget {
     final signupCubit = context.read<SignupCubit>();
     return Row(
       children: [
-        BlocBuilder<SignupCubit, SignupCubitState>(
+        BlocBuilder<SignupCubit, SignupState>(
           builder: (context, state) {
-            if (state is SignupCubitInitial) {
+            if (state is SignupInitial) {
               return Checkbox(
                 visualDensity: VisualDensity(
                   horizontal: VisualDensity.minimumDensity,
@@ -31,6 +31,7 @@ class AcceptPolicyCheckBox extends StatelessWidget {
                 value: state.isChecked,
                 onChanged: (v) {
                   signupCubit.checkBoxToggle(v!);
+                  signupCubit.updateIsValid();
                 },
               );
             } else {

@@ -24,7 +24,7 @@ class EmailRequestScreen extends StatelessWidget {
         appBar: GlobalAppbar(
           title: '',
           onLeadingTap: () {
-            context.go("/login");
+            context.pop();
           },
         ),
         resizeToAvoidBottomInset: true,
