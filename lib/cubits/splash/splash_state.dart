@@ -12,3 +12,5 @@ class SplashInitial extends SplashState {}
 class SplashSuccess extends SplashState {}
 
 class SplashAuth extends SplashState {}
+
+class SplashLogin extends SplashState {}
