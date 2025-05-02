@@ -1,5 +1,5 @@
 import '../contractor/daily_rec_contractor.dart';
-import '../models/remote/response/daily_rec_response.dart';
+import '../models/remote/response/daily_rec_model.dart';
 import '../services/remote/daily_rec_service.dart';
 
 class DailyRecRepository implements DailyRecContractor {

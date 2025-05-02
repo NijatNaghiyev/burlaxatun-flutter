@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../cubits/daily_rec/daily_rec_cubit.dart';
 import '../../../cubits/main_cubit/main_state.dart';
 import '../../../cubits/main_cubit/mainn_cubit.dart';
 import '../../../utils/constants/color_constants.dart';
@@ -22,10 +23,30 @@ class BottomNavbarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mainCubit = context.read<MainnCubit>();
+    final dailyRecCubit = context.read<DailyRecCubit>();
+
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         mainCubit.changeView(i);
-        navigationShell.goBranch(i);
+
+        if (i == 1) {
+          var slug = dailyRecCubit.state.slug;
+
+          if (slug == null) {
+            await dailyRecCubit.getDailyRec();
+            slug = dailyRecCubit.state.slug;
+          }
+
+          if (slug != null) {
+            context.go('/daily-rec-detail', extra: {'slug': slug});
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Slug tapılmadı')),
+            );
+          }
+        } else {
+          navigationShell.goBranch(i);
+        }
       },
       onLongPress: () {
         i == 3 ? mainCubit.showChangeBabyBottomSheet(context) : null;
