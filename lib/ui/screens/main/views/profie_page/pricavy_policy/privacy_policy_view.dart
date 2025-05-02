@@ -10,7 +10,6 @@ import '../widgets/text_board_widget.dart';
 import 'widgets/last_edit_text.dart';
 import 'widgets/privacy_policy_description.dart';
 import 'widgets/privacy_policy_header.dart';
-import 'widgets/privacy_policy_title.dart';
 
 class PrivacyPolicyView extends StatelessWidget {
   const PrivacyPolicyView({super.key});
@@ -64,19 +63,17 @@ class PrivacyPolicyView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             spacing: 20,
                             children: [
-                              PrivacyPolicyHeader(
-                                headerTitle: result?.text ?? '',
-                              ),
+                              PrivacyPolicyHeader(),
                               LastEditText(
                                 lastEditText:
                                     result?.updatedAt?.toLocal().toString() ??
                                         '',
                               ),
-                              PrivacyPolicyTitle(
-                                title:
-                                    result?.updatedAt?.toLocal().toString() ??
-                                        '',
-                              ),
+                              // PrivacyPolicyTitle(
+                              //   title:
+                              //       result?.updatedAt?.toLocal().toString() ??
+                              //           '',
+                              // ),
                               PrivacyPolicyDescription(
                                 description: result?.text ?? '',
                               ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../../widgets/global_text.dart';
+import 'package:intl/intl.dart';
 
 class LastEditText extends StatelessWidget {
   final String lastEditText;
@@ -10,15 +9,38 @@ class LastEditText extends StatelessWidget {
     required this.lastEditText,
   });
 
+  String _formatDate(String dateString) {
+    try {
+      final date = DateTime.parse(dateString);
+      return DateFormat("d MMMM y").format(date);
+    } catch (e) {
+      return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GlobalText(
-      fontStyle: FontStyle.italic,
-      text: lastEditText,
-      //'Sonuncu düzəliş : 31 Dekabr 2024-cü il',
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      color: Colors.black,
+    final formattedDate = _formatDate(lastEditText);
+
+    if (formattedDate.isEmpty) return const SizedBox.shrink();
+
+    return RichText(
+      text: TextSpan(
+        style: const TextStyle(
+          fontSize: 14,
+          color: Colors.black,
+          fontStyle: FontStyle.italic,
+          fontWeight: FontWeight.w400,
+        ),
+        children: [
+          const TextSpan(
+            text: 'Sonuncu düzəliş : ',
+          ),
+          TextSpan(
+            text: formattedDate,
+          ),
+        ],
+      ),
     );
   }
 }
