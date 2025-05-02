@@ -13,9 +13,9 @@ class DailyRecService {
     if (response.statusCode.isSuccess) {
       return DailyRecResponse.fromJson(response.data);
     } else if (response.statusCode.isFailure) {
-      throw Exception('Failed to load daily rec list from service');
+      throw Exception('Failed to load daily rec from service');
     } else {
-      throw Exception('Failed to load daily rec list from service');
+      throw Exception('Failed to load daily rec from service');
     }
   }
 }

@@ -28,7 +28,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -44,7 +43,14 @@ class MyApp extends StatelessWidget {
           create: (context) => locator<DailyRecCubit>()..getDailyRec(),
         ),
         BlocProvider(
-          create: (context) => locator<DailyRecDetailCubit>(),
+          create: (context) {
+            final dailyRecState = context.read<DailyRecCubit>().state;
+            if (dailyRecState.status == DailyRecStatus.success) {
+              final slug = dailyRecState.response?.results?.first.slug;
+              return locator<DailyRecDetailCubit>()..getDailyRecDetail(slug!);
+            }
+            return locator<DailyRecDetailCubit>();
+          },
         ),
 
         // BlocProvider(

@@ -1,8 +1,8 @@
 import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/email_request_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_otp_screen.dart';
-import 'package:burla_xatun/ui/screens/auth/forgot_psw/reset_psw_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_success_screen.dart';
+import 'package:burla_xatun/ui/screens/auth/forgot_psw/reset_psw_screen.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -54,6 +54,7 @@ class Routerapp {
   static Routerapp? _instance;
 
   Routerapp._();
+
   static Routerapp get instance => _instance ??= Routerapp._();
 
   // static final navigatorKey = GlobalKey<NavigatorState>();
@@ -215,6 +216,13 @@ class Routerapp {
                 path: '/daily_advices',
                 builder: (context, state) => AdvisesPage(),
               ),
+              // GoRoute(
+              //   path: '/daily_advices',
+              //   builder: (context, state) {
+              //     final slug = state.extra as String?;
+              //     return AdvisesPage(slug: slug);
+              //   },
+              // ),
             ],
           ),
           StatefulShellBranch(
