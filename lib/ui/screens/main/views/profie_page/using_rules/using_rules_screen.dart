@@ -1,5 +1,6 @@
-import 'package:burla_xatun/cubits/privacy_policy/privacy_policy_cubit.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/widgets/header_text.dart';
+import 'package:burla_xatun/cubits/using_rules/using_rules_cubit.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/widgets/description_widget.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/widgets/last_edit_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -7,27 +8,26 @@ import 'package:go_router/go_router.dart';
 import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/custom_circular_progress_indicator.dart';
 import '../../../../../widgets/global_appbar.dart';
-import '../widgets/description_widget.dart';
-import '../widgets/last_edit_text.dart';
+import '../widgets/header_text.dart';
 import '../widgets/text_board_widget.dart';
 
-class PrivacyPolicyView extends StatelessWidget {
-  const PrivacyPolicyView({super.key});
+class UsingRulesScreen extends StatelessWidget {
+  const UsingRulesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GlobalAppbar(
-        title: 'Mexfilik siyaseti',
+        title: 'İstifade Qaydalari',
         onLeadingTap: () {
           context.pop();
         },
       ),
       body: Center(
         child: SingleChildScrollView(
-          child: BlocBuilder<PrivacyPolicyCubit, PrivacyPolicyState>(
+          child: BlocBuilder<UsingRulesCubit, UsingRulesState>(
             builder: (_, state) {
-              if (state.status == PrivacyPolicyStatus.loading) {
+              if (state.status == UsingRulesStatus.loading) {
                 return Center(
                   child: CustomCircularProgressIndicator(
                     isWhite: false,
@@ -35,21 +35,22 @@ class PrivacyPolicyView extends StatelessWidget {
                 );
               }
 
-              if (state.status == PrivacyPolicyStatus.failure) {
+              if (state.status == UsingRulesStatus.failure) {
                 return Center(
                   child: Text('Error'),
                 );
               }
 
-              if (state.status == PrivacyPolicyStatus.networkError) {
+              if (state.status == UsingRulesStatus.networkError) {
                 return Center(
                   child: Text('Network error'),
                 );
               }
 
-              if (state.status == PrivacyPolicyStatus.success) {
+              if (state.status == UsingRulesStatus.success) {
                 final data = state.response?.results ?? [];
                 final result = data.isNotEmpty ? data[0] : null;
+
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
@@ -64,8 +65,10 @@ class PrivacyPolicyView extends StatelessWidget {
                             spacing: 20,
                             children: [
                               HeaderText(
-                                  title:
-                                      '“Burla Xatun” internet portalı və mobil tətbiq üzrə Məxfilik Siyasəti'),
+                                title:
+                                    '“Burla Xatun” mobil tətbiqindən istifadə qaydaları',
+                              ),
+                              //LastEditText(),
                               LastEditText(
                                 lastEditText:
                                     result?.updatedAt?.toLocal().toString() ??
@@ -82,7 +85,6 @@ class PrivacyPolicyView extends StatelessWidget {
                   ),
                 );
               }
-
               return SizedBox.shrink();
             },
           ),

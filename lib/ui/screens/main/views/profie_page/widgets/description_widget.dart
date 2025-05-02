@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../widgets/global_text.dart';
+import '../../../../../widgets/global_text.dart';
 
-class PrivacyPolicyDescription extends StatelessWidget {
+class DescriptionWidget extends StatelessWidget {
   final String description;
 
-  const PrivacyPolicyDescription({
+  const DescriptionWidget({
     super.key,
     required this.description,
   });

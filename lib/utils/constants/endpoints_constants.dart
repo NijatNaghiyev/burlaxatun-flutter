@@ -28,4 +28,5 @@ class EndpointsConstants {
 
   static const String faqs = '$baseUrl/extra/faq/';
   static const String privacyPolicy = '$baseUrl/extra/privacy-policy/';
+  static const String usingRules = '$baseUrl/extra/using-rules/';
 }

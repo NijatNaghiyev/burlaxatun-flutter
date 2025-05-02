@@ -3,6 +3,7 @@ import 'package:burla_xatun/ui/screens/auth/forgot_psw/email_request_screen.dart
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_otp_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_success_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/reset_psw_screen.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/using_rules/using_rules_screen.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -44,7 +45,6 @@ import '../../ui/screens/main/views/profie_page/settings/setting_views/change_pa
 import '../../ui/screens/main/views/profie_page/settings/setting_views/change_password/success_change_password/success_change_password.dart';
 import '../../ui/screens/main/views/profie_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
 import '../../ui/screens/main/views/profie_page/special_thanks/special_thanks_view.dart';
-import '../../ui/screens/main/views/profie_page/terms_of_use/terms_of_use_view.dart';
 import '../../ui/screens/onboarding/onboarding.dart';
 import '../../ui/screens/questions/questions.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/calculate_birth.dart';
@@ -289,7 +289,7 @@ class Routerapp {
               ),
               GoRoute(
                 path: '/terms_of_use',
-                builder: (context, state) => TermsOfUseView(),
+                builder: (context, state) => UsingRulesScreen(),
               ),
               GoRoute(
                 path: '/change_language',
