@@ -29,4 +29,9 @@ class LoginTokenService {
   }
 
   String? get token => loginResponse?.access;
+  
+  Future<bool> isUserLoggedIn() async {
+    final currentToken = token;
+    return currentToken != null && currentToken.isNotEmpty;
+  }
 }
