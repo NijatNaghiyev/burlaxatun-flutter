@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../../../../data/models/remote/response/faqs_model.dart';
 import '../../../../../../../utils/extensions/context_extensions.dart';
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
@@ -11,10 +12,11 @@ class QuestionBox extends StatelessWidget {
   QuestionBox({
     super.key,
     required this.index,
+    required this.faq,
   });
 
   final int index;
-
+  final Result faq;
   final isExpanded = ValueNotifier<bool>(false);
 
   @override
@@ -42,7 +44,7 @@ class QuestionBox extends StatelessWidget {
                       child: GlobalText(
                         height: 1.5,
                         textAlign: TextAlign.left,
-                        text: 'Körpəm hərətlərini nə zaman hiss edə bilərəm?',
+                        text: faq.question ?? 'No question',
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
@@ -81,8 +83,7 @@ class QuestionBox extends StatelessWidget {
                             GlobalText(
                               height: 1.8,
                               textAlign: TextAlign.left,
-                              text:
-                                  'Körpəniz 7 və ya 8-ci həftədən etibarən müxtəlif istigamətlərə əyilir ve gərilir, lakin 16-ci - 24-cü həftəyədək hərəkətlər sizin tərəfinizdən hiss edilməyəcəkdir.',
+                              text: faq.answer ?? 'No answer',
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
                               color: Colors.black,

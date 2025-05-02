@@ -1,16 +1,20 @@
 import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
+import 'package:burla_xatun/cubits/faqs_cubit/faqs_cubit.dart';
 import 'package:burla_xatun/cubits/login_cubit/login_cubit.dart';
 import 'package:burla_xatun/cubits/signup_cubit/signup_cubit.dart';
 import 'package:burla_xatun/data/contractor/daily_rec_contractor.dart';
 import 'package:burla_xatun/data/contractor/daily_rec_detail_contractor.dart';
+import 'package:burla_xatun/data/contractor/faqs_contractor.dart';
 import 'package:burla_xatun/data/contractor/login_contractor.dart';
 import 'package:burla_xatun/data/contractor/register_contractor.dart';
 import 'package:burla_xatun/data/repository/daily_rec_repository.dart';
+import 'package:burla_xatun/data/repository/faqs_repository.dart';
 import 'package:burla_xatun/data/repository/login_repository.dart';
 import 'package:burla_xatun/data/repository/register_repository.dart';
 import 'package:burla_xatun/data/services/local/login_token_service.dart';
 import 'package:burla_xatun/data/services/remote/daily_rec_detail_service.dart';
 import 'package:burla_xatun/data/services/remote/daily_rec_service.dart';
+import 'package:burla_xatun/data/services/remote/faqs_service.dart';
 import 'package:burla_xatun/data/services/remote/login_service.dart';
 import 'package:burla_xatun/data/services/remote/register_service.dart';
 import 'package:get_it/get_it.dart';
@@ -34,6 +38,7 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton(() => DailyRecService());
   locator.registerLazySingleton(() => RegisterService());
   locator.registerLazySingleton(() => DailyRecDetailService());
+  locator.registerLazySingleton(() => FaqsService());
 
   // contractor
   locator.registerLazySingleton<LoginContractor>(
@@ -47,9 +52,13 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton<DailyRecDetailContractor>(
       () => DailyRecDetailRepository(locator<DailyRecDetailService>()));
 
+  locator.registerLazySingleton<FaqsContractor>(
+      () => FaqsRepository(locator<FaqsService>()));
+
   // cubit
   locator.registerFactory(() => LoginCubit(locator()));
   locator.registerFactory(() => DailyRecCubit(locator()));
   locator.registerFactory(() => DailyRecDetailCubit(locator()));
   locator.registerFactory(() => SignupCubit(locator()));
+  locator.registerFactory(() => FaqsCubit(locator()));
 }
