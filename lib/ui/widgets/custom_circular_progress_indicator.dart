@@ -2,11 +2,11 @@ import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomCircularProgressIndicator extends StatelessWidget {
-  final Color? color;
+  final bool? isWhite;
 
   const CustomCircularProgressIndicator({
     super.key,
-    this.color,
+    this.isWhite,
   });
 
   @override
@@ -14,7 +14,7 @@ class CustomCircularProgressIndicator extends StatelessWidget {
     return SizedBox.square(
       dimension: 20,
       child: CircularProgressIndicator(
-        color: color ?? ColorConstants.white,
+        color: isWhite == false ? Color(0xFFEC407A) : ColorConstants.white,
       ),
     );
   }

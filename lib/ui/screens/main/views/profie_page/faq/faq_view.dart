@@ -25,7 +25,7 @@ class FaqView extends StatelessWidget {
           if (state.status == FaqsStatus.loading) {
             return Center(
               child: CustomCircularProgressIndicator(
-                color: Color(0xFFEC407A),
+                isWhite: false,
               ),
             );
           }

@@ -1,5 +1,6 @@
 import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
 import 'package:burla_xatun/cubits/faqs_cubit/faqs_cubit.dart';
+import 'package:burla_xatun/cubits/privacy_policy/privacy_policy_cubit.dart';
 import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,11 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => locator<FaqsCubit>()..getFaqs(),
+        ),
+
+        BlocProvider(
+          create: (context) =>
+              locator<PrivacyPolicyCubit>()..getPrivacyPolicy(),
         ),
 
         // BlocProvider(

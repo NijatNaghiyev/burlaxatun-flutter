@@ -1,8 +1,7 @@
-import '../pricavy_policy/widgets/privacy_policy_description.dart';
-import '../../../../../../utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/global_appbar.dart';
 import '../widgets/text_board_widget.dart';
 
@@ -32,7 +31,7 @@ class AboutUsView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 20,
                     children: [
-                      PrivacyPolicyDescription(),
+                      //PrivacyPolicyDescription(),
                     ],
                   ),
                 ),
