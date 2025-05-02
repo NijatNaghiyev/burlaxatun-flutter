@@ -7,20 +7,24 @@ final class DailyRecState extends Equatable {
     required this.status,
     required this.response,
     required this.errorMessage,
+    this.slug,
   });
 
   final DailyRecStatus status;
   final DailyRecResponse? response;
   final String? errorMessage;
+  final String? slug;
 
   DailyRecState copyWith({
     DailyRecStatus? status,
     DailyRecResponse? response,
     String? errorMessage,
+    String? slug,
   }) {
     return DailyRecState(
       status: status ?? this.status,
       response: response ?? this.response,
+      slug: slug ?? this.slug,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }

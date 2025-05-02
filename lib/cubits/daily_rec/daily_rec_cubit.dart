@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/contractor/daily_rec_contractor.dart';
-import '../../data/models/remote/response/daily_rec_response.dart';
+import '../../data/models/remote/response/daily_rec_model.dart';
 
 part 'daily_rec_state.dart';
 
@@ -21,6 +21,7 @@ class DailyRecCubit extends Cubit<DailyRecState> {
       emit(state.copyWith(
         status: DailyRecStatus.success,
         response: response,
+        slug: response.results?.first.slug,
       ));
     } on DioException catch (e) {
       emit(state.copyWith(

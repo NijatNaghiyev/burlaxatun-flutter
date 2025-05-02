@@ -2,7 +2,7 @@ import 'package:burla_xatun/data/services/remote/base_network_service.dart';
 import 'package:burla_xatun/utils/extensions/statuscode_extension.dart';
 
 import '../../../utils/constants/endpoints_constants.dart';
-import '../../models/remote/response/daily_rec_response.dart';
+import '../../models/remote/response/daily_rec_model.dart';
 
 class DailyRecService {
   final endpoint = EndpointsConstants.dailyRec;

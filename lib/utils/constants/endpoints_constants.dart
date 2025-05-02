@@ -23,4 +23,6 @@ class EndpointsConstants {
 
   // Extra
   static const String dailyRec = '$baseUrl/extra/daily-recommendations/';
+  static const String dailyRecDetail =
+      '$baseUrl/extra/daily-recommendations-detail/{slug}/';
 }
