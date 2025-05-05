@@ -29,8 +29,10 @@ class PrivacyPolicyView extends StatelessWidget {
             builder: (_, state) {
               if (state.status == PrivacyPolicyStatus.loading) {
                 return Center(
-                  child: CustomCircularProgressIndicator(
-                    isWhite: false,
+                  child: Center(
+                    child: CustomCircularProgressIndicator(
+                      isWhite: false,
+                    ),
                   ),
                 );
               }
