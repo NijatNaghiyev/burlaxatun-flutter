@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../utils/constants/color_constants.dart';
 import '../../../../../widgets/global_appbar.dart';
 import 'widgets/question_box.dart';
 
@@ -13,7 +14,7 @@ class FaqView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF7F8FA),
+      backgroundColor: ColorConstants.profileScaffoldColor,
       appBar: GlobalAppbar(
         title: 'Tez-tez verilən suallar',
         onLeadingTap: () {

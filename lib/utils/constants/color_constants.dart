@@ -13,4 +13,5 @@ class ColorConstants {
   static const lightGray = Color(0xffD8DADC);
   static const textFieldTitleColor = Color(0xff767676);
   static const disabledButtonColor = Color(0xffCDCDCD);
+  static const profileScaffoldColor = Color(0xffF7F8FA);
 }

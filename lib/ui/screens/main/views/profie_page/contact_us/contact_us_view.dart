@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../utils/constants/color_constants.dart';
 import '../../../../../widgets/global_appbar.dart';
 import 'widgets/contact_us_box.dart';
 
@@ -10,6 +11,7 @@ class ContactUsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConstants.profileScaffoldColor,
       appBar: GlobalAppbar(
         title: 'Bizimle elaqe saxla',
         onLeadingTap: () {

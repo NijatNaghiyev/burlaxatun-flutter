@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,6 +24,7 @@ class _SpecialThanksViewState extends State<SpecialThanksView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConstants.profileScaffoldColor,
       appBar: GlobalAppbar(
         title: 'xususi teshekkurler',
         onLeadingTap: () {

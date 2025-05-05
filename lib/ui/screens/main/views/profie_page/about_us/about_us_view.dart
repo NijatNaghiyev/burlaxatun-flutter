@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../utils/constants/color_constants.dart';
 import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/custom_circular_progress_indicator.dart';
 import '../../../../../widgets/global_appbar.dart';
@@ -15,6 +16,7 @@ class AboutUsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConstants.profileScaffoldColor,
       appBar: GlobalAppbar(
         title: 'Haqqımızda',
         onLeadingTap: () {
