@@ -28,7 +28,7 @@ import '../../ui/screens/main/views/home_page/home/home_page.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/body_weight_page.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/initial_my_healing_page/my_healing_page.dart';
 import '../../ui/screens/main/views/home_page/names/gender_names/gender_names.dart';
-import '../../ui/screens/main/views/home_page/names/initial_names/initial_names_page.dart';
+import '../../ui/screens/main/views/home_page/names/initial_names/baby_names_page.dart';
 import '../../ui/screens/main/views/home_page/notification/notification_page.dart';
 import '../../ui/screens/main/views/home_page/ultrasound/ultrasound_page.dart';
 import '../../ui/screens/main/views/home_page/video/video_page.dart';
@@ -193,7 +193,7 @@ class Routerapp {
                 builder: (context, state) => BlocProvider(
                   create: (context) =>
                       BabyNamesCubit()..getCountriesAndSelectedNames(),
-                  child: InitialNamesPage(),
+                  child: BabyNamesPage(),
                 ),
               ),
               GoRoute(

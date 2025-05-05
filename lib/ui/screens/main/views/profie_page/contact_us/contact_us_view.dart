@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../utils/constants/color_constants.dart';
+import '../../../../../../utils/helper/url_launcher_helper.dart';
 import '../../../../../widgets/custom_circular_progress_indicator.dart';
 import '../../../../../widgets/global_appbar.dart';
 import 'widgets/contact_us_box.dart';
@@ -50,27 +51,34 @@ class ContactUsView extends StatelessWidget {
                 return Column(
                   children: [
                     ContactUsBox(
-                      contactTitle: result?.callTop ?? 'Bizə zəng edin',
-                      contactDescription:
-                          result?.callBottom ?? 'Sual və təklifiniz var ?',
+                      contactTitle: result?.callTop ?? '',
+                      contactDescription: result?.callBottom ?? '',
                       icon: result?.callIcon,
+                      onTap: () =>
+                          UrlLauncherHelper.launchPhoneCall('+994552516420'),
                       // icon: 'assets/icons/contact_us_call_icon.svg',
                       // iconColor: Color(0xffEC407A),
                     ),
                     SizedBox(height: 24),
                     ContactUsBox(
-                      contactTitle: result?.whatsappTop ?? 'Whatsapp',
-                      contactDescription:
-                          result?.whatsappBottom ?? 'Bizə onlayn yazın',
+                      contactTitle: result?.whatsappTop ?? '',
+                      contactDescription: result?.whatsappBottom ?? '',
                       icon: result?.whatsappIcon,
-                      //iconColor: Color(0xff00D95F),
+                      onTap: () => UrlLauncherHelper.launchWhatsApp(
+                        '994552516420',
+                        message: 'Salam Burla Xatun komandası!',
+                      ),
                     ),
                     SizedBox(height: 24),
                     ContactUsBox(
                       contactTitle: result?.emailTop ?? '',
                       contactDescription: result?.emailBottom ?? '',
                       icon: result?.emailIcon ?? '',
-                      //iconColor: Color(0xff0BA5EC),
+                      onTap: () => UrlLauncherHelper.launchEmail(
+                        toEmail: 'uzeyir.nev@gmail.com',
+                        subject: 'Burla Xatun Əlaqə',
+                        body: 'Salam!',
+                      ),
                     ),
                   ],
                 );

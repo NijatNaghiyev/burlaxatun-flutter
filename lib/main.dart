@@ -1,5 +1,6 @@
 import 'package:burla_xatun/cubits/about/about_cubit.dart';
 import 'package:burla_xatun/cubits/contact/contact_cubit.dart';
+import 'package:burla_xatun/cubits/countries/countries_cubit.dart';
 import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
 import 'package:burla_xatun/cubits/faqs_cubit/faqs_cubit.dart';
 import 'package:burla_xatun/cubits/privacy_policy/privacy_policy_cubit.dart';
@@ -76,6 +77,10 @@ class MyApp extends StatelessWidget {
 
         BlocProvider(
           create: (context) => locator<ContactCubit>()..getContact(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<CountriesCubit>()..getCountries(),
         ),
 
         // BlocProvider(

@@ -11,14 +11,14 @@ import 'widgets/countries_and_selecteds_box.dart';
 import 'widgets/countries_widget.dart';
 import 'widgets/selected_names_widget.dart';
 
-class InitialNamesPage extends StatelessWidget {
-  const InitialNamesPage({super.key});
+class BabyNamesPage extends StatelessWidget {
+  const BabyNamesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GlobalAppbar(
-        title: 'Adlar1',
+        title: 'Adlar ',
         onLeadingTap: () {
           context.pop();
         },

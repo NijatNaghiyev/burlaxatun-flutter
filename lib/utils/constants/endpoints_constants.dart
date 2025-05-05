@@ -31,4 +31,5 @@ class EndpointsConstants {
   static const String usingRules = '$baseUrl/extra/using-rules/';
   static const String about = '$baseUrl/extra/about/';
   static const String contact = '$baseUrl/extra/contact-details/';
+  static const String extraCountries = '$baseUrl/extra/countries/';
 }
