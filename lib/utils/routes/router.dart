@@ -1,3 +1,4 @@
+import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
 import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/email_request_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_otp_screen.dart';
@@ -28,7 +29,7 @@ import '../../ui/screens/main/views/home_page/home/home_page.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/body_weight_page.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/initial_my_healing_page/my_healing_page.dart';
 import '../../ui/screens/main/views/home_page/names/gender_names/gender_names.dart';
-import '../../ui/screens/main/views/home_page/names/initial_names/baby_names_page.dart';
+import '../../ui/screens/main/views/home_page/names/initial_names/names_page.dart';
 import '../../ui/screens/main/views/home_page/notification/notification_page.dart';
 import '../../ui/screens/main/views/home_page/ultrasound/ultrasound_page.dart';
 import '../../ui/screens/main/views/home_page/video/video_page.dart';
@@ -193,17 +194,17 @@ class Routerapp {
                 builder: (context, state) => BlocProvider(
                   create: (context) =>
                       BabyNamesCubit()..getCountriesAndSelectedNames(),
-                  child: BabyNamesPage(),
+                  child: NamesPage(),
                 ),
               ),
               GoRoute(
                 path: '/gender_names',
                 builder: (context, state) {
                   final extra = state.extra as Map;
-                  final cubit = extra['cubit'] as BabyNamesCubit;
+                  final cubit = extra['cubit'] as BabyNamesCubit2;
                   final countryId = extra['id'];
                   return BlocProvider.value(
-                    value: cubit..getNames(countryId),
+                    value: cubit..getBabyNames(countryId),
                     child: GenderNames(countryId: countryId),
                   );
                 },

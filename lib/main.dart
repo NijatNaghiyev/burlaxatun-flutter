@@ -1,4 +1,6 @@
 import 'package:burla_xatun/cubits/about/about_cubit.dart';
+import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
+import 'package:burla_xatun/cubits/blog_sliders/blog_sliders_cubit.dart';
 import 'package:burla_xatun/cubits/contact/contact_cubit.dart';
 import 'package:burla_xatun/cubits/countries/countries_cubit.dart';
 import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
@@ -81,6 +83,14 @@ class MyApp extends StatelessWidget {
 
         BlocProvider(
           create: (context) => locator<CountriesCubit>()..getCountries(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<BabyNamesCubit2>(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<BlogSlidersCubit>()..getBlogSliders(),
         ),
 
         // BlocProvider(

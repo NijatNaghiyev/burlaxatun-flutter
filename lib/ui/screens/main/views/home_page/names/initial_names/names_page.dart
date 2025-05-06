@@ -11,8 +11,8 @@ import 'widgets/countries_and_selecteds_box.dart';
 import 'widgets/countries_widget.dart';
 import 'widgets/selected_names_widget.dart';
 
-class BabyNamesPage extends StatelessWidget {
-  const BabyNamesPage({super.key});
+class NamesPage extends StatelessWidget {
+  const NamesPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -49,7 +49,7 @@ class GlobalBanner extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Image.asset(
                     'assets/png/banner.png',
-                    width: context.deviceWidth ,
+                    width: context.deviceWidth,
                     fit: BoxFit.contain,
                   ),
                 ),

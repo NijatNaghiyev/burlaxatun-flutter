@@ -64,6 +64,7 @@
 //   }
 // }
 
+import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -77,6 +78,7 @@ class CountriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final babyNamesCubit = context.read<BabyNamesCubit2>();
     return BlocBuilder<CountriesCubit, CountriesState>(
       builder: (_, state) {
         if (state.status == CountriesStatus.loading) {
@@ -99,7 +101,6 @@ class CountriesWidget extends StatelessWidget {
 
         if (state.status == CountriesStatus.success) {
           final data = state.response?.results ?? [];
-          final result = data.isNotEmpty ? data[0] : null;
 
           return Expanded(
             child: ListView.separated(
@@ -125,7 +126,7 @@ class CountriesWidget extends StatelessWidget {
                   onTap: () {
                     context.push('/gender_names', extra: {
                       'id': country.id,
-                      //'cubit': babyNamesCubit,
+                      'cubit': babyNamesCubit,
                     });
                   },
                 );

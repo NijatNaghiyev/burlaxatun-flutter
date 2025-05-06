@@ -1,4 +1,6 @@
 import 'package:burla_xatun/cubits/about/about_cubit.dart';
+import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
+import 'package:burla_xatun/cubits/blog_sliders/blog_sliders_cubit.dart';
 import 'package:burla_xatun/cubits/contact/contact_cubit.dart';
 import 'package:burla_xatun/cubits/countries/countries_cubit.dart';
 import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
@@ -8,6 +10,8 @@ import 'package:burla_xatun/cubits/privacy_policy/privacy_policy_cubit.dart';
 import 'package:burla_xatun/cubits/signup_cubit/signup_cubit.dart';
 import 'package:burla_xatun/cubits/using_rules/using_rules_cubit.dart';
 import 'package:burla_xatun/data/contractor/about_contractor.dart';
+import 'package:burla_xatun/data/contractor/baby_names_contractor2.dart';
+import 'package:burla_xatun/data/contractor/blog_sliders_contractor.dart';
 import 'package:burla_xatun/data/contractor/contact_contractor.dart';
 import 'package:burla_xatun/data/contractor/countries_contractor.dart';
 import 'package:burla_xatun/data/contractor/daily_rec_contractor.dart';
@@ -18,6 +22,8 @@ import 'package:burla_xatun/data/contractor/privacy_policy_contractor.dart';
 import 'package:burla_xatun/data/contractor/register_contractor.dart';
 import 'package:burla_xatun/data/contractor/using_rules_contractor.dart';
 import 'package:burla_xatun/data/repository/about_repository.dart';
+import 'package:burla_xatun/data/repository/baby_names_repository2.dart';
+import 'package:burla_xatun/data/repository/blog_sliders_repository.dart';
 import 'package:burla_xatun/data/repository/contact_repository.dart';
 import 'package:burla_xatun/data/repository/countries_repository.dart';
 import 'package:burla_xatun/data/repository/daily_rec_repository.dart';
@@ -28,6 +34,8 @@ import 'package:burla_xatun/data/repository/register_repository.dart';
 import 'package:burla_xatun/data/repository/using_rules_repository.dart';
 import 'package:burla_xatun/data/services/local/login_token_service.dart';
 import 'package:burla_xatun/data/services/remote/about_service.dart';
+import 'package:burla_xatun/data/services/remote/baby_names_service2.dart';
+import 'package:burla_xatun/data/services/remote/blog_sliders_service.dart';
 import 'package:burla_xatun/data/services/remote/contact_service.dart';
 import 'package:burla_xatun/data/services/remote/countries_service.dart';
 import 'package:burla_xatun/data/services/remote/daily_rec_detail_service.dart';
@@ -64,6 +72,8 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton(() => AboutService());
   locator.registerLazySingleton(() => ContactService());
   locator.registerLazySingleton(() => CountriesService());
+  locator.registerLazySingleton(() => BabyNamesService());
+  locator.registerLazySingleton(() => BlogSlidersService());
 
   // contractor
   locator.registerLazySingleton<LoginContractor>(
@@ -95,6 +105,12 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton<CountriesContractor>(
       () => CountriesRepository(locator<CountriesService>()));
 
+  locator.registerLazySingleton<BabyNamesContractor>(
+      () => BabyNamesRepository(locator<BabyNamesService>()));
+
+  locator.registerLazySingleton<BlogSlidersContractor>(
+      () => BlogSlidersRepository(locator<BlogSlidersService>()));
+
   // cubit
   locator.registerFactory(() => LoginCubit(locator()));
   locator.registerFactory(() => DailyRecCubit(locator()));
@@ -106,4 +122,6 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => AboutCubit(locator()));
   locator.registerFactory(() => ContactCubit(locator()));
   locator.registerFactory(() => CountriesCubit(locator()));
+  locator.registerFactory(() => BabyNamesCubit2(locator()));
+  locator.registerFactory(() => BlogSlidersCubit(locator()));
 }

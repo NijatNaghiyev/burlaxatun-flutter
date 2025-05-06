@@ -1,10 +1,7 @@
-import 'dart:developer';
-
+import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
+import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../../../../cubits/baby_names_cubit/baby_names_cubit.dart';
-import 'boy_name_tile.dart';
 
 class BoyNames extends StatelessWidget {
   const BoyNames({
@@ -16,21 +13,38 @@ class BoyNames extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BabyNamesCubit, BabyNamesInitial>(
+    return BlocBuilder<BabyNamesCubit2, BabyNamesState2>(
       // buildWhen: (previous, current) => previous.names != current.names,
-      builder: (context, state) {
-        log('BUILDED');
-        if (state.nameStateStatus == NameStateStatus.loading) {
-          log('BOY PAGE STATUS ${state.nameStateStatus}');
-          return CircularProgressIndicator.adaptive();
-        } else if (state.nameStateStatus == NameStateStatus.success) {
-          log('BOY PAGE STATUS ${state.nameStateStatus}');
+      builder: (_, state) {
+        if (state.status == BabyNamesStatus2.loading) {
+          return Center(
+            child: CustomCircularProgressIndicator(),
+          );
+        }
+
+        if (state.status == BabyNamesStatus2.failure) {
+          return Center(
+            child: Text('Error'),
+          );
+        }
+
+        if (state.status == BabyNamesStatus2.networkError) {
+          return Center(
+            child: Text('Network error'),
+          );
+        }
+
+        if (state.status == BabyNamesStatus2.success) {
+          final boyNames = state.response?.results
+                  ?.where((result) => result.gender == 'male')
+                  .toList() ??
+              [];
           return Expanded(
             child: ListView.separated(
-              itemCount: state.names!.boys.length,
+              itemCount: boyNames.length,
               itemBuilder: (_, i) {
-                final boyName = state.names!.boys[i];
-                return BoyNameTile(boyName: boyName, countryId: countryId);
+                final boyName = boyNames[i];
+                //return BoyNameTile(boyName: boyName, countryId: countryId);
               },
               separatorBuilder: (BuildContext context, int index) {
                 return Divider(
@@ -39,11 +53,8 @@ class BoyNames extends StatelessWidget {
               },
             ),
           );
-        } else if (state.nameStateStatus == NameStateStatus.error) {
-          log('BOY PAGE STATUS ${state.nameStateStatus}');
-          return Text('melumat tapilmadi');
         }
-        log('BOY PAGE STATUS ${state.nameStateStatus}');
+
         return SizedBox.shrink();
       },
     );
