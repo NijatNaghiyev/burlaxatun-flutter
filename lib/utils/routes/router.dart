@@ -176,7 +176,12 @@ class Routerapp {
               ),
               GoRoute(
                 path: '/article_details',
-                builder: (context, state) => ArticleDetailsPage(),
+                builder: (context, state) {
+                  final blog = state.extra as Blog;
+                  return ArticleDetailsPage(
+                    blog: blog,
+                  );
+                },
               ),
               GoRoute(
                 path: '/see_all_articles',
