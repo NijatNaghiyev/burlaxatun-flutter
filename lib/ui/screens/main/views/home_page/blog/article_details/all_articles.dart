@@ -27,8 +27,6 @@ class AllArticles extends StatelessWidget {
           final data = state.response;
           final results = data?.results ?? [];
 
-          //final allBlogs = categories.expand((cat) => cat.blogs ?? []).toList();
-
           return ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -40,6 +38,7 @@ class AllArticles extends StatelessWidget {
                 title: category.name ?? '',
                 itemCount: blogs.length,
                 blogs: blogs,
+                category: category,
               );
             },
           );

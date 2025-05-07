@@ -36,10 +36,6 @@ class InitialBlogPage extends StatelessWidget {
               },
             ),
             24.h,
-            // ArticlesWidget(),
-            // 24.h,
-            // ArticlesWidget(),
-
             AllArticles(),
           ],
         ),

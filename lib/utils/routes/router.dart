@@ -1,5 +1,6 @@
 import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
 import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
+import 'package:burla_xatun/data/models/remote/response/blog_cat_model.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/email_request_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_otp_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_success_screen.dart';
@@ -179,7 +180,12 @@ class Routerapp {
               ),
               GoRoute(
                 path: '/see_all_articles',
-                builder: (context, state) => SeeAllArticlesPage(),
+                builder: (context, state) {
+                  final category = state.extra as Result;
+                  return SeeAllArticlesPage(
+                    category: category,
+                  );
+                },
               ),
               GoRoute(
                 path: '/videos',

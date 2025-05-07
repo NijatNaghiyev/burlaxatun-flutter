@@ -9,17 +9,18 @@ class ArticlesWidget extends StatelessWidget {
   final String title;
   final int itemCount;
   final List<Blog> blogs;
+  final Result category;
 
   const ArticlesWidget({
     super.key,
     required this.title,
     required this.itemCount,
     required this.blogs,
+    required this.category,
   });
 
   @override
   Widget build(BuildContext context) {
-    // final mainCubit = context.read<MainnCubit>();
     return Column(
       children: [
         Padding(
@@ -29,13 +30,15 @@ class ArticlesWidget extends StatelessWidget {
             children: [
               GlobalText(
                 text: title,
-                //'Doğuşdan sonra bərpa',
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: Colors.black,
               ),
               GestureDetector(
-                onTap: () => context.push('/see_all_articles'),
+                onTap: () => context.push(
+                  '/see_all_articles',
+                  extra: category,
+                ),
                 child: GlobalText(
                   text: 'Ətraflı',
                   fontSize: 10,
@@ -59,25 +62,30 @@ class ArticlesWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.37,
                   margin: EdgeInsets.only(left: index == 0 ? 15 : 12),
-                  decoration: BoxDecoration(
+                  child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    color: Color(0xffE4C0ED),
-                  ),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: Image.network(blog.file ?? ''),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(9),
-                        child: GlobalText(
-                          text: blog.name ?? '',
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Image.network(
+                          blog.file ?? '',
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Center(child: Icon(Icons.error)),
                         ),
-                      ),
-                    ],
+                        Positioned(
+                          bottom: 10,
+                          left: 9,
+                          right: 9,
+                          child: GlobalText(
+                            text: blog.name ?? '',
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
