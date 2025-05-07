@@ -1,3 +1,4 @@
+import 'package:burla_xatun/data/models/remote/response/blog_cat_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -5,7 +6,16 @@ import '../../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../../widgets/global_text.dart';
 
 class ArticlesWidget extends StatelessWidget {
-  const ArticlesWidget({super.key});
+  final String title;
+  final int itemCount;
+  final List<Blog> blogs;
+
+  const ArticlesWidget({
+    super.key,
+    required this.title,
+    required this.itemCount,
+    required this.blogs,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +28,8 @@ class ArticlesWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GlobalText(
-                text: 'Doğuşdan sonra bərpa',
+                text: title,
+                //'Doğuşdan sonra bərpa',
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: Colors.black,
@@ -40,52 +51,40 @@ class ArticlesWidget extends StatelessWidget {
           height: 175,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (_, i) {
-              return Row(
-                children: [
-                  SizedBox(width: i == 0 ? 15 : 12),
-                  GestureDetector(
-                    onTap: () => context.push('/article_details'),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.37,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          color: Color(0xffE4C0ED),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 16),
-                              child: Image.asset(
-                                  'assets/png/postnatal_saglamlig.png'),
-                            ),
-                            2.h,
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 9, right: 9, bottom: 5),
-                              child: GlobalText(
-                                maxLines: 3,
-                                textAlign: TextAlign.left,
-                                height: 1.3,
-                                text:
-                                    'Doğuşdan Sonra Emosional və Fiziki Dəyişikliklər',
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
+            itemCount: blogs.length,
+            itemBuilder: (_, index) {
+              final blog = blogs[index];
+              return GestureDetector(
+                onTap: () => context.push('/article_details', extra: blog),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.37,
+                  margin: EdgeInsets.only(left: index == 0 ? 15 : 12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Color(0xffE4C0ED),
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: Image.network(blog.file ?? ''),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(9),
+                        child: GlobalText(
+                          text: blog.name ?? '',
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               );
             },
           ),
         ),
+        24.h,
       ],
     );
   }
