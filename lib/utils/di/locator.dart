@@ -10,6 +10,7 @@ import 'package:burla_xatun/cubits/login_cubit/login_cubit.dart';
 import 'package:burla_xatun/cubits/medicine/medicine_cubit.dart';
 import 'package:burla_xatun/cubits/privacy_policy/privacy_policy_cubit.dart';
 import 'package:burla_xatun/cubits/signup_cubit/signup_cubit.dart';
+import 'package:burla_xatun/cubits/user_update/user_update_cubit.dart';
 import 'package:burla_xatun/cubits/using_rules/using_rules_cubit.dart';
 import 'package:burla_xatun/data/contractor/about_contractor.dart';
 import 'package:burla_xatun/data/contractor/baby_names_contractor2.dart';
@@ -24,6 +25,7 @@ import 'package:burla_xatun/data/contractor/login_contractor.dart';
 import 'package:burla_xatun/data/contractor/medicine_contractor.dart';
 import 'package:burla_xatun/data/contractor/privacy_policy_contractor.dart';
 import 'package:burla_xatun/data/contractor/register_contractor.dart';
+import 'package:burla_xatun/data/contractor/user_update_contractor.dart';
 import 'package:burla_xatun/data/contractor/using_rules_contractor.dart';
 import 'package:burla_xatun/data/repository/about_repository.dart';
 import 'package:burla_xatun/data/repository/baby_names_repository2.dart';
@@ -37,6 +39,7 @@ import 'package:burla_xatun/data/repository/login_repository.dart';
 import 'package:burla_xatun/data/repository/medicine_repository.dart';
 import 'package:burla_xatun/data/repository/privacy_policy_repository.dart';
 import 'package:burla_xatun/data/repository/register_repository.dart';
+import 'package:burla_xatun/data/repository/user_update_repository.dart';
 import 'package:burla_xatun/data/repository/using_rules_repository.dart';
 import 'package:burla_xatun/data/services/local/login_token_service.dart';
 import 'package:burla_xatun/data/services/remote/about_service.dart';
@@ -52,6 +55,7 @@ import 'package:burla_xatun/data/services/remote/login_service.dart';
 import 'package:burla_xatun/data/services/remote/medicine_service.dart';
 import 'package:burla_xatun/data/services/remote/privacy_policy_service.dart';
 import 'package:burla_xatun/data/services/remote/register_service.dart';
+import 'package:burla_xatun/data/services/remote/user_update_service.dart';
 import 'package:burla_xatun/data/services/remote/using_rules_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -84,6 +88,7 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton(() => BlogSlidersService());
   locator.registerLazySingleton(() => BlogCatService());
   locator.registerLazySingleton(() => MedicineService());
+  locator.registerLazySingleton(() => UserUpdateService());
 
   // contractor
   locator.registerLazySingleton<LoginContractor>(
@@ -127,6 +132,9 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton<MedicineContractor>(
       () => MedicineRepository(locator<MedicineService>()));
 
+  locator.registerLazySingleton<UserUpdateContractor>(
+      () => UserUpdateRepository(locator<UserUpdateService>()));
+
   // cubit
   locator.registerFactory(() => LoginCubit(locator()));
   locator.registerFactory(() => DailyRecCubit(locator()));
@@ -142,4 +150,5 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => BlogSlidersCubit(locator()));
   locator.registerFactory(() => BlogCatCubit(locator()));
   locator.registerFactory(() => MedicineCubit(locator()));
+  locator.registerFactory(() => UserUpdateCubit(locator()));
 }

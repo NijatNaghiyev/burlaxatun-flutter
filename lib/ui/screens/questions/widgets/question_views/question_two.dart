@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/cubits/user_update/user_update_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +16,7 @@ class QuestionTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
+    final userUpdateCubit = context.read<UserUpdateCubit>();
     return Padding(
       padding: const EdgeInsets.only(top: 56),
       child: Column(
@@ -69,30 +71,35 @@ class QuestionTwo extends StatelessWidget {
                           itemExtent: 60,
                           children: [
                             for (int i = 0; i < 37; i++)
-                              SizedBox(
-                                width: double.maxFinite,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    BlocBuilder<QuestionsCubit,
-                                        QuestionsInitial>(
-                                      buildWhen: (previous, current) {
-                                        return previous.focusedWeekIndex !=
-                                            current.focusedWeekIndex;
-                                      },
-                                      builder: (context, state) {
-                                        log('builded scroll wheel index: $i');
-                                        return GlobalText(
-                                          text: '$i',
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.w500,
-                                          color: state.focusedWeekIndex == i
-                                              ? Colors.pink
-                                              : Color(0xffACACAC),
-                                        );
-                                      },
-                                    ),
-                                  ],
+                              BlocListener<UserUpdateCubit, UserUpdateState>(
+                                listener: (_, state) {
+                                  userUpdateCubit.pregnantWeek = i.toString();
+                                },
+                                child: SizedBox(
+                                  width: double.maxFinite,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      BlocBuilder<QuestionsCubit,
+                                          QuestionsInitial>(
+                                        buildWhen: (previous, current) {
+                                          return previous.focusedWeekIndex !=
+                                              current.focusedWeekIndex;
+                                        },
+                                        builder: (context, state) {
+                                          log('builded scroll wheel index: $i');
+                                          return GlobalText(
+                                            text: '$i',
+                                            fontSize: 32,
+                                            fontWeight: FontWeight.w500,
+                                            color: state.focusedWeekIndex == i
+                                                ? Colors.pink
+                                                : Color(0xffACACAC),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                           ],

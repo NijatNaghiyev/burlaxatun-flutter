@@ -359,12 +359,10 @@
 //   }
 // }
 
-
-
-
-
 import 'dart:async';
 import 'dart:developer';
+import 'package:burla_xatun/cubits/user_update/user_update_cubit.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:intl/intl.dart';
 
 import 'package:burla_xatun/data/models/remote/response/pregnancy_calculate_model.dart';
@@ -424,8 +422,14 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   final PregnancyService pregnancyService = PregnancyService();
 
   final List questionViews = [
-    QuestionOne(),
-    QuestionTwo(),
+    BlocProvider<UserUpdateCubit>(
+      create: (context) => locator<UserUpdateCubit>(),
+      child: QuestionOne(),
+    ),
+    BlocProvider<UserUpdateCubit>(
+      create: (context) => locator<UserUpdateCubit>(),
+      child: QuestionTwo(),
+    ),
     QuestionThree(),
     RegisterSuccess(),
     AddYourChild(),
@@ -456,15 +460,15 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   Future<void> calculate() async {
     try {
       stateLoading();
-      
+
       // Ensure we have a properly formatted date string (YYYY-MM-DD)
       String dateToSend = state.birthDateString;
       if (dateToSend == 'Dogum tarixini qeyd edinn') {
         dateToSend = DateFormat('yyyy-MM-dd').format(state.selectedDay);
       }
-      
+
       log('Sending date: $dateToSend');
-      
+
       calculatedData = await pregnancyService.calculatePregnancy(
         type: (state.selectedCalculateOptionIndex ?? 0),
         date: dateToSend,
@@ -734,8 +738,9 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
       formattedDate = DateFormat('yyyy-MM-dd').format(initialTime);
       log('Date parsing failed. Using default format: $formattedDate');
     }
-    
-    emit(state.copyWith(birthDateString: formattedDate, initialDateTime: initialTime));
+
+    emit(state.copyWith(
+        birthDateString: formattedDate, initialDateTime: initialTime));
     log('Updated birth date: $formattedDate');
   }
 
