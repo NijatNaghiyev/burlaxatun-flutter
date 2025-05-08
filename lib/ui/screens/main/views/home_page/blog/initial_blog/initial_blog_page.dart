@@ -1,10 +1,12 @@
+import 'package:burla_xatun/cubits/blog_sliders/blog_sliders_cubit.dart';
+import 'package:burla_xatun/ui/screens/main/views/home_page/blog/article_details/all_articles.dart';
+import 'package:burla_xatun/ui/screens/main/views/home_page/blog/initial_blog/widgets/blog_banner.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_appbar.dart';
-import '../../../../../../widgets/global_banner.dart';
-import 'widgets/articles_widget.dart';
 import 'widgets/search_input.dart';
 
 class InitialBlogPage extends StatelessWidget {
@@ -28,11 +30,13 @@ class InitialBlogPage extends StatelessWidget {
               child: SearchInput(),
             ),
             24.h,
-            GlobalBanner(),
+            BlocBuilder<BlogSlidersCubit, BlogSlidersState>(
+              builder: (context, state) {
+                return BlogBanner();
+              },
+            ),
             24.h,
-            ArticlesWidget(),
-            24.h,
-            ArticlesWidget(),
+            AllArticles(),
           ],
         ),
       ),

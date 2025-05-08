@@ -1,4 +1,14 @@
+import 'package:burla_xatun/cubits/about/about_cubit.dart';
+import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
+import 'package:burla_xatun/cubits/blog_cat/blog_cat_cubit.dart';
+import 'package:burla_xatun/cubits/blog_sliders/blog_sliders_cubit.dart';
+import 'package:burla_xatun/cubits/contact/contact_cubit.dart';
+import 'package:burla_xatun/cubits/countries/countries_cubit.dart';
 import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
+import 'package:burla_xatun/cubits/faqs_cubit/faqs_cubit.dart';
+import 'package:burla_xatun/cubits/medicine/medicine_cubit.dart';
+import 'package:burla_xatun/cubits/privacy_policy/privacy_policy_cubit.dart';
+import 'package:burla_xatun/cubits/using_rules/using_rules_cubit.dart';
 import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +38,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -44,7 +53,54 @@ class MyApp extends StatelessWidget {
           create: (context) => locator<DailyRecCubit>()..getDailyRec(),
         ),
         BlocProvider(
-          create: (context) => locator<DailyRecDetailCubit>(),
+          create: (context) {
+            final dailyRecState = context.read<DailyRecCubit>().state;
+            if (dailyRecState.status == DailyRecStatus.success) {
+              final slug = dailyRecState.response?.results?.first.slug;
+              return locator<DailyRecDetailCubit>()..getDailyRecDetail(slug!);
+            }
+            return locator<DailyRecDetailCubit>();
+          },
+        ),
+        BlocProvider(
+          create: (context) => locator<FaqsCubit>()..getFaqs(),
+        ),
+
+        BlocProvider(
+          create: (context) =>
+              locator<PrivacyPolicyCubit>()..getPrivacyPolicy(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<UsingRulesCubit>()..getUsingRules(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<AboutCubit>()..getAbout(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<ContactCubit>()..getContact(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<CountriesCubit>()..getCountries(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<BabyNamesCubit2>(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<BlogSlidersCubit>()..getBlogSliders(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<BlogCatCubit>()..getBlogCat(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<MedicineCubit>()..getMedicines(),
         ),
 
         // BlocProvider(

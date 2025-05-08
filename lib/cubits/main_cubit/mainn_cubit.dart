@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:burla_xatun/data/models/local/medicine_detail_items_model.dart';
 import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_password/change_password_page/change_password_page.dart';
 import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/using_rules/using_rules_screen.dart';
 import 'package:burla_xatun/ui/widgets/change_baby_bottomsheet/global_change_baby_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +36,6 @@ import '../../ui/screens/main/views/profie_page/initial_profile/initial_profile_
 import '../../ui/screens/main/views/profie_page/pricavy_policy/privacy_policy_view.dart';
 import '../../ui/screens/main/views/profie_page/settings/setting_view.dart';
 import '../../ui/screens/main/views/profie_page/special_thanks/special_thanks_view.dart';
-import '../../ui/screens/main/views/profie_page/terms_of_use/terms_of_use_view.dart';
 import 'main_state.dart';
 
 enum UltrasoundFormat { format2d, format3d }
@@ -93,7 +93,7 @@ class MainnCubit extends Cubit<MainInitial> {
     'faq': FaqView(),
     'about_us': AboutUsView(),
     'contact_us': ContactUsView(),
-    'terms_of_use': TermsOfUseView(),
+    'terms_of_use': UsingRulesScreen(),
     'privacy_policy': PrivacyPolicyView(),
     'special_thanks': SpecialThanksView(),
   };
@@ -135,9 +135,7 @@ class MainnCubit extends Cubit<MainInitial> {
     });
   }
 
-  void onEmoji(){
-    
-  }
+  void onEmoji() {}
 
   void setShellContext(v) {
     emit(state.copyWith(navigationShellContext: v));

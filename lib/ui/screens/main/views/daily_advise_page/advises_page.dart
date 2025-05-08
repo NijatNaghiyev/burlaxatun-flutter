@@ -1,7 +1,7 @@
 import 'package:burla_xatun/cubits/daily_rec_detail/daily_rec_detail_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../../utils/extensions/context_extensions.dart';
 import '../../../../../utils/extensions/num_extensions.dart';
@@ -11,21 +11,22 @@ import 'widgets/advise_text.dart';
 import 'widgets/advise_title.dart';
 
 class AdvisesPage extends StatefulWidget {
-  const AdvisesPage({super.key});
+  final String? slug;
+
+  const AdvisesPage({
+    super.key,
+    this.slug,
+  });
 
   @override
   State<AdvisesPage> createState() => _AdvisesPageState();
 }
 
 class _AdvisesPageState extends State<AdvisesPage> {
-  late final String slug;
-
   @override
   void initState() {
     super.initState();
-    final extra = GoRouterState.of(context).extra;
-    slug = (extra as Map<String, dynamic>)['slug'] as String;
-    context.read<DailyRecDetailCubit>().getDailyRecDetail(slug);
+    //context.read<DailyRecDetailCubit>().getDailyRecDetail();
   }
 
   @override
@@ -55,22 +56,46 @@ class _AdvisesPageState extends State<AdvisesPage> {
                     child: Column(
                       children: [
                         26.h,
+                        // SizedBox(
+                        //   height: 148,
+                        //   width: context.deviceWidth,
+                        //   child: DecoratedBox(
+                        //     decoration: BoxDecoration(
+                        //       color: Colors.black12,
+                        //       border: Border.all(
+                        //         color: const Color(0xffF5F5F5),
+                        //       ),
+                        //       borderRadius: BorderRadius.circular(8),
+                        //     ),
+                        //     child: const Center(
+                        //       child: Text('image'),
+                        //     ),
+                        //   ),
+                        // ),
+
                         SizedBox(
                           height: 148,
                           width: context.deviceWidth,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Colors.black12,
-                              border: Border.all(
-                                color: const Color(0xffF5F5F5),
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const Center(
-                                child: Text(
-                                    'image')), // buranı real şəkil ilə əvəz edə bilərsən
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: data?.image != null
+                                ? data!.image!.endsWith('.svg')
+                                    ? SvgPicture.network(
+                                        data.image!,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.network(
+                                        data.image!,
+                                        fit: BoxFit.cover,
+                                      )
+                                : Container(
+                                    color: Colors.black12,
+                                    child: const Center(
+                                        child: Text('Şəkil yoxdur')),
+                                  ),
                           ),
                         ),
+
                         20.h,
                         AdviseTitle(adviceTitle: data?.name ?? ''),
                         20.h,

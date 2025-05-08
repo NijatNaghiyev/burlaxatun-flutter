@@ -3,62 +3,43 @@ import 'package:go_router/go_router.dart';
 
 class ArticleDetailsAppbar extends StatelessWidget
     implements PreferredSizeWidget {
-  const ArticleDetailsAppbar({super.key});
+  final String imagePath;
+
+  const ArticleDetailsAppbar({
+    super.key,
+    required this.imagePath,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: SizedBox(
+        height: 175,
+        child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 74),
-              child: GestureDetector(
-                onTap: () {
-                  context.pop();
-                },
-                child: SizedBox(
-                  width: 44,
-                  height: 44,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.arrow_back_ios_new_rounded),
-                      ],
-                    ),
-                  ),
+            Positioned.fill(
+              child: Image.network(
+                imagePath,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => Container(
+                  color: Colors.grey[200],
+                  child: const Icon(Icons.error),
                 ),
               ),
             ),
-            SizedBox(
-              child: Image.asset(
-                'assets/png/postnatal.png',
-                scale: 2.9,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 74),
-              child: SizedBox(
-                width: 44,
-                height: 44,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
+            Positioned(
+              top: 16,
+              left: 15,
+              child: GestureDetector(
+                onTap: () => context.pop(),
+                child: Container(
+                  width: 44,
+                  height: 44,
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.more_vert_rounded),
-                    ],
-                  ),
+                  child: const Icon(Icons.arrow_back_ios_new_rounded),
                 ),
               ),
             ),
@@ -69,5 +50,5 @@ class ArticleDetailsAppbar extends StatelessWidget
   }
 
   @override
-  Size get preferredSize => Size(double.maxFinite, 175);
+  Size get preferredSize => const Size(double.maxFinite, 175);
 }

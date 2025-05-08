@@ -75,25 +75,24 @@ class _BoyNameTileState extends State<BoyNameTile> {
   }
 }
 
-
-  // trailing: GestureDetector(
-      //   onTap: () async {
-      //     isNameSelected.value = !isNameSelected.value;
-      //     await babyNamesCubit.selectName(boyName.id);
-      //     // await babyNamesCubit.getNames(countryId);
-      //   },
-      //   child: ValueListenableBuilder(
-      //     valueListenable: isNameSelected,
-      //     builder: (context, isSelected, child) {
-      //       return SvgPicture.asset(
-      //         'assets/icons/favorite_icon.svg',
-      //         colorFilter: ColorFilter.mode(
-      //           isSelected
-      //               ? ColorConstants.primaryColor
-      //               : ColorConstants.hintTextColor,
-      //           BlendMode.srcIn,
-      //         ),
-      //       );
-      //     },
-      //   ),
-      // ),
+// trailing: GestureDetector(
+//   onTap: () async {
+//     isNameSelected.value = !isNameSelected.value;
+//     await babyNamesCubit.selectName(boyName.id);
+//     // await babyNamesCubit.getNames(countryId);
+//   },
+//   child: ValueListenableBuilder(
+//     valueListenable: isNameSelected,
+//     builder: (context, isSelected, child) {
+//       return SvgPicture.asset(
+//         'assets/icons/favorite_icon.svg',
+//         colorFilter: ColorFilter.mode(
+//           isSelected
+//               ? ColorConstants.primaryColor
+//               : ColorConstants.hintTextColor,
+//           BlendMode.srcIn,
+//         ),
+//       );
+//     },
+//   ),
+// ),
