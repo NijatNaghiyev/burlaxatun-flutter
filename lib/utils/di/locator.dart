@@ -92,6 +92,8 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton(() => BlogSlidersService());
   locator.registerLazySingleton(() => BlogCatService());
   locator.registerLazySingleton(() => MedicineService());
+  locator.registerLazySingleton(() => UserUpdateService());
+  locator.registerLazySingleton(() => MedicineCreateService());
 
   // contractor
   locator.registerLazySingleton<LoginContractor>(
@@ -135,6 +137,11 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton<MedicineContractor>(
       () => MedicineRepository(locator<MedicineService>()));
 
+  locator.registerLazySingleton<UserUpdateContractor>(
+      () => UserUpdateRepository(locator<UserUpdateService>()));
+  locator.registerLazySingleton<MedicineCreateContractor>(
+      () => MedicineCreateRepository(locator<MedicineCreateService>()));
+
   // cubit
   locator.registerFactory(() => LoginCubit(locator()));
   locator.registerFactory(() => DailyRecCubit(locator()));
@@ -150,4 +157,6 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => BlogSlidersCubit(locator()));
   locator.registerFactory(() => BlogCatCubit(locator()));
   locator.registerFactory(() => MedicineCubit(locator()));
+  locator.registerFactory(() => UserUpdateCubit(locator()));
+  locator.registerFactory(() => MedicineCreateCubit(locator()));
 }
