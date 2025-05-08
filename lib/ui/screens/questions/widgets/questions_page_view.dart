@@ -10,15 +10,14 @@ class QuestionsPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
     return Expanded(
-      flex: 10,
       child: PageView.builder(
         physics: NeverScrollableScrollPhysics(),
         controller: questionsCubit.pageController,
-          itemCount: questionsCubit.questionViews.length,
-          itemBuilder: (_, i) {
-            return questionsCubit.questionViews[i];
-          },
-        ),
+        itemCount: questionsCubit.questionViews.length,
+        itemBuilder: (_, i) {
+          return questionsCubit.questionViews[i];
+        },
+      ),
     );
   }
 }

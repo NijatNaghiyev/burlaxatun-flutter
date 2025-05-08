@@ -4,16 +4,14 @@ class EndpointsConstants {
   static const String baseUrl = 'https://burla-backend-py.onrender.com';
 
   // Authentication
-  static const String users = '$baseUrl/users';
-
-  static const String login = '$baseUrl/A/users/access-token/';
-  static const String register = '$baseUrl/A/user-register/';
-  static const String tokenInfo = '';
-  static const String tokenRefresh = '';
-  static const String changePassword = '';
+  static const login = '$baseUrl/A/users/access-token/';
+  static const register = '$baseUrl/A/user-register/';
+  static const userUpdate = "$baseUrl/A/user-update/";
+  
+  static const users = '$baseUrl/users';
 
   static const String pregnancyCalculateDetails =
-      '$baseUrl/pregnancy/calculate';
+      '$baseUrl/B1/pregnancy-calculate/';
 
   // Baby
   static const String babyUrl = '$baseUrl/baby';

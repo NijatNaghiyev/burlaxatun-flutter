@@ -42,7 +42,7 @@ class _FirstDayOfLastPeriodState extends State<FirstDayOfLastPeriod> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               GlobalText(
-                text: 'Period muddetini secin',
+                text: 'Period müddəti',
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: Color(0xff667085),
@@ -114,13 +114,14 @@ class _FirstDayOfLastPeriodState extends State<FirstDayOfLastPeriod> {
                                     height: 58,
                                     width: MediaQuery.of(context).size.width,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(left: 120),
                                           child: GlobalText(
-                                            text: 'həftəlik',
+                                            text: 'gün',
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500,
                                             color: Color(0xffEC407A),
@@ -136,11 +137,12 @@ class _FirstDayOfLastPeriodState extends State<FirstDayOfLastPeriod> {
                                 onSelectedItemChanged: (i) {
                                   log(' hefte: $i');
                                   questionsCubit.updateFocusedWeekIndex(i);
-                                  questionsCubit.updatePeriodTime(i.toString());
+                                  questionsCubit
+                                      .updatePeriodTime("${i + 1} gün");
                                 },
                                 itemExtent: 57,
                                 children: [
-                                  for (int i = 0; i < 10; i++)
+                                  for (int i = 1; i < 11; i++)
                                     SizedBox(
                                       width: double.maxFinite,
                                       child: Row(
@@ -155,7 +157,8 @@ class _FirstDayOfLastPeriodState extends State<FirstDayOfLastPeriod> {
                                                 text: '$i',
                                                 fontSize: 32,
                                                 fontWeight: FontWeight.w500,
-                                                color: state.focusedWeekIndex == i
+                                                color: state.focusedWeekIndex ==
+                                                        i - 1
                                                     ? Colors.pink
                                                     : Color(0xffACACAC),
                                               );
