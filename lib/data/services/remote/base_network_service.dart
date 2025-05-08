@@ -12,6 +12,7 @@ class BaseNetwork {
 
   Dio? _dio;
 
+  /// Get
   Dio getDio({String? token}) {
     log('authorization token is this: $token');
     _dio ??= Dio()
@@ -27,5 +28,15 @@ class BaseNetwork {
     }
 
     return _dio!;
+  }
+
+  /// Post
+  Future<Response> post({
+    required String path,
+    required dynamic postData,
+    Options? options,
+  }) async {
+    final dio = getDio();
+    return await dio.post(path, data: postData, options: options);
   }
 }

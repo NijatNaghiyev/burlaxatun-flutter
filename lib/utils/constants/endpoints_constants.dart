@@ -38,4 +38,5 @@ class EndpointsConstants {
 
   // C
   static const String medicines = '$baseUrl/C/medicines/';
+  static const String medicineCreate = '$baseUrl/C/medicines/create/';
 }
