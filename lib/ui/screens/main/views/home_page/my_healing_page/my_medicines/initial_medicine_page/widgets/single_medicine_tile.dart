@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/data/models/remote/response/medicines_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -8,7 +9,12 @@ import '../../../../../../../../widgets/global_text.dart';
 import '../../medicine_details_page/medicine_details_page.dart';
 
 class SingleMedicineTile extends StatelessWidget {
-  const SingleMedicineTile({super.key});
+  final Result data;
+
+  const SingleMedicineTile({
+    super.key,
+    required this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +46,9 @@ class SingleMedicineTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GlobalText(
-                      text: '24.09.2024-24.12.2024',
+                      text:
+                          '${_formatDate(data.startDate)} - ${_formatDate(data.endDate)}',
+                      //'24.09.2024-24.12.2024',
                       fontSize: 10,
                       fontWeight: FontWeight.w500,
                       color: Colors.black,
@@ -62,7 +70,7 @@ class SingleMedicineTile extends StatelessWidget {
                 ),
                 8.h,
                 GlobalText(
-                  text: 'Folic acid',
+                  text: data.name ?? 'Ad yoxdur',
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                   color: Colors.black,
@@ -73,5 +81,10 @@ class SingleMedicineTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _formatDate(DateTime? date) {
+    if (date == null) return 'Tarix yoxdur';
+    return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
   }
 }

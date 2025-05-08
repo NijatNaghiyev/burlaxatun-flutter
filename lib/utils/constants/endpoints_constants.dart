@@ -35,4 +35,7 @@ class EndpointsConstants {
   static const String babyNames = '$baseUrl/extra/baby-names/';
   static const String blogSliders = '$baseUrl/extra/blog-sliders/';
   static const String blogCategories = '$baseUrl/extra/blogs-with-categories/';
+
+  // C
+  static const String medicines = '$baseUrl/C/medicines/';
 }
