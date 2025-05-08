@@ -24,7 +24,9 @@ class SingleMedicineTile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => MedicineDetailsPage(),
+            builder: (_) => MedicineDetailsPage(
+              data: data,
+            ),
           ),
         );
       },
