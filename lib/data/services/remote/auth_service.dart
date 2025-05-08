@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:burla_xatun/data/models/remote/response/register_response_model.dart';
 import 'package:dio/dio.dart';
 import '../../../utils/constants/endpoints_constants.dart';
 import '../../models/remote/response/user_response_model.dart';

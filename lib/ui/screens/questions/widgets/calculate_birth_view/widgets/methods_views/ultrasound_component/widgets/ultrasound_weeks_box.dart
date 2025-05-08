@@ -20,7 +20,7 @@ class UltrasoundWeeksBox extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GlobalText(
-          text: 'Hefte',
+          text: "Həftə",
           fontSize: 14,
           fontWeight: FontWeight.w500,
           color: Color(0xff667085),
@@ -32,7 +32,7 @@ class UltrasoundWeeksBox extends StatelessWidget {
           },
           child: SizedBox(
             height: 56,
-            width: context.deviceWidth * 0.44,
+            width: context.deviceWidth * 0.43,
             child: DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(34)),
@@ -47,7 +47,7 @@ class UltrasoundWeeksBox extends StatelessWidget {
                       builder: (context, state) {
                         return GlobalText(
                           text: state.ultrasoundWeekCount == null
-                              ? 'Hefte sayi'
+                              ? 'Həftə sayı'
                               : state.ultrasoundWeekCount.toString(),
                           fontSize: 14,
                           fontWeight: FontWeight.w500,

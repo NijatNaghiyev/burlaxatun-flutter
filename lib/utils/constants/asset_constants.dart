@@ -12,6 +12,9 @@ class AssetConstants {
   static const String onboard2 = "$svgsPath/onboard_2.svg";
   static const String onboard3 = "$svgsPath/onboard_3.svg";
   static const taddaaImage = "$svgsPath/taddaaa_image.svg";
+  static const baby = "$svgsPath/baby.svg";
+  static const arrowLeft = "$svgsPath/arrow_left.svg";
+  static const arrowRight = "$svgsPath/arrow_right.svg";
 
   static const String iconsPath = 'assets/icons';
   static const String emailIcon = '$iconsPath/email_icon.svg';
@@ -28,4 +31,6 @@ class AssetConstants {
   static const String calendarIcon = '$iconsPath/calendar_svg.svg';
   static const String arrowUpIcon = 'assets/icons/arrow_up.svg';
   static const String arrowDownIcon = '$iconsPath/arrow_down.svg';
+
+  static const greenApple = "assets/png/green_apple.png";
 }

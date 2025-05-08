@@ -11,6 +11,8 @@ class GlobalButton extends StatelessWidget {
     required this.textColor,
     required this.onPressed,
     this.height = 55,
+    this.textFSize = 16,
+    this.textHeight = 1.3,
   });
 
   final double height;
@@ -18,6 +20,8 @@ class GlobalButton extends StatelessWidget {
   final Color buttonColor;
   final Color borderColor;
   final Color textColor;
+  final double? textFSize;
+  final double? textHeight;
   final void Function()? onPressed;
 
   @override
@@ -42,8 +46,8 @@ class GlobalButton extends StatelessWidget {
         onPressed: onPressed,
         child: GlobalText(
           text: buttonName,
-          fontSize: 16,
-          height: 1.3,
+          fontSize: textFSize,
+          height: textHeight,
           fontWeight: FontWeight.w500,
           color: textColor,
         ),

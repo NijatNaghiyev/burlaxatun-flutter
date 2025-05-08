@@ -21,14 +21,14 @@ class Questions extends StatelessWidget {
       appBar: GlobalAppbar(
         title: 'Qeydiyyat',
         onLeadingTap: () {
-          questionsCubit.goBack();
+          context.pop();
         },
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           BlocBuilder<QuestionsCubit, QuestionsInitial>(
-            builder: (context, state) {
+            builder: (_, state) {
               return state.questionPageIndex < 3
                   ? Column(
                       children: [
