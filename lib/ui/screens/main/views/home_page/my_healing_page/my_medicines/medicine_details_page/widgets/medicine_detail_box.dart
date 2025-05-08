@@ -42,7 +42,7 @@ class MedicineDetailBox extends StatelessWidget {
       case 0:
         return data.name ?? 'Ad yoxdur';
       case 1:
-        return data.dose ?? 'Doza yoxdur';
+        return "${data.dose} mg";
       case 2:
         return data.frequency ?? 'Tezlik yoxdur';
       case 3:
