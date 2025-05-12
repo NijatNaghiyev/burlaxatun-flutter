@@ -5,6 +5,7 @@ import 'package:burla_xatun/cubits/blog_sliders/blog_sliders_cubit.dart';
 import 'package:burla_xatun/cubits/contact/contact_cubit.dart';
 import 'package:burla_xatun/cubits/countries/countries_cubit.dart';
 import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
+import 'package:burla_xatun/cubits/doctors_list/doctors_list_cubit.dart';
 import 'package:burla_xatun/cubits/faqs_cubit/faqs_cubit.dart';
 import 'package:burla_xatun/cubits/medicine/medicine_cubit.dart';
 import 'package:burla_xatun/cubits/medicine_create/medicine_create_cubit.dart';
@@ -106,6 +107,10 @@ class MyApp extends StatelessWidget {
 
         BlocProvider<MedicineCreateCubit>(
           create: (context) => locator<MedicineCreateCubit>(),
+        ),
+
+        BlocProvider<DoctorsListCubit>(
+          create: (context) => locator<DoctorsListCubit>()..getDoctorsList(),
         ),
 
         // BlocProvider(

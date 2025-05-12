@@ -1,17 +1,19 @@
+import 'package:burla_xatun/data/models/remote/response/doctors_list_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../../widgets/global_text.dart';
 
 class DoctorInfo extends StatelessWidget {
-  const DoctorInfo({super.key});
+  final Result doctor;
 
+  const DoctorInfo({super.key, required this.doctor});
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(
-          'assets/png/doctor_image.png',
+        Image.network(
+          doctor.image ?? 'assets/png/doctor_image.png',
           width: 40,
           height: 40,
         ),
@@ -23,7 +25,7 @@ class DoctorInfo extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 GlobalText(
-                  text: 'Dr. Günel Kərimova',
+                  text: 'Dr. ${doctor.name} ${doctor.surname}',
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: Colors.black,
@@ -35,7 +37,7 @@ class DoctorInfo extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 GlobalText(
-                  text: 'Ginekolog',
+                  text: doctor.position?.name ?? 'N/A',
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                   color: Colors.black,
@@ -49,7 +51,7 @@ class DoctorInfo extends StatelessWidget {
                 ),
                 SizedBox(width: 4),
                 GlobalText(
-                  text: 'Medistyle Hosbital',
+                  text: doctor.workplace ?? 'N/A',
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                   color: Colors.black,
