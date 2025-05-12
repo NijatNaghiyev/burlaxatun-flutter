@@ -50,57 +50,59 @@ class MyApp extends StatelessWidget {
         BlocProvider<SignupCubit>(
           create: (context) => locator<SignupCubit>(),
         ),
-        BlocProvider(
+        BlocProvider<DailyRecCubit>(
           create: (context) => locator<DailyRecCubit>()..getDailyRec(),
         ),
-        BlocProvider(
+        BlocProvider<DailyRecCubit>(
           create: (context) {
             final dailyRecState = context.read<DailyRecCubit>().state;
             if (dailyRecState.status == DailyRecStatus.success) {
               final slug = dailyRecState.response?.results?.first.slug;
-              return locator<DailyRecDetailCubit>()..getDailyRecDetail(slug!);
+              return locator<DailyRecCubit>()..getDailyRec();
+              // ..getDailyRecDetail(slug!);
             }
-            return locator<DailyRecDetailCubit>();
+            return locator<DailyRecCubit>();
           },
         ),
-        BlocProvider(
+        BlocProvider<FaqsCubit>(
           create: (context) => locator<FaqsCubit>()..getFaqs(),
         ),
 
-        BlocProvider(
+        BlocProvider<PrivacyPolicyCubit>(
           create: (context) =>
               locator<PrivacyPolicyCubit>()..getPrivacyPolicy(),
         ),
 
-        BlocProvider(
+        BlocProvider<UsingRulesCubit>(
           create: (context) => locator<UsingRulesCubit>()..getUsingRules(),
         ),
 
-        BlocProvider(
-          create: (context) => locator<AboutCubit>()..getAbout(),
-        ),
+        BlocProvider<UsingRulesCubit>(
+            create: (context) => locator<UsingRulesCubit>()..getUsingRules()
+            // ..getAbout(),
+            ),
 
-        BlocProvider(
+        BlocProvider<ContactCubit>(
           create: (context) => locator<ContactCubit>()..getContact(),
         ),
 
-        BlocProvider(
+        BlocProvider<CountriesCubit>(
           create: (context) => locator<CountriesCubit>()..getCountries(),
         ),
 
-        BlocProvider(
+        BlocProvider<BabyNamesCubit2>(
           create: (context) => locator<BabyNamesCubit2>(),
         ),
 
-        BlocProvider(
+        BlocProvider<BlogSlidersCubit>(
           create: (context) => locator<BlogSlidersCubit>()..getBlogSliders(),
         ),
 
-        BlocProvider(
+        BlocProvider<BlogCatCubit>(
           create: (context) => locator<BlogCatCubit>()..getBlogCat(),
         ),
 
-        BlocProvider(
+        BlocProvider<MedicineCubit>(
           create: (context) => locator<MedicineCubit>()..getMedicines(),
         ),
 

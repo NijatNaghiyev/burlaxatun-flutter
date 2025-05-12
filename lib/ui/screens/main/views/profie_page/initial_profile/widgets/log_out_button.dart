@@ -27,13 +27,13 @@ class _LogOutButtonState extends State<LogOutButton> {
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainnCubit>();
+    // final mainCubit = context.read<MainnCubit>();
     return GestureDetector(
       onTap: () {
         _logOut();
         Future.delayed(Duration(seconds: 1), () {
           context.go('/login');
-          mainCubit.changeView(0);
+          // mainCubit.changeView(0);
         });
       },
       child: SizedBox(
