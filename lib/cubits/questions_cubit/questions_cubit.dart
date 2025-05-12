@@ -430,7 +430,10 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
       create: (context) => locator<UserUpdateCubit>(),
       child: QuestionTwo(),
     ),
-    QuestionThree(),
+    BlocProvider<UserUpdateCubit>(
+      create: (context) => locator<UserUpdateCubit>(),
+      child: QuestionThree(),
+    ),
     RegisterSuccess(),
     AddYourChild(),
   ];

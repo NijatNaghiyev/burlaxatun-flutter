@@ -1,5 +1,6 @@
 import 'package:burla_xatun/data/models/remote/response/user_update_model.dart';
 import 'package:burla_xatun/data/services/local/login_token_service.dart';
+import 'package:burla_xatun/data/services/local/register_token_service.dart';
 import 'package:burla_xatun/data/services/remote/base_network_service.dart';
 import 'package:burla_xatun/utils/constants/endpoints_constants.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
@@ -17,7 +18,7 @@ class UserUpdateService {
     String? activeLanguage,
     bool? enableNotifications,
   }) async {
-    final token = locator<LoginTokenService>().token;
+    final token = locator<RegisterTokenService>().token;
     final endpoint = EndpointsConstants.userUpdate;
     final requestBody = {
       "phone_number": phoneNumber,

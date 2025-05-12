@@ -37,4 +37,8 @@ class SplashCubit extends Cubit<SplashState> {
       return false;
     }
   }
+
+  // void _isSeenOnboarding() {
+  // hive check burada olacag 
+  // }
 }
