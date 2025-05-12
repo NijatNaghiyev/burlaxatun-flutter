@@ -36,11 +36,14 @@ class QuestionOne extends StatelessWidget {
               return BlocListener<UserUpdateCubit, UserUpdateState>(
                 listener: (_, state) {
                   if (i == 0) {
-                    userUpdateCubit.isPregnant = true;
+                    // userUpdateCubit.isPregnant = true;
+                    userUpdateCubit.updateUser(isPregnant: true);
                   } else if (i == 1) {
-                    userUpdateCubit.wantToSeePeriod = true;
+                    // userUpdateCubit.wantToSeePeriod = true;
+                    userUpdateCubit.updateUser(wantToSeePeriod: true);
                   } else if (i == 2) {
-                    userUpdateCubit.wantToBePregnant = true;
+                    // userUpdateCubit.wantToBePregnant = true;
+                    userUpdateCubit.updateUser(wantToBePregnant: true);
                   }
                 },
                 child: QuestionOneButton(

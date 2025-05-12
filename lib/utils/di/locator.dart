@@ -45,6 +45,7 @@ import 'package:burla_xatun/data/repository/register_repository.dart';
 import 'package:burla_xatun/data/repository/user_update_repository.dart';
 import 'package:burla_xatun/data/repository/using_rules_repository.dart';
 import 'package:burla_xatun/data/services/local/login_token_service.dart';
+import 'package:burla_xatun/data/services/local/register_token_service.dart';
 import 'package:burla_xatun/data/services/remote/about_service.dart';
 import 'package:burla_xatun/data/services/remote/baby_names_service2.dart';
 import 'package:burla_xatun/data/services/remote/blog_cat_service.dart';
@@ -74,10 +75,13 @@ Future<void> init() async {
 }
 
 Future<void> setupLocator() async {
-  final Box<String> box = await Hive.openBox('loginBox');
+  final Box<String> loginBox = await Hive.openBox('loginBox');
+  final Box<String> registerBox = await Hive.openBox('loginBox');
 
   // services
-  locator.registerLazySingleton(() => LoginTokenService(box));
+  locator.registerLazySingleton(() => LoginTokenService(loginBox));
+  locator.registerLazySingleton(() => RegisterTokenService(registerBox));
+
   locator.registerLazySingleton(() => LoginService());
   locator.registerLazySingleton(() => DailyRecService());
   locator.registerLazySingleton(() => RegisterService());

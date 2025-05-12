@@ -73,7 +73,8 @@ class QuestionTwo extends StatelessWidget {
                             for (int i = 0; i < 37; i++)
                               BlocListener<UserUpdateCubit, UserUpdateState>(
                                 listener: (_, state) {
-                                  userUpdateCubit.pregnantWeek = i.toString();
+                                  // userUpdateCubit.pregnantWeek = i.toString();
+                                  userUpdateCubit.updateUser(pregnantWeek: i.toString());
                                 },
                                 child: SizedBox(
                                   width: double.maxFinite,
