@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           create: (context) => LanguageCubit(),
         ),
         BlocProvider(
-          create: (context) => SignupCubit(),
+          create: (context) => SignupCubit(), // logoutdan sonra signupda daxil edilenler qalir
         ),
         // BlocProvider(
         //   create: (context) => BabyNamesCubit(),

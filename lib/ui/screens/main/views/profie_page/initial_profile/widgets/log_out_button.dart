@@ -1,5 +1,7 @@
+import 'package:burla_xatun/cubits/main_cubit/mainn_cubit.dart';
 import 'package:burla_xatun/data/services/local/token_hive_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,19 +15,24 @@ class LogOutButton extends StatefulWidget {
 }
 
 class _LogOutButtonState extends State<LogOutButton> {
+  bool isLoading = false;
+
   void _logOut() async {
     isLoading = true;
     setState(() {});
     await TokenHiveService.instance.clearToken();
   }
 
-  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
+    final mainCubit = context.read<MainnCubit>();
     return GestureDetector(
       onTap: () {
         _logOut();
-        context.go('/login');
+        Future.delayed(Duration(seconds: 1), () {
+          context.go('/login');
+          mainCubit.changeView(0);
+        });
       },
       child: SizedBox(
         height: 56,
@@ -39,9 +46,10 @@ class _LogOutButtonState extends State<LogOutButton> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: isLoading
                 ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 153, vertical: 15),
-                  child: CircularProgressIndicator.adaptive(),
-                )
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 153, vertical: 15),
+                    child: CircularProgressIndicator.adaptive(),
+                  )
                 : Row(
                     children: [
                       SvgPicture.asset('assets/icons/log_out_icon.svg'),

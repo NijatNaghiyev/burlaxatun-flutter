@@ -14,4 +14,8 @@ class SplashCubit extends Cubit<SplashState> {
 
     token != null ? emit(SplashSuccess()) : emit(SplashAuth());
   }
+
+  // void _isSeenOnboarding() {
+  // hive check burada olacag 
+  // }
 }

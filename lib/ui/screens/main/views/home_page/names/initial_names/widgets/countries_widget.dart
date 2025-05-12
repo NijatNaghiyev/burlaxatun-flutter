@@ -18,7 +18,7 @@ class CountriesWidget extends StatelessWidget {
         return previous.countryList != current.countryList;
       },
       builder: (context, state) {
-        
+
         if (state.nameStateStatus == NameStateStatus.error) {
           log('COUNTRY PAGE STATE: ${state.nameStateStatus}');
           return Center(
@@ -28,7 +28,7 @@ class CountriesWidget extends StatelessWidget {
           log('COUNTRY PAGE STATE: ${state.nameStateStatus}');
           return Expanded(
             child: ListView.separated(
-              itemCount: state.countryList!.length,
+              itemCount: state.countryList!.length + 10,
               itemBuilder: (_, i) {
                 return ListTile(
                   leading: Image.asset(
@@ -36,7 +36,8 @@ class CountriesWidget extends StatelessWidget {
                     width: 46,
                     height: 46,
                   ),
-                  title: Text(state.countryList![i].title),
+                  // state.countryList![i].title
+                  title: Text('$i'),
                   trailing: SvgPicture.asset('assets/icons/arrow_right.svg'),
                   onTap: () {
                     context.push('/gender_names', extra: {
