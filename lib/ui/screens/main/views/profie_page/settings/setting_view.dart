@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../utils/constants/color_constants.dart';
 import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/global_appbar.dart';
 import 'widgets/setting_boxes.dart';
@@ -11,9 +12,10 @@ class SettingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConstants.profileScaffoldColor,
       appBar: GlobalAppbar(
         title: 'Tənzimləmələr',
-        onTap: () => context.pop(),
+        onLeadingTap: () => context.pop(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),

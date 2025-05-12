@@ -12,7 +12,7 @@ class MyHealingPage extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'baby 1',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
         },
       ),

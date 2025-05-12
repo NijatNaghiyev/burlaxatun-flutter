@@ -19,7 +19,7 @@ class AddNewForumButton extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: ColorConstants.primaryColor,
+            color: ColorConstants.primaryRedColor,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

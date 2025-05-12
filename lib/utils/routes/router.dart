@@ -1,4 +1,12 @@
+import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
 import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
+import 'package:burla_xatun/data/models/remote/response/blog_cat_model.dart';
+import 'package:burla_xatun/ui/screens/auth/forgot_psw/email_request_screen.dart';
+import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_otp_screen.dart';
+import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_success_screen.dart';
+import 'package:burla_xatun/ui/screens/auth/forgot_psw/reset_psw_screen.dart';
+import 'package:burla_xatun/ui/screens/main/views/profie_page/using_rules/using_rules_screen.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,7 +30,7 @@ import '../../ui/screens/main/views/home_page/home/home_page.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/body_weight_page.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/initial_my_healing_page/my_healing_page.dart';
 import '../../ui/screens/main/views/home_page/names/gender_names/gender_names.dart';
-import '../../ui/screens/main/views/home_page/names/initial_names/initial_names_page.dart';
+import '../../ui/screens/main/views/home_page/names/initial_names/names_page.dart';
 import '../../ui/screens/main/views/home_page/notification/notification_page.dart';
 import '../../ui/screens/main/views/home_page/ultrasound/ultrasound_page.dart';
 import '../../ui/screens/main/views/home_page/video/video_page.dart';
@@ -39,7 +47,6 @@ import '../../ui/screens/main/views/profie_page/settings/setting_views/change_pa
 import '../../ui/screens/main/views/profie_page/settings/setting_views/change_password/success_change_password/success_change_password.dart';
 import '../../ui/screens/main/views/profie_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
 import '../../ui/screens/main/views/profie_page/special_thanks/special_thanks_view.dart';
-import '../../ui/screens/main/views/profie_page/terms_of_use/terms_of_use_view.dart';
 import '../../ui/screens/onboarding/onboarding.dart';
 import '../../ui/screens/questions/questions.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/calculate_birth.dart';
@@ -49,6 +56,7 @@ class Routerapp {
   static Routerapp? _instance;
 
   Routerapp._();
+
   static Routerapp get instance => _instance ??= Routerapp._();
 
   // static final navigatorKey = GlobalKey<NavigatorState>();
@@ -73,8 +81,8 @@ class Routerapp {
       ),
       GoRoute(
         path: '/login',
-        builder: (context, state) => BlocProvider(
-          create: (context) => LoginCubit(),
+        builder: (context, state) => BlocProvider<LoginCubit>(
+          create: (context) => locator<LoginCubit>(),
           child: Login(),
         ),
       ),
@@ -83,6 +91,28 @@ class Routerapp {
         builder: (context, state) {
           return SignUp();
         },
+      ),
+      GoRoute(
+        path: '/email_request',
+        builder: (context, state) {
+          return EmailRequestScreen();
+        },
+      ),
+      GoRoute(
+        path: '/forgot_psw_otp',
+        builder: (context, state) {
+          return ForgotPswOtpScreen();
+        },
+      ),
+      GoRoute(
+        path: '/reset_psw',
+        builder: (context, state) {
+          return ResetPswScreen();
+        },
+      ),
+      GoRoute(
+        path: '/forgot_psw_success',
+        builder: (context, state) => SuccessForgotPswScreen(),
       ),
       GoRoute(
         path: '/questions',
@@ -146,11 +176,21 @@ class Routerapp {
               ),
               GoRoute(
                 path: '/article_details',
-                builder: (context, state) => ArticleDetailsPage(),
+                builder: (context, state) {
+                  final blog = state.extra as Blog;
+                  return ArticleDetailsPage(
+                    blog: blog,
+                  );
+                },
               ),
               GoRoute(
                 path: '/see_all_articles',
-                builder: (context, state) => SeeAllArticlesPage(),
+                builder: (context, state) {
+                  final category = state.extra as Result;
+                  return SeeAllArticlesPage(
+                    category: category,
+                  );
+                },
               ),
               GoRoute(
                 path: '/videos',
@@ -165,17 +205,17 @@ class Routerapp {
                 builder: (context, state) => BlocProvider(
                   create: (context) =>
                       BabyNamesCubit()..getCountriesAndSelectedNames(),
-                  child: InitialNamesPage(),
+                  child: NamesPage(),
                 ),
               ),
               GoRoute(
                 path: '/gender_names',
                 builder: (context, state) {
                   final extra = state.extra as Map;
-                  final cubit = extra['cubit'] as BabyNamesCubit;
+                  final cubit = extra['cubit'] as BabyNamesCubit2;
                   final countryId = extra['id'];
                   return BlocProvider.value(
-                    value: cubit..getNames(countryId),
+                    value: cubit..getBabyNames(countryId),
                     child: GenderNames(countryId: countryId),
                   );
                 },
@@ -188,6 +228,13 @@ class Routerapp {
                 path: '/daily_advices',
                 builder: (context, state) => AdvisesPage(),
               ),
+              // GoRoute(
+              //   path: '/daily_advices',
+              //   builder: (context, state) {
+              //     final slug = state.extra as String?;
+              //     return AdvisesPage(slug: slug);
+              //   },
+              // ),
             ],
           ),
           StatefulShellBranch(
@@ -254,7 +301,7 @@ class Routerapp {
               ),
               GoRoute(
                 path: '/terms_of_use',
-                builder: (context, state) => TermsOfUseView(),
+                builder: (context, state) => UsingRulesScreen(),
               ),
               GoRoute(
                 path: '/change_language',

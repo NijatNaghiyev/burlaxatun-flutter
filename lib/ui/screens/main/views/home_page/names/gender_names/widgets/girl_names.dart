@@ -29,7 +29,7 @@ class GirlNames extends StatelessWidget {
                     'assets/icons/favorite_icon.svg',
                     colorFilter: ColorFilter.mode(
                       state.names!.girls[i].selected == 1
-                          ? ColorConstants.primaryColor
+                          ? ColorConstants.primaryRedColor
                           : ColorConstants.hintTextColor,
                       BlendMode.srcIn,
                     ),

@@ -12,7 +12,7 @@ class DoctorRegisterButton extends StatelessWidget {
     return GlobalButton(
       buttonName: 'Qeydiyyat',
       buttonColor: Color(0xffFDECF2),
-      textColor: ColorConstants.primaryColor,
+      textColor: ColorConstants.primaryRedColor,
       onPressed: () {
         context.push('/doctor_register');
       },

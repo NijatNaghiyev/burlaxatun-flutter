@@ -1,8 +1,11 @@
-import '../../../../../widgets/global_text.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../widgets/global_text.dart';
+
 class AdviseTitle extends StatelessWidget {
-  const AdviseTitle({super.key});
+  final String adviceTitle;
+
+  const AdviseTitle({super.key, required this.adviceTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +14,7 @@ class AdviseTitle extends StatelessWidget {
       children: [
         GlobalText(
           textAlign: TextAlign.left,
-          text: 'O qədər yorğunam ki',
+          text: adviceTitle,
           fontSize: 24,
           fontWeight: FontWeight.w600,
           color: Colors.black,

@@ -9,7 +9,7 @@ class RegistrationCalendarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.all(10),
       child: TableCalendar(
         rowHeight: 48,
@@ -29,7 +29,7 @@ class RegistrationCalendarWidget extends StatelessWidget {
           cellPadding: EdgeInsets.zero,
           outsideDaysVisible: false,
           selectedDecoration: BoxDecoration(
-            color: ColorConstants.primaryColor,
+            color: ColorConstants.primaryRedColor,
           ),
           todayTextStyle: GoogleFonts.poppins(
             fontSize: 20,

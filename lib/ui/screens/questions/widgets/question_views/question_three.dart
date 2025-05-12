@@ -1,3 +1,4 @@
+import 'package:burla_xatun/cubits/user_update/user_update_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +16,8 @@ class QuestionThree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final questionCubit = context.read<QuestionsCubit>();
+    final userUpdateCubit = context.read<UserUpdateCubit>();
+
     return Padding(
       padding: PaddingConstants.h20 + EdgeInsets.only(top: 56),
       child: Column(
@@ -35,11 +38,13 @@ class QuestionThree extends StatelessWidget {
                     : state.isFirstChild!
                         ? Color(0xffFFD3E2)
                         : Colors.white,
-                borderColor: ColorConstants.primaryColor,
-                textColor: ColorConstants.primaryColor,
+                borderColor: ColorConstants.primaryRedColor,
+                textColor: ColorConstants.primaryRedColor,
                 onPressed: () {
                   questionCubit.updateQuestionThreeAnswer(true);
                   questionCubit.updateIsActiveButton();
+                  // userUpdateCubit.firstChild = true;
+                  userUpdateCubit.updateUser(firstChild: true);
                 },
               );
             },
@@ -54,11 +59,13 @@ class QuestionThree extends StatelessWidget {
                     : !state.isFirstChild!
                         ? Color(0xffFFD3E2)
                         : Colors.white,
-                borderColor: ColorConstants.primaryColor,
-                textColor: ColorConstants.primaryColor,
+                borderColor: ColorConstants.primaryRedColor,
+                textColor: ColorConstants.primaryRedColor,
                 onPressed: () {
                   questionCubit.updateQuestionThreeAnswer(false);
                   questionCubit.updateIsActiveButton();
+                  // userUpdateCubit.firstChild = false;
+                  userUpdateCubit.updateUser(firstChild: false);
                 },
               );
             },

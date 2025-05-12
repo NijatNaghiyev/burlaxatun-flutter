@@ -13,18 +13,17 @@ class Onboarding extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 0),
-            child: SizedBox(
-              height: 512,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 0),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   OnboardPageView(),
                   Positioned(
-                    top: 330,
+                    bottom: 160,
                     child: OnboardDots(),
-                  )
+                  ),
                 ],
               ),
             ),

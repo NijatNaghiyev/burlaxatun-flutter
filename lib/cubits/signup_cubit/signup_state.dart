@@ -1,10 +1,10 @@
 part of 'signup_cubit.dart';
 
 @immutable
-abstract class SignupCubitState {}
+abstract class SignupState {}
 
-class SignupCubitInitial extends SignupCubitState {
-  SignupCubitInitial({
+class SignupInitial extends SignupState {
+  SignupInitial({
     required this.isChecked,
     required this.isActiveButton,
   });
@@ -13,8 +13,16 @@ class SignupCubitInitial extends SignupCubitState {
   final bool isActiveButton;
 }
 
-class SignupCubitLoading extends SignupCubitState {}
+class SignupLoading extends SignupState {}
 
-class SignupCubitSuccess extends SignupCubitState {}
+class SignupSuccess extends SignupState {}
 
-class SignupCubitError extends SignupCubitState {}
+class SignupError extends SignupState {
+  SignupError(this.error);
+  final String error;
+}
+
+class SignupNetworkError extends SignupState {
+  SignupNetworkError(this.error);
+  final String error;
+}

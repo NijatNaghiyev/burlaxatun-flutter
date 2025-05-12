@@ -20,7 +20,7 @@ class ChangePasswordPage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: GlobalAppbar(
         title: ' ',
-        onTap: () => context.pop(),
+        onLeadingTap: () => context.pop(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -49,7 +49,7 @@ class ChangePasswordPage extends StatelessWidget {
             GlobalInput(
               inputName: TextConstants.email,
               prefixIcon: AssetConstants.emailIcon,
-              hintText: TextConstants.emailiniziDaxilEdin,
+              hintText: TextConstants.enterYourEmail,
             ),
           ],
         ),
@@ -61,7 +61,7 @@ class ChangePasswordPage extends StatelessWidget {
         child: GlobalButton(
           height: 50,
           buttonName: 'Send code',
-          buttonColor: ColorConstants.primaryColor,
+          buttonColor: ColorConstants.primaryRedColor,
           textColor: Colors.white,
           onPressed: () {
             Navigator.push(

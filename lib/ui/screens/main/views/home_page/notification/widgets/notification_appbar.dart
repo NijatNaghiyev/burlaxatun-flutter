@@ -12,7 +12,7 @@ class NotificationAppbar extends StatelessWidget
     // final mainCubit = context.read<MainnCubit>();
     return GlobalAppbar(
       title: 'Bildirişlər',
-      onTap: () {
+      onLeadingTap: () {
         // mainCubit.changeHomeView('Home');
         context.pop();
       },

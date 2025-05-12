@@ -26,7 +26,7 @@ class SignupButton extends StatelessWidget {
             text: ' Sign Up',
             style: GoogleFonts.poppins(
               fontSize: 12,
-              color: ColorConstants.primaryColor,
+              color: ColorConstants.primaryRedColor,
               fontWeight: FontWeight.w400,
               height: 1.1,
             ),

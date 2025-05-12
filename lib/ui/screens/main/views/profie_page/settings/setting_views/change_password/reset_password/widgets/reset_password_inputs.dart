@@ -18,8 +18,8 @@ class ResetPasswordInputs extends StatelessWidget {
           hintText: 'Yeni şifrəni qeyd edin',
           isObsecure: true,
           suffixIcon: 5 == 5
-              ? AssetConstants.eyeSlashedIcon
-              : AssetConstants.eyeOpenIcon,
+              ? AssetConstants.eyeClosedIcon
+              : AssetConstants.eyeOpenedIcon,
         ),
         GlobalInput(
           inputName: 'Confirm new password',
@@ -27,8 +27,8 @@ class ResetPasswordInputs extends StatelessWidget {
           hintText: 'Yeni şifrəni təsdiq edin',
           isObsecure: true,
           suffixIcon: 5 == 5
-              ? AssetConstants.eyeSlashedIcon
-              : AssetConstants.eyeOpenIcon,
+              ? AssetConstants.eyeClosedIcon
+              : AssetConstants.eyeOpenedIcon,
         ),
         5.h,
       ],

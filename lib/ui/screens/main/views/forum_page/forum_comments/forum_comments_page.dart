@@ -13,7 +13,7 @@ class ForumCommentsPage extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Forum',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
         },
       ),

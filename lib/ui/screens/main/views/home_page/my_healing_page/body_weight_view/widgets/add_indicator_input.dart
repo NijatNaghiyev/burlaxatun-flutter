@@ -10,10 +10,12 @@ class AddIndicatorInput extends StatelessWidget {
     super.key,
     required this.inputName,
     required this.hintText,
+    this.controller,
   });
 
   final String inputName;
   final String hintText;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class AddIndicatorInput extends StatelessWidget {
         ),
         16.h,
         TextFormField(
+          controller: controller,
           style: GoogleFonts.poppins(
             fontSize: 14,
             color: Colors.black,
@@ -56,12 +59,12 @@ class AddIndicatorInput extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(34)),
               borderSide: BorderSide(
-                color: ColorConstants.primaryColor,
+                color: ColorConstants.primaryRedColor,
               ),
             ),
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: ColorConstants.primaryColor,
+                color: ColorConstants.primaryRedColor,
               ),
             ),
           ),

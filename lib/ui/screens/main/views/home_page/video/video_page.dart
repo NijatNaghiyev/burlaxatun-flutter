@@ -16,7 +16,7 @@ class VideoPage extends StatelessWidget {
       child: Scaffold(
         appBar: GlobalAppbar(
           title: 'Video',
-          onTap: () {
+          onLeadingTap: () {
             context.pop();
           },
         ),

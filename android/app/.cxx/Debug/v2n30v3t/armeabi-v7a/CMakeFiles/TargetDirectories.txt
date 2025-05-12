@@ -1,0 +1,2 @@
+C:/Users/sadiq/IdeaProjects/burlaxatun-flutter/android/app/.cxx/Debug/v2n30v3t/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/sadiq/IdeaProjects/burlaxatun-flutter/android/app/.cxx/Debug/v2n30v3t/armeabi-v7a/CMakeFiles/rebuild_cache.dir

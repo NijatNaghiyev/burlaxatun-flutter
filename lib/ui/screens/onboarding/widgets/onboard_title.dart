@@ -14,12 +14,8 @@ class OnboardTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return GlobalText(
       text: onboardTitle,
-      fontSize: 34,
-      height: 1.2,
-      fontWeight: FontWeight.w600,
-      color: Colors.black,
+      fontSize: 16,
+      textAlign: TextAlign.center,
     );
   }
 }
-
-

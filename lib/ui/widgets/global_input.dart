@@ -15,7 +15,7 @@ class GlobalInput extends StatelessWidget {
     this.suffixIcon,
     required this.hintText,
     this.isObsecure = false,
-    this.onSuffixIcon,
+    this.onSuffixIconTap,
     this.focusNode,
     this.onFieldSubmitted,
     this.validator,
@@ -32,7 +32,7 @@ class GlobalInput extends StatelessWidget {
   final bool isError;
   final TextEditingController? textController;
   final FocusNode? focusNode;
-  final void Function()? onSuffixIcon;
+  final void Function()? onSuffixIconTap;
   final void Function(String v)? onFieldSubmitted;
   final void Function(String v)? onChanged;
   final String? Function(String?)? validator;
@@ -76,8 +76,10 @@ class GlobalInput extends StatelessWidget {
             contentPadding: EdgeInsets.symmetric(vertical: 18),
             hintText: hintText,
             hintStyle: GoogleFonts.poppins(
-              fontSize: 14,
-              color: isError ? Color(0xffD62828) : Color(0xff595959),
+              fontSize: 12,
+              color: isError
+                  ? Color(0xffD62828)
+                  : ColorConstants.enabledInputColor,
               fontWeight: FontWeight.w500,
             ),
             prefixIcon: prefixIcon == null
@@ -93,7 +95,7 @@ class GlobalInput extends StatelessWidget {
                           colorFilter: ColorFilter.mode(
                             isError
                                 ? Color(0xffD62828)
-                                : ColorConstants.enabledInputColor,
+                                : ColorConstants.customBlack,
                             BlendMode.srcIn,
                           ),
                         ),
@@ -108,7 +110,7 @@ class GlobalInput extends StatelessWidget {
                       width: 24,
                       height: 24,
                       child: GestureDetector(
-                        onTap: onSuffixIcon,
+                        onTap: onSuffixIconTap,
                         child: SvgPicture.asset(
                           suffixIcon!,
                           colorFilter: ColorFilter.mode(
@@ -132,12 +134,12 @@ class GlobalInput extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(34)),
               borderSide: BorderSide(
-                color: ColorConstants.primaryColor,
+                color: ColorConstants.primaryRedColor,
               ),
             ),
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: ColorConstants.primaryColor,
+                color: ColorConstants.primaryRedColor,
               ),
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:burla_xatun/cubits/user_update/user_update_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,6 +15,7 @@ class QuestionOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
+    final userUpdateCubit = context.read<UserUpdateCubit>();
 
     return Padding(
       padding: PaddingConstants.h20 + EdgeInsets.only(top: 56),
@@ -30,11 +32,25 @@ class QuestionOne extends StatelessWidget {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemCount: 3,
-            itemBuilder: (context, i) {
-              return QuestionOneButton(
-                buttonName: QuestionOneOptionsModel.options[i].option,
-                optionIndex: i,
-                questionsCubit: questionsCubit,
+            itemBuilder: (_, i) {
+              return BlocListener<UserUpdateCubit, UserUpdateState>(
+                listener: (_, state) {
+                  if (i == 0) {
+                    // userUpdateCubit.isPregnant = true;
+                    userUpdateCubit.updateUser(isPregnant: true);
+                  } else if (i == 1) {
+                    // userUpdateCubit.wantToSeePeriod = true;
+                    userUpdateCubit.updateUser(wantToSeePeriod: true);
+                  } else if (i == 2) {
+                    // userUpdateCubit.wantToBePregnant = true;
+                    userUpdateCubit.updateUser(wantToBePregnant: true);
+                  }
+                },
+                child: QuestionOneButton(
+                  buttonName: QuestionOneOptionsModel.options[i].option,
+                  optionIndex: i,
+                  questionsCubit: questionsCubit,
+                ),
               );
             },
           ),

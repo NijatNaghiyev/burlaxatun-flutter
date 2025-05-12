@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/constants/asset_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,16 +20,16 @@ class SuccessChangePassword extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: ' ',
-        onTap: () {
+        onLeadingTap: () {
           context.pop();
         },
       ),
       body: Center(
         child: Column(
           children: [
-            74.h,
-            SvgPicture.asset('assets/svgs/taddaaa_image.svg'),
-            76.h,
+            Spacer(),
+            SvgPicture.asset(AssetConstants.taddaaImage),
+            Spacer(),
             GlobalText(
               height: 1.4,
               text: 'Şifrə uğurla \n dəyişildi!',
@@ -36,6 +37,7 @@ class SuccessChangePassword extends StatelessWidget {
               fontWeight: FontWeight.w500,
               color: Colors.black,
             ),
+            Spacer(),
           ],
         ),
       ),
@@ -46,7 +48,7 @@ class SuccessChangePassword extends StatelessWidget {
         child: GlobalButton(
           height: 50,
           buttonName: 'Back at home',
-          buttonColor: ColorConstants.primaryColor,
+          buttonColor: ColorConstants.primaryRedColor,
           textColor: Colors.white,
           onPressed: () {
             Navigator.of(context).popUntil((route) => route.isFirst);

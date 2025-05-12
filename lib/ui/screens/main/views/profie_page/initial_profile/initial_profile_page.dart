@@ -1,11 +1,12 @@
-import 'widgets/log_out_button.dart';
-import 'widgets/my_profile_box.dart';
-import 'widgets/profile_pregnancy_box.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../utils/constants/color_constants.dart';
 import '../../../../../../utils/extensions/num_extensions.dart';
+import 'widgets/log_out_button.dart';
+import 'widgets/my_profile_box.dart';
 import 'widgets/profile_page_sections.dart';
 import 'widgets/profile_picture_and_name.dart';
+import 'widgets/profile_pregnancy_box.dart';
 
 class InitialProfilePage extends StatelessWidget {
   const InitialProfilePage({super.key});
@@ -14,7 +15,7 @@ class InitialProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // final mainCubit = context.read<MainnCubit>();
     return Scaffold(
-      backgroundColor: Color(0xffF7F8FA),
+      backgroundColor: ColorConstants.profileScaffoldColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),

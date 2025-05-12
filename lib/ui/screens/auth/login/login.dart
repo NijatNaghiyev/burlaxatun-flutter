@@ -1,3 +1,4 @@
+import 'package:burla_xatun/ui/screens/main/views/home_page/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/constants/padding_constants.dart';
@@ -23,7 +24,7 @@ class Login extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
-                  context.deviceHeight < 750 ? 11.h : 26.h,
+                  (context.deviceHeight * 0.07).h,
                   LoginImage(),
                   context.deviceHeight < 750 ? 13.h : 30.h,
                   LoginInputs(),
@@ -34,6 +35,19 @@ class Login extends StatelessWidget {
                   SignupButton(),
                   context.deviceHeight < 750 ? 10.h : 25.h,
                   SignupOptions(),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ),
+                        );
+                      },
+                      child: Text('Home')),
                 ],
               ),
             ),

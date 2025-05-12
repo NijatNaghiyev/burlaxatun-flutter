@@ -26,14 +26,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstants.primaryColor,
+      backgroundColor: ColorConstants.primaryRedColor,
       body: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
           if (state is SplashAuth) {
             // onboardinge baxilib yoxsa yox burada yoxlanilmalidir.
             context.go('/onboarding');
           } else if (state is SplashSuccess) {
-            context.go('/home'); 
+            context.go('/home');
+          } else if (state is SplashLogin) {
+            context.go('/login');
           }
         },
         child: Center(

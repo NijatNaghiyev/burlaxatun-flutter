@@ -45,7 +45,7 @@ class SelectedNameTile extends StatelessWidget {
               colorFilter: ColorFilter.mode(
                 tileIndex == state.selectedNameIndex
                     ? ColorConstants.hintTextColor
-                    : ColorConstants.primaryColor,
+                    : ColorConstants.primaryRedColor,
                 BlendMode.srcIn,
               ),
             ),

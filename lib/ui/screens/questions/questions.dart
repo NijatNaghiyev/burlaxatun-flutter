@@ -20,15 +20,15 @@ class Questions extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Qeydiyyat',
-        onTap: () {
-          questionsCubit.goBack();
+        onLeadingTap: () {
+          context.pop();
         },
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           BlocBuilder<QuestionsCubit, QuestionsInitial>(
-            builder: (context, state) {
+            builder: (_, state) {
               return state.questionPageIndex < 3
                   ? Column(
                       children: [

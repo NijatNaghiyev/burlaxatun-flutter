@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/cubits/user_update/user_update_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +16,7 @@ class QuestionTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
+    final userUpdateCubit = context.read<UserUpdateCubit>();
     return Padding(
       padding: const EdgeInsets.only(top: 56),
       child: Column(
@@ -26,116 +28,128 @@ class QuestionTwo extends StatelessWidget {
             color: Colors.black,
           ),
           36.h,
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 252,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Positioned(
-                      child: ColoredBox(
-                        color: Color(0xffFFECF2),
-                        child: SizedBox(
-                          height: 58,
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 120),
-                                child: GlobalText(
-                                  text: 'həftəlik',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xffEC407A),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    ListWheelScrollView(
-                      physics: FixedExtentScrollPhysics(),
-                      onSelectedItemChanged: (i) {
-                        // log(' hefte: $i');
-                        questionsCubit.updateFocusedWeekIndex(i);
-                        questionsCubit.updateIsActiveButton();
-                      },
-                      itemExtent: 57,
-                      children: [
-                        for (int i = 0; i < 10; i++)
-                          SizedBox(
-                            width: double.maxFinite,
-                            child: Row(
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(
+                        child: ColoredBox(
+                          color: Color(0xffFFECF2),
+                          child: SizedBox(
+                            height: 58,
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                BlocBuilder<QuestionsCubit, QuestionsInitial>(
-                                  buildWhen: (previous, current) {
-                                    return previous.focusedWeekIndex !=
-                                        current.focusedWeekIndex;
-                                  },
-                                  builder: (context, state) {
-                                    log('builded scroll wheel index: $i');
-                                    return GlobalText(
-                                      text: '$i',
-                                      fontSize: 32,
-                                      fontWeight: FontWeight.w500,
-                                      color: state.focusedWeekIndex == i
-                                          ? Colors.pink
-                                          : Color(0xffACACAC),
-                                    );
-                                  },
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 120),
+                                  child: GlobalText(
+                                    text: 'həftəlik',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xffEC407A),
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 28, left: 24),
-            child: Row(
-              children: [
-                BlocBuilder<QuestionsCubit, QuestionsInitial>(
-                  buildWhen: (previous, current) {
-                    return previous.iDontKnow != current.iDontKnow;
-                  },
-                  builder: (context, state) {
-                    return Radio(
-                      visualDensity: VisualDensity(
-                        horizontal: VisualDensity.minimumDensity,
-                        vertical: VisualDensity.minimumDensity,
+                        ),
                       ),
-                      activeColor: ColorConstants.primaryColor,
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      toggleable: true,
-                      splashRadius: 0,
-                      value: state.iDontKnow,
-                      groupValue: true,
-                      onChanged: (v) {
-                        log('builded radio button');
-                        questionsCubit.iDontKnowToggle(v ?? true);
-                        questionsCubit.updateIsActiveButton();
-                      },
-                    );
-                  },
+                      // Replaced Expanded with Positioned.fill to fill the Stack
+                      Positioned.fill(
+                        child: ListWheelScrollView(
+                          physics: FixedExtentScrollPhysics(),
+                          onSelectedItemChanged: (i) {
+                            // log(' hefte: $i');
+                            questionsCubit.updateFocusedWeekIndex(i);
+                            questionsCubit.updateIsActiveButton();
+                          },
+                          itemExtent: 60,
+                          children: [
+                            for (int i = 0; i < 37; i++)
+                              BlocListener<UserUpdateCubit, UserUpdateState>(
+                                listener: (_, state) {
+                                  // userUpdateCubit.pregnantWeek = i.toString();
+                                  userUpdateCubit.updateUser(pregnantWeek: i.toString());
+                                },
+                                child: SizedBox(
+                                  width: double.maxFinite,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      BlocBuilder<QuestionsCubit,
+                                          QuestionsInitial>(
+                                        buildWhen: (previous, current) {
+                                          return previous.focusedWeekIndex !=
+                                              current.focusedWeekIndex;
+                                        },
+                                        builder: (context, state) {
+                                          log('builded scroll wheel index: $i');
+                                          return GlobalText(
+                                            text: '$i',
+                                            fontSize: 32,
+                                            fontWeight: FontWeight.w500,
+                                            color: state.focusedWeekIndex == i
+                                                ? Colors.pink
+                                                : Color(0xffACACAC),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                SizedBox(width: 12),
-                GlobalText(
-                  text: 'Bilmirəm',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                )
               ],
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 28, left: 24),
+              child: Row(
+                children: [
+                  BlocBuilder<QuestionsCubit, QuestionsInitial>(
+                    buildWhen: (previous, current) {
+                      return previous.iDontKnow != current.iDontKnow;
+                    },
+                    builder: (context, state) {
+                      return Radio(
+                        visualDensity: VisualDensity(
+                          horizontal: VisualDensity.minimumDensity,
+                          vertical: VisualDensity.minimumDensity,
+                        ),
+                        activeColor: ColorConstants.primaryRedColor,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        toggleable: true,
+                        splashRadius: 0,
+                        value: state.iDontKnow,
+                        groupValue: true,
+                        onChanged: (v) {
+                          log('builded radio button');
+                          questionsCubit.iDontKnowToggle(v ?? true);
+                          questionsCubit.updateIsActiveButton();
+                        },
+                      );
+                    },
+                  ),
+                  SizedBox(width: 12),
+                  GlobalText(
+                    text: 'Bilmirəm',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  )
+                ],
+              ),
             ),
           ),
         ],

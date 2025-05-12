@@ -1,8 +1,23 @@
+import 'package:burla_xatun/cubits/about/about_cubit.dart';
+import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
+import 'package:burla_xatun/cubits/blog_cat/blog_cat_cubit.dart';
+import 'package:burla_xatun/cubits/blog_sliders/blog_sliders_cubit.dart';
+import 'package:burla_xatun/cubits/contact/contact_cubit.dart';
+import 'package:burla_xatun/cubits/countries/countries_cubit.dart';
+import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
+import 'package:burla_xatun/cubits/faqs_cubit/faqs_cubit.dart';
+import 'package:burla_xatun/cubits/medicine/medicine_cubit.dart';
+import 'package:burla_xatun/cubits/medicine_create/medicine_create_cubit.dart';
+import 'package:burla_xatun/cubits/privacy_policy/privacy_policy_cubit.dart';
+import 'package:burla_xatun/cubits/using_rules/using_rules_cubit.dart';
+import 'package:burla_xatun/utils/constants/color_constants.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'cubits/daily_rec_detail/daily_rec_detail_cubit.dart';
 import 'cubits/language_cubit/language_cubit.dart';
 import 'cubits/main_cubit/mainn_cubit.dart';
 import 'cubits/signup_cubit/signup_cubit.dart';
@@ -13,12 +28,15 @@ import 'utils/routes/router.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  await init();
+  await setupLocator();
   Hive.registerAdapter(UserDataModelAdapter());
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -29,9 +47,67 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LanguageCubit(),
         ),
-        BlocProvider(
-          create: (context) => SignupCubit(), // logoutdan sonra signupda daxil edilenler qalir
+        BlocProvider<SignupCubit>(
+          create: (context) => locator<SignupCubit>(),
         ),
+        BlocProvider(
+          create: (context) => locator<DailyRecCubit>()..getDailyRec(),
+        ),
+        BlocProvider(
+          create: (context) {
+            final dailyRecState = context.read<DailyRecCubit>().state;
+            if (dailyRecState.status == DailyRecStatus.success) {
+              final slug = dailyRecState.response?.results?.first.slug;
+              return locator<DailyRecDetailCubit>()..getDailyRecDetail(slug!);
+            }
+            return locator<DailyRecDetailCubit>();
+          },
+        ),
+        BlocProvider(
+          create: (context) => locator<FaqsCubit>()..getFaqs(),
+        ),
+
+        BlocProvider(
+          create: (context) =>
+              locator<PrivacyPolicyCubit>()..getPrivacyPolicy(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<UsingRulesCubit>()..getUsingRules(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<AboutCubit>()..getAbout(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<ContactCubit>()..getContact(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<CountriesCubit>()..getCountries(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<BabyNamesCubit2>(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<BlogSlidersCubit>()..getBlogSliders(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<BlogCatCubit>()..getBlogCat(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<MedicineCubit>()..getMedicines(),
+        ),
+
+        BlocProvider<MedicineCreateCubit>(
+          create: (context) => locator<MedicineCreateCubit>(),
+        ),
+
         // BlocProvider(
         //   create: (context) => BabyNamesCubit(),
         // )
@@ -42,6 +118,7 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
+              scaffoldBackgroundColor: ColorConstants.white,
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),

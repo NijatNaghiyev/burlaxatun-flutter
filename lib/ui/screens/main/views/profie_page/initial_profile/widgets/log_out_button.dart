@@ -1,5 +1,5 @@
-import 'package:burla_xatun/cubits/main_cubit/mainn_cubit.dart';
-import 'package:burla_xatun/data/services/local/token_hive_service.dart';
+import 'package:burla_xatun/data/services/local/login_token_service.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,7 +20,9 @@ class _LogOutButtonState extends State<LogOutButton> {
   void _logOut() async {
     isLoading = true;
     setState(() {});
-    await TokenHiveService.instance.clearToken();
+    await locator<LoginTokenService>().deleteSaveByKey("login");
+
+    // await TokenHiveService.instance.clearToken();
   }
 
   @override

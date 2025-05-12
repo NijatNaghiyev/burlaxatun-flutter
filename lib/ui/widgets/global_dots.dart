@@ -25,7 +25,7 @@ class GlobalDots extends StatelessWidget {
         ),
         activeDotDecoration: DotDecoration(
           width: 16,
-          color: ColorConstants.primaryColor,
+          color: ColorConstants.primaryRedColor,
           borderRadius: BorderRadius.all(Radius.circular(19)),
         ),
       ),

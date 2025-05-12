@@ -18,33 +18,30 @@ class MyMedicinesPage extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Dərmanlarım',
-        onTap: () => context.pop(),
+        onLeadingTap: () => context.pop(),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              children: [
-                Stack(
-                  alignment: AlignmentDirectional.bottomEnd,
-                  children: [
-                    MedicineList(),
-                    Positioned(
-                      bottom: 68,
-                      right: 5,
-                      child: AddButton(
-                        onPressed: () {
-                          log('message');
-                          mainCubit.showAddMedicine(context);
-                        },
-                      ),
-                    )
-                  ],
-                ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Stack(
+          alignment: AlignmentDirectional.bottomEnd,
+          children: [
+            ListView(
+              padding: const EdgeInsets.only(bottom: 100),
+              children: const [
+                MedicineList(),
               ],
             ),
-          ),
+            Positioned(
+              bottom: 20,
+              right: 5,
+              child: AddButton(
+                onPressed: () {
+                  log('message');
+                  mainCubit.showAddMedicine(context);
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
