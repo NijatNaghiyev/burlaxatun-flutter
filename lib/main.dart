@@ -1,10 +1,10 @@
-import 'package:burla_xatun/cubits/about/about_cubit.dart';
 import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
 import 'package:burla_xatun/cubits/blog_cat/blog_cat_cubit.dart';
 import 'package:burla_xatun/cubits/blog_sliders/blog_sliders_cubit.dart';
 import 'package:burla_xatun/cubits/contact/contact_cubit.dart';
 import 'package:burla_xatun/cubits/countries/countries_cubit.dart';
 import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
+import 'package:burla_xatun/cubits/doctors_list/doctors_list_cubit.dart';
 import 'package:burla_xatun/cubits/faqs_cubit/faqs_cubit.dart';
 import 'package:burla_xatun/cubits/forum_category/forum_category_cubit.dart';
 import 'package:burla_xatun/cubits/medicine/medicine_cubit.dart';
@@ -18,7 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'cubits/daily_rec_detail/daily_rec_detail_cubit.dart';
+import 'cubits/doctors_detail/doctors_detail_cubit.dart';
 import 'cubits/language_cubit/language_cubit.dart';
 import 'cubits/main_cubit/mainn_cubit.dart';
 import 'cubits/signup_cubit/signup_cubit.dart';
@@ -51,57 +51,59 @@ class MyApp extends StatelessWidget {
         BlocProvider<SignupCubit>(
           create: (context) => locator<SignupCubit>(),
         ),
-        BlocProvider(
+        BlocProvider<DailyRecCubit>(
           create: (context) => locator<DailyRecCubit>()..getDailyRec(),
         ),
-        BlocProvider(
-          create: (context) {
-            final dailyRecState = context.read<DailyRecCubit>().state;
-            if (dailyRecState.status == DailyRecStatus.success) {
-              final slug = dailyRecState.response?.results?.first.slug;
-              return locator<DailyRecDetailCubit>()..getDailyRecDetail(slug!);
-            }
-            return locator<DailyRecDetailCubit>();
-          },
-        ),
-        BlocProvider(
+        // BlocProvider<DailyRecCubit>(
+        //   create: (context) {
+        //     final dailyRecState = context.read<DailyRecCubit>().state;
+        //     if (dailyRecState.status == DailyRecStatus.success) {
+        //       final slug = dailyRecState.response?.results?.first.slug;
+        //       return locator<DailyRecCubit>()..getDailyRec();
+        //       // ..getDailyRecDetail(slug!);
+        //     }
+        //     return locator<DailyRecCubit>();
+        //   },
+        // ),
+        BlocProvider<FaqsCubit>(
           create: (context) => locator<FaqsCubit>()..getFaqs(),
         ),
 
-        BlocProvider(
+        BlocProvider<PrivacyPolicyCubit>(
           create: (context) =>
               locator<PrivacyPolicyCubit>()..getPrivacyPolicy(),
         ),
 
-        BlocProvider(
+        BlocProvider<UsingRulesCubit>(
           create: (context) => locator<UsingRulesCubit>()..getUsingRules(),
         ),
 
-        BlocProvider(
-          create: (context) => locator<AboutCubit>()..getAbout(),
-        ),
+        BlocProvider<UsingRulesCubit>(
+            create: (context) => locator<UsingRulesCubit>()..getUsingRules()
+            // ..getAbout(),
+            ),
 
-        BlocProvider(
+        BlocProvider<ContactCubit>(
           create: (context) => locator<ContactCubit>()..getContact(),
         ),
 
-        BlocProvider(
+        BlocProvider<CountriesCubit>(
           create: (context) => locator<CountriesCubit>()..getCountries(),
         ),
 
-        BlocProvider(
+        BlocProvider<BabyNamesCubit2>(
           create: (context) => locator<BabyNamesCubit2>(),
         ),
 
-        BlocProvider(
+        BlocProvider<BlogSlidersCubit>(
           create: (context) => locator<BlogSlidersCubit>()..getBlogSliders(),
         ),
 
-        BlocProvider(
+        BlocProvider<BlogCatCubit>(
           create: (context) => locator<BlogCatCubit>()..getBlogCat(),
         ),
 
-        BlocProvider(
+        BlocProvider<MedicineCubit>(
           create: (context) => locator<MedicineCubit>()..getMedicines(),
         ),
 
@@ -112,7 +114,14 @@ class MyApp extends StatelessWidget {
         BlocProvider<ForumCategoryCubit>(
           create: (context) =>
               locator<ForumCategoryCubit>()..getForumCategory(),
-        )
+        ),
+        BlocProvider<DoctorsListCubit>(
+          create: (context) => locator<DoctorsListCubit>()..getDoctorsList(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<DoctorDetailCubit>(),
+        ),
 
         // BlocProvider(
         //   create: (context) => BabyNamesCubit(),

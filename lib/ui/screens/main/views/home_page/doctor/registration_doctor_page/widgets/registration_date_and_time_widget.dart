@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+
+import '../../../../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../../../widgets/global_text.dart';
 import 'registration_calendar_widget.dart';
 import 'time_widget.dart';
-import '../../../../../../../widgets/global_text.dart';
-import '../../../../../../../../utils/extensions/num_extensions.dart';
-import 'package:flutter/material.dart';
 
 class RegistrationDateAndTimeWidget extends StatelessWidget {
   const RegistrationDateAndTimeWidget({super.key});

@@ -30,6 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
           if (state is SplashAuth) {
+            // onboardinge baxilib yoxsa yox burada yoxlanilmalidir.
             context.go('/onboarding');
           } else if (state is SplashSuccess) {
             context.go('/home');

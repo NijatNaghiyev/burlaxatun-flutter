@@ -1,3 +1,4 @@
+import 'package:burla_xatun/data/models/remote/response/doctors_list_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../../utils/extensions/num_extensions.dart';
@@ -6,7 +7,12 @@ import 'doctor_register_button.dart';
 import 'time_and_price_box.dart';
 
 class DoctorBox extends StatelessWidget {
-  const DoctorBox({super.key});
+  final Result doctor;
+
+  const DoctorBox({
+    super.key,
+    required this.doctor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +29,17 @@ class DoctorBox extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 14),
           child: Column(
             children: [
-              DoctorInfo(),
+              DoctorInfo(
+                doctor: doctor,
+              ),
               24.h,
-              TimeAndPriceBox(),
+              TimeAndPriceBox(
+                doctor: doctor,
+              ),
               24.h,
-              DoctorRegisterButton(),
+              DoctorRegisterButton(
+                slug: doctor.slug ?? '',
+              ),
             ],
           ),
         ),

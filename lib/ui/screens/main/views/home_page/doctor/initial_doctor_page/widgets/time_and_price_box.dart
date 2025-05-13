@@ -1,10 +1,16 @@
+import 'package:burla_xatun/data/models/remote/response/doctors_list_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../../widgets/global_text.dart';
 
 class TimeAndPriceBox extends StatelessWidget {
-  const TimeAndPriceBox({super.key});
+  final Result doctor;
+
+  const TimeAndPriceBox({
+    super.key,
+    required this.doctor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +46,7 @@ class TimeAndPriceBox extends StatelessWidget {
                   ),
                   5.h,
                   GlobalText(
-                    text: '9:00 - 15:00',
+                    text: doctor.availableTime.toString(),
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                     color: Color(0xff667085),
@@ -59,7 +65,7 @@ class TimeAndPriceBox extends StatelessWidget {
                   ),
                   12.h,
                   GlobalText(
-                    text: '52 AZN',
+                    text: doctor.consultantPrice.toString(),
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                     color: Color(0xff667085),

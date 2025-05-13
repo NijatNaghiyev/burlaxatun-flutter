@@ -40,4 +40,6 @@ class EndpointsConstants {
 
   // D
   static const forumCategory = "$baseUrl/D/forum-category-stats/";
+  static const String doctorsList = '$baseUrl/C/doctors-list/';
+  static const String doctorDetail = '$baseUrl/C/doctors-detail/{slug}/';
 }
