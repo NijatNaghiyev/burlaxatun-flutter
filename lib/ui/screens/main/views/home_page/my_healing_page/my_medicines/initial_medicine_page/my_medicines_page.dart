@@ -36,7 +36,7 @@ class MyMedicinesPage extends StatelessWidget {
               right: 5,
               child: AddButton(
                 onPressed: () {
-                  log('message');
+                  log('show add medicine message');
                   mainCubit.showAddMedicine(context);
                 },
               ),

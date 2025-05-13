@@ -1,13 +1,21 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
+import 'package:burla_xatun/data/models/remote/response/medicines_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../../../../../cubits/main_cubit/mainn_cubit.dart';
 import '../../../../../../../../../utils/constants/color_constants.dart';
 import '../../../../../../../../widgets/global_text.dart';
 
 class EditDetailsButton extends StatelessWidget {
-  const EditDetailsButton({super.key});
+  final Result data;
+
+  const EditDetailsButton({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
+    final mainCubit = context.read<MainnCubit>();
     return SizedBox(
       height: 48,
       width: 117,
@@ -19,7 +27,10 @@ class EditDetailsButton extends StatelessWidget {
             BorderSide(color: ColorConstants.primaryRedColor),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          log('show edit medicine message');
+          mainCubit.showEditMedicine(context, data);
+        },
         child: GlobalText(
           text: 'Düzəliş et',
           fontSize: 14,

@@ -32,7 +32,9 @@ class MedicineDetailsPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                EditDetailsButton(),
+                EditDetailsButton(
+                  data: data,
+                ),
               ],
             ),
           ],
