@@ -7,7 +7,7 @@ class EndpointsConstants {
   static const login = '$baseUrl/A/users/access-token/';
   static const register = '$baseUrl/A/user-register/';
   static const userUpdate = "$baseUrl/A/user-update/";
-  
+
   static const users = '$baseUrl/users';
 
   static const String pregnancyCalculateDetails =
@@ -37,4 +37,7 @@ class EndpointsConstants {
   // C
   static const String medicines = '$baseUrl/C/medicines/';
   static const String medicineCreate = '$baseUrl/C/medicines/create/';
+
+  // D
+  static const forumCategory = "$baseUrl/D/forum-category-stats/";
 }

@@ -214,12 +214,33 @@ class Routerapp {
                   final extra = state.extra as Map;
                   final cubit = extra['cubit'] as BabyNamesCubit2;
                   final countryId = extra['id'];
-                  return BlocProvider.value(
-                    value: cubit..getBabyNames(countryId),
+                  return MultiBlocProvider(
+                    providers: [
+                      BlocProvider.value(
+                        value: cubit..getBabyNames(countryId),
+                        child: GenderNames(countryId: countryId),
+                      ),
+                      BlocProvider(
+                        create: (context) =>
+                            BabyNamesCubit()..getCountriesAndSelectedNames(),
+                      ),
+                    ],
                     child: GenderNames(countryId: countryId),
                   );
                 },
               ),
+              //  GoRoute(
+              //   path: '/gender_names',
+              //   builder: (context, state) {
+              //    final extra = state.extra as Map;
+              //     final cubit = extra['cubit'] as BabyNamesCubit2;
+              //     final countryId = extra['id'];
+              //     return BlocProvider(
+              //       create:(context) => cubit..getBabyNames(countryId),
+              //       child: GenderNames(countryId: countryId),
+              //     );
+              //   },
+              // ),
             ],
           ),
           StatefulShellBranch(

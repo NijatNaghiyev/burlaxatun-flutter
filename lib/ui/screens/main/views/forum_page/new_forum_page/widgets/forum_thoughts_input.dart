@@ -10,7 +10,7 @@ class ForumThoughtsInput extends StatelessWidget {
     return ForumInput(
       hintText: 'Fikirlərinizi buraya yaza bilərsiniz',
       topPadding: 26,
-      maxLines: 20,
+      maxLines: 15,
     );
   }
 }

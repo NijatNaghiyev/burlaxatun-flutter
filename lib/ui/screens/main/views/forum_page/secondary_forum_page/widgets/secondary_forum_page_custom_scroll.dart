@@ -29,7 +29,7 @@ class SecondaryForumPageCustomScroll extends StatelessWidget {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                childCount: 7,
+                childCount: 2,
                 (_, i) {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 18),

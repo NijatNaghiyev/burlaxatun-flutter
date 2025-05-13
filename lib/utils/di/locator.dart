@@ -6,6 +6,7 @@ import 'package:burla_xatun/cubits/contact/contact_cubit.dart';
 import 'package:burla_xatun/cubits/countries/countries_cubit.dart';
 import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
 import 'package:burla_xatun/cubits/faqs_cubit/faqs_cubit.dart';
+import 'package:burla_xatun/cubits/forum_category/forum_category_cubit.dart';
 import 'package:burla_xatun/cubits/login_cubit/login_cubit.dart';
 import 'package:burla_xatun/cubits/medicine/medicine_cubit.dart';
 import 'package:burla_xatun/cubits/medicine_create/medicine_create_cubit.dart';
@@ -22,6 +23,7 @@ import 'package:burla_xatun/data/contractor/countries_contractor.dart';
 import 'package:burla_xatun/data/contractor/daily_rec_contractor.dart';
 import 'package:burla_xatun/data/contractor/daily_rec_detail_contractor.dart';
 import 'package:burla_xatun/data/contractor/faqs_contractor.dart';
+import 'package:burla_xatun/data/contractor/forum_category_contractor.dart';
 import 'package:burla_xatun/data/contractor/login_contractor.dart';
 import 'package:burla_xatun/data/contractor/medicine_contractor.dart';
 import 'package:burla_xatun/data/contractor/medicine_create_contractor.dart';
@@ -37,6 +39,7 @@ import 'package:burla_xatun/data/repository/contact_repository.dart';
 import 'package:burla_xatun/data/repository/countries_repository.dart';
 import 'package:burla_xatun/data/repository/daily_rec_repository.dart';
 import 'package:burla_xatun/data/repository/faqs_repository.dart';
+import 'package:burla_xatun/data/repository/forum_category_repository.dart';
 import 'package:burla_xatun/data/repository/login_repository.dart';
 import 'package:burla_xatun/data/repository/medicine_create_repository.dart';
 import 'package:burla_xatun/data/repository/medicine_repository.dart';
@@ -55,6 +58,7 @@ import 'package:burla_xatun/data/services/remote/countries_service.dart';
 import 'package:burla_xatun/data/services/remote/daily_rec_detail_service.dart';
 import 'package:burla_xatun/data/services/remote/daily_rec_service.dart';
 import 'package:burla_xatun/data/services/remote/faqs_service.dart';
+import 'package:burla_xatun/data/services/remote/forum_category_service.dart';
 import 'package:burla_xatun/data/services/remote/login_service.dart';
 import 'package:burla_xatun/data/services/remote/medicine_create_service.dart';
 import 'package:burla_xatun/data/services/remote/medicine_service.dart';
@@ -98,10 +102,12 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton(() => MedicineService());
   locator.registerLazySingleton(() => UserUpdateService());
   locator.registerLazySingleton(() => MedicineCreateService());
+  locator.registerLazySingleton(() => ForumCategoryService());
 
   // contractor
   locator.registerLazySingleton<LoginContractor>(
       () => LoginRepository(locator<LoginService>()));
+
   locator.registerLazySingleton<RegisterContractor>(
       () => RegisterRepository(locator<RegisterService>()));
 
@@ -143,8 +149,12 @@ Future<void> setupLocator() async {
 
   locator.registerLazySingleton<UserUpdateContractor>(
       () => UserUpdateRepository(locator<UserUpdateService>()));
+
   locator.registerLazySingleton<MedicineCreateContractor>(
       () => MedicineCreateRepository(locator<MedicineCreateService>()));
+
+  locator.registerLazySingleton<ForumCategoryContractor>(
+      () => ForumCategoryRepository(locator<ForumCategoryService>()));
 
   // cubit
   locator.registerFactory(() => LoginCubit(locator()));
@@ -163,4 +173,5 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => MedicineCubit(locator()));
   locator.registerFactory(() => UserUpdateCubit(locator()));
   locator.registerFactory(() => MedicineCreateCubit(locator()));
+  locator.registerFactory(() => ForumCategoryCubit(locator()));
 }

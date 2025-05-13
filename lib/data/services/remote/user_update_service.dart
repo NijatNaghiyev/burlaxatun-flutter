@@ -1,5 +1,4 @@
 import 'package:burla_xatun/data/models/remote/response/user_update_model.dart';
-import 'package:burla_xatun/data/services/local/login_token_service.dart';
 import 'package:burla_xatun/data/services/local/register_token_service.dart';
 import 'package:burla_xatun/data/services/remote/base_network_service.dart';
 import 'package:burla_xatun/utils/constants/endpoints_constants.dart';

@@ -6,7 +6,10 @@ import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
 
 class MainForumTitleBox extends StatelessWidget {
-  const MainForumTitleBox({super.key});
+  const MainForumTitleBox({super.key, required this.title, this.movzuSayi});
+
+  final String title;
+  final int? movzuSayi;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class MainForumTitleBox extends StatelessWidget {
                     width: context.deviceWidth * 0.58,
                     child: GlobalText(
                       textAlign: TextAlign.left,
-                      text: 'Hamiləlik və Reproduktiv sağlamlıq',
+                      text: title,
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
@@ -40,7 +43,7 @@ class MainForumTitleBox extends StatelessWidget {
                     children: [
                       GlobalText(
                         textAlign: TextAlign.left,
-                        text: '17 mövzu',
+                        text: '$movzuSayi mövzu',
                         fontSize: 10,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
