@@ -18,7 +18,7 @@ class CommentsBox extends StatelessWidget {
         padding: const EdgeInsets.all(2),
         sliver: SliverList(
           delegate: SliverChildBuilderDelegate(
-            childCount: 10,
+            childCount: 4,
             (_, i) {
               return SingleCommentBox(i: i);
             },
