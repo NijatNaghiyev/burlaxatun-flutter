@@ -70,7 +70,11 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../cubits/daily_rec_detail/daily_rec_detail_cubit.dart';
+import '../../cubits/doctors_detail/doctors_detail_cubit.dart';
+import '../../data/contractor/doctors_detail_contractor.dart';
 import '../../data/repository/daily_rec_detail_repository.dart';
+import '../../data/repository/doctors_detail_repository.dart';
+import '../../data/services/remote/doctors_detail_service.dart';
 
 final GetIt locator = GetIt.instance;
 
@@ -103,6 +107,7 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton(() => UserUpdateService());
   locator.registerLazySingleton(() => MedicineCreateService());
   locator.registerLazySingleton(() => DoctorsListService());
+  locator.registerLazySingleton(() => DoctorDetailService());
 
   // contractor
   locator.registerLazySingleton<LoginContractor>(
@@ -155,6 +160,9 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton<DoctorsListContractor>(
       () => DoctorsListRepository(locator<DoctorsListService>()));
 
+  locator.registerLazySingleton<DoctorDetailContractor>(
+      () => DoctorDetailRepository(locator<DoctorDetailService>()));
+
   // cubit
   locator.registerFactory(() => LoginCubit(locator()));
   locator.registerFactory(() => DailyRecCubit(locator()));
@@ -173,4 +181,5 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => UserUpdateCubit(locator()));
   locator.registerFactory(() => MedicineCreateCubit(locator()));
   locator.registerFactory(() => DoctorsListCubit(locator()));
+  locator.registerFactory(() => DoctorDetailCubit(locator()));
 }

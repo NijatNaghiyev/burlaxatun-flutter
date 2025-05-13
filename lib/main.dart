@@ -1,4 +1,3 @@
-import 'package:burla_xatun/cubits/about/about_cubit.dart';
 import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
 import 'package:burla_xatun/cubits/blog_cat/blog_cat_cubit.dart';
 import 'package:burla_xatun/cubits/blog_sliders/blog_sliders_cubit.dart';
@@ -18,7 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'cubits/daily_rec_detail/daily_rec_detail_cubit.dart';
+import 'cubits/doctors_detail/doctors_detail_cubit.dart';
 import 'cubits/language_cubit/language_cubit.dart';
 import 'cubits/main_cubit/mainn_cubit.dart';
 import 'cubits/signup_cubit/signup_cubit.dart';
@@ -54,17 +53,17 @@ class MyApp extends StatelessWidget {
         BlocProvider<DailyRecCubit>(
           create: (context) => locator<DailyRecCubit>()..getDailyRec(),
         ),
-        BlocProvider<DailyRecCubit>(
-          create: (context) {
-            final dailyRecState = context.read<DailyRecCubit>().state;
-            if (dailyRecState.status == DailyRecStatus.success) {
-              final slug = dailyRecState.response?.results?.first.slug;
-              return locator<DailyRecCubit>()..getDailyRec();
-              // ..getDailyRecDetail(slug!);
-            }
-            return locator<DailyRecCubit>();
-          },
-        ),
+        // BlocProvider<DailyRecCubit>(
+        //   create: (context) {
+        //     final dailyRecState = context.read<DailyRecCubit>().state;
+        //     if (dailyRecState.status == DailyRecStatus.success) {
+        //       final slug = dailyRecState.response?.results?.first.slug;
+        //       return locator<DailyRecCubit>()..getDailyRec();
+        //       // ..getDailyRecDetail(slug!);
+        //     }
+        //     return locator<DailyRecCubit>();
+        //   },
+        // ),
         BlocProvider<FaqsCubit>(
           create: (context) => locator<FaqsCubit>()..getFaqs(),
         ),
@@ -113,6 +112,10 @@ class MyApp extends StatelessWidget {
 
         BlocProvider<DoctorsListCubit>(
           create: (context) => locator<DoctorsListCubit>()..getDoctorsList(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<DoctorDetailCubit>(),
         ),
 
         // BlocProvider(

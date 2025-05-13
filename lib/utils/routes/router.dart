@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../cubits/baby_names_cubit/baby_names_cubit.dart';
+import '../../cubits/doctors_detail/doctors_detail_cubit.dart';
 import '../../cubits/login_cubit/login_cubit.dart';
 import '../../cubits/onboarding_cubit/onboarding_cubit.dart';
 import '../../cubits/questions_cubit/questions_cubit.dart';
@@ -167,9 +168,25 @@ class Routerapp {
                 builder: (context, state) => InitialDoctorPage(),
               ),
               GoRoute(
-                path: '/doctor_register',
-                builder: (context, state) => RegistrationDoctorPage(),
+                path: '/doctor_register/:slug',
+                builder: (context, state) {
+                  final slug = state.pathParameters['slug']!;
+                  return BlocProvider(
+                    create: (context) =>
+                        locator<DoctorDetailCubit>()..getDoctorDetail(slug),
+                    child: RegistrationDoctorPage(slug: slug),
+                  );
+                },
               ),
+
+              // GoRoute(
+              //   path: '/doctor_register/:slug',
+              //   builder: (context, state) {
+              //     final slug = state.params['slug']!;
+              //     return RegistrationDoctorPage(slug: slug);
+              //   },
+              // ),
+
               GoRoute(
                 path: '/initial_blog',
                 builder: (context, state) => InitialBlogPage(),

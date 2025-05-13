@@ -37,7 +37,9 @@ class DoctorBox extends StatelessWidget {
                 doctor: doctor,
               ),
               24.h,
-              DoctorRegisterButton(),
+              DoctorRegisterButton(
+                slug: doctor.slug ?? '',
+              ),
             ],
           ),
         ),

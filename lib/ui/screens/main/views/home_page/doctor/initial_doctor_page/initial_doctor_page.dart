@@ -58,6 +58,7 @@ class _InitialDoctorPageState extends State<InitialDoctorPage> {
                   .whereType<Position>()
                   .toList();
 
+              /// Fetched datas that screen loaded for first time
               if (selectedPosition == null && positions.isNotEmpty) {
                 selectedPosition = positions[0];
               }

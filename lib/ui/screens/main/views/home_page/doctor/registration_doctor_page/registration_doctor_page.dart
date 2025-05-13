@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../../cubits/doctors_detail/doctors_detail_cubit.dart';
 import '../../../../../../../utils/constants/color_constants.dart';
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_button.dart';
@@ -9,7 +11,8 @@ import 'widgets/registration_doctor_info.dart';
 import 'widgets/registration_price_and_time.dart';
 
 class RegistrationDoctorPage extends StatelessWidget {
-  const RegistrationDoctorPage({super.key});
+  final String slug;
+  const RegistrationDoctorPage({super.key, required this.slug});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +34,33 @@ class RegistrationDoctorPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             children: [
-              RegistrationDoctorInfo(),
-              32.h,
-              RegistrationPriceAndTime(),
+              BlocBuilder<DoctorDetailCubit, DoctorDetailState>(
+                builder: (context, state) {
+                  if (state.status == DoctorDetailStatus.loading) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+
+                  if (state.status == DoctorDetailStatus.failure ||
+                      state.status == DoctorDetailStatus.networkError) {
+                    return Center(
+                        child: Text('Xəta baş verdi: ${state.errorMessage}'));
+                  }
+
+                  final doctor = state.response;
+
+                  if (doctor == null) {
+                    return Center(child: Text('Həkim məlumatı tapılmadı.'));
+                  }
+
+                  return Column(
+                    children: [
+                      RegistrationDoctorInfo(doctor: doctor),
+                      32.h,
+                      RegistrationPriceAndTime(doctor: doctor),
+                    ],
+                  );
+                },
+              ),
               40.h,
               RegistrationDateAndTimeWidget(),
               75.h,
