@@ -3,7 +3,6 @@ import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'widgets/forum_title_input.dart';
 import 'widgets/new_forum_appbar.dart';
 
 class CreateNewForum extends StatelessWidget {
@@ -23,8 +22,8 @@ class CreateNewForum extends StatelessWidget {
           child: Column(
             children: [
               22.h,
-              ForumTitleInput(),
-              32.h,
+              // ForumTitleInput(),
+              // 32.h,
               ForumThoughtsInput(),
             ],
           ),

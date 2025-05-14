@@ -1,13 +1,15 @@
-import 'package:burla_xatun/cubits/about/about_cubit.dart';
 import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
 import 'package:burla_xatun/cubits/blog_cat/blog_cat_cubit.dart';
 import 'package:burla_xatun/cubits/blog_sliders/blog_sliders_cubit.dart';
 import 'package:burla_xatun/cubits/contact/contact_cubit.dart';
 import 'package:burla_xatun/cubits/countries/countries_cubit.dart';
 import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
+import 'package:burla_xatun/cubits/doctors_list/doctors_list_cubit.dart';
 import 'package:burla_xatun/cubits/faqs_cubit/faqs_cubit.dart';
+import 'package:burla_xatun/cubits/forum_category/forum_category_cubit.dart';
 import 'package:burla_xatun/cubits/medicine/medicine_cubit.dart';
 import 'package:burla_xatun/cubits/medicine_create/medicine_create_cubit.dart';
+import 'package:burla_xatun/cubits/medicine_patch/medicine_patch_cubit.dart';
 import 'package:burla_xatun/cubits/privacy_policy/privacy_policy_cubit.dart';
 import 'package:burla_xatun/cubits/using_rules/using_rules_cubit.dart';
 import 'package:burla_xatun/utils/constants/color_constants.dart';
@@ -17,7 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-
+import 'cubits/doctors_detail/doctors_detail_cubit.dart';
 import 'cubits/language_cubit/language_cubit.dart';
 import 'cubits/main_cubit/mainn_cubit.dart';
 import 'cubits/signup_cubit/signup_cubit.dart';
@@ -53,17 +55,17 @@ class MyApp extends StatelessWidget {
         BlocProvider<DailyRecCubit>(
           create: (context) => locator<DailyRecCubit>()..getDailyRec(),
         ),
-        BlocProvider<DailyRecCubit>(
-          create: (context) {
-            final dailyRecState = context.read<DailyRecCubit>().state;
-            if (dailyRecState.status == DailyRecStatus.success) {
-              final slug = dailyRecState.response?.results?.first.slug;
-              return locator<DailyRecCubit>()..getDailyRec();
-              // ..getDailyRecDetail(slug!);
-            }
-            return locator<DailyRecCubit>();
-          },
-        ),
+        // BlocProvider<DailyRecCubit>(
+        //   create: (context) {
+        //     final dailyRecState = context.read<DailyRecCubit>().state;
+        //     if (dailyRecState.status == DailyRecStatus.success) {
+        //       final slug = dailyRecState.response?.results?.first.slug;
+        //       return locator<DailyRecCubit>()..getDailyRec();
+        //       // ..getDailyRecDetail(slug!);
+        //     }
+        //     return locator<DailyRecCubit>();
+        //   },
+        // ),
         BlocProvider<FaqsCubit>(
           create: (context) => locator<FaqsCubit>()..getFaqs(),
         ),
@@ -108,6 +110,22 @@ class MyApp extends StatelessWidget {
 
         BlocProvider<MedicineCreateCubit>(
           create: (context) => locator<MedicineCreateCubit>(),
+        ),
+
+        BlocProvider<MedicinePatchCubit>(
+          create: (context) => locator<MedicinePatchCubit>(),
+        ),
+
+        BlocProvider<ForumCategoryCubit>(
+          create: (context) =>
+              locator<ForumCategoryCubit>()..getForumCategory(),
+        ),
+        BlocProvider<DoctorsListCubit>(
+          create: (context) => locator<DoctorsListCubit>()..getDoctorsList(),
+        ),
+
+        BlocProvider(
+          create: (context) => locator<DoctorDetailCubit>(),
         ),
 
         // BlocProvider(

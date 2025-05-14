@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -16,6 +17,8 @@ class NewForumAppbar extends StatelessWidget implements PreferredSizeWidget {
     return SafeArea(
       minimum: EdgeInsets.only(top: 32),
       child: AppBar(
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: Colors.transparent,
         centerTitle: true,
         leading: Padding(
           padding: const EdgeInsets.only(left: 20),
@@ -37,7 +40,10 @@ class NewForumAppbar extends StatelessWidget implements PreferredSizeWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 22),
-            child: SvgPicture.asset('assets/icons/forum_send_icon.svg'),
+            child: SvgPicture.asset(
+              'assets/icons/forum_send_icon.svg',
+              color: ColorConstants.primaryRedColor,
+            ),
           ),
         ],
       ),

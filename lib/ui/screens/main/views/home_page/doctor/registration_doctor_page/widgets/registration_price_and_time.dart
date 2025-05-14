@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../../../data/models/remote/response/doctor_detail_model.dart';
 import '../../../../../../../../utils/extensions/num_extensions.dart';
 import 'date_or_price_box.dart';
 
 class RegistrationPriceAndTime extends StatelessWidget {
-  const RegistrationPriceAndTime({super.key});
+  final DoctorDetailResponse doctor;
+  const RegistrationPriceAndTime({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,11 @@ class RegistrationPriceAndTime extends StatelessWidget {
             children: [
               DateOrPriceBox(
                   boxName: 'Uyğun Tarix',
-                  boxInfo: 'Monday to Friday | 9:00 - 15:00'),
+                  boxInfo: 'Monday to Friday | ${doctor.availableTime}'),
               26.h,
-              DateOrPriceBox(boxName: 'Müayinə Qiyməti', boxInfo: '52 AZN'),
+              DateOrPriceBox(
+                  boxName: 'Müayinə Qiyməti',
+                  boxInfo: '${doctor.consultantPrice} AZN'),
             ],
           ),
         ),

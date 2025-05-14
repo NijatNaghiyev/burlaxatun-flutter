@@ -1,4 +1,4 @@
-import '../models/remote/response/medicines_model.dart';
+import '../../models/remote/response/medicine/medicines_model.dart';
 
 abstract class MedicineContractor {
   Future<MedicineResponse> getMedicines();

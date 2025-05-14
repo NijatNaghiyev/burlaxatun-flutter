@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'time_box.dart';
 
 class TimeWidget extends StatelessWidget {
-  const TimeWidget({super.key});
+  final List<String> timeList;
+
+  const TimeWidget({super.key, required this.timeList});
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +17,16 @@ class TimeWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(32)),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6),
+          padding: const EdgeInsets.all(6),
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(27)),
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: timeList.length,
               itemBuilder: (_, i) {
-                return TimeBox(time: '11:00');
+                return TimeBox(time: timeList[i]);
               },
-              separatorBuilder: (_, i) {
-                return SizedBox(width: 4);
-              },
+              separatorBuilder: (_, i) => SizedBox(width: 4),
             ),
           ),
         ),

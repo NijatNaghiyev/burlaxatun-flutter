@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/contractor/medicine_create_contractor.dart';
+import '../../data/contractor/medicine/medicine_create_contractor.dart';
 
 part 'medicine_create_state.dart';
 

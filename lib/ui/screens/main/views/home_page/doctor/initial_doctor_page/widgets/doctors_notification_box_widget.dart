@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../../../utils/extensions/num_extensions.dart';
-import 'doctor_info.dart';
 import 'doctor_notification_status.dart';
 import 're_registration_button.dart';
 
@@ -23,7 +22,7 @@ class DoctorsNotificationBoxWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 14),
           child: Column(
             children: [
-              DoctorInfo(),
+              //DoctorInfo(),
               24.h,
               DoctorNotificationStatus(),
               24.h,

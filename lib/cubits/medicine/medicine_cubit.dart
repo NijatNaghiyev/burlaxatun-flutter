@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/contractor/medicine_contractor.dart';
-import '../../data/models/remote/response/medicines_model.dart';
+import '../../data/contractor/medicine/medicine_contractor.dart';
+import '../../data/models/remote/response/medicine/medicines_model.dart';
 
 part 'medicine_state.dart';
 

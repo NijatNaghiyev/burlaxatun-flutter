@@ -1,6 +1,6 @@
-import '../contractor/medicine_contractor.dart';
-import '../models/remote/response/medicines_model.dart';
-import '../services/remote/medicine_service.dart';
+import '../../contractor/medicine/medicine_contractor.dart';
+import '../../models/remote/response/medicine/medicines_model.dart';
+import '../../services/remote/medicine/medicine_service.dart';
 
 class MedicineRepository implements MedicineContractor {
   MedicineRepository(this._medicineService);

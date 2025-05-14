@@ -26,17 +26,21 @@ class DateOrPriceBox extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GlobalText(
-              text: boxName,
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
+            Flexible(
+              child: GlobalText(
+                text: boxName,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
             ),
-            GlobalText(
-              text: boxInfo,
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: Color(0xff667085),
+            Flexible(
+              child: GlobalText(
+                text: boxInfo,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff667085),
+              ),
             ),
           ],
         ),

@@ -9,12 +9,12 @@ class RegisterTokenService {
   final Box<String> _box;
 
   Future<void> saveLoginResponse(RegisterResponseModel response) async {
-    _box.put('login', jsonEncode(response.toJson()));
+    _box.put('register', jsonEncode(response.toJson()));
   }
 
   RegisterResponseModel? get registerResponse {
     try {
-      String? registerResponse = _box.get('login');
+      String? registerResponse = _box.get('register');
       if (registerResponse == null) return null;
       RegisterResponseModel decodedResponse =
           RegisterResponseModel.fromJson(jsonDecode(registerResponse));

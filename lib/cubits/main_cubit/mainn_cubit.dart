@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:burla_xatun/data/models/local/medicine_detail_items_model.dart';
+import 'package:burla_xatun/data/models/remote/response/medicine/medicines_model.dart';
+import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/my_medicines/initial_medicine_page/widgets/edit_medicine_dialog.dart';
 import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_password/change_password_page/change_password_page.dart';
 import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
 import 'package:burla_xatun/ui/screens/main/views/profie_page/using_rules/using_rules_screen.dart';
@@ -262,6 +264,15 @@ class MainnCubit extends Cubit<MainInitial> {
       builder: (_) {
         return AddMedicineDialog();
       },
+    );
+  }
+
+  Future<Result?> showEditMedicine(BuildContext context, Result data) {
+    return showModalBottomSheet<Result>(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (_) => EditMedicineDialog(data: data),
     );
   }
 

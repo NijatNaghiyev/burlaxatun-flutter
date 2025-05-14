@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/global_text.dart';
@@ -9,7 +10,8 @@ class ArticleBox extends StatelessWidget {
     this.playButton,
     required this.boxTitle,
     required this.boxDescription,
-    this.onTap, required this.videoOrImage,
+    this.onTap,
+    required this.videoOrImage,
   });
 
   final Widget? playButton;
@@ -51,13 +53,19 @@ class ArticleBox extends StatelessWidget {
                 12.h,
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
-                  child: GlobalText(
-                    height: 1.2,
-                    textAlign: TextAlign.left,
-                    text: boxDescription,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff8C8A8A),
+                  child: Html(
+                    data: boxDescription,
+                    style: {
+                      "body": Style(
+                        margin: Margins.zero,
+                        padding: HtmlPaddings.zero,
+                        fontSize: FontSize(12),
+                        color: Color(0xff8C8A8A),
+                        fontWeight: FontWeight.w400,
+                        textAlign: TextAlign.left,
+                        lineHeight: LineHeight.number(1.2),
+                      ),
+                    },
                   ),
                 ),
               ],

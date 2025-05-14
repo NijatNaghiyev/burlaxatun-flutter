@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../utils/constants/padding_constants.dart';
 import '../../../../utils/extensions/context_extensions.dart';

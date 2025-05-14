@@ -6,7 +6,12 @@ import '../../../../../../../../cubits/main_cubit/mainn_cubit.dart';
 import '../../../../../../../widgets/global_input.dart';
 
 class SearchAndNotification extends StatelessWidget {
-  const SearchAndNotification({super.key});
+  final void Function(String)? onSearch;
+
+  const SearchAndNotification({
+    super.key,
+    required this.onSearch,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +27,7 @@ class SearchAndNotification extends StatelessWidget {
               child: GlobalInput(
                 prefixIcon: 'assets/icons/search_icon.svg',
                 hintText: 'Axtarış...',
+                onChanged: onSearch,
               ),
             ),
             GestureDetector(

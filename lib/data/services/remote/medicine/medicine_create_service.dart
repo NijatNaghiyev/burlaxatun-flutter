@@ -6,7 +6,7 @@ import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:burla_xatun/utils/extensions/statuscode_extension.dart';
 import 'package:dio/dio.dart';
 
-import '../local/login_token_service.dart';
+import '../../local/login_token_service.dart';
 
 class MedicineCreateService {
   final endpoint = EndpointsConstants.medicineCreate;
