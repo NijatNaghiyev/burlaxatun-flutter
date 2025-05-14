@@ -1,98 +1,84 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../../../cubits/baby_names_cubit/baby_names_cubit.dart';
-import '../../../../../../../../data/models/remote/response/names_model.dart';
+import '../../../../../../../../data/models/remote/response/selected_names_model.dart';
 import '../../../../../../../../utils/constants/color_constants.dart';
 
 class BoyNameTile extends StatefulWidget {
   const BoyNameTile({
     super.key,
-    required this.boyName,
-    required this.countryId,
+    required this.name,
+    required this.babyNameId,
+    required this.isSelectedName,
   });
 
-  final Gender boyName;
-  final String countryId;
+  final String name;
+  final int babyNameId;
+  final ValueNotifier<bool> isSelectedName;
 
   @override
   State<BoyNameTile> createState() => _BoyNameTileState();
 }
 
 class _BoyNameTileState extends State<BoyNameTile> {
-  late final BabyNamesCubit babyNamesCubit;
+  late BabyNamesCubit babyNamesCubit;
+
   @override
   void initState() {
     babyNamesCubit = context.read<BabyNamesCubit>();
-    // if (babyNamesCubit.state.isSelected == -1) {
-    babyNamesCubit.changeIsSelected(v: widget.boyName.selected);
-    // }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    log('tile builded');
-    final BabyNamesCubit babyNamesCubit = context.read<BabyNamesCubit>();
-    // isNameSelected.value = boyName.selected == 1;
+    ValueNotifier<bool> isSelectedName = ValueNotifier<bool>(false);
+    for (var e in babyNamesCubit.selectedNames ?? []) {
+      if (e.babyName == widget.babyNameId) {
+        isSelectedName.value = e.babyName == widget.babyNameId;
+      }
+    }
+    // babyNamesCubit.selectedNames?.forEach((e) {
+    //   if (e.babyName == widget.babyNameId) {
+    //     isSelectedName.value = e.babyName == widget.babyNameId;
+    //   }
+    // });
     return ListTile(
-      title: Text(widget.boyName.name),
-      trailing: BlocBuilder<BabyNamesCubit, BabyNamesInitial>(
-        buildWhen: (previous, current) {
-          return previous.isSelected != current.isSelected;
-          //  ||
-          // previous.names != current.names;
-        },
-        builder: (context, state) {
-          if (state.selectNameStatus == SelectNameStatus.error) {
-            log('error');
+      title: Text(widget.name),
+      trailing: GestureDetector(
+        onTap: () async {
+          isSelectedName.value = !isSelectedName.value;
+          if (isSelectedName.value) {
+            final isAdded = await babyNamesCubit.addToWishList(
+              babyNameId: widget.babyNameId,
+              selectedName: SelectedName(babyName: widget.babyNameId),
+            );
+            if (isAdded == false) {
+              isSelectedName.value = !isSelectedName.value;
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('failed add to list the name')),
+              );
+            }
+          } else {
+            babyNamesCubit.removeFromWishList(babyNameId: widget.babyNameId);
           }
-          log('HEART STATUS ${state.nameStateStatus}');
-          return GestureDetector(
-            onTap: () async {
-              babyNamesCubit.changeIsSelected(
-                  v: widget.boyName.selected == 1 ? 0 : 1);
-              await babyNamesCubit.selectName(
-                  nameId: widget.boyName.id, countryId: widget.countryId);
-              // await babyNamesCubit.getNames(countryId);
-            },
-            child: SvgPicture.asset(
+        },
+        child: ValueListenableBuilder<bool>(
+          valueListenable: isSelectedName,
+          builder: (context, value, child) {
+            return SvgPicture.asset(
               'assets/icons/favorite_icon.svg',
               colorFilter: ColorFilter.mode(
-                state.isSelected == 1
+                value
                     ? ColorConstants.primaryRedColor
                     : ColorConstants.hintTextColor,
                 BlendMode.srcIn,
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
 }
-
-// trailing: GestureDetector(
-//   onTap: () async {
-//     isNameSelected.value = !isNameSelected.value;
-//     await babyNamesCubit.selectName(boyName.id);
-//     // await babyNamesCubit.getNames(countryId);
-//   },
-//   child: ValueListenableBuilder(
-//     valueListenable: isNameSelected,
-//     builder: (context, isSelected, child) {
-//       return SvgPicture.asset(
-//         'assets/icons/favorite_icon.svg',
-//         colorFilter: ColorFilter.mode(
-//           isSelected
-//               ? ColorConstants.primaryColor
-//               : ColorConstants.hintTextColor,
-//           BlendMode.srcIn,
-//         ),
-//       );
-//     },
-//   ),
-// ),

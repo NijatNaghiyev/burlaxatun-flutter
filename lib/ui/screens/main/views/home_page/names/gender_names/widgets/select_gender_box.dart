@@ -7,44 +7,39 @@ import '../../widgets/select_option.dart';
 import '../../widgets/single_option.dart';
 
 class SelectGenderBox extends StatelessWidget {
-  const SelectGenderBox({super.key});
+  const SelectGenderBox({
+    super.key,
+    required this.genderScreenIndex,
+    required this.pageController,
+  });
+
+  final ValueNotifier<int> genderScreenIndex;
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainnCubit>();
-    return SelectOption(
-      optionOne: BlocBuilder<MainnCubit, MainInitial>(
-        buildWhen: (previous, current) {
-          return previous.genderOption != current.genderOption;
-        },
-        builder: (context, state) {
-          return SingleOption(
+    return ValueListenableBuilder(
+      valueListenable: genderScreenIndex,
+      builder: (context, value, child) {
+        return SelectOption(
+          optionOne: SingleOption(
             boxTitle: 'Oglan',
-            boxColors: state.genderOption == GenderOption.boy
-                ? Colors.white
-                : Colors.transparent,
+            boxColors: value == 0 ? Colors.white : Colors.transparent,
             onTap: () {
-              mainCubit.changeGender(GenderOption.boy);
+              genderScreenIndex.value = 0;
+              pageController.jumpToPage(genderScreenIndex.value);
             },
-          );
-        },
-      ),
-      optionTwo: BlocBuilder<MainnCubit, MainInitial>(
-        buildWhen: (previous, current) {
-          return previous.genderOption != current.genderOption;
-        },
-        builder: (context, state) {
-          return SingleOption(
+          ),
+          optionTwo: SingleOption(
             boxTitle: 'Qiz',
-            boxColors: state.genderOption == GenderOption.girl
-                ? Colors.white
-                : Colors.transparent,
+            boxColors: value == 1 ? Colors.white : Colors.transparent,
             onTap: () {
-              mainCubit.changeGender(GenderOption.girl);
+              genderScreenIndex.value = 1;
+              pageController.jumpToPage(genderScreenIndex.value);
             },
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

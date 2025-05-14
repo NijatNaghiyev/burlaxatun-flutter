@@ -1,51 +1,81 @@
+import 'dart:developer';
+
+import 'package:burla_xatun/cubits/baby_names_cubit/baby_names_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../../../cubits/baby_names_cubit/baby_names_cubit.dart';
 import 'selected_name_tile.dart';
 
-class SelectedNamesWidget extends StatelessWidget {
+class SelectedNamesWidget extends StatefulWidget {
   const SelectedNamesWidget({super.key});
 
   @override
+  State<SelectedNamesWidget> createState() => _SelectedNamesWidgetState();
+}
+
+class _SelectedNamesWidgetState extends State<SelectedNamesWidget>
+    with AutomaticKeepAliveClientMixin {
+  late BabyNamesCubit babyNamesCubit;
+  @override
+  void initState() {
+    babyNamesCubit = context.read<BabyNamesCubit>()..getSelectedNames();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final babyNamesCubit = context.read<BabyNamesCubit>();
-    return BlocBuilder<BabyNamesCubit, BabyNamesInitial>(
+    return BlocBuilder<BabyNamesCubit, BabyNamesState>(
       buildWhen: (previous, current) {
-        return previous.selectedNames != current.selectedNames;
+        return previous.selectedNamesList != current.selectedNamesList;
       },
       builder: (context, state) {
         if (state.nameStateStatus == NameStateStatus.loading) {
-          return CircularProgressIndicator.adaptive();
-        } else if (state.nameStateStatus == NameStateStatus.success) {
-          final nameList = state.selectedNames;
-          return Expanded(
-            child: RefreshIndicator(
-              onRefresh: () async {
-                await babyNamesCubit.updateSelectedNames();
-              },
-              child: ListView.separated(
-                itemCount: nameList!.length,
-                itemBuilder: (_, i) {
-                  return SelectedNameTile(
-                    name: nameList[i].name,
-                    nameId: nameList[i].id,
-                    tileIndex: i,
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return Divider(
-                    color: Color(0xffDADADA),
-                  );
-                },
-              ),
-            ),
-          );
+          return Center(child: CircularProgressIndicator.adaptive());
+        } else if (state.nameStateStatus == NameStateStatus.networkError) {
+          return Center(child: Text('Connection error'));
         } else if (state.nameStateStatus == NameStateStatus.error) {
-          return Text('Beyenilen adlar tapilmadi');
+          return Center(child: Text('Data not found'));
+        }
+        if (state.nameStateStatus == NameStateStatus.success) {
+          final selectedNames = state.selectedNamesList;
+          log('in list: $selectedNames');
+          return RefreshIndicator(
+            onRefresh: () async {
+              babyNamesCubit.getSelectedNames();
+            },
+            child: selectedNames!.isEmpty
+                ? ListView(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 100),
+                        child: Center(
+                          child: Text('There is no any selected name'),
+                        ),
+                      )
+                    ],
+                  )
+                : ListView.separated(
+                    itemCount: selectedNames.length,
+                    itemBuilder: (_, i) {
+                      final selectedName = selectedNames[i];
+                      return SelectedNameTile(
+                        name: selectedName.babyName.toString(),
+                        nameId: selectedName.babyName ?? -1,
+                      );
+                    },
+                    separatorBuilder: (_, index) {
+                      return Divider(
+                        color: Color(0xffDADADA),
+                      );
+                    },
+                  ),
+          );
         }
         return SizedBox.shrink();
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

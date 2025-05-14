@@ -586,7 +586,12 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
           duration: Durations.medium2,
           curve: Curves.linear,
         );
-        emit(state.copyWith(isActiveButton: false));
+        emit(state.copyWith(
+          isActiveButton:
+              state.focusedWeekIndex == 0 || state.isFirstChild == null
+                  ? false
+                  : true,
+        ));
       } else if (state.isFirstChild! && state.questionPageIndex < 4) {
         pageController.jumpToPage(state.questionPageIndex);
       } else if (!state.isFirstChild! && state.questionPageIndex < 4) {
@@ -601,6 +606,10 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   }
 
   void goBack() {
+    emit(state.copyWith(
+      iDontKnow: state.iDontKnow ? false : null,
+      isActiveButton: true,
+    ));
     if (state.questionPageIndex == 0) {
       log('back');
     } else {

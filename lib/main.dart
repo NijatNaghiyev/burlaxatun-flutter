@@ -17,7 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'cubits/daily_rec_detail/daily_rec_detail_cubit.dart';
+
 import 'cubits/language_cubit/language_cubit.dart';
 import 'cubits/main_cubit/mainn_cubit.dart';
 import 'cubits/signup_cubit/signup_cubit.dart';
@@ -90,9 +90,9 @@ class MyApp extends StatelessWidget {
           create: (context) => locator<CountriesCubit>()..getCountries(),
         ),
 
-        BlocProvider<BabyNamesCubit2>(
-          create: (context) => locator<BabyNamesCubit2>(),
-        ),
+        // BlocProvider<BabyNamesCubit2>(
+        //   create: (context) => locator<BabyNamesCubit>(),
+        // ),
 
         BlocProvider<BlogSlidersCubit>(
           create: (context) => locator<BlogSlidersCubit>()..getBlogSliders(),

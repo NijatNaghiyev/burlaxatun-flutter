@@ -9,9 +9,15 @@ import '../../../../../utils/extensions/num_extensions.dart';
 import '../../../../widgets/global_text.dart';
 import 'question_one_buttons.dart';
 
-class QuestionOne extends StatelessWidget {
+class QuestionOne extends StatefulWidget {
   const QuestionOne({super.key});
 
+  @override
+  State<QuestionOne> createState() => _QuestionOneState();
+}
+
+class _QuestionOneState extends State<QuestionOne>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
@@ -58,4 +64,8 @@ class QuestionOne extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

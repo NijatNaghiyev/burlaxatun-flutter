@@ -7,7 +7,7 @@ class EndpointsConstants {
   static const login = '$baseUrl/A/users/access-token/';
   static const register = '$baseUrl/A/user-register/';
   static const userUpdate = "$baseUrl/A/user-update/";
-  
+
   static const users = '$baseUrl/users';
 
   static const String pregnancyCalculateDetails =
@@ -18,6 +18,9 @@ class EndpointsConstants {
   static const String countries = '$babyUrl/name_countries';
   static const String names = '$babyUrl/names';
   static const String selectedNames = '$names/select';
+  static const String wishListNames = '$baseUrl/A/wishlist-names/';
+  static const String addToWishList = '$baseUrl/A/wishlist-name/add/';
+  static const String removeFromWishList = '$baseUrl/A/wishlist-name/remove/';
 
   // Extra
   static const String dailyRec = '$baseUrl/extra/daily-recommendations/';

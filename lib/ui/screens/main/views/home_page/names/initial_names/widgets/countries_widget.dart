@@ -1,144 +1,81 @@
-// import 'dart:developer';
-//
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_svg/svg.dart';
-// import 'package:go_router/go_router.dart';
-//
-// import '../../../../../../../../cubits/baby_names_cubit/baby_names_cubit.dart';
-//
-// class CountriesWidget extends StatelessWidget {
-//   const CountriesWidget({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final babyNamesCubit = context.read<BabyNamesCubit>();
-//     return BlocBuilder<BabyNamesCubit, BabyNamesInitial>(
-//       buildWhen: (previous, current) {
-//         return previous.countryList != current.countryList;
-//       },
-//       builder: (context, state) {
-//
-//         if (state.nameStateStatus == NameStateStatus.error) {
-//           log('COUNTRY PAGE STATE: ${state.nameStateStatus}');
-//           return Center(
-//             child: Text('Melumat tapilmadi'),
-//           );
-//         } else if (state.nameStateStatus == NameStateStatus.success) {
-//           log('COUNTRY PAGE STATE: ${state.nameStateStatus}');
-//           return Expanded(
-//             child: ListView.separated(
-//               itemCount: state.countryList!.length,
-//               itemBuilder: (_, i) {
-//                 return ListTile(
-//                   leading: Image.asset(
-//                     'assets/png/flag.png',
-//                     width: 46,
-//                     height: 46,
-//                   ),
-//                   title: Text(state.countryList![i].title),
-//                   trailing: SvgPicture.asset('assets/icons/arrow_right.svg'),
-//                   onTap: () {
-//                     context.push('/gender_names', extra: {
-//                       'id': state.countryList![i].id,
-//                       'cubit': babyNamesCubit,
-//                     });
-//                   },
-//                 );
-//               },
-//               separatorBuilder: (BuildContext context, int index) {
-//                 return Divider(
-//                   color: Color(0xffDADADA),
-//                 );
-//               },
-//             ),
-//           );
-//         } else if (state.nameStateStatus == NameStateStatus.loading) {
-//           log('COUNTRY PAGE STATE: ${state.nameStateStatus}');
-//           return Center(child: CircularProgressIndicator.adaptive());
-//         }
-//         log('COUNTRY PAGE STATE: ${state.nameStateStatus}');
-//         return SizedBox.shrink();
-//       },
-//     );
-//   }
-// }
+import 'dart:developer';
 
-import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
+import 'package:burla_xatun/cubits/baby_names_cubit/baby_names_cubit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../../../../cubits/countries/countries_cubit.dart';
-import '../../../../../../../widgets/custom_circular_progress_indicator.dart';
-
-class CountriesWidget extends StatelessWidget {
+class CountriesWidget extends StatefulWidget {
   const CountriesWidget({super.key});
 
   @override
+  State<CountriesWidget> createState() => _CountriesWidgetState();
+}
+
+class _CountriesWidgetState extends State<CountriesWidget>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  late BabyNamesCubit _babyNamesCubit;
+  void initState() {
+    super.initState();
+    log('init countries');
+    _babyNamesCubit = context.read<BabyNamesCubit>()..getCountries();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final babyNamesCubit = context.read<BabyNamesCubit2>();
-    return BlocBuilder<CountriesCubit, CountriesState>(
-      builder: (_, state) {
-        if (state.status == CountriesStatus.loading) {
-          return const Center(
-            child: CustomCircularProgressIndicator(isWhite: false),
-          );
+    return BlocBuilder<BabyNamesCubit, BabyNamesState>(
+      buildWhen: (previous, current) {
+        return previous.countries != current.countries;
+      },
+      builder: (context, state) {
+        if (state.nameStateStatus == NameStateStatus.loading) {
+          return Center(child: CircularProgressIndicator.adaptive());
+        } else if (state.nameStateStatus == NameStateStatus.networkError) {
+          return Center(child: Text('Connection error'));
+        } else if (state.nameStateStatus == NameStateStatus.error) {
+          return Center(child: Text('Data not found'));
         }
-
-        if (state.status == CountriesStatus.failure) {
-          return const Center(
-            child: Text('Error'),
-          );
-        }
-
-        if (state.status == CountriesStatus.networkError) {
-          return const Center(
-            child: Text('Network error'),
-          );
-        }
-
-        if (state.status == CountriesStatus.success) {
-          final data = state.response?.results ?? [];
-
-          return Expanded(
-            child: ListView.separated(
-              itemCount: data.length,
-              itemBuilder: (_, i) {
-                final country = data[i];
-
-                return ListTile(
-                  leading: Image.network(
-                    country.flag ?? '',
+        if (state.nameStateStatus == NameStateStatus.success) {
+          final countryResponse = state.countries;
+          final countrieList = countryResponse?.results;
+          return ListView.separated(
+            itemCount: countrieList?.length ?? 0,
+            itemBuilder: (_, i) {
+              final country = countrieList?[i];
+              return ListTile(
+                leading: ClipOval(
+                  child: CachedNetworkImage(
                     width: 46,
                     height: 46,
-                    fit: BoxFit.contain,
-                    errorBuilder: (_, __, ___) => Image.asset(
-                      'assets/png/flag.png',
-                      width: 46,
-                      height: 46,
-                      fit: BoxFit.cover,
-                    ),
+                    fit: BoxFit.cover,
+                    imageUrl: country?.flag ?? '',
+                    errorWidget: (context, url, error) {
+                      return Icon(Icons.error);
+                    },
                   ),
-                  title: Text(country.name ?? 'Naməlum'),
-                  trailing: SvgPicture.asset('assets/icons/arrow_right.svg'),
-                  onTap: () {
-                    context.push('/gender_names', extra: {
-                      'id': country.id,
-                      'cubit': babyNamesCubit,
-                    });
-                  },
-                );
-              },
-              separatorBuilder: (_, __) =>
-                  const Divider(color: Color(0xffDADADA)),
-            ),
+                ),
+                title: Text(country?.name ?? 'country name not found'),
+                trailing: SvgPicture.asset('assets/icons/arrow_right.svg'),
+                onTap: () {
+                  context.push('/gender_names', extra: {
+                    'id': country?.id ?? -1,
+                    'cubit': _babyNamesCubit,
+                  });
+                },
+              );
+            },
+            separatorBuilder: (_, __) =>
+                const Divider(color: Color(0xffDADADA)),
           );
         }
-
-        return const SizedBox.shrink();
+        return SizedBox.shrink();
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

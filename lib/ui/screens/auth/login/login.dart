@@ -1,5 +1,7 @@
+import 'package:burla_xatun/ui/screens/main/main_page.dart';
 import 'package:burla_xatun/ui/screens/main/views/home_page/home/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../utils/constants/padding_constants.dart';
 import '../../../../utils/extensions/context_extensions.dart';
@@ -39,15 +41,11 @@ class Login extends StatelessWidget {
                     height: 5,
                   ),
                   TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(),
-                          ),
-                        );
-                      },
-                      child: Text('Home')),
+                    onPressed: () {
+                      context.go('/home');
+                    },
+                    child: Text('Home'),
+                  ),
                 ],
               ),
             ),

@@ -1,27 +1,27 @@
 import 'package:equatable/equatable.dart';
 
-class BabyNamesResponse2 extends Equatable {
+class BabyNamesResponse extends Equatable {
   final int? count;
   final String? next;
   final String? previous;
-  final List<Result>? results;
+  final List<Country>? results;
 
-  const BabyNamesResponse2({
+  const BabyNamesResponse({
     this.count,
     this.next,
     this.previous,
     this.results,
   });
 
-  factory BabyNamesResponse2.fromJson(Map<String, dynamic> json) =>
-      BabyNamesResponse2(
+  factory BabyNamesResponse.fromJson(Map<String, dynamic> json) =>
+      BabyNamesResponse(
         count: json["count"],
         next: json["next"],
         previous: json["previous"],
         results: json["results"] == null
             ? []
-            : List<Result>.from(
-                json["results"]!.map((x) => Result.fromJson(x))),
+            : List<Country>.from(
+                json["results"]!.map((x) => Country.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -42,7 +42,7 @@ class BabyNamesResponse2 extends Equatable {
       ];
 }
 
-class Result extends Equatable {
+class Country extends Equatable {
   final int? id;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -50,7 +50,7 @@ class Result extends Equatable {
   final String? name;
   final int? country;
 
-  const Result({
+  const Country({
     this.id,
     this.createdAt,
     this.updatedAt,
@@ -59,7 +59,7 @@ class Result extends Equatable {
     this.country,
   });
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory Country.fromJson(Map<String, dynamic> json) => Country(
         id: json["id"],
         createdAt: json["created_at"] == null
             ? null

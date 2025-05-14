@@ -1,10 +1,9 @@
-import 'dart:developer';
-
+import 'package:burla_xatun/cubits/baby_names_cubit/baby_names_cubit.dart';
+import 'package:burla_xatun/data/contractor/baby_names_contractor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../../../../cubits/baby_names_cubit/baby_names_cubit.dart';
 import '../../../../../../../../utils/constants/color_constants.dart';
 
 class SelectedNameTile extends StatelessWidget {
@@ -12,45 +11,37 @@ class SelectedNameTile extends StatelessWidget {
     super.key,
     required this.name,
     required this.nameId,
-    required this.tileIndex,
   });
 
   final String name;
-  final String nameId;
-  final int tileIndex;
+  final int nameId;
 
   @override
   Widget build(BuildContext context) {
     final babyNamesCubit = context.read<BabyNamesCubit>();
     return ListTile(
       title: Text(name),
-      trailing: BlocConsumer<BabyNamesCubit, BabyNamesInitial>(
-        buildWhen: (previous, current) =>
-            previous.selectedNameIndex != current.selectedNameIndex,
-        listener: (context, state) {
-          if (state.nameStateStatus == NameStateStatus.error) {
-            log('ERROR WHILE UNSELECTING NAME');
-          }
+      trailing: GestureDetector(
+        onTap: () async {
+          babyNamesCubit.removeFromWishList(babyNameId: nameId);
         },
-        builder: (context, state) {
-          log('Building tile: $tileIndex');
-          return GestureDetector(
-            onTap: () async {
-              babyNamesCubit.updateSelectedNameIndex(tileIndex);
-              await babyNamesCubit.selectName(nameId: nameId);
-              babyNamesCubit.updateSelectedNameIndex(-1);
-            },
-            child: SvgPicture.asset(
+        child: BlocBuilder<BabyNamesCubit, BabyNamesState>(
+          buildWhen: (previous, current) {
+            return previous.selectNameStatus != current.selectNameStatus;
+          },
+          builder: (context, state) {
+            return SvgPicture.asset(
               'assets/icons/favorite_icon.svg',
               colorFilter: ColorFilter.mode(
-                tileIndex == state.selectedNameIndex
-                    ? ColorConstants.hintTextColor
-                    : ColorConstants.primaryRedColor,
+                // state.selectNameStatus == SelectNameStatus.loading
+                    // ? ColorConstants.hintTextColor
+                    // :
+                     ColorConstants.primaryRedColor,
                 BlendMode.srcIn,
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

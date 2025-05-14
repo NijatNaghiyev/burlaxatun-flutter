@@ -203,8 +203,7 @@ class Routerapp {
               GoRoute(
                 path: '/initial_names',
                 builder: (context, state) => BlocProvider(
-                  create: (context) =>
-                      BabyNamesCubit()..getCountriesAndSelectedNames(),
+                  create: (context) => locator<BabyNamesCubit>(),
                   child: NamesPage(),
                 ),
               ),
@@ -212,11 +211,11 @@ class Routerapp {
                 path: '/gender_names',
                 builder: (context, state) {
                   final extra = state.extra as Map;
-                  final cubit = extra['cubit'] as BabyNamesCubit2;
-                  final countryId = extra['id'];
+                  final cubit = extra['cubit'] as BabyNamesCubit;
+                  final countryId = extra['id'] as int;
                   return BlocProvider.value(
-                    value: cubit..getBabyNames(countryId),
-                    child: GenderNames(countryId: countryId),
+                    value: cubit,
+                    child: GenderNames(countryId: countryId.toString()),
                   );
                 },
               ),

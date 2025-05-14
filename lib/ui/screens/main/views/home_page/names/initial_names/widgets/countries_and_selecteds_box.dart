@@ -7,44 +7,57 @@ import '../../widgets/select_option.dart';
 import '../../widgets/single_option.dart';
 
 class CountriesAndSelectedsBox extends StatelessWidget {
-  const CountriesAndSelectedsBox({super.key});
+  const CountriesAndSelectedsBox({
+    super.key,
+    required this.countriesOrSelectedNamesScreen,
+    required this.pageController,
+  });
+
+  final ValueNotifier<int> countriesOrSelectedNamesScreen;
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainnCubit>();
-    return SelectOption(
-      optionOne: BlocBuilder<MainnCubit, MainInitial>(
-        buildWhen: (previous, current) {
-          return previous.nameViewOptions != current.nameViewOptions;
-        },
-        builder: (context, state) {
-          return SingleOption(
-            boxTitle: 'Ölkələr',
-            boxColors: state.nameViewOptions == NameViewOption.countries
-                ? Colors.white
-                : Colors.transparent,
-            onTap: () {
-              mainCubit.changeNameView(NameViewOption.countries);
+    return ValueListenableBuilder(
+      valueListenable: countriesOrSelectedNamesScreen,
+      builder: (_, value, child) {
+        return SelectOption(
+          optionOne: BlocBuilder<MainnCubit, MainInitial>(
+            buildWhen: (previous, current) {
+              return previous.nameViewOptions != current.nameViewOptions;
             },
-          );
-        },
-      ),
-      optionTwo: BlocBuilder<MainnCubit, MainInitial>(
-        buildWhen: (previous, current) {
-          return previous.nameViewOptions != current.nameViewOptions;
-        },
-        builder: (context, state) {
-          return SingleOption(
-            boxTitle: 'Seçilmişlər',
-            boxColors: state.nameViewOptions == NameViewOption.selecteds
-                ? Colors.white
-                : Colors.transparent,
-            onTap: () {
-              mainCubit.changeNameView(NameViewOption.selecteds);
+            builder: (context, state) {
+              return SingleOption(
+                boxTitle: 'Ölkələr',
+                boxColors: countriesOrSelectedNamesScreen.value == 0
+                    ? Colors.white
+                    : Colors.transparent,
+                onTap: () {
+                  countriesOrSelectedNamesScreen.value = 0;
+                  pageController.jumpToPage(0);
+                },
+              );
             },
-          );
-        },
-      ),
+          ),
+          optionTwo: BlocBuilder<MainnCubit, MainInitial>(
+            buildWhen: (previous, current) {
+              return previous.nameViewOptions != current.nameViewOptions;
+            },
+            builder: (context, state) {
+              return SingleOption(
+                boxTitle: 'Seçilmişlər',
+                boxColors: countriesOrSelectedNamesScreen.value == 1
+                    ? Colors.white
+                    : Colors.transparent,
+                onTap: () {
+                  countriesOrSelectedNamesScreen.value = 1;
+                  pageController.jumpToPage(1);
+                },
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

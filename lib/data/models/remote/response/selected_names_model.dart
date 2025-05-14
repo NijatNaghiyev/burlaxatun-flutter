@@ -1,51 +1,85 @@
 class SelectedNamesModel {
-    final int status;
-    final String message;
-    final List<SelectedNameData> data;
+  final int? count;
+  final String? next;
+  final String? previous;
+  final List<SelectedName>? results;
 
-    SelectedNamesModel({
-        required this.status,
-        required this.message,
-        required this.data,
-    });
+  SelectedNamesModel({
+    this.count,
+    this.next,
+    this.previous,
+    this.results,
+  });
 
-    factory SelectedNamesModel.fromJson(Map<String, dynamic> json) => SelectedNamesModel(
-        status: json["status"],
-        message: json["message"],
-        data: List<SelectedNameData>.from(json["data"].map((x) => SelectedNameData.fromJson(x))),
-    );
+  factory SelectedNamesModel.fromJson(Map<String, dynamic> json) =>
+      SelectedNamesModel(
+        count: json["count"],
+        next: json["next"],
+        previous: json["previous"],
+        results: json["results"] == null
+            ? []
+            : List<SelectedName>.from(
+                json["results"]!.map((x) => SelectedName.fromJson(x))),
+      );
 
-    Map<String, dynamic> toJson() => {
-        "status": status,
-        "message": message,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-    };
+  Map<String, dynamic> toJson() => {
+        "count": count,
+        "next": next,
+        "previous": previous,
+        "results": results == null
+            ? []
+            : List<dynamic>.from(results!.map((x) => x.toJson())),
+      };
 }
 
-class SelectedNameData {
-    final String id;
-    final String name;
-    final String country;
-    final String gender;
+class SelectedName {
+  final int? id;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final int? user;
+  final int? babyName;
 
-    SelectedNameData({
-        required this.id,
-        required this.name,
-        required this.country,
-        required this.gender,
-    });
+  SelectedName({
+    this.id,
+    this.createdAt,
+    this.updatedAt,
+    this.user,
+    this.babyName,
+  });
 
-    factory SelectedNameData.fromJson(Map<String, dynamic> json) => SelectedNameData(
+  factory SelectedName.fromJson(Map<String, dynamic> json) => SelectedName(
         id: json["id"],
-        name: json["name"],
-        country: json["country"],
-        gender: json["gender"],
-    );
+        createdAt: json["created_at"] == null
+            ? null
+            : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null
+            ? null
+            : DateTime.parse(json["updated_at"]),
+        user: json["user"],
+        babyName: json["baby_name"],
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
-        "name": name,
-        "country": country,
-        "gender": gender,
-    };
+        "created_at": createdAt?.toIso8601String(),
+        "updated_at": updatedAt?.toIso8601String(),
+        "user": user,
+        "baby_name": babyName,
+      };
+
+   SelectedName copyWith({
+    int? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? user,
+    int? babyName,
+  }) {
+    return SelectedName(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      user: user ?? this.user,
+      babyName: babyName ?? this.babyName,
+    );
+  }
 }

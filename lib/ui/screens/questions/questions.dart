@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -21,7 +23,8 @@ class Questions extends StatelessWidget {
       appBar: GlobalAppbar(
         title: 'Qeydiyyat',
         onLeadingTap: () {
-          context.pop();
+          // context.pop();
+          questionsCubit.goBack();
         },
       ),
       body: Column(
@@ -45,17 +48,20 @@ class Questions extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 24),
             child: BlocBuilder<QuestionsCubit, QuestionsInitial>(
+              buildWhen: (previous, current) {
+                return previous.isActiveButton != current.isActiveButton ||
+                    previous.iDontKnow != current.iDontKnow;
+              },
               builder: (context, state) {
                 return DavamEt(
                   isActive: state.isActiveButton,
                   onPressed: () {
-                    state.isActiveButton
-                        ? questionsCubit.questionOneButtonNotifier.value == 0
-                            ? state.iDontKnow
-                                ? context.push('/calculate')
-                                : questionsCubit.nextQuestion()
-                            : context.go('/home')
-                        : null;
+                    questionsCubit.questionOneButtonNotifier.value == 0
+                        ? state.iDontKnow
+                            ? context.push('/calculate')
+                            : questionsCubit.nextQuestion()
+                        : // request if success go to home page
+                        context.go('/home');
                   },
                 );
               },

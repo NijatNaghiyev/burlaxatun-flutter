@@ -22,7 +22,7 @@ class DavamEt extends StatelessWidget {
         buttonName: 'Davam et',
         buttonColor: isActive ? ColorConstants.primaryRedColor : Colors.black38,
         textColor: Colors.white,
-        onPressed: onPressed,
+        onPressed: isActive ? onPressed : null,
       ),
     );
   }

@@ -10,9 +10,15 @@ import '../../../../../utils/constants/color_constants.dart';
 import '../../../../../utils/extensions/num_extensions.dart';
 import '../../../../widgets/global_text.dart';
 
-class QuestionTwo extends StatelessWidget {
+class QuestionTwo extends StatefulWidget {
   const QuestionTwo({super.key});
 
+  @override
+  State<QuestionTwo> createState() => _QuestionTwoState();
+}
+
+class _QuestionTwoState extends State<QuestionTwo>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
@@ -74,7 +80,8 @@ class QuestionTwo extends StatelessWidget {
                               BlocListener<UserUpdateCubit, UserUpdateState>(
                                 listener: (_, state) {
                                   // userUpdateCubit.pregnantWeek = i.toString();
-                                  userUpdateCubit.updateUser(pregnantWeek: i.toString());
+                                  userUpdateCubit.updateUser(
+                                      pregnantWeek: i.toString());
                                 },
                                 child: SizedBox(
                                   width: double.maxFinite,
@@ -156,4 +163,8 @@ class QuestionTwo extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
