@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 import '../../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../../widgets/global_text.dart';
@@ -51,14 +52,20 @@ class ArticleDetail extends StatelessWidget {
                 ),
                 20.h,
                 SizedBox(
-                  //width: MediaQuery.of(context).size.width * 0.84,
-                  child: GlobalText(
-                    height: 1.4,
-                    textAlign: TextAlign.left,
-                    text: text,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff667085),
+                  width: double.infinity,
+                  child: Html(
+                    data: text,
+                    style: {
+                      "body": Style(
+                        margin: Margins.zero,
+                        padding: HtmlPaddings.zero,
+                        fontSize: FontSize(14),
+                        color: const Color(0xff667085),
+                        fontWeight: FontWeight.w400,
+                        lineHeight: const LineHeight(1.4),
+                        textAlign: TextAlign.left,
+                      ),
+                    },
                   ),
                 ),
               ],

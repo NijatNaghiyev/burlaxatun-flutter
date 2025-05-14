@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AllArticles extends StatelessWidget {
-  const AllArticles({super.key});
+  final String searchQuery;
+
+  const AllArticles({super.key, required this.searchQuery});
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +26,23 @@ class AllArticles extends StatelessWidget {
         }
 
         if (state.status == BlogCatStatus.success) {
-          final data = state.response;
-          final results = data?.results ?? [];
+          final results = state.response?.results ?? [];
+
+          final filtered = results.where((result) {
+            final name = result.name?.toLowerCase() ?? '';
+            return name.contains(searchQuery.toLowerCase());
+          }).toList();
 
           return ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: data?.count,
+            itemCount: filtered.length,
             itemBuilder: (_, index) {
-              final category = results[index];
-              final blogs = category.blogs ?? [];
+              final category = filtered[index];
               return ArticlesWidget(
                 title: category.name ?? '',
-                itemCount: blogs.length,
-                blogs: blogs,
+                itemCount: category.blogs?.length ?? 0,
+                blogs: category.blogs ?? [],
                 category: category,
               );
             },
