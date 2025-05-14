@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../../../../../../../../../cubits/medicine_patch/medicine_patch_cubit.dart'; // Import MedicinePatchCubit
 import '../../../../../../../../../utils/constants/color_constants.dart';
 import '../../../../../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../../../../../utils/helper/date_picker_helper.dart';
 import '../../../../../../../../widgets/global_text.dart';
 import '../../../body_weight_view/widgets/add_indicator_input.dart';
 
@@ -45,6 +46,23 @@ class _EditMedicineDialogState extends State<EditMedicineDialog> {
       _endDateController.text = dateFormat.format(widget.data.endDate!);
     }
   }
+
+  // Future<void> _selectDate(
+  //     BuildContext context, TextEditingController controller) async {
+  //   final DateTime? picked = await showDatePicker(
+  //     context: context,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime(2000),
+  //     lastDate: DateTime(2100),
+  //     helpText: 'Tarix seçin',
+  //     locale: const Locale('az'), // Optional: Azərbaycan dili üçün
+  //   );
+  //
+  //   if (picked != null) {
+  //     final formatted = DateFormat('dd.MM.yyyy').format(picked);
+  //     controller.text = formatted;
+  //   }
+  // }
 
   @override
   void dispose() {
@@ -151,11 +169,19 @@ class _EditMedicineDialogState extends State<EditMedicineDialog> {
                                     inputName: 'Başlama tarixi',
                                     hintText: '24.06.2024',
                                     controller: _startDateController,
+                                    onTap: () => showCustomDatePicker(
+                                      context: context,
+                                      controller: _startDateController,
+                                    ),
                                   ),
                                   AddIndicatorInput(
                                     inputName: 'Bitmə tarixi',
                                     hintText: '24.07.2025',
                                     controller: _endDateController,
+                                    onTap: () => showCustomDatePicker(
+                                      context: context,
+                                      controller: _endDateController,
+                                    ),
                                   ),
                                 ],
                               ),
