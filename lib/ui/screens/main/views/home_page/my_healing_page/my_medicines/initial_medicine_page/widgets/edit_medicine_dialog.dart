@@ -1,10 +1,10 @@
-import 'package:burla_xatun/data/models/remote/response/medicines_model.dart';
+import 'package:burla_xatun/data/models/remote/response/medicine/medicines_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../../../../../../cubits/medicine_create/medicine_create_cubit.dart';
+import '../../../../../../../../../cubits/medicine_patch/medicine_patch_cubit.dart'; // Import MedicinePatchCubit
 import '../../../../../../../../../utils/constants/color_constants.dart';
 import '../../../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../../../widgets/global_text.dart';
@@ -12,6 +12,7 @@ import '../../../body_weight_view/widgets/add_indicator_input.dart';
 
 class EditMedicineDialog extends StatefulWidget {
   final Result data;
+
   const EditMedicineDialog({
     super.key,
     required this.data,
@@ -57,15 +58,27 @@ class _EditMedicineDialogState extends State<EditMedicineDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<MedicineCreateCubit, MedicineCreateState>(
+    return BlocListener<MedicinePatchCubit, MedicinePatchState>(
       listener: (context, state) {
-        if (state.status == MedicineCreateStatus.success) {
-          Navigator.pop(context);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Dərman datalari uğurla duzeldildi")),
+        if (state.status == MedicinePatchStatus.success) {
+          final updated = Result(
+            name: _nameController.text,
+            dose: _doseController.text,
+            frequency: _frequencyController.text,
+            startDate:
+                DateFormat('dd.MM.yyyy').parse(_startDateController.text),
+            endDate: DateFormat('dd.MM.yyyy').parse(_endDateController.text),
+            slug: widget.data.slug,
+            status: "yes",
           );
-        } else if (state.status == MedicineCreateStatus.failure ||
-            state.status == MedicineCreateStatus.networkError) {
+
+          Navigator.pop(context, updated);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text("Dərman məlumatları uğurla yeniləndi")),
+          );
+        } else if (state.status == MedicinePatchStatus.failure ||
+            state.status == MedicinePatchStatus.networkError) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Xəta baş verdi")),
           );
@@ -102,7 +115,7 @@ class _EditMedicineDialogState extends State<EditMedicineDialog> {
                       ),
                     ),
                     const GlobalText(
-                      text: 'Duzelish et',
+                      text: 'Düzəliş et',
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
@@ -167,7 +180,7 @@ class _EditMedicineDialogState extends State<EditMedicineDialog> {
                             ),
                             onPressed: () => Navigator.pop(context),
                             child: const GlobalText(
-                              text: 'Imtina Et',
+                              text: 'İmtina Et',
                               fontSize: 14,
                               height: 1.1,
                               fontWeight: FontWeight.w500,
@@ -225,9 +238,9 @@ class _EditMedicineDialogState extends State<EditMedicineDialog> {
                                 return;
                               }
 
-                              context
-                                  .read<MedicineCreateCubit>()
-                                  .createMedicine(
+                              // Use patchMedicine method
+                              context.read<MedicinePatchCubit>().patchMedicine(
+                                    slug: widget.data.slug ?? '',
                                     name: name,
                                     dose: dose,
                                     frequency: frequency,

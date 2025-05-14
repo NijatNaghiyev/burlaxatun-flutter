@@ -1,10 +1,10 @@
 import 'package:burla_xatun/data/services/local/login_token_service.dart';
 import 'package:burla_xatun/utils/extensions/statuscode_extension.dart';
 
-import '../../../utils/constants/endpoints_constants.dart';
-import '../../../utils/di/locator.dart';
-import '../../models/remote/response/medicines_model.dart';
-import 'base_network_service.dart';
+import '../../../../utils/constants/endpoints_constants.dart';
+import '../../../../utils/di/locator.dart';
+import '../../../models/remote/response/medicine/medicines_model.dart';
+import '../base_network_service.dart';
 
 class MedicineService {
   final endpoint = EndpointsConstants.medicines;

@@ -39,4 +39,14 @@ class BaseNetwork {
     final dio = getDio();
     return await dio.post(path, data: postData, options: options);
   }
+
+  /// PATCH
+  Future<Response> patch({
+    required String path,
+    required dynamic postData,
+    Options? options,
+  }) async {
+    final dio = getDio();
+    return await dio.patch(path, data: postData, options: options);
+  }
 }
