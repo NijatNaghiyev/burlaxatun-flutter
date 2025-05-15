@@ -286,27 +286,64 @@ class Routerapp {
                 path: '/main_forum',
                 builder: (context, state) => MainForumPage(),
               ),
+              // GoRoute(
+              //   path: '/secondary_forum',
+              //   builder: (context, state) {
+              //     // final forumCategory = context.read<ForumCategoryResponse>();
+              //     return MultiBlocProvider(
+              //       providers: [
+              //         BlocProvider(
+              //           create: (context) => locator<ForumListCubit>()
+              //             ..getForumList(
+              //                 // categoryId: forumCategory.id.toString(),
+              //                 ),
+              //         ),
+              //         // BlocProvider<ForumCategoryCubit>(
+              //         //   create: (context) =>
+              //         //       locator<ForumCategoryCubit>()..getForumCategory(),
+              //         // ),
+              //       ],
+              //       child: SecondaryForumPage(),
+              //     );
+              //   },
+              // ),
               GoRoute(
                 path: '/secondary_forum',
                 builder: (context, state) {
-                  // final forumCategory = context.read<ForumCategoryResponse>();
+                  final categoryId = state.uri.queryParameters['categoryId'];
                   return MultiBlocProvider(
                     providers: [
                       BlocProvider(
                         create: (context) => locator<ForumListCubit>()
-                          ..getForumList(
-                            // categoryId: forumCategory.id.toString(),
-                          ),
+                          ..getForumList(categoryId: categoryId),
                       ),
-                      // BlocProvider<ForumCategoryCubit>(
-                      //   create: (context) =>
-                      //       locator<ForumCategoryCubit>()..getForumCategory(),
-                      // ),
                     ],
                     child: SecondaryForumPage(),
                   );
                 },
               ),
+
+              // GoRoute(
+              //   path: '/secondary_forum',
+              //   builder: (context, state) {
+              //     // Extract categoryId from route params
+              //     final Map<String, dynamic>? extra =
+              //         state.extra as Map<String, dynamic>?;
+              //     final String? categoryId = extra?['categoryId']?.toString();
+
+              //     return MultiBlocProvider(
+              //       providers: [
+              //         BlocProvider(
+              //           create: (context) => locator<ForumListCubit>()
+              //             ..getForumList(
+              //               categoryId: categoryId,
+              //             ),
+              //         ),
+              //       ],
+              //       child: SecondaryForumPage(),
+              //     );
+              //   },
+              // ),
               GoRoute(
                 path: '/create_new_forum',
                 builder: (context, state) => CreateNewForum(),

@@ -4,6 +4,7 @@ import 'package:burla_xatun/cubits/forum_category/forum_category_cubit.dart';
 import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'main_forum_banner.dart';
 import 'main_forum_title_box.dart';
@@ -48,6 +49,9 @@ class MainForumCustomScroll extends StatelessWidget {
                       child: MainForumTitleBox(
                         title: data[i].name ?? "",
                         movzuSayi: data[i].forumCount,
+                        onTap: () => context.push(
+                          '/secondary_forum?categoryId=${data[i].id}',
+                        ),
                       ),
                     );
                   },

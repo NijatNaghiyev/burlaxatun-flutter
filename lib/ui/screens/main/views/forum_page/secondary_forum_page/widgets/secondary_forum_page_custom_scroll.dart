@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:burla_xatun/cubits/forum_list/forum_list_cubit.dart';
-import 'package:burla_xatun/generated/l10n.dart';
 import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,10 +57,10 @@ class SecondaryForumPageCustomScroll extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 18),
                           child: ForumBox(
                             authorName: data.results?[i].user?.fullName ?? "",
-                            forumTitle: '',
-                            likeCount: 1,
-                            viewCount: 1,
-                            commentCount: '',
+                            forumTitle: data.results?[i].text ?? "",
+                            likeCount: data.results?[i].likes ?? 0,
+                            viewCount: data.results?[i].viewCount ?? 0,
+                            commentCount: 0,
                           ),
                         );
                       },

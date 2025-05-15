@@ -21,7 +21,7 @@ class ForumBox extends StatelessWidget {
   final String forumTitle;
   final int likeCount;
   final int viewCount;
-  final String commentCount;
+  final int commentCount;
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +76,8 @@ class ForumBox extends StatelessWidget {
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                   color: Colors.black,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               20.h,

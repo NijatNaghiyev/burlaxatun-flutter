@@ -6,15 +6,21 @@ import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
 
 class MainForumTitleBox extends StatelessWidget {
-  const MainForumTitleBox({super.key, required this.title, this.movzuSayi});
+  const MainForumTitleBox({
+    super.key,
+    required this.title,
+    this.movzuSayi,
+    this.onTap,
+  });
 
   final String title;
   final int? movzuSayi;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.push('/secondary_forum'),
+      onTap: onTap,
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Color(0xffF7F7F7),
