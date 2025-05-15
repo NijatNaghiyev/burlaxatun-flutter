@@ -47,7 +47,7 @@ class MainForumCustomScroll extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: 15),
                       child: MainForumTitleBox(
                         title: data[i].name ?? "",
-                        movzuSayi: 1,
+                        movzuSayi: data[i].forumCount,
                       ),
                     );
                   },
