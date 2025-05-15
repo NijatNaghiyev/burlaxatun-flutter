@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:burla_xatun/data/models/remote/response/medicines_model.dart';
+import 'package:burla_xatun/data/models/remote/response/medicine/medicines_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -10,10 +10,12 @@ import '../../medicine_details_page/medicine_details_page.dart';
 
 class SingleMedicineTile extends StatelessWidget {
   final Result data;
+  final ValueChanged<Result>? onUpdated;
 
   const SingleMedicineTile({
     super.key,
     required this.data,
+    this.onUpdated,
   });
 
   @override

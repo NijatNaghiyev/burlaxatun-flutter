@@ -1,4 +1,4 @@
-import 'package:burla_xatun/data/models/remote/response/medicines_model.dart';
+import 'package:burla_xatun/data/models/remote/response/medicine/medicines_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

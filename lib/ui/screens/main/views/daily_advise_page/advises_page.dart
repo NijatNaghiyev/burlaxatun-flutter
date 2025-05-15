@@ -1,8 +1,8 @@
 import 'package:burla_xatun/cubits/daily_rec_detail/daily_rec_detail_cubit.dart';
+import 'package:burla_xatun/ui/screens/main/views/daily_advise_page/widgets/advise_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../utils/extensions/context_extensions.dart';
 import '../../../../../utils/extensions/num_extensions.dart';
 import '../../../../widgets/custom_circular_progress_indicator.dart';
 import '../home_page/widgets/scrollable_days_appbar.dart';
@@ -55,65 +55,15 @@ class _AdvisesPageState extends State<AdvisesPage> {
                     child: Column(
                       children: [
                         26.h,
-                        SizedBox(
-                          height: 148,
-                          width: context.deviceWidth,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Colors.black12,
-                              border: Border.all(
-                                color: const Color(0xffF5F5F5),
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const Center(
-                              child: Text('image'),
-                            ),
-                          ),
+                        AdviseImage(
+                          imageUrl: 'assets/png/banner.png',
                         ),
-
-                        // SizedBox(
-                        //   height: 148,
-                        //   width: context.deviceWidth,
-                        //   child: ClipRRect(
-                        //     borderRadius: BorderRadius.circular(8),
-                        //     child: (data?.image != null &&
-                        //             data!.image!.isNotEmpty)
-                        //         ? (data.image!.toLowerCase().endsWith('.svg')
-                        //             ? SvgPicture.network(
-                        //                 data.image!,
-                        //                 fit: BoxFit.cover,
-                        //                 placeholderBuilder: (context) =>
-                        //                     const Center(
-                        //                         child:
-                        //                             CircularProgressIndicator()),
-                        //               )
-                        //             : Image.network(
-                        //                 data.image!,
-                        //                 fit: BoxFit.cover,
-                        //                 errorBuilder:
-                        //                     (context, error, stackTrace) {
-                        //                   return Container(
-                        //                     color: Colors.black12,
-                        //                     child: const Center(
-                        //                       child: Text('Şəkil yüklənmədi'),
-                        //                     ),
-                        //                   );
-                        //                 },
-                        //               ))
-                        //         : Container(
-                        //             color: Colors.black12,
-                        //             child: const Center(
-                        //               child: Text('Şəkil yoxdur'),
-                        //             ),
-                        //           ),
-                        //   ),
-                        // ),
-
                         20.h,
                         AdviseTitle(adviceTitle: data?.name ?? ''),
                         20.h,
-                        AdviseText(adviceText: data?.text ?? ''),
+                        AdviseText(
+                          adviceText: data?.text ?? '',
+                        ),
                         20.h,
                       ],
                     ),

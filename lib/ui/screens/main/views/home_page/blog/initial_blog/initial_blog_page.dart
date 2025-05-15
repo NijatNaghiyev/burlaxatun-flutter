@@ -9,34 +9,44 @@ import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_appbar.dart';
 import 'widgets/search_input.dart';
 
-class InitialBlogPage extends StatelessWidget {
+class InitialBlogPage extends StatefulWidget {
   const InitialBlogPage({super.key});
 
   @override
+  State<InitialBlogPage> createState() => _InitialBlogPageState();
+}
+
+class _InitialBlogPageState extends State<InitialBlogPage> {
+  String searchQuery = '';
+
+  @override
   Widget build(BuildContext context) {
-    // final mainCubit = context.read<MainnCubit>();
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Blog',
-        onLeadingTap: () {
-          context.pop();
-        },
+        onLeadingTap: () => context.pop(),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: SearchInput(),
+              child: SearchInput(
+                onChanged: (value) {
+                  setState(() {
+                    searchQuery = value;
+                  });
+                },
+              ),
             ),
             24.h,
             BlocBuilder<BlogSlidersCubit, BlogSlidersState>(
               builder: (context, state) {
-                return BlogBanner();
+                return const BlogBanner();
               },
             ),
             24.h,
-            AllArticles(),
+            AllArticles(searchQuery: searchQuery),
           ],
         ),
       ),

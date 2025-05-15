@@ -1,5 +1,5 @@
-import 'package:burla_xatun/data/contractor/medicine_create_contractor.dart';
-import 'package:burla_xatun/data/services/remote/medicine_create_service.dart';
+import 'package:burla_xatun/data/contractor/medicine/medicine_create_contractor.dart';
+import 'package:burla_xatun/data/services/remote/medicine/medicine_create_service.dart';
 
 class MedicineCreateRepository implements MedicineCreateContractor {
   MedicineCreateRepository(this._medicineCreateService);

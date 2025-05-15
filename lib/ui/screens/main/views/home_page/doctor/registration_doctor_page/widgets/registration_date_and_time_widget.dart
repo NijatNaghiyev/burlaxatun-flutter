@@ -6,7 +6,9 @@ import 'registration_calendar_widget.dart';
 import 'time_widget.dart';
 
 class RegistrationDateAndTimeWidget extends StatelessWidget {
-  const RegistrationDateAndTimeWidget({super.key});
+  final List<String> timeList;
+
+  const RegistrationDateAndTimeWidget({super.key, required this.timeList});
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +31,13 @@ class RegistrationDateAndTimeWidget extends StatelessWidget {
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(13),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(13)),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Column(
                 children: [
-                  TimeWidget(),
+                  TimeWidget(timeList: timeList),
                   RegistrationCalendarWidget(),
                 ],
               ),
