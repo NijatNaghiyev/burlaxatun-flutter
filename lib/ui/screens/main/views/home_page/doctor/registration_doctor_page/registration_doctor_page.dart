@@ -12,9 +12,11 @@ import 'widgets/registration_doctor_info.dart';
 import 'widgets/registration_price_and_time.dart';
 
 class RegistrationDoctorPage extends StatelessWidget {
-  final String slug;
-
-  const RegistrationDoctorPage({super.key, required this.slug});
+  // final String slug;
+  const RegistrationDoctorPage({
+    super.key,
+    // required this.slug,
+  });
 
   @override
   Widget build(BuildContext context) {

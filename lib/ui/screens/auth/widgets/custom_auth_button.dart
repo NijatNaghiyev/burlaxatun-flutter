@@ -1,4 +1,3 @@
-import 'package:burla_xatun/ui/widgets/global_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomAuthButton extends StatelessWidget {

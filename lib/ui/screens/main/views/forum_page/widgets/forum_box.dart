@@ -8,7 +8,20 @@ import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/global_text.dart';
 
 class ForumBox extends StatelessWidget {
-  const ForumBox({super.key});
+  const ForumBox({
+    super.key,
+    required this.authorName,
+    required this.forumTitle,
+    required this.likeCount,
+    required this.viewCount,
+    required this.commentCount,
+  });
+
+  final String authorName;
+  final String forumTitle;
+  final int likeCount;
+  final int viewCount;
+  final int commentCount;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +45,7 @@ class ForumBox extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GlobalText(
-                    text: 'Samira',
+                    text: authorName,
                     fontSize: 10,
                     fontWeight: FontWeight.w500,
                     color: Colors.black,
@@ -47,7 +60,8 @@ class ForumBox extends StatelessWidget {
                       ),
                       SizedBox(width: 7),
                       SvgPicture.asset(
-                          'assets/icons/medicine_arrow_right_icon.svg'),
+                        'assets/icons/medicine_arrow_right_icon.svg',
+                      ),
                     ],
                   ),
                 ],
@@ -58,11 +72,12 @@ class ForumBox extends StatelessWidget {
                 child: GlobalText(
                   height: 1.4,
                   textAlign: TextAlign.left,
-                  text:
-                      'Hamilə qadının havanın çirklənməsi haqqında nəyi bilməsi lazımdır?',
+                  text: forumTitle,
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                   color: Colors.black,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               20.h,
@@ -71,21 +86,21 @@ class ForumBox extends StatelessWidget {
                 children: [
                   GlobalText(
                     textAlign: TextAlign.left,
-                    text: '651,324 Views',
+                    text: '$viewCount Views',
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Colors.black,
                   ),
                   GlobalText(
                     textAlign: TextAlign.left,
-                    text: '36,6545 Likes',
+                    text: '$likeCount Likes',
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Colors.black,
                   ),
                   GlobalText(
                     textAlign: TextAlign.left,
-                    text: '56 comments',
+                    text: '$commentCount comments',
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Colors.black,

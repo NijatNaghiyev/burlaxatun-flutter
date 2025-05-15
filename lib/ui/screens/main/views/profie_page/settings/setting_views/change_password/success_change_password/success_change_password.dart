@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../../../../../cubits/main_cubit/mainn_cubit.dart';
 import '../../../../../../../../../utils/constants/color_constants.dart';
-import '../../../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../../../widgets/global_appbar.dart';
 import '../../../../../../../../widgets/global_button.dart';
 import '../../../../../../../../widgets/global_text.dart';
