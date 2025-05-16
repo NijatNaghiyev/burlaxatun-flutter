@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../../../utils/extensions/context_extensions.dart';
 import '../../../../../../../utils/extensions/num_extensions.dart';
@@ -9,12 +8,14 @@ class MainForumTitleBox extends StatelessWidget {
   const MainForumTitleBox({
     super.key,
     required this.title,
-    this.movzuSayi,
+    this.topicCount,
+    this.messageCount,
     this.onTap,
   });
 
   final String title;
-  final int? movzuSayi;
+  final int? topicCount;
+  final int? messageCount;
   final void Function()? onTap;
 
   @override
@@ -49,7 +50,7 @@ class MainForumTitleBox extends StatelessWidget {
                     children: [
                       GlobalText(
                         textAlign: TextAlign.left,
-                        text: '$movzuSayi mövzu',
+                        text: '$topicCount mövzu',
                         fontSize: 10,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
@@ -57,7 +58,7 @@ class MainForumTitleBox extends StatelessWidget {
                       SizedBox(width: 14),
                       GlobalText(
                         textAlign: TextAlign.left,
-                        text: '46 mesaj',
+                        text: '$messageCount mesaj',
                         fontSize: 10,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,

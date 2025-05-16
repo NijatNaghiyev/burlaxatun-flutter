@@ -48,7 +48,8 @@ class MainForumCustomScroll extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: 15),
                       child: MainForumTitleBox(
                         title: data[i].name ?? "",
-                        movzuSayi: data[i].forumCount,
+                        topicCount: data[i].forumCount,
+                        messageCount: data[i].totalViews,
                         onTap: () => context.push(
                           '/secondary_forum?categoryId=${data[i].id}',
                         ),
