@@ -88,7 +88,7 @@ class _HomePageAppbarState extends State<HomePageAppbar> {
                   textAlign: TextAlign.left,
                   height: 1.3,
                   text:
-                      '${data.pregnantWeek ?? '0'}th Week of Pregnancy \nDay 20',
+                      '${data.pregnantWeek ?? '0'}th Week of Pregnancy \nDay ${(int.tryParse(data.pregnantWeek ?? '0') ?? 0) * 7}',
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                   color: Colors.black,
