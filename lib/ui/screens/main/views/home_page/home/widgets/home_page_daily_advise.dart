@@ -33,8 +33,6 @@ class HomePageDailyAdvise extends StatelessWidget {
 
           if (state.status == DailyRecStatus.success) {
             final data = state.response?.results?.first;
-            final cleanImageUrl =
-                (data?.image ?? '').replaceAll('\n', '').trim();
 
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -55,25 +53,18 @@ class HomePageDailyAdvise extends StatelessWidget {
                   ),
                   17.h,
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(17),
-                    child: cleanImageUrl.isNotEmpty
-                        ? CachedNetworkImage(
-                            imageUrl: cleanImageUrl,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: 200,
-                            placeholder: (context, url) => const Center(
-                                child: CircularProgressIndicator()),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.broken_image, size: 100),
-                          )
-                        : Image.asset(
-                            'assets/images/default_image.png',
-                            fit: BoxFit.cover,
-                            height: 200,
-                            width: double.infinity,
-                          ),
-                  ),
+                      borderRadius: BorderRadius.circular(17),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            data?.image ?? 'assets/images/default_image.png',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: 116,
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.broken_image, size: 100),
+                      )),
                   16.h,
                   GlobalText(
                     textAlign: TextAlign.left,

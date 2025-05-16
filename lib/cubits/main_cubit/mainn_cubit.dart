@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:burla_xatun/data/models/local/medicine_detail_items_model.dart';
 import 'package:burla_xatun/data/models/remote/response/medicine/medicines_model.dart';
+import 'package:burla_xatun/ui/screens/main/views/daily_advise_page/advice_page.dart';
 import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/my_medicines/initial_medicine_page/widgets/edit_medicine_dialog.dart';
 import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_password/change_password_page/change_password_page.dart';
 import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
@@ -16,7 +17,6 @@ import '../../data/models/local/main_page_box_model.dart';
 import '../../data/models/local/my_healing_card_items_model.dart';
 import '../../data/models/local/profile_sections_items_model.dart';
 import '../../data/models/local/settings_items_model.dart';
-import '../../ui/screens/main/views/daily_advise_page/advises_page.dart';
 import '../../ui/screens/main/views/forum_page/forum_comments/forum_comments_page.dart';
 import '../../ui/screens/main/views/forum_page/forum_comments/widgets/menu_and_emoji_dialog.dart';
 import '../../ui/screens/main/views/forum_page/main_forum_page.dart/forum_page.dart';
@@ -102,7 +102,7 @@ class MainnCubit extends Cubit<MainInitial> {
 
   final Map<String, Widget> homePageViews = {
     'Home': HomePage(),
-    'Gündəlik Tövsiyyələr': AdvisesPage(),
+    'Gündəlik Tövsiyyələr': AdvicePage(),
     'Ultrasəs': UltrasoundPage(),
     'Notification': NotificationPage(),
     'Videolar': VideoPage(),

@@ -19,4 +19,6 @@ class ColorConstants {
   static const profileScaffoldColor = Color(0xffF7F8FA);
   static const gray100 = Color(0xffF2F4F7);
   static const gray400 = Color(0xff98A2B3);
+  static const gray600 = Color(0xff535862);
+  static const black800 = Color(0xff1D2939);
 }

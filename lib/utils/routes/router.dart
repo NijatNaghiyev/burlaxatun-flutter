@@ -1,9 +1,7 @@
 import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
-import 'package:burla_xatun/cubits/forum_category/forum_category_cubit.dart';
 import 'package:burla_xatun/cubits/forum_list/forum_list_cubit.dart';
 import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
 import 'package:burla_xatun/data/models/remote/response/blog_cat_model.dart';
-import 'package:burla_xatun/data/models/remote/response/forum_category_response.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/email_request_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_otp_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_success_screen.dart';
@@ -21,7 +19,7 @@ import '../../cubits/questions_cubit/questions_cubit.dart';
 import '../../ui/screens/auth/login/login.dart';
 import '../../ui/screens/auth/sign_up/signup.dart';
 import '../../ui/screens/main/main_page.dart';
-import '../../ui/screens/main/views/daily_advise_page/advises_page.dart';
+import '../../ui/screens/main/views/daily_advise_page/advice_page.dart';
 import '../../ui/screens/main/views/forum_page/main_forum_page.dart/forum_page.dart';
 import '../../ui/screens/main/views/forum_page/new_forum_page/create_new_forum.dart';
 import '../../ui/screens/main/views/forum_page/secondary_forum_page/secondary_forum_page.dart';
@@ -269,7 +267,7 @@ class Routerapp {
             routes: [
               GoRoute(
                 path: '/daily_advices',
-                builder: (context, state) => AdvisesPage(),
+                builder: (context, state) => AdvicePage(),
               ),
               // GoRoute(
               //   path: '/daily_advices',

@@ -11,21 +11,13 @@ class AdviseImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cleanUrl = imageUrl.replaceAll('\n', '').trim(); // <-- Əsas düzəliş
-
-    print("Sekil URL: $cleanUrl");
-
-    if (cleanUrl.isEmpty) {
-      return const SizedBox.shrink();
-    }
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
       child: CachedNetworkImage(
-        imageUrl: cleanUrl,
+        imageUrl: imageUrl,
         fit: BoxFit.cover,
         width: double.infinity,
-        height: 200,
+        height: 148,
         errorWidget: (context, url, error) =>
             const Icon(Icons.broken_image, size: 100),
         placeholder: (context, url) =>

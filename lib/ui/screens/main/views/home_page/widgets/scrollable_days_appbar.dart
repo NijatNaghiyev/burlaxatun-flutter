@@ -1,5 +1,5 @@
+import 'package:burla_xatun/ui/screens/main/views/home_page/home/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../../utils/constants/color_constants.dart';
 import '../../../../../../utils/extensions/context_extensions.dart';
@@ -11,9 +11,11 @@ class ScrollableDaysAppbar extends StatelessWidget
   const ScrollableDaysAppbar({
     super.key,
     required this.appbarName,
+    this.day,
   });
 
   final String appbarName;
+  final int? day;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,12 @@ class ScrollableDaysAppbar extends StatelessWidget
                 children: [
                   GestureDetector(
                     onTap: () {
-                      context.pop();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ),
+                      );
                     },
                     child: SizedBox(
                       width: 44,
@@ -81,7 +88,7 @@ class ScrollableDaysAppbar extends StatelessWidget
                   scrollDirection: Axis.horizontal,
                   itemCount: 50,
                   itemBuilder: (_, i) {
-                    return i == 10
+                    return i == day
                         ? SizedBox(
                             height: 65,
                             width: 42,
