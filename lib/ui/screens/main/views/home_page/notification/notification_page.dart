@@ -50,18 +50,21 @@ class _NotificationPageState extends State<NotificationPage> {
                 }
                 if (state.notificationStatus == NotificationStatus.success) {
                   final notificationList = state.notifications ?? [];
-                  return Expanded(
-                    child: ListView.separated(
-                      itemCount: notificationList.length,
-                      itemBuilder: (_, i) {
-                        return NotificationBox(
-                            notification: notificationList[i]);
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return 23.h;
-                      },
-                    ),
-                  );
+                  return notificationList.isEmpty
+                      ? Center(child: Text('There is no notification'))
+                      : Expanded(
+                          child: ListView.separated(
+                            itemCount: notificationList.length,
+                            itemBuilder: (_, i) {
+                              return NotificationBox(
+                                  notification: notificationList[i]);
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return 23.h;
+                            },
+                          ),
+                        );
                 }
                 return SizedBox.shrink();
               },

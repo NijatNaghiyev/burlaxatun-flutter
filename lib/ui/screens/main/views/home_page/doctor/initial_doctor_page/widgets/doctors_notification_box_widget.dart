@@ -1,3 +1,4 @@
+import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/doctor_info.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../../utils/extensions/num_extensions.dart';
@@ -22,7 +23,7 @@ class DoctorsNotificationBoxWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 14),
           child: Column(
             children: [
-              //DoctorInfo(),
+              DoctorInfo(),
               24.h,
               DoctorNotificationStatus(),
               24.h,

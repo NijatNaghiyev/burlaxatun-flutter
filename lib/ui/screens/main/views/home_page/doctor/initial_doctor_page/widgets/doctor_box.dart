@@ -29,9 +29,7 @@ class DoctorBox extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 14),
           child: Column(
             children: [
-              DoctorInfo(
-                doctor: doctor,
-              ),
+              DoctorInfo(doctor: doctor),
               24.h,
               TimeAndPriceBox(
                 doctor: doctor,

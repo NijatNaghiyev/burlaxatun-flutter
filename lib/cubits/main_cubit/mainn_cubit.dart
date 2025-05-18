@@ -238,16 +238,7 @@ class MainnCubit extends Cubit<MainInitial> {
     );
   }
 
-  void showDoctorsNotification(BuildContext context) {
-    showModalBottomSheet(
-      showDragHandle: true,
-      isScrollControlled: true,
-      context: context,
-      builder: (_) {
-        return DoctorsNotification();
-      },
-    );
-  }
+  
 
   void showCalendar(BuildContext context) {
     showDialog(

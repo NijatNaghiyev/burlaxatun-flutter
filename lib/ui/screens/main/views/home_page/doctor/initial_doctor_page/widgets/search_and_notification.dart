@@ -1,3 +1,6 @@
+import 'package:burla_xatun/cubits/doctor_notification/doctor_notification_cubit.dart';
+import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/doctors_notification.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -32,7 +35,17 @@ class SearchAndNotification extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                mainCubit.showDoctorsNotification(context);
+                showModalBottomSheet(
+                  showDragHandle: true,
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (_) {
+                    return BlocProvider(
+                      create: (context) => locator<DoctorNotificationCubit>()..getDrNotifications(),
+                      child: DoctorsNotification(),
+                    );
+                  },
+                );
               },
               child: SvgPicture.asset('assets/icons/notification_bing.svg'),
             ),
