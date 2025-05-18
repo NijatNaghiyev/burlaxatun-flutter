@@ -1,4 +1,6 @@
+import 'package:burla_xatun/cubits/user_data/user_data_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../utils/constants/color_constants.dart';
 import '../../../../../../utils/extensions/num_extensions.dart';
@@ -14,6 +16,7 @@ class InitialProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final mainCubit = context.read<MainnCubit>();
+    final userData = context.read<UserDataCubit>().getUserData();
     return Scaffold(
       backgroundColor: ColorConstants.profileScaffoldColor,
       body: SafeArea(

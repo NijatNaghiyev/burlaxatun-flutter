@@ -1,4 +1,5 @@
 import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
+import 'package:burla_xatun/cubits/forum_list/forum_list_cubit.dart';
 import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
 import 'package:burla_xatun/data/models/remote/response/blog_cat_model.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/email_request_screen.dart';
@@ -18,7 +19,7 @@ import '../../cubits/questions_cubit/questions_cubit.dart';
 import '../../ui/screens/auth/login/login.dart';
 import '../../ui/screens/auth/sign_up/signup.dart';
 import '../../ui/screens/main/main_page.dart';
-import '../../ui/screens/main/views/daily_advise_page/advises_page.dart';
+import '../../ui/screens/main/views/daily_advise_page/advice_page.dart';
 import '../../ui/screens/main/views/forum_page/main_forum_page.dart/forum_page.dart';
 import '../../ui/screens/main/views/forum_page/new_forum_page/create_new_forum.dart';
 import '../../ui/screens/main/views/forum_page/secondary_forum_page/secondary_forum_page.dart';
@@ -174,7 +175,9 @@ class Routerapp {
                   return BlocProvider(
                     create: (context) =>
                         locator<DoctorDetailCubit>()..getDoctorDetail(slug),
-                    child: RegistrationDoctorPage(slug: slug),
+                    child: RegistrationDoctorPage(
+                        // slug: slug
+                        ),
                   );
                 },
               ),
@@ -254,7 +257,7 @@ class Routerapp {
             routes: [
               GoRoute(
                 path: '/daily_advices',
-                builder: (context, state) => AdvisesPage(),
+                builder: (context, state) => AdvicePage(),
               ),
               // GoRoute(
               //   path: '/daily_advices',
@@ -271,10 +274,64 @@ class Routerapp {
                 path: '/main_forum',
                 builder: (context, state) => MainForumPage(),
               ),
+              // GoRoute(
+              //   path: '/secondary_forum',
+              //   builder: (context, state) {
+              //     // final forumCategory = context.read<ForumCategoryResponse>();
+              //     return MultiBlocProvider(
+              //       providers: [
+              //         BlocProvider(
+              //           create: (context) => locator<ForumListCubit>()
+              //             ..getForumList(
+              //                 // categoryId: forumCategory.id.toString(),
+              //                 ),
+              //         ),
+              //         // BlocProvider<ForumCategoryCubit>(
+              //         //   create: (context) =>
+              //         //       locator<ForumCategoryCubit>()..getForumCategory(),
+              //         // ),
+              //       ],
+              //       child: SecondaryForumPage(),
+              //     );
+              //   },
+              // ),
               GoRoute(
                 path: '/secondary_forum',
-                builder: (context, state) => SecondaryForumPage(),
+                builder: (context, state) {
+                  final categoryId = state.uri.queryParameters['categoryId'];
+                  return MultiBlocProvider(
+                    providers: [
+                      BlocProvider(
+                        create: (context) => locator<ForumListCubit>()
+                          ..getForumList(categoryId: categoryId),
+                      ),
+                    ],
+                    child: SecondaryForumPage(),
+                  );
+                },
               ),
+
+              // GoRoute(
+              //   path: '/secondary_forum',
+              //   builder: (context, state) {
+              //     // Extract categoryId from route params
+              //     final Map<String, dynamic>? extra =
+              //         state.extra as Map<String, dynamic>?;
+              //     final String? categoryId = extra?['categoryId']?.toString();
+
+              //     return MultiBlocProvider(
+              //       providers: [
+              //         BlocProvider(
+              //           create: (context) => locator<ForumListCubit>()
+              //             ..getForumList(
+              //               categoryId: categoryId,
+              //             ),
+              //         ),
+              //       ],
+              //       child: SecondaryForumPage(),
+              //     );
+              //   },
+              // ),
               GoRoute(
                 path: '/create_new_forum',
                 builder: (context, state) => CreateNewForum(),

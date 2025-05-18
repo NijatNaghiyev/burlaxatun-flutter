@@ -126,6 +126,7 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
                                         context: context,
                                         controller: _startDateController,
                                       ),
+                                      suffixIcon: Icons.calendar_month,
                                     ),
                                     AddIndicatorInput(
                                       inputName: 'Bitmə tarixi',
@@ -135,6 +136,7 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
                                         context: context,
                                         controller: _endDateController,
                                       ),
+                                      suffixIcon: Icons.calendar_month,
                                     ),
                                   ],
                                 ),

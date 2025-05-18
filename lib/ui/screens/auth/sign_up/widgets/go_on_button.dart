@@ -8,7 +8,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../cubits/signup_cubit/signup_cubit.dart';
 import '../../../../../utils/constants/color_constants.dart';
-import '../../../../widgets/global_button.dart';
 
 class GoOnButton extends StatelessWidget {
   const GoOnButton({super.key});

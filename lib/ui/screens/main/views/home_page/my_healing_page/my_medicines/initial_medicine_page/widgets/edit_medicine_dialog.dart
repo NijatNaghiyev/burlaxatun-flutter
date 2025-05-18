@@ -47,23 +47,6 @@ class _EditMedicineDialogState extends State<EditMedicineDialog> {
     }
   }
 
-  // Future<void> _selectDate(
-  //     BuildContext context, TextEditingController controller) async {
-  //   final DateTime? picked = await showDatePicker(
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime(2000),
-  //     lastDate: DateTime(2100),
-  //     helpText: 'Tarix seçin',
-  //     locale: const Locale('az'), // Optional: Azərbaycan dili üçün
-  //   );
-  //
-  //   if (picked != null) {
-  //     final formatted = DateFormat('dd.MM.yyyy').format(picked);
-  //     controller.text = formatted;
-  //   }
-  // }
-
   @override
   void dispose() {
     _nameController.dispose();
@@ -173,6 +156,7 @@ class _EditMedicineDialogState extends State<EditMedicineDialog> {
                                       context: context,
                                       controller: _startDateController,
                                     ),
+                                    suffixIcon: Icons.calendar_month,
                                   ),
                                   AddIndicatorInput(
                                     inputName: 'Bitmə tarixi',
@@ -182,6 +166,7 @@ class _EditMedicineDialogState extends State<EditMedicineDialog> {
                                       context: context,
                                       controller: _endDateController,
                                     ),
+                                    suffixIcon: Icons.calendar_month,
                                   ),
                                 ],
                               ),

@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../widgets/global_text.dart';
@@ -15,9 +16,9 @@ class AdviseText extends StatelessWidget {
     return GlobalText(
       textAlign: TextAlign.left,
       text: adviceText,
-      fontSize: 16,
+      fontSize: 14,
       fontWeight: FontWeight.w400,
-      color: Color(0xff667085),
+      color: ColorConstants.gray600,
     );
   }
 }

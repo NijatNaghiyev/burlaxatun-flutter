@@ -12,12 +12,14 @@ class AddIndicatorInput extends StatelessWidget {
     required this.hintText,
     this.controller,
     this.onTap,
+    this.suffixIcon,
   });
 
   final String inputName;
   final String hintText;
   final TextEditingController? controller;
   final VoidCallback? onTap;
+  final IconData? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +48,12 @@ class AddIndicatorInput extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
           decoration: InputDecoration(
-            contentPadding:
-                const EdgeInsets.only(left: 20, top: 15, bottom: 15),
+            contentPadding: const EdgeInsets.only(
+              left: 20,
+              top: 15,
+              bottom: 15,
+              right: 20,
+            ),
             hintText: hintText,
             hintStyle: GoogleFonts.poppins(
               fontSize: 14,
@@ -71,6 +77,13 @@ class AddIndicatorInput extends StatelessWidget {
                 color: ColorConstants.primaryRedColor,
               ),
             ),
+            suffixIcon: suffixIcon != null
+                ? Icon(
+                    size: 24,
+                    suffixIcon,
+                    color: ColorConstants.medicineTextColor,
+                  )
+                : null,
           ),
         ),
       ],

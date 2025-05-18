@@ -1,4 +1,6 @@
 import 'package:burla_xatun/data/models/remote/response/blog_cat_model.dart';
+import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
+import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,6 +20,12 @@ class ArticlesWidget extends StatelessWidget {
     required this.blogs,
     required this.category,
   });
+
+  bool isVideo(String? url) {
+    if (url == null) return false;
+    final videoExtensions = ['.mp4', '.mov', '.avi', '.mkv'];
+    return videoExtensions.any((ext) => url.toLowerCase().contains(ext));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +78,17 @@ class ArticlesWidget extends StatelessWidget {
                         Image.network(
                           blog.file ?? '',
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              const Center(child: Icon(Icons.error)),
+                          errorBuilder: (_, __, ___) =>
+                              CustomCircularProgressIndicator(),
                         ),
+                        if (isVideo(blog.file))
+                          Center(
+                            child: Icon(
+                              Icons.play_circle_outline,
+                              size: 40,
+                              color: ColorConstants.primaryRedColor,
+                            ),
+                          ),
                         Positioned(
                           bottom: 10,
                           left: 9,

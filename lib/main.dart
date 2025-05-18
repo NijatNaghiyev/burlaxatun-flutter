@@ -11,6 +11,7 @@ import 'package:burla_xatun/cubits/medicine/medicine_cubit.dart';
 import 'package:burla_xatun/cubits/medicine_create/medicine_create_cubit.dart';
 import 'package:burla_xatun/cubits/medicine_patch/medicine_patch_cubit.dart';
 import 'package:burla_xatun/cubits/privacy_policy/privacy_policy_cubit.dart';
+import 'package:burla_xatun/cubits/user_data/user_data_cubit.dart';
 import 'package:burla_xatun/cubits/using_rules/using_rules_cubit.dart';
 import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
@@ -126,7 +127,13 @@ class MyApp extends StatelessWidget {
           create: (context) => locator<DoctorDetailCubit>(),
         ),
 
-       
+        BlocProvider(
+          create: (context) => locator<UserDataCubit>()..getUserData(),
+        ),
+
+        // BlocProvider(
+        //   create: (context) => BabyNamesCubit(),
+        // )
       ],
       child: BlocBuilder<LanguageCubit, Locale>(
         builder: (context, state) {

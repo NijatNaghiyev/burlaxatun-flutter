@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../widgets/global_text.dart';
@@ -12,12 +13,14 @@ class AdviseTitle extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        GlobalText(
-          textAlign: TextAlign.left,
-          text: adviceTitle,
-          fontSize: 24,
-          fontWeight: FontWeight.w600,
-          color: Colors.black,
+        Expanded(
+          child: GlobalText(
+            textAlign: TextAlign.left,
+            text: adviceTitle,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: ColorConstants.black800,
+          ),
         ),
       ],
     );
