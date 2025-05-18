@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../widgets/global_text.dart';
@@ -6,9 +7,11 @@ class TimeBox extends StatelessWidget {
   const TimeBox({
     super.key,
     required this.time,
+    required this.isSelected,
   });
 
   final String time;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,9 @@ class TimeBox extends StatelessWidget {
               text: time,
               fontSize: 14,
               fontWeight: FontWeight.w500,
-              color: Color(0xff98A2B3),
+              color: isSelected
+                  ? ColorConstants.primaryRedColor
+                  : Color(0xff98A2B3),
             ),
           ),
         ),

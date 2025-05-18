@@ -1,5 +1,7 @@
 import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
+import 'package:burla_xatun/cubits/doctor_reservation/doctor_reservation_cubit.dart';
 import 'package:burla_xatun/cubits/forum_list/forum_list_cubit.dart';
+import 'package:burla_xatun/cubits/notification/notification_cubit.dart';
 import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
 import 'package:burla_xatun/data/models/remote/response/blog_cat_model.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/email_request_screen.dart';
@@ -154,7 +156,10 @@ class Routerapp {
               ),
               GoRoute(
                 path: '/notification',
-                builder: (context, state) => NotificationPage(),
+                builder: (context, state) => BlocProvider(
+                  create: (context) => locator<NotificationCubit>(),
+                  child: NotificationPage(),
+                ),
               ),
               GoRoute(
                 path: '/my_healing_card',
@@ -172,13 +177,23 @@ class Routerapp {
                 path: '/doctor_register/:slug',
                 builder: (context, state) {
                   final slug = state.pathParameters['slug']!;
-                  return BlocProvider(
-                    create: (context) =>
-                        locator<DoctorDetailCubit>()..getDoctorDetail(slug),
-                    child: RegistrationDoctorPage(
-                        // slug: slug
-                        ),
+                  return MultiBlocProvider(
+                    providers: [
+                      BlocProvider(
+                        create: (context) =>
+                            locator<DoctorDetailCubit>()..getDoctorDetail(slug),
+                      ),
+                      BlocProvider(
+                        create: (context) => locator<DoctorReservationCubit>(),
+                      )
+                    ],
+                    child: RegistrationDoctorPage(),
                   );
+                  // BlocProvider(
+                  //   create: (context) =>
+                  //       locator<DoctorDetailCubit>()..getDoctorDetail(slug),
+                  //   child: RegistrationDoctorPage(),
+                  // );
                 },
               ),
 

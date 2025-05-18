@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:burla_xatun/cubits/doctor_reservation/doctor_reservation_cubit.dart';
+import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -20,6 +24,9 @@ class RegistrationDoctorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DoctorReservationCubit doctorReservationCubit =
+        context.read<DoctorReservationCubit>();
+    late int doctorId;
     return Scaffold(
       backgroundColor: Color(0xffFCFCFD),
       appBar: AppBar(
@@ -51,6 +58,7 @@ class RegistrationDoctorPage extends StatelessWidget {
                   }
 
                   final doctor = state.response;
+                  doctorId = doctor?.id ?? -1;
 
                   if (doctor == null) {
                     return Center(child: Text('Həkim məlumatı tapılmadı.'));
@@ -81,11 +89,38 @@ class RegistrationDoctorPage extends StatelessWidget {
       ),
       bottomSheet: Padding(
         padding: const EdgeInsets.all(10),
-        child: GlobalButton(
-          buttonName: 'Qeydiyyat',
-          buttonColor: ColorConstants.primaryRedColor,
-          textColor: Colors.white,
-          onPressed: () {},
+        child: BlocConsumer<DoctorReservationCubit, DoctorReservationState>(
+          buildWhen: (previous, current) {
+            return previous.doctorReservStatus != current.doctorReservStatus;
+          },
+          listenWhen: (previous, current) {
+            return previous.doctorReservStatus != current.doctorReservStatus;
+          },
+          listener: (context, state) {
+            if (state.doctorReservStatus == DoctorReservStatus.error) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.errorMessage ?? 'error occured')),
+              );
+            } else if (state.doctorReservStatus == DoctorReservStatus.success) {
+              context.go('/home');
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //   SnackBar(content: Text('success')),
+              // );
+            }
+          },
+          builder: (context, state) {
+            if (state.doctorReservStatus == DoctorReservStatus.loading) {
+              return CircularProgressIndicator.adaptive();
+            }
+            return GlobalButton(
+              buttonName: 'Qeydiyyat',
+              buttonColor: ColorConstants.primaryRedColor,
+              textColor: Colors.white,
+              onPressed: () {
+                doctorReservationCubit.reservDoctor(doctorId);
+              },
+            );
+          },
         ),
       ),
     );

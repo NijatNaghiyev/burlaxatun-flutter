@@ -1,4 +1,8 @@
+import 'dart:developer';
+
+import 'package:burla_xatun/cubits/doctor_reservation/doctor_reservation_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'time_box.dart';
 
@@ -9,6 +13,9 @@ class TimeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DoctorReservationCubit doctorReservationCubit =
+        context.read<DoctorReservationCubit>();
+    ValueNotifier<String?> selectedTimeValue = ValueNotifier<String?>(null);
     return SizedBox(
       height: 52,
       child: DecoratedBox(
@@ -24,7 +31,23 @@ class TimeWidget extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: timeList.length,
               itemBuilder: (_, i) {
-                return TimeBox(time: timeList[i]);
+                return GestureDetector(
+                  onTap: () {
+                    doctorReservationCubit.saveTime(timeList[i]);
+                    selectedTimeValue.value = timeList[i];
+                  },
+                  child: ValueListenableBuilder(
+                    valueListenable: selectedTimeValue,
+                    builder: (context, value, child) {
+                      return TimeBox(
+                        time: timeList[i],
+                        isSelected: value == null
+                            ? false
+                            : timeList.indexOf(value) == i,
+                      );
+                    },
+                  ),
+                );
               },
               separatorBuilder: (_, i) => SizedBox(width: 4),
             ),

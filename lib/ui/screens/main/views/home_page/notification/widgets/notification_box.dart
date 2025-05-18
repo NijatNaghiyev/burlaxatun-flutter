@@ -1,3 +1,4 @@
+import 'package:burla_xatun/data/models/remote/response/notifications_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -5,7 +6,12 @@ import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
 
 class NotificationBox extends StatelessWidget {
-  const NotificationBox({super.key});
+  const NotificationBox({
+    super.key,
+    required this.notification,
+  });
+
+  final NotificationsModel notification;
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +63,7 @@ class NotificationBox extends StatelessWidget {
                     child: GlobalText(
                       height: 1.3,
                       textAlign: TextAlign.left,
-                      text:
-                          'This sunflower is so vibrant! The colors just pop. It makes me feel so cheerful!',
+                      text: notification.text ?? 'not found',
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       color: Colors.black,
@@ -66,7 +71,7 @@ class NotificationBox extends StatelessWidget {
                   ),
                   4.h,
                   GlobalText(
-                    text: '2 dq evvel',
+                    text: '${DateTime.now().difference(notification.createdAt!).inMinutes} dq evvel',
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Color(0xff8E8E93),

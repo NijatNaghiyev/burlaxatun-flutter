@@ -40,10 +40,15 @@ class EndpointsConstants {
   // A
   static const String userData = '$baseUrl/A/me/';
 
+  // B1
+  static const String notifications = '$baseUrl/B1/notifications/';
+
   // C
   static const String medicines = '$baseUrl/C/medicines/';
   static const String medicineCreate = '$baseUrl/C/medicines/create/';
   static const String medicinePatch = '$baseUrl/C/medicines/{slug}/update/';
+  static const String doctorReserve = '$baseUrl/C/doctor-reserve/';
+  static const String myReservations = '$baseUrl/C/my-reservations/';
 
   // D
   static const forumCategory = "$baseUrl/D/forum-category-stats/";
