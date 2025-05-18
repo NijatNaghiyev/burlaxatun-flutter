@@ -92,9 +92,7 @@ class MyApp extends StatelessWidget {
           create: (context) => locator<CountriesCubit>()..getCountries(),
         ),
 
-        // BlocProvider<BabyNamesCubit2>(
-        //   create: (context) => locator<BabyNamesCubit>(),
-        // ),
+
 
         BlocProvider<BlogSlidersCubit>(
           create: (context) => locator<BlogSlidersCubit>()..getBlogSliders(),
@@ -128,9 +126,7 @@ class MyApp extends StatelessWidget {
           create: (context) => locator<DoctorDetailCubit>(),
         ),
 
-        // BlocProvider(
-        //   create: (context) => BabyNamesCubit(),
-        // )
+       
       ],
       child: BlocBuilder<LanguageCubit, Locale>(
         builder: (context, state) {
