@@ -10,12 +10,14 @@ class MainForumTitleBox extends StatelessWidget {
     required this.title,
     this.topicCount,
     this.messageCount,
+    this.viewsCount,
     this.onTap,
   });
 
   final String title;
   final int? topicCount;
   final int? messageCount;
+  final int? viewsCount;
   final void Function()? onTap;
 
   @override

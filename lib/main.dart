@@ -1,4 +1,4 @@
-import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
+import 'package:burla_xatun/cubits/about/about_cubit.dart';
 import 'package:burla_xatun/cubits/blog_cat/blog_cat_cubit.dart';
 import 'package:burla_xatun/cubits/blog_sliders/blog_sliders_cubit.dart';
 import 'package:burla_xatun/cubits/contact/contact_cubit.dart';
@@ -7,6 +7,7 @@ import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
 import 'package:burla_xatun/cubits/doctors_list/doctors_list_cubit.dart';
 import 'package:burla_xatun/cubits/faqs_cubit/faqs_cubit.dart';
 import 'package:burla_xatun/cubits/forum_category/forum_category_cubit.dart';
+import 'package:burla_xatun/cubits/forum_comments/forum_comments_cubit.dart';
 import 'package:burla_xatun/cubits/medicine/medicine_cubit.dart';
 import 'package:burla_xatun/cubits/medicine_create/medicine_create_cubit.dart';
 import 'package:burla_xatun/cubits/medicine_patch/medicine_patch_cubit.dart';
@@ -80,10 +81,8 @@ class MyApp extends StatelessWidget {
           create: (context) => locator<UsingRulesCubit>()..getUsingRules(),
         ),
 
-        BlocProvider<UsingRulesCubit>(
-            create: (context) => locator<UsingRulesCubit>()..getUsingRules()
-            // ..getAbout(),
-            ),
+        BlocProvider<AboutCubit>(
+            create: (context) => locator<AboutCubit>()..getAbout()),
 
         BlocProvider<ContactCubit>(
           create: (context) => locator<ContactCubit>()..getContact(),
@@ -92,8 +91,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<CountriesCubit>(
           create: (context) => locator<CountriesCubit>()..getCountries(),
         ),
-
-
 
         BlocProvider<BlogSlidersCubit>(
           create: (context) => locator<BlogSlidersCubit>()..getBlogSliders(),
@@ -118,6 +115,11 @@ class MyApp extends StatelessWidget {
         BlocProvider<ForumCategoryCubit>(
           create: (context) =>
               locator<ForumCategoryCubit>()..getForumCategory(),
+        ),
+
+        BlocProvider<ForumCommentsCubit>(
+          create: (context) =>
+              locator<ForumCommentsCubit>()..getForumComments(),
         ),
         BlocProvider<DoctorsListCubit>(
           create: (context) => locator<DoctorsListCubit>()..getDoctorsList(),

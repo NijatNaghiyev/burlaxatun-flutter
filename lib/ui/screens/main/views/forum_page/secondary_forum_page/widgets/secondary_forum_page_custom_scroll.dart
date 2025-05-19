@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/cubits/forum_comments/forum_comments_cubit.dart';
 import 'package:burla_xatun/cubits/forum_list/forum_list_cubit.dart';
 import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ class SecondaryForumPageCustomScroll extends StatelessWidget {
         }
         if (state is ForumListSuccess) {
           final data = state.forumListResponse;
+
           return Stack(
             alignment: Alignment.bottomRight,
             children: [
@@ -40,7 +42,9 @@ class SecondaryForumPageCustomScroll extends StatelessWidget {
                   SliverPadding(
                     padding: EdgeInsets.only(top: 22, bottom: 18),
                     sliver: SliverToBoxAdapter(
-                      child: ForumTitle(),
+                      child: ForumTitle(
+                        title: data.results?.first.category?.name ?? '',
+                      ),
                     ),
                   ),
                   SliverPadding(
@@ -53,15 +57,27 @@ class SecondaryForumPageCustomScroll extends StatelessWidget {
                     delegate: SliverChildBuilderDelegate(
                       childCount: data.results!.length,
                       (_, i) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 18),
-                          child: ForumBox(
-                            authorName: data.results?[i].user?.fullName ?? "",
-                            forumTitle: data.results?[i].text ?? "",
-                            likeCount: data.results?[i].likes ?? 0,
-                            viewCount: data.results?[i].viewCount ?? 0,
-                            commentCount: 0,
-                          ),
+                        final forum = data.results![i];
+                        return BlocBuilder<ForumCommentsCubit,
+                            ForumCommentsState>(
+                          builder: (_, commentState) {
+                            int commentCount = 0;
+                            if (commentState.status ==
+                                ForumCommentsStatus.success) {
+                              commentCount =
+                                  commentState.response?.results?.length ?? 0;
+                            }
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 18),
+                              child: ForumBox(
+                                authorName: forum.user?.fullName ?? "",
+                                forumTitle: forum.text ?? "",
+                                likeCount: forum.likes ?? 0,
+                                viewCount: forum.viewCount ?? 0,
+                                commentCount: commentCount,
+                              ),
+                            );
+                          },
                         );
                       },
                     ),
