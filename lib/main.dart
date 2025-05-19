@@ -4,6 +4,7 @@ import 'package:burla_xatun/cubits/blog_sliders/blog_sliders_cubit.dart';
 import 'package:burla_xatun/cubits/contact/contact_cubit.dart';
 import 'package:burla_xatun/cubits/countries/countries_cubit.dart';
 import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
+import 'package:burla_xatun/cubits/daily_rec_detail/daily_rec_detail_cubit.dart';
 import 'package:burla_xatun/cubits/doctors_list/doctors_list_cubit.dart';
 import 'package:burla_xatun/cubits/faqs_cubit/faqs_cubit.dart';
 import 'package:burla_xatun/cubits/forum_category/forum_category_cubit.dart';
@@ -57,17 +58,10 @@ class MyApp extends StatelessWidget {
         BlocProvider<DailyRecCubit>(
           create: (context) => locator<DailyRecCubit>()..getDailyRec(),
         ),
-        // BlocProvider<DailyRecCubit>(
-        //   create: (context) {
-        //     final dailyRecState = context.read<DailyRecCubit>().state;
-        //     if (dailyRecState.status == DailyRecStatus.success) {
-        //       final slug = dailyRecState.response?.results?.first.slug;
-        //       return locator<DailyRecCubit>()..getDailyRec();
-        //       // ..getDailyRecDetail(slug!);
-        //     }
-        //     return locator<DailyRecCubit>();
-        //   },
-        // ),
+        BlocProvider<DailyRecDetailCubit>(
+          create: (context) => locator<DailyRecDetailCubit>(),
+        ),
+
         BlocProvider<FaqsCubit>(
           create: (context) => locator<FaqsCubit>()..getFaqs(),
         ),

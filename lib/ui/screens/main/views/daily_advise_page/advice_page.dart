@@ -1,13 +1,10 @@
-import 'package:burla_xatun/ui/screens/main/views/daily_advise_page/widgets/advise_image.dart';
-import 'package:burla_xatun/ui/screens/main/views/daily_advise_page/widgets/advise_text.dart';
-import 'package:burla_xatun/ui/screens/main/views/daily_advise_page/widgets/advise_title.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/widgets/scrollable_days_appbar.dart';
-import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
+import 'package:burla_xatun/ui/screens/main/views/daily_advise_page/advice_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../cubits/daily_rec/daily_rec_cubit.dart';
-import '../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../cubits/daily_rec_detail/daily_rec_detail_cubit.dart';
+import '../../../../widgets/custom_circular_progress_indicator.dart';
 
 class AdvicePage extends StatefulWidget {
   const AdvicePage({super.key});
@@ -17,6 +14,9 @@ class AdvicePage extends StatefulWidget {
 }
 
 class _AdvicePageState extends State<AdvicePage> {
+  String? _slug;
+  bool _detailFetched = false;
+
   @override
   void initState() {
     super.initState();
@@ -26,57 +26,39 @@ class _AdvicePageState extends State<AdvicePage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DailyRecCubit, DailyRecState>(
-      builder: (context, state) {
-        switch (state.status) {
-          case DailyRecStatus.loading:
-            return const Scaffold(
-              body: Center(child: CustomCircularProgressIndicator()),
-            );
+      builder: (_, dailyRecState) {
+        if (dailyRecState.status == DailyRecStatus.loading) {
+          return const Center(
+            child: CustomCircularProgressIndicator(),
+          );
+        } else if (dailyRecState.status == DailyRecStatus.failure) {
+          return const Center(
+            child: Text('Error'),
+          );
+        } else if (dailyRecState.status == DailyRecStatus.networkError) {
+          return const Center(
+            child: Text('Network Error'),
+          );
+        } else if (dailyRecState.status == DailyRecStatus.success) {
+          // Create a slug one time
+          _slug ??= dailyRecState.response?.results?.first.slug;
 
-          case DailyRecStatus.failure:
-            return const Scaffold(
-              body: Center(child: Text('Xəta baş verdi')),
+          if (_slug == null) {
+            return const Center(
+              child: Text("Slug not found"),
             );
+          }
 
-          case DailyRecStatus.networkError:
-            return const Scaffold(
-              body: Center(child: Text('Şəbəkə xətası')),
-            );
+          // Fetch detail for only one time
+          if (!_detailFetched) {
+            _detailFetched = true;
+            context.read<DailyRecDetailCubit>().getDailyRecDetail(_slug!);
+          }
 
-          case DailyRecStatus.success:
-            final data = state.response?.results?.first;
-
-            return Scaffold(
-              appBar: ScrollableDaysAppbar(
-                appbarName: 'Günlük Tövsiyələr',
-                day: data?.day ?? 1,
-              ),
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AdviseImage(
-                        imageUrl:
-                            data?.image ?? 'assets/images/default_image.png',
-                      ),
-                      12.h,
-                      AdviseTitle(adviceTitle: data?.name ?? ''),
-                      10.h,
-                      AdviseText(adviceText: data?.text ?? ''),
-                    ],
-                  ),
-                ),
-              ),
-            );
-
-          default:
-            return const Scaffold(
-              body: SizedBox.shrink(),
-            );
+          return AdviceDetailView();
         }
+
+        return const SizedBox.shrink();
       },
     );
   }
