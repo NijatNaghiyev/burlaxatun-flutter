@@ -66,12 +66,15 @@ class HomePageDailyAdvise extends StatelessWidget {
                             const Icon(Icons.broken_image, size: 100),
                       )),
                   16.h,
-                  GlobalText(
-                    textAlign: TextAlign.left,
-                    text: data?.name ?? '',
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: GlobalText(
+                      textAlign: TextAlign.left,
+                      text: data?.name ?? '',
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
                   ),
                   11.h,
                   GlobalText(
