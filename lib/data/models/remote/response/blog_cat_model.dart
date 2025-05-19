@@ -79,6 +79,7 @@ class Blog extends Equatable {
   final DateTime? updatedAt;
   final String? slug;
   final String? file;
+  final String? thumbnail;
   final String? name;
   final String? text;
   final int? category;
@@ -89,6 +90,7 @@ class Blog extends Equatable {
     this.updatedAt,
     this.slug,
     this.file,
+    this.thumbnail,
     this.name,
     this.text,
     this.category,
@@ -104,6 +106,7 @@ class Blog extends Equatable {
             : DateTime.parse(json["updated_at"]),
         slug: json["slug"],
         file: json["file"],
+        thumbnail: json["thumbnail"],
         name: json["name"],
         text: json["text"],
         category: json["category"],
@@ -115,6 +118,7 @@ class Blog extends Equatable {
         "updated_at": updatedAt?.toIso8601String(),
         "slug": slug,
         "file": file,
+        "thumbnail": thumbnail,
         "name": name,
         "text": text,
         "category": category,
@@ -127,6 +131,7 @@ class Blog extends Equatable {
         updatedAt,
         slug,
         file,
+        thumbnail,
         name,
         text,
         category,

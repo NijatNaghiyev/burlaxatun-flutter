@@ -1,6 +1,7 @@
 import 'package:burla_xatun/data/models/remote/response/blog_cat_model.dart';
 import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
-import 'package:burla_xatun/utils/constants/color_constants.dart';
+import 'package:burla_xatun/utils/helper/get_blog_img_helper.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,12 +21,6 @@ class ArticlesWidget extends StatelessWidget {
     required this.blogs,
     required this.category,
   });
-
-  bool isVideo(String? url) {
-    if (url == null) return false;
-    final videoExtensions = ['.mp4', '.mov', '.avi', '.mkv'];
-    return videoExtensions.any((ext) => url.toLowerCase().contains(ext));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,20 +70,14 @@ class ArticlesWidget extends StatelessWidget {
                     child: Stack(
                       fit: StackFit.expand,
                       children: [
-                        Image.network(
-                          blog.file ?? '',
+                        CachedNetworkImage(
+                          imageUrl: getBlogImageHelper(blog),
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) =>
-                              CustomCircularProgressIndicator(),
+                          placeholder: (context, url) =>
+                              Center(child: CustomCircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              Center(child: CustomCircularProgressIndicator()),
                         ),
-                        if (isVideo(blog.file))
-                          Center(
-                            child: Icon(
-                              Icons.play_circle_outline,
-                              size: 40,
-                              color: ColorConstants.primaryRedColor,
-                            ),
-                          ),
                         Positioned(
                           bottom: 10,
                           left: 9,

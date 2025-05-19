@@ -1,13 +1,17 @@
+import 'package:burla_xatun/utils/helper/get_blog_img_helper.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../../data/models/remote/response/blog_cat_model.dart';
 import '../../../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../../widgets/custom_circular_progress_indicator.dart';
 import '../../../../../../widgets/global_appbar.dart';
 import '../../widgets/article_box.dart';
 
 class SeeAllArticlesPage extends StatelessWidget {
   const SeeAllArticlesPage({super.key, required this.category});
+
   final Result category; //
 
   @override
@@ -30,10 +34,13 @@ class SeeAllArticlesPage extends StatelessWidget {
                     child: ArticleBox(
                       onTap: () =>
                           context.push('/article_details', extra: blog),
-                      videoOrImage: Image.network(
-                        blog.file ?? '',
+                      videoOrImage: CachedNetworkImage(
+                        imageUrl: getBlogImageHelper(blog),
                         fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => const Icon(Icons.error),
+                        placeholder: (context, url) =>
+                            Center(child: CustomCircularProgressIndicator()),
+                        errorWidget: (context, url, error) =>
+                            Center(child: CustomCircularProgressIndicator()),
                       ),
                       boxTitle: blog.name ?? '',
                       boxDescription: blog.text ?? '',
