@@ -8,9 +8,11 @@ class NewForumAppbar extends StatelessWidget implements PreferredSizeWidget {
   const NewForumAppbar({
     super.key,
     required this.onTap,
+    required this.send,
   });
 
   final void Function() onTap;
+  final void Function() send;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +40,14 @@ class NewForumAppbar extends StatelessWidget implements PreferredSizeWidget {
           color: Color(0xff344054),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 22),
-            child: SvgPicture.asset(
-              'assets/icons/forum_send_icon.svg',
-              color: ColorConstants.primaryRedColor,
+          GestureDetector(
+            onTap: send,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 22),
+              child: SvgPicture.asset(
+                'assets/icons/forum_send_icon.svg',
+                color: ColorConstants.primaryRedColor,
+              ),
             ),
           ),
         ],

@@ -5,13 +5,15 @@ import 'package:go_router/go_router.dart';
 import '../../../../../../../utils/constants/color_constants.dart';
 
 class AddNewForumButton extends StatelessWidget {
-  const AddNewForumButton({super.key});
+  final int categoryId;
+
+  const AddNewForumButton({super.key, required this.categoryId});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push('/create_new_forum');
+        context.push('/create_new_forum?categoryId=$categoryId');
       },
       child: SizedBox(
         width: 56,
@@ -21,13 +23,8 @@ class AddNewForumButton extends StatelessWidget {
             shape: BoxShape.circle,
             color: ColorConstants.primaryRedColor,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'assets/icons/add_forum_icon.svg',
-              ),
-            ],
+          child: Center(
+            child: SvgPicture.asset('assets/icons/add_forum_icon.svg'),
           ),
         ),
       ),
