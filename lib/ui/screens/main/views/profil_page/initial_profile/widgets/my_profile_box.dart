@@ -79,14 +79,6 @@ class MyProfileBox extends StatelessWidget {
                       ),
                     ),
                     14.h,
-                    ColoredBox(
-                      color: Color(0xffF2F4F7),
-                      child: SizedBox(
-                        height: 1,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ),
-                    14.h,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

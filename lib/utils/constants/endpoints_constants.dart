@@ -38,7 +38,7 @@ class EndpointsConstants {
   static const String blogCategories = '$baseUrl/extra/blogs-with-categories/';
 
   // A
-  static const String userData = '$baseUrl/A/me/';
+  static const userData = '$baseUrl/A/me/';
 
   // B1
   static const String notifications = '$baseUrl/B1/notifications/';

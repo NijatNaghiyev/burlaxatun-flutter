@@ -1,28 +1,26 @@
 part of 'user_update_cubit.dart';
 
-sealed class UserUpdateState {}
-// extends Equatable {
-//   const UserUpdateState();
+enum UserUpdateStatus { initial, loading, success, failure, networkError }
 
-//   @override
-//   List<Object> get props => [];
-// }
+final class UserUpdateState extends Equatable {
+  const UserUpdateState({
+    required this.status,
+    this.message = '',
+  });
 
-final class UserUpdateInitial extends UserUpdateState {}
-
-final class UserUpdateLoading extends UserUpdateState {}
-
-final class UserUpdateSuccess extends UserUpdateState {
-  UserUpdateSuccess(this.response);
-  final UserUpdateModel response;
-}
-
-final class UserUpdateError extends UserUpdateState {
-  UserUpdateError(this.message);
+  final UserUpdateStatus status;
   final String message;
-}
 
-final class UserUpdateNetworkError extends UserUpdateState {
-  UserUpdateNetworkError(this.message);
-  final String message;
+  UserUpdateState copyWith({
+    UserUpdateStatus? status,
+    String? message,
+  }) {
+    return UserUpdateState(
+      status: status ?? this.status,
+      message: message ?? this.message,
+    );
+  }
+
+  @override
+  List<Object?> get props => [status, message];
 }

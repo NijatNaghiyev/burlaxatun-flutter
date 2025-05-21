@@ -1,5 +1,4 @@
 import 'package:burla_xatun/cubits/about/about_cubit.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/widgets/description_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +7,7 @@ import '../../../../../../utils/constants/color_constants.dart';
 import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/custom_circular_progress_indicator.dart';
 import '../../../../../widgets/global_appbar.dart';
+import '../widgets/description_widget.dart';
 import '../widgets/text_board_widget.dart';
 
 class AboutUsView extends StatelessWidget {

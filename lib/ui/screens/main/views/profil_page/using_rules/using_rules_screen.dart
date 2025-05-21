@@ -1,6 +1,6 @@
 import 'package:burla_xatun/cubits/using_rules/using_rules_cubit.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/widgets/description_widget.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/widgets/last_edit_text.dart';
+import 'package:burla_xatun/ui/screens/main/views/profil_page/widgets/description_widget.dart';
+import 'package:burla_xatun/ui/screens/main/views/profil_page/widgets/last_edit_text.dart';
 import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
