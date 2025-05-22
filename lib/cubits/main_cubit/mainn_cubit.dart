@@ -186,10 +186,12 @@ class MainnCubit extends Cubit<MainInitial> {
     );
   }
 
-  void pushScaffoldForumComments(BuildContext context) {
+  void pushScaffoldForumComments(BuildContext context, int forumID) {
     Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(
-        builder: (_) => ForumCommentsPage(),
+        builder: (_) => ForumCommentsPage(
+          forumId: forumID,
+        ),
       ),
     );
   }

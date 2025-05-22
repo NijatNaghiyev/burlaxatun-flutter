@@ -4,9 +4,11 @@ import 'package:burla_xatun/cubits/forum_comments/forum_comments_cubit.dart';
 import 'package:burla_xatun/cubits/forum_list/forum_list_cubit.dart';
 import 'package:burla_xatun/data/models/remote/response/forum_comments_model.dart';
 import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
+import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../forum_comments/forum_comments_page.dart';
 import '../../widgets/forum_box.dart';
 import 'add_new_forum_button.dart';
 import 'forum_title.dart';
@@ -48,6 +50,18 @@ class _SecondaryForumPageCustomScrollState
             return fullName.contains(searchText.toLowerCase()) ||
                 text.contains(searchText.toLowerCase());
           }).toList();
+
+          if (filteredResults.isEmpty) {
+            return const Center(
+              child: Text(
+                "No element yet",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: ColorConstants.primaryRedColor,
+                ),
+              ),
+            );
+          }
 
           return Stack(
             alignment: Alignment.bottomRight,
@@ -106,11 +120,22 @@ class _SecondaryForumPageCustomScrollState
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 18),
                                 child: ForumBox(
+                                  forumId: forum.id ?? 0,
                                   authorName: forum.user?.fullName ?? "",
                                   forumTitle: forum.text ?? "",
                                   likeCount: forum.likes ?? 0,
                                   viewCount: forum.viewCount ?? 0,
                                   commentCount: commentCount,
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => ForumCommentsPage(
+                                          forumId: forum.id ?? 0,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               );
                             },
