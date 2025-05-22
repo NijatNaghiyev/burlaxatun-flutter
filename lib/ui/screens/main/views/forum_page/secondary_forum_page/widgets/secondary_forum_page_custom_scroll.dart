@@ -4,6 +4,7 @@ import 'package:burla_xatun/cubits/forum_comments/forum_comments_cubit.dart';
 import 'package:burla_xatun/cubits/forum_list/forum_list_cubit.dart';
 import 'package:burla_xatun/data/models/remote/response/forum_comments_model.dart';
 import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
+import 'package:burla_xatun/ui/widgets/custom_refresh_indicator.dart';
 import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,7 +67,7 @@ class _SecondaryForumPageCustomScrollState
           return Stack(
             alignment: Alignment.bottomRight,
             children: [
-              RefreshIndicator(
+              CustomRefreshIndicator(
                 onRefresh: () async {
                   final categoryId = allResults.first.category?.id;
                   if (categoryId != null) {
