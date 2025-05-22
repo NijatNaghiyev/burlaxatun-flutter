@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:burla_xatun/cubits/forum_comments/forum_comments_cubit.dart';
 import 'package:burla_xatun/cubits/forum_list/forum_list_cubit.dart';
+import 'package:burla_xatun/data/models/remote/response/forum_comments_model.dart';
 import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,9 +56,12 @@ class _SecondaryForumPageCustomScrollState
                 onRefresh: () async {
                   final categoryId = allResults.first.category?.id;
                   if (categoryId != null) {
-                    await context
-                        .read<ForumListCubit>()
-                        .getForumList(categoryId: categoryId.toString());
+                    await Future.wait([
+                      context
+                          .read<ForumListCubit>()
+                          .getForumList(categoryId: categoryId.toString()),
+                      context.read<ForumCommentsCubit>().getForumComments(),
+                    ]);
                   }
                 },
                 child: CustomScrollView(
@@ -93,11 +97,11 @@ class _SecondaryForumPageCustomScrollState
                               int commentCount = 0;
                               if (commentState.status ==
                                   ForumCommentsStatus.success) {
-                                commentCount = commentState.response?.results
-                                        ?.where((res) => res.forum == forum.id)
-                                        .expand((res) => res.replies ?? [])
-                                        .length ??
-                                    0;
+                                final forumId = forum.id;
+                                final counts =
+                                    commentState.response?.forumCommentCounts ??
+                                        {};
+                                commentCount = counts[forumId] ?? 0;
                               }
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 18),

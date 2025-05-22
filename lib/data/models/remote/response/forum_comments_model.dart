@@ -107,3 +107,19 @@ class Result extends Equatable {
         dislikeCount,
       ];
 }
+
+/// Returns comments count for every forum
+extension ForumCommentsCountExtension on ForumCommentsResponse {
+  Map<int, int> get forumCommentCounts {
+    final counts = <int, int>{};
+
+    for (final result in results ?? []) {
+      if (result.forum != null) {
+        final id = result.forum!;
+        counts[id] = (counts[id] ?? 0) + 1;
+      }
+    }
+
+    return counts;
+  }
+}
