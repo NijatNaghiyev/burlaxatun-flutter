@@ -52,7 +52,7 @@ class MainForumTitleBox extends StatelessWidget {
                     children: [
                       GlobalText(
                         textAlign: TextAlign.left,
-                        text: '$topicCount mövzu',
+                        text: '$topicCount topic',
                         fontSize: 10,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
@@ -60,7 +60,7 @@ class MainForumTitleBox extends StatelessWidget {
                       SizedBox(width: 14),
                       GlobalText(
                         textAlign: TextAlign.left,
-                        text: '$messageCount mesaj',
+                        text: '$messageCount views',
                         fontSize: 10,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
