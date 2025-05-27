@@ -15,8 +15,11 @@ class ForumBox extends StatelessWidget {
     required this.likeCount,
     required this.viewCount,
     required this.commentCount,
+    required this.forumId,
+    this.onTap,
   });
-
+  final int forumId;
+  final VoidCallback? onTap;
   final String authorName;
   final String forumTitle;
   final int likeCount;
@@ -27,9 +30,7 @@ class ForumBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final mainCubit = context.read<MainnCubit>();
     return GestureDetector(
-      onTap: () {
-        mainCubit.pushScaffoldForumComments(context);
-      },
+      onTap: onTap,
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -44,11 +45,13 @@ class ForumBox extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GlobalText(
-                    text: authorName,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
+                  Flexible(
+                    child: GlobalText(
+                      text: authorName,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
                   ),
                   Row(
                     children: [

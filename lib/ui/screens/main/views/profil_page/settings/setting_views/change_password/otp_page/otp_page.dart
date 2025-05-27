@@ -1,4 +1,4 @@
-import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_password/reset_password/reset_password_page.dart';
+import 'package:burla_xatun/ui/screens/main/views/profil_page/settings/setting_views/change_password/reset_password/reset_password_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

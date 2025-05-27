@@ -1,5 +1,5 @@
 import 'package:burla_xatun/cubits/privacy_policy/privacy_policy_cubit.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/widgets/header_text.dart';
+import 'package:burla_xatun/ui/screens/main/views/profil_page/widgets/header_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

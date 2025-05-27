@@ -9,6 +9,7 @@ import 'package:burla_xatun/cubits/doctors_list/doctors_list_cubit.dart';
 import 'package:burla_xatun/cubits/faqs_cubit/faqs_cubit.dart';
 import 'package:burla_xatun/cubits/forum_category/forum_category_cubit.dart';
 import 'package:burla_xatun/cubits/forum_comments/forum_comments_cubit.dart';
+import 'package:burla_xatun/cubits/forum_create/forum_create_cubit.dart';
 import 'package:burla_xatun/cubits/medicine/medicine_cubit.dart';
 import 'package:burla_xatun/cubits/medicine_create/medicine_create_cubit.dart';
 import 'package:burla_xatun/cubits/medicine_patch/medicine_patch_cubit.dart';
@@ -16,6 +17,7 @@ import 'package:burla_xatun/cubits/privacy_policy/privacy_policy_cubit.dart';
 import 'package:burla_xatun/cubits/tasks_by_weeks/tasks_by_weeks_cubit.dart';
 import 'package:burla_xatun/cubits/ultrasound/ultrasound_cubit.dart';
 import 'package:burla_xatun/cubits/user_data/user_data_cubit.dart';
+import 'package:burla_xatun/cubits/user_update/user_update_cubit.dart';
 import 'package:burla_xatun/cubits/using_rules/using_rules_cubit.dart';
 import 'package:burla_xatun/data/contractor/ultrasound_contract.dart';
 import 'package:burla_xatun/utils/constants/color_constants.dart';
@@ -97,6 +99,11 @@ class MyApp extends StatelessWidget {
         BlocProvider<MedicinePatchCubit>(
           create: (context) => locator<MedicinePatchCubit>(),
         ),
+
+        BlocProvider<UserUpdateCubit>(
+          create: (context) => locator<UserUpdateCubit>(),
+        ),
+
         BlocProvider<ForumCategoryCubit>(
           create: (context) =>
               locator<ForumCategoryCubit>()..getForumCategory(),
@@ -105,6 +112,11 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               locator<ForumCommentsCubit>()..getForumComments(),
         ),
+
+        BlocProvider<ForumCreateCubit>(
+          create: (context) => locator<ForumCreateCubit>(),
+        ),
+
         BlocProvider<DoctorsListCubit>(
           create: (context) => locator<DoctorsListCubit>()..getDoctorsList(),
         ),

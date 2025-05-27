@@ -4,9 +4,9 @@ import 'package:burla_xatun/data/models/local/medicine_detail_items_model.dart';
 import 'package:burla_xatun/data/models/remote/response/medicine/medicines_model.dart';
 import 'package:burla_xatun/ui/screens/main/views/daily_advise_page/advice_page.dart';
 import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/my_medicines/initial_medicine_page/widgets/edit_medicine_dialog.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_password/change_password_page/change_password_page.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/using_rules/using_rules_screen.dart';
+import 'package:burla_xatun/ui/screens/main/views/profil_page/settings/setting_views/change_password/change_password_page/change_password_page.dart';
+import 'package:burla_xatun/ui/screens/main/views/profil_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
+import 'package:burla_xatun/ui/screens/main/views/profil_page/using_rules/using_rules_screen.dart';
 import 'package:burla_xatun/ui/widgets/change_baby_bottomsheet/global_change_baby_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +20,6 @@ import '../../data/models/local/settings_items_model.dart';
 import '../../ui/screens/main/views/forum_page/forum_comments/forum_comments_page.dart';
 import '../../ui/screens/main/views/forum_page/forum_comments/widgets/menu_and_emoji_dialog.dart';
 import '../../ui/screens/main/views/forum_page/main_forum_page.dart/forum_page.dart';
-import '../../ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/doctors_notification.dart';
 import '../../ui/screens/main/views/home_page/home.dart';
 import '../../ui/screens/main/views/home_page/home/home_page.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/widgets/add_new_indicator_dialog.dart';
@@ -31,13 +30,13 @@ import '../../ui/screens/main/views/home_page/my_healing_page/my_medicines/initi
 import '../../ui/screens/main/views/home_page/notification/notification_page.dart';
 import '../../ui/screens/main/views/home_page/ultrasound/ultrasound_page.dart';
 import '../../ui/screens/main/views/home_page/video/video_page.dart';
-import '../../ui/screens/main/views/profie_page/about_us/about_us_view.dart';
-import '../../ui/screens/main/views/profie_page/contact_us/contact_us_view.dart';
-import '../../ui/screens/main/views/profie_page/faq/faq_view.dart';
-import '../../ui/screens/main/views/profie_page/initial_profile/initial_profile_page.dart';
-import '../../ui/screens/main/views/profie_page/pricavy_policy/privacy_policy_view.dart';
-import '../../ui/screens/main/views/profie_page/settings/setting_view.dart';
-import '../../ui/screens/main/views/profie_page/special_thanks/special_thanks_view.dart';
+import '../../ui/screens/main/views/profil_page/about_us/about_us_view.dart';
+import '../../ui/screens/main/views/profil_page/contact_us/contact_us_view.dart';
+import '../../ui/screens/main/views/profil_page/faq/faq_view.dart';
+import '../../ui/screens/main/views/profil_page/initial_profile/initial_profile_page.dart';
+import '../../ui/screens/main/views/profil_page/pricavy_policy/privacy_policy_view.dart';
+import '../../ui/screens/main/views/profil_page/settings/setting_view.dart';
+import '../../ui/screens/main/views/profil_page/special_thanks/special_thanks_view.dart';
 import 'main_state.dart';
 
 enum UltrasoundFormat { format2d, format3d }
@@ -187,10 +186,12 @@ class MainnCubit extends Cubit<MainInitial> {
     );
   }
 
-  void pushScaffoldForumComments(BuildContext context) {
+  void pushScaffoldForumComments(BuildContext context, int forumID) {
     Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(
-        builder: (_) => ForumCommentsPage(),
+        builder: (_) => ForumCommentsPage(
+          forumId: forumID,
+        ),
       ),
     );
   }

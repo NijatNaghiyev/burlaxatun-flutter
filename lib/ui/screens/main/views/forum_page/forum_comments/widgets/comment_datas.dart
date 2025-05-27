@@ -1,10 +1,17 @@
+import 'package:burla_xatun/data/models/remote/response/forum_comments_model.dart';
+import 'package:burla_xatun/utils/helper/time_ago_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
 
 class CommentDatas extends StatelessWidget {
-  const CommentDatas({super.key});
+  final Result comment;
+
+  const CommentDatas({
+    super.key,
+    required this.comment,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +32,23 @@ class CommentDatas extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GlobalText(
-                    text: '@AngelaMayer',
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey,
+                  Flexible(
+                    child: GlobalText(
+                      text: '@${comment.user}',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey,
+                    ),
                   ),
-                  GlobalText(
-                    text: '3 hours ago',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey,
+                  Flexible(
+                    child: GlobalText(
+                      text: comment.createdAt != null
+                          ? timeAgo(comment.createdAt!)
+                          : '',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey,
+                    ),
                   ),
                 ],
               ),
@@ -43,8 +56,7 @@ class CommentDatas extends StatelessWidget {
               GlobalText(
                 height: 1.4,
                 textAlign: TextAlign.left,
-                text:
-                    'This sunflower is so vibrant! The colors just pop. It makes me feel so cheerful!',
+                text: comment.text ?? '',
                 fontSize: 13,
                 fontWeight: FontWeight.w400,
                 color: Colors.black,

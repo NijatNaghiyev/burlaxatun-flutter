@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:burla_xatun/data/contractor/user_update_contractor.dart';
 import 'package:burla_xatun/data/models/remote/response/user_update_model.dart';
 import 'package:burla_xatun/data/services/remote/user_update_service.dart';
@@ -7,7 +9,7 @@ class UserUpdateRepository implements UserUpdateContractor {
   final UserUpdateService _userUpdateService;
 
   @override
-  Future<UserUpdateModel> updateUser({
+  Future<UserUpdateResponse?> updateUser({
     String? phoneNumber,
     bool? onboardingDone,
     bool? wantToBePregnant,
@@ -15,19 +17,21 @@ class UserUpdateRepository implements UserUpdateContractor {
     bool? isPregnant,
     String? pregnantWeek,
     bool? firstChild,
+    File? image,
     String? activeLanguage,
     bool? enableNotifications,
   }) {
     return _userUpdateService.updateUser(
-      activeLanguage: activeLanguage,
-      enableNotifications: enableNotifications,
-      firstChild: firstChild,
-      isPregnant: isPregnant,
-      onboardingDone: onboardingDone,
       phoneNumber: phoneNumber,
-      pregnantWeek: pregnantWeek,
+      onboardingDone: onboardingDone,
       wantToBePregnant: wantToBePregnant,
       wantToSeePeriod: wantToSeePeriod,
+      isPregnant: isPregnant,
+      pregnantWeek: pregnantWeek,
+      firstChild: firstChild,
+      image: image,
+      activeLanguage: activeLanguage,
+      enableNotifications: enableNotifications,
     );
   }
 }

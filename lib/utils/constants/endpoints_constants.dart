@@ -39,7 +39,7 @@ class EndpointsConstants {
   static const String blogCategories = '$baseUrl/extra/blogs-with-categories/';
 
   // A
-  static const String userData = '$baseUrl/A/me/';
+  static const userData = '$baseUrl/A/me/';
 
   // A1
   static const String babyIndicators = '$baseUrl/A1/baby-indicators/';
@@ -62,7 +62,8 @@ class EndpointsConstants {
   // D
   static const forumCategory = "$baseUrl/D/forum-category-stats/";
   static const forumList = "$baseUrl/D/forum-list/";
-  static const forumComments = '$baseUrl/D/comments';
+  static const forumComments = '$baseUrl/D/comments/';
+  static const forumCreate = '$baseUrl/D/forum-create/';
 
   static const String doctorsList = '$baseUrl/C/doctors-list/';
   static const String doctorDetail = '$baseUrl/C/doctors-detail/{slug}/';
