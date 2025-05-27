@@ -28,9 +28,12 @@ class AdviceDetailView extends StatelessWidget {
           final data = detailState.response;
 
           return Scaffold(
-            appBar: ScrollableDaysAppbar(
-              appbarName: 'Günlük Tövsiyələr',
-              day: data?.day ?? 1,
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(175),
+              child: ScrollableDaysAppbar(
+                appbarName: 'Günlük Tövsiyələr',
+                week: data?.day ?? 1,
+              ),
             ),
             body: SingleChildScrollView(
               child: Padding(

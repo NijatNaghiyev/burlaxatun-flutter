@@ -1,44 +1,91 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../cubits/main_cubit/main_state.dart';
 import '../../../../../../cubits/main_cubit/mainn_cubit.dart';
+import '../../../../../../cubits/ultrasound/ultrasound_cubit.dart';
 import '../../../../../../utils/extensions/num_extensions.dart';
 import '../widgets/scrollable_days_appbar.dart';
-import 'widgets/format_2d.dart';
-import 'widgets/format_3d.dart';
 import 'widgets/selectable_ultrasound_format.dart';
 
-class UltrasoundPage extends StatelessWidget {
+class UltrasoundPage extends StatefulWidget {
   const UltrasoundPage({super.key});
+
+  @override
+  State<UltrasoundPage> createState() => _UltrasoundPageState();
+}
+
+class _UltrasoundPageState extends State<UltrasoundPage> {
+  late UltrasoundCubit ultrasoundCubit;
+  late ValueNotifier<int?> weekValue;
+  @override
+  void initState() {
+    ultrasoundCubit = context.read<UltrasoundCubit>()..getUltraSound();
+    weekValue = ValueNotifier<int?>(10);
+
+    
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ScrollableDaysAppbar(
-        appbarName: 'Ultrasəs',
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(175),
+        child: ScrollableDaysAppbar(
+          appbarName: 'Ultrasəs',
+          weekValue: weekValue,
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Center(
-            child: Column(
-              children: [
-                24.h,
-                SelectableUltrasoundFormat(),
-                24.h,
-                BlocBuilder<MainnCubit, MainInitial>(
-                  buildWhen: (previous, current) {
-                    return previous.ultrasoundFormat !=
-                        current.ultrasoundFormat;
-                  },
-                  builder: (context, state) {
-                    return state.ultrasoundFormat == UltrasoundFormat.format2d
-                        ? Format2d()
-                        : Format3d();
-                  },
-                ),
-              ],
+            child: BlocBuilder<UltrasoundCubit, UltrasoundState>(
+              builder: (context, state) {
+                if (state.ultraSoundStatus == UltraSoundStatus.error) {
+                  return Text('data not found');
+                } else if (state.ultraSoundStatus == UltraSoundStatus.loading) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (state.ultraSoundStatus == UltraSoundStatus.success) {
+                  final ultrasoundByWeek = state.ultrasound?.results?.first;
+
+                  Future.delayed(Duration(seconds: 1), () {
+                    weekValue.value = 30;
+                  });
+                  final format2d = ultrasoundByWeek?.image2D ?? '';
+                  final format3d = ultrasoundByWeek?.image3D ?? '';
+                  return ultrasoundByWeek == null
+                      ? Text('data')
+                      : Column(
+                          children: [
+                            24.h,
+                            SelectableUltrasoundFormat(),
+                            24.h,
+                            BlocBuilder<MainnCubit, MainInitial>(
+                              buildWhen: (previous, current) {
+                                return previous.ultrasoundFormat !=
+                                    current.ultrasoundFormat;
+                              },
+                              builder: (context, state) {
+                                final isTwoD = state.ultrasoundFormat ==
+                                    UltrasoundFormat.format2d;
+                                return CachedNetworkImage(
+                                  imageUrl: isTwoD ? format2d : format3d,
+                                  errorWidget: (context, url, error) {
+                                    return Icon(Icons.error);
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                }
+                return SizedBox.shrink();
+              },
             ),
           ),
         ),

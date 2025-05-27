@@ -19,17 +19,30 @@ class UserUpdateService {
   }) async {
     final token = locator<RegisterTokenService>().token;
     final endpoint = EndpointsConstants.userUpdate;
-    final requestBody = {
-      "phone_number": phoneNumber,
-      "onboarding_done": onboardingDone,
-      "want_to_be_pregnant": wantToBePregnant,
-      "want_to_see_period": wantToSeePeriod,
-      "is_pregnant": isPregnant,
-      "pregnant_week": pregnantWeek,
-      "first_child": firstChild,
-      "active_language": activeLanguage,
-      "enable_notifications": enableNotifications,
-    };
+    final requestBody = {};
+    phoneNumber != null ? requestBody["phone_number"] = phoneNumber : null;
+    requestBody["onboarding_done"] = onboardingDone;
+    requestBody["want_to_be_pregnant"] = wantToBePregnant;
+    requestBody["want_to_see_period"] = wantToSeePeriod;
+    isPregnant != null ? requestBody["is_pregnant"] = isPregnant : null;
+    pregnantWeek != null ? requestBody["pregnant_week"] = pregnantWeek : null;
+    firstChild != null ? requestBody["first_child"] = firstChild : null;
+    activeLanguage != null
+        ? requestBody["active_language"] = activeLanguage
+        : null;
+    requestBody["enable_notifications"] = enableNotifications;
+
+    // {
+    //   "phone_number": phoneNumber,
+    //   "onboarding_done": onboardingDone,
+    //   "want_to_be_pregnant": wantToBePregnant,
+    //   "want_to_see_period": wantToSeePeriod,
+    //   "is_pregnant": isPregnant,
+    //   "pregnant_week": pregnantWeek,
+    //   "first_child": firstChild,
+    //   "active_language": activeLanguage,
+    //   "enable_notifications": enableNotifications,
+    // };
 
     final response = await BaseNetwork.instance.getDio(token: token).patch(
           endpoint,

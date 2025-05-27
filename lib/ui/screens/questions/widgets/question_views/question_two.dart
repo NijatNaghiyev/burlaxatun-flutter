@@ -80,8 +80,8 @@ class _QuestionTwoState extends State<QuestionTwo>
                               BlocListener<UserUpdateCubit, UserUpdateState>(
                                 listener: (_, state) {
                                   // userUpdateCubit.pregnantWeek = i.toString();
-                                  userUpdateCubit.updateUser(
-                                      pregnantWeek: i.toString());
+                                  // userUpdateCubit.updateUser(
+                                  //     pregnantWeek: i.toString());
                                 },
                                 child: SizedBox(
                                   width: double.maxFinite,
@@ -95,7 +95,7 @@ class _QuestionTwoState extends State<QuestionTwo>
                                               current.focusedWeekIndex;
                                         },
                                         builder: (context, state) {
-                                          log('builded scroll wheel index: $i');
+                                          // log('builded scroll wheel index: $i');
                                           return GlobalText(
                                             text: '$i',
                                             fontSize: 32,
@@ -141,7 +141,6 @@ class _QuestionTwoState extends State<QuestionTwo>
                         value: state.iDontKnow,
                         groupValue: true,
                         onChanged: (v) {
-                          log('builded radio button');
                           questionsCubit.iDontKnowToggle(v ?? true);
                           questionsCubit.updateIsActiveButton();
                         },

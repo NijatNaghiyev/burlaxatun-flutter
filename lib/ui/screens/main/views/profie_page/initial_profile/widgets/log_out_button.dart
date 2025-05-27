@@ -1,6 +1,8 @@
+import 'package:burla_xatun/cubits/main_cubit/mainn_cubit.dart';
 import 'package:burla_xatun/data/services/local/login_token_service.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,13 +28,13 @@ class _LogOutButtonState extends State<LogOutButton> {
 
   @override
   Widget build(BuildContext context) {
-    // final mainCubit = context.read<MainnCubit>();
+    final mainCubit = context.read<MainnCubit>();
     return GestureDetector(
       onTap: () {
         _logOut();
         Future.delayed(Duration(seconds: 1), () {
           context.go('/login');
-          // mainCubit.changeView(0);
+          mainCubit.changeView(0);
         });
       },
       child: SizedBox(

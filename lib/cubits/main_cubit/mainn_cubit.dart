@@ -238,8 +238,6 @@ class MainnCubit extends Cubit<MainInitial> {
     );
   }
 
-  
-
   void showCalendar(BuildContext context) {
     showDialog(
       context: context,

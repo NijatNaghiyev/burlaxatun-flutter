@@ -12,16 +12,6 @@ class UserUpdateCubit extends Cubit<UserUpdateState> {
 
   final UserUpdateContractor _contractor;
 
-  // String? phoneNumber = "";
-  // bool? onboardingDone = true;
-  // bool? wantToBePregnant = true;
-  // bool? wantToSeePeriod = true;
-  // bool? isPregnant = true;
-  // String? pregnantWeek = "";
-  // bool? firstChild = true;
-  // String? activeLanguage = "";
-  // bool? enableNotifications = true;
-
   Future<void> updateUser(
       {String? phoneNumber,
       bool? onboardingDone,

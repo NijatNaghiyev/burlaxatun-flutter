@@ -1,23 +1,25 @@
-import 'package:burla_xatun/cubits/baby_names2/baby_names2_cubit.dart';
-import 'package:burla_xatun/cubits/doctor_reservation/doctor_reservation_cubit.dart';
-import 'package:burla_xatun/cubits/forum_list/forum_list_cubit.dart';
-import 'package:burla_xatun/cubits/notification/notification_cubit.dart';
-import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
-import 'package:burla_xatun/data/models/remote/response/blog_cat_model.dart';
-import 'package:burla_xatun/ui/screens/auth/forgot_psw/email_request_screen.dart';
-import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_otp_screen.dart';
-import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_success_screen.dart';
-import 'package:burla_xatun/ui/screens/auth/forgot_psw/reset_psw_screen.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/using_rules/using_rules_screen.dart';
-import 'package:burla_xatun/utils/di/locator.dart';
+import 'package:burla_xatun/cubits/add_child/add_child_cubit.dart';
+import 'package:burla_xatun/cubits/indicator/indicator_cubit.dart';
+import 'package:burla_xatun/cubits/ultrasound/ultrasound_cubit.dart';
+import 'package:burla_xatun/data/contractor/ultrasound_contract.dart';
+import 'package:burla_xatun/ui/screens/add_child/add_your_child.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../cubits/baby_names_cubit/baby_names_cubit.dart';
+import '../../cubits/doctor_reservation/doctor_reservation_cubit.dart';
 import '../../cubits/doctors_detail/doctors_detail_cubit.dart';
+import '../../cubits/forum_list/forum_list_cubit.dart';
 import '../../cubits/login_cubit/login_cubit.dart';
+import '../../cubits/notification/notification_cubit.dart';
 import '../../cubits/onboarding_cubit/onboarding_cubit.dart';
 import '../../cubits/questions_cubit/questions_cubit.dart';
+import '../../cubits/splash/splash_cubit.dart';
+import '../../data/models/remote/response/blog_cat_model.dart';
+import '../../ui/screens/auth/forgot_psw/email_request_screen.dart';
+import '../../ui/screens/auth/forgot_psw/forgot_psw_otp_screen.dart';
+import '../../ui/screens/auth/forgot_psw/forgot_psw_success_screen.dart';
+import '../../ui/screens/auth/forgot_psw/reset_psw_screen.dart';
 import '../../ui/screens/auth/login/login.dart';
 import '../../ui/screens/auth/sign_up/signup.dart';
 import '../../ui/screens/main/main_page.dart';
@@ -31,7 +33,7 @@ import '../../ui/screens/main/views/home_page/blog/see_all_articles/see_all_arti
 import '../../ui/screens/main/views/home_page/doctor/initial_doctor_page/initial_doctor_page.dart';
 import '../../ui/screens/main/views/home_page/doctor/registration_doctor_page/registration_doctor_page.dart';
 import '../../ui/screens/main/views/home_page/home/home_page.dart';
-import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/body_weight_page.dart';
+import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/indicator_data_screen.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/initial_my_healing_page/my_healing_page.dart';
 import '../../ui/screens/main/views/home_page/names/gender_names/gender_names.dart';
 import '../../ui/screens/main/views/home_page/names/initial_names/names_page.dart';
@@ -51,10 +53,12 @@ import '../../ui/screens/main/views/profie_page/settings/setting_views/change_pa
 import '../../ui/screens/main/views/profie_page/settings/setting_views/change_password/success_change_password/success_change_password.dart';
 import '../../ui/screens/main/views/profie_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
 import '../../ui/screens/main/views/profie_page/special_thanks/special_thanks_view.dart';
+import '../../ui/screens/main/views/profie_page/using_rules/using_rules_screen.dart';
 import '../../ui/screens/onboarding/onboarding.dart';
 import '../../ui/screens/questions/questions.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/calculate_birth.dart';
 import '../../ui/screens/splash/splash_screen.dart';
+import '../di/locator.dart';
 
 class Routerapp {
   static Routerapp? _instance;
@@ -97,6 +101,22 @@ class Routerapp {
         },
       ),
       GoRoute(
+        path: '/add_child',
+        builder: (context, state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => locator<AddChildCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => locator<QuestionsCubit>(),
+              ),
+            ],
+            child: AddYourChild(),
+          );
+        },
+      ),
+      GoRoute(
         path: '/email_request',
         builder: (context, state) {
           return EmailRequestScreen();
@@ -122,7 +142,7 @@ class Routerapp {
         path: '/questions',
         builder: (context, state) {
           return BlocProvider(
-            create: (context) => QuestionsCubit(),
+            create: (context) => locator<QuestionsCubit>(),
             child: Questions(),
           );
         },
@@ -131,7 +151,7 @@ class Routerapp {
         path: '/calculate',
         builder: (context, state) {
           return BlocProvider(
-            create: (context) => QuestionsCubit(),
+            create: (context) => locator<QuestionsCubit>(),
             child: CalculateBirth(),
           );
         },
@@ -166,8 +186,13 @@ class Routerapp {
                 builder: (context, state) => MyHealingPage(),
               ),
               GoRoute(
-                path: '/body_weight',
-                builder: (context, state) => BodyWeightPage(),
+                path: '/indicator_data',
+                builder: (context, state) => BlocProvider(
+                  create: (context) => locator<IndicatorCubit>(),
+                  child: IndicatorDataScreen(
+                    indicatorName: state.extra as String,
+                  ),
+                ),
               ),
               GoRoute(
                 path: '/initial_doctors',

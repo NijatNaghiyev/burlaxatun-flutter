@@ -1,11 +1,12 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/data/models/remote/response/register_response_model.dart';
 import 'package:burla_xatun/data/services/remote/base_network_service.dart';
 import 'package:burla_xatun/utils/constants/endpoints_constants.dart';
 import 'package:burla_xatun/utils/extensions/statuscode_extension.dart';
 
 class RegisterService {
-  Future<bool> register({
+  Future<RegisterResponseModel> register({
     required String fullName,
     required String email,
     required String password,
@@ -24,6 +25,11 @@ class RegisterService {
         );
     log("Register service response: $response");
 
-    return response.statusCode.isSuccess;
+    if (response.statusCode.isSuccess) {
+      return RegisterResponseModel.fromJson(response.data);
+    } else if (response.statusCode.isFailure) {
+      throw Exception("Failed to login");
+    }
+    throw Exception("Unable to login");
   }
 }

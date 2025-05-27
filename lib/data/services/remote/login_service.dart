@@ -12,7 +12,7 @@ class LoginService {
     final requestBody = {
       "email": email,
       "password": password,
-    };
+    }; 
     final response = await BaseNetwork.instance.getDio().post(
           endpoint,
           data: requestBody,

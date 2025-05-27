@@ -25,7 +25,7 @@ class SingleIndicatorTile extends StatelessWidget {
           if (item.route == '/my_medicines') {
             mainCubit.pushScaffoldMyMedicinesPage(context);
           } else {
-            context.push(item.route);
+            context.push('/indicator_data', extra: item.indciatorName);
           }
         },
         child: SizedBox(

@@ -22,6 +22,20 @@ class Questions extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Qeydiyyat',
+        leading: BlocBuilder<QuestionsCubit, QuestionsInitial>(
+          buildWhen: (previous, current) {
+            return previous.questionPageIndex != current.questionPageIndex &&
+                current.questionPageIndex == 3;
+          },
+          builder: (context, state) {
+            return state.questionPageIndex == 3
+                ? SizedBox.fromSize()
+                : Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Color(0xff344054),
+                  );
+          },
+        ),
         onLeadingTap: () {
           // context.pop();
           questionsCubit.goBack();
@@ -47,21 +61,44 @@ class Questions extends StatelessWidget {
           QuestionsPageView(),
           Padding(
             padding: const EdgeInsets.only(bottom: 24),
-            child: BlocBuilder<QuestionsCubit, QuestionsInitial>(
+            child: BlocConsumer<QuestionsCubit, QuestionsInitial>(
               buildWhen: (previous, current) {
                 return previous.isActiveButton != current.isActiveButton ||
-                    previous.iDontKnow != current.iDontKnow;
+                    previous.iDontKnow != current.iDontKnow ||
+                    previous.userUpdateStatus != current.userUpdateStatus ||
+                    previous.questionPageIndex != current.questionPageIndex;
+              },
+              listenWhen: (previous, current) {
+                return previous.userUpdateStatus != current.userUpdateStatus;
+              },
+              listener: (BuildContext context, QuestionsInitial state) {
+                if (state.userUpdateStatus == UserUpdateStatus.error) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text('error'),
+                    ),
+                  );
+                } else if (state.userUpdateStatus == UserUpdateStatus.success) {
+                  if (state.questionPageIndex == 0) {
+                    context.go('/home');
+                  } else if (state.isFirstChild == false) {
+                    log('go add child');
+                  }
+                }
               },
               builder: (context, state) {
+                if (state.userUpdateStatus == UserUpdateStatus.loading) {
+                  return CircularProgressIndicator.adaptive();
+                }
                 return DavamEt(
                   isActive: state.isActiveButton,
                   onPressed: () {
-                    questionsCubit.questionOneButtonNotifier.value == 0
+                    state.questionPageIndex != 3
                         ? state.iDontKnow
                             ? context.push('/calculate')
                             : questionsCubit.nextQuestion()
-                        : // request if success go to home page
-                        context.go('/home');
+                        : context.go('/home');
                   },
                 );
               },

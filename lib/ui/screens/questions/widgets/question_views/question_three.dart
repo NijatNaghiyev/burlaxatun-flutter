@@ -50,7 +50,7 @@ class _QuestionThreeState extends State<QuestionThree>
                   questionCubit.updateQuestionThreeAnswer(true);
                   questionCubit.updateIsActiveButton();
                   // userUpdateCubit.firstChild = true;
-                  userUpdateCubit.updateUser(firstChild: true);
+                  // userUpdateCubit.updateUser(firstChild: true);
                 },
               );
             },
@@ -71,7 +71,7 @@ class _QuestionThreeState extends State<QuestionThree>
                   questionCubit.updateQuestionThreeAnswer(false);
                   questionCubit.updateIsActiveButton();
                   // userUpdateCubit.firstChild = false;
-                  userUpdateCubit.updateUser(firstChild: false);
+                  // userUpdateCubit.updateUser(firstChild: false);
                 },
               );
             },
