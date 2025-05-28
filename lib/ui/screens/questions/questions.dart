@@ -24,11 +24,10 @@ class Questions extends StatelessWidget {
         title: 'Qeydiyyat',
         leading: BlocBuilder<QuestionsCubit, QuestionsInitial>(
           buildWhen: (previous, current) {
-            return previous.questionPageIndex != current.questionPageIndex &&
-                current.questionPageIndex == 3;
+            return previous.questionPageIndex != current.questionPageIndex;
           },
           builder: (context, state) {
-            return state.questionPageIndex == 3
+            return state.questionPageIndex == 3 || state.questionPageIndex == 0
                 ? SizedBox.fromSize()
                 : Icon(
                     Icons.arrow_back_ios_new,

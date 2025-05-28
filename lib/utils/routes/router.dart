@@ -1,8 +1,11 @@
+import 'package:burla_xatun/cubits/add_child/add_child_cubit.dart';
 import 'package:burla_xatun/cubits/doctor_reservation/doctor_reservation_cubit.dart';
 import 'package:burla_xatun/cubits/forum_list/forum_list_cubit.dart';
+import 'package:burla_xatun/cubits/indicator/indicator_cubit.dart';
 import 'package:burla_xatun/cubits/notification/notification_cubit.dart';
 import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
 import 'package:burla_xatun/data/models/remote/response/blog_cat_model.dart';
+import 'package:burla_xatun/ui/screens/add_child/add_your_child.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/email_request_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_otp_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_success_screen.dart';

@@ -19,7 +19,7 @@ class ChartWidget extends StatelessWidget {
             // primaryYAxis: NumericAxis(),
             primaryXAxis: CategoryAxis(
               maximumLabels: indicatorDataList.length,
-              minimum: 0,
+              // minimum: 0,
               maximum: indicatorDataList.length.toDouble(),
               labelPlacement: LabelPlacement.onTicks,
               // axisLabelFormatter: (AxisLabelRenderDetails details) {
@@ -52,11 +52,4 @@ class ChartWidget extends StatelessWidget {
             ],
           );
   }
-}
-
-class WeightData {
-  final String time;
-  final double value;
-
-  WeightData(this.time, this.value);
 }

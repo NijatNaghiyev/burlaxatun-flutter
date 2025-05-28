@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:burla_xatun/data/contractor/register_contractor.dart';
+import 'package:burla_xatun/data/models/remote/response/login_response_model.dart';
+import 'package:burla_xatun/data/services/local/login_token_service.dart';
 import 'package:burla_xatun/data/services/local/register_token_service.dart';
 import 'package:burla_xatun/data/services/local/token_hive_service.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
@@ -54,7 +56,7 @@ class SignupCubit extends Cubit<SignupState> {
   //   }
   // }
 
-  final _registerTokenService = locator<RegisterTokenService>();
+  final _loginTokenService = locator<LoginTokenService>();
 
   void checkEmailValidity() {
     emailValidity = RegExp(
@@ -91,7 +93,15 @@ class SignupCubit extends Cubit<SignupState> {
         password: passwordController.text,
       );
 
-      _registerTokenService.saveLoginResponse(response);
+      final savedRegisterData = LoginResponseModel(
+        refresh: response.refresh,
+        access: response.access,
+        activeLanguage: response.activeLanguage,
+        onboardingDone: response.onboardingDone,
+        enableNotifications: response.enableNotifications,
+      );
+
+      _loginTokenService.saveLoginResponse(savedRegisterData);
 
       emit(SignupSuccess());
       log("Register success");

@@ -54,11 +54,15 @@ class _IndicatorDataScreenState extends State<IndicatorDataScreen> {
                   border: Border.all(width: 1, color: Colors.grey)),
               child: BlocBuilder<IndicatorCubit, IndicatorState>(
                 buildWhen: (previous, current) {
-                  return previous.indicatorStatus != current.indicatorStatus;
+                  return current.indicatorList != null;
                 },
                 builder: (context, state) {
                   if (state.indicatorStatus == IndicatorStatus.loading) {
-                    return Center(child: CircularProgressIndicator.adaptive());
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 112),
+                      child:
+                          Center(child: CircularProgressIndicator.adaptive()),
+                    );
                   } else if (state.indicatorStatus == IndicatorStatus.error) {
                     return Center(child: Text('Error occured'));
                   }
@@ -75,7 +79,7 @@ class _IndicatorDataScreenState extends State<IndicatorDataScreen> {
               ),
             ),
             27.h,
-            CalendarAndAddButtons(),
+            CalendarAndAddButtons(indicatorName: widget.indicatorName),
           ],
         ),
       ),

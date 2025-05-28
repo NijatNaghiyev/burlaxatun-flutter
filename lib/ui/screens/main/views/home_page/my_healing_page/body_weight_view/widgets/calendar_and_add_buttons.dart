@@ -1,3 +1,6 @@
+import 'package:burla_xatun/cubits/indicator/indicator_cubit.dart';
+import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/body_weight_view/widgets/add_new_indicator_dialog.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,7 +10,9 @@ import '../../../../../../../widgets/global_text.dart';
 import '../../widgets/add_button.dart';
 
 class CalendarAndAddButtons extends StatelessWidget {
-  const CalendarAndAddButtons({super.key});
+  const CalendarAndAddButtons({super.key, required this.indicatorName});
+
+  final String indicatorName;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +38,17 @@ class CalendarAndAddButtons extends StatelessWidget {
           ),
         ),
         AddButton(
-          onPressed: () => mainCubit.showAddIndicator(context),
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (_) {
+                return BlocProvider.value(
+                  value: locator<IndicatorCubit>(),
+                  child: AddNewIndicatorDialog(indicatorName: indicatorName),
+                );
+              },
+            );
+          },
         ),
       ],
     );

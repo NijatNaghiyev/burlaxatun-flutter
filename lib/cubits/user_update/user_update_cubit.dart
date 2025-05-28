@@ -36,7 +36,6 @@ class UserUpdateCubit extends Cubit<UserUpdateState> {
         onboardingDone: onboardingDone,
         phoneNumber: phoneNumber,
         pregnantWeek: pregnantWeek,
-        image: image,
         wantToBePregnant: wantToBePregnant,
         wantToSeePeriod: wantToSeePeriod,
       );

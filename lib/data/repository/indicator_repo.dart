@@ -19,4 +19,9 @@ class IndicatorRepo implements IndicatorContract {
       range: range,
     );
   }
+
+  @override
+  Future<Response> addIndicator({required Map<String, dynamic> postData}) {
+    return indicatorService.addIndicator(postData: postData);
+  }
 }

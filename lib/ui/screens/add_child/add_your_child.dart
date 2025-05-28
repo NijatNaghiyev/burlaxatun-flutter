@@ -78,7 +78,9 @@ class AddYourChild extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             questionCubit.showBirthDateBottomSheet(
-                                context, PickBirthDateWidget());
+                              context,
+                              PickBirthDateWidget(),
+                            );
                           },
                           child: SizedBox(
                             width: context.deviceWidth,

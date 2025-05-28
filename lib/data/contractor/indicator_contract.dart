@@ -6,4 +6,8 @@ abstract class IndicatorContract {
     required String indicatorName,
     required String range,
   });
+
+  Future<Response<dynamic>> addIndicator({
+    required Map<String, dynamic> postData,
+  });
 }

@@ -266,14 +266,14 @@ class MainnCubit extends Cubit<MainInitial> {
     );
   }
 
-  void showAddIndicator(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) {
-        return AddNewIndicatorDialog();
-      },
-    );
-  }
+  // void showAddIndicator(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (_) {
+  //       return AddNewIndicatorDialog();
+  //     },
+  //   );
+  // }
 
   void firstChildToggle(bool v) {
     emit(state.copyWith(isFirstChild: v));

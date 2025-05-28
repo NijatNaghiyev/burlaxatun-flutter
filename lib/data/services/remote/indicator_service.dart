@@ -31,4 +31,20 @@ class IndicatorService {
     }
     throw Exception();
   }
+
+  Future<Response<dynamic>> addIndicator({
+    required Map<String, dynamic> postData,
+  }) async {
+    const url = EndpointsConstants.createIndicator;
+    final token = locator<LoginTokenService>().token;
+
+    final response = await BaseNetwork.instance
+        .getDio(token: token)
+        .post(url, data: postData);
+
+    if (response.statusCode.isSuccess) {
+      return response;
+    }
+    throw Exception();
+  }
 }

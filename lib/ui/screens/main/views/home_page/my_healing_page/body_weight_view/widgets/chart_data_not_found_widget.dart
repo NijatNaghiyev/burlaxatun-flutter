@@ -5,11 +5,14 @@ class ChartDataNotFoundWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('Melumat tapilmadi'),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 100),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Melumat tapilmadi'),
+        ],
+      ),
     );
   }
 }

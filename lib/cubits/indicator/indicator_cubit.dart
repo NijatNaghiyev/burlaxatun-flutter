@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:burla_xatun/data/contractor/indicator_contract.dart';
+import 'package:burla_xatun/data/models/remote/request/add_indicator_request_model.dart';
 import 'package:burla_xatun/data/models/remote/response/indicator_model.dart';
 import 'package:burla_xatun/data/repository/indicator_repo.dart';
 import 'package:burla_xatun/utils/extensions/statuscode_extension.dart';
@@ -35,7 +36,7 @@ class IndicatorCubit extends Cubit<IndicatorState> {
             indicatorData.map((e) => IndicatorModel.fromJson(e)).toList();
         emit(state.copyWith(
           indicatorStatus: IndicatorStatus.success,
-          indicatorList: indicatorList.reversed.toList(),
+          indicatorList: indicatorList,
         ));
       }
     } on DioException catch (e, s) {
@@ -47,6 +48,42 @@ class IndicatorCubit extends Cubit<IndicatorState> {
       emit(state.copyWith(indicatorStatus: IndicatorStatus.error));
     } catch (e, s) {
       log('Error occured while gettinng indicator data: $e', stackTrace: s);
+      emit(state.copyWith(indicatorStatus: IndicatorStatus.error));
+    }
+  }
+
+  void addIndicator({
+    required String indicatorName,
+    required String indicator,
+    required String date,
+    required String time,
+  }) async {
+    try {
+      emit(state.copyWith(indicatorStatus: IndicatorStatus.loading));
+
+      final postData = AddIndicatorRequestModel(
+        babyId: 96,
+        indicator: indicator,
+        name: indicatorName,
+        date: date,
+        time: time,
+      ).toJson();
+      final response = await indicatorContract.addIndicator(postData: postData);
+
+      if (response.statusCode.isSuccess) {
+        emit(state.copyWith(indicatorStatus: IndicatorStatus.success));
+      } else {
+        emit(state.copyWith(indicatorStatus: IndicatorStatus.error));
+      }
+    } on DioException catch (e, s) {
+      if (e.type is SocketException) {
+        log('network error');
+        emit(state.copyWith(indicatorStatus: IndicatorStatus.networkError));
+      }
+      log('Error occured while adding indicator data: $e', stackTrace: s);
+      emit(state.copyWith(indicatorStatus: IndicatorStatus.error));
+    } catch (e, s) {
+      log('Error occured while adding indicator data: $e', stackTrace: s);
       emit(state.copyWith(indicatorStatus: IndicatorStatus.error));
     }
   }
