@@ -99,11 +99,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<MedicinePatchCubit>(
           create: (context) => locator<MedicinePatchCubit>(),
         ),
-
         BlocProvider<UserUpdateCubit>(
           create: (context) => locator<UserUpdateCubit>(),
         ),
-
         BlocProvider<ForumCategoryCubit>(
           create: (context) =>
               locator<ForumCategoryCubit>()..getForumCategory(),
@@ -112,11 +110,9 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               locator<ForumCommentsCubit>()..getForumComments(),
         ),
-
         BlocProvider<ForumCreateCubit>(
           create: (context) => locator<ForumCreateCubit>(),
         ),
-
         BlocProvider<DoctorsListCubit>(
           create: (context) => locator<DoctorsListCubit>()..getDoctorsList(),
         ),
@@ -130,8 +126,7 @@ class MyApp extends StatelessWidget {
           create: (context) => locator<TasksByWeeksCubit>(),
         ),
         BlocProvider(
-          create: (context) =>
-              UltrasoundCubit(locator<UltrasoundContract>()),
+          create: (context) => UltrasoundCubit(locator<UltrasoundContract>()),
           child: Container(),
         )
       ],
@@ -144,6 +139,9 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: ColorConstants.white,
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
+              progressIndicatorTheme: ProgressIndicatorThemeData(
+                color: ColorConstants.primaryRedColor,
+              ),
             ),
             localizationsDelegates: [
               S.delegate,
