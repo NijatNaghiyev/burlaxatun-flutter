@@ -82,6 +82,7 @@ class Questions extends StatelessWidget {
                   if (state.questionPageIndex == 0) {
                     context.go('/home');
                   } else if (state.isFirstChild == false) {
+                    context.go('/add_child');
                     log('go add child');
                   }
                 }

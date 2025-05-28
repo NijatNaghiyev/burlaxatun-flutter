@@ -53,7 +53,7 @@ class LoginCubit extends Cubit<LoginCubitInitial> {
       await _loginTokenService.saveLoginResponse(response);
       emit(state.copyWith(loginStatus: LoginStatus.success));
       log("Login success");
-      log("Saved access token: ${_loginTokenService.token}");
+      log("Saved access token (login): ${_loginTokenService.token}");
 
       // final token = await authService.login(
       //     loginEmailController.text, loginPasswordController.text);
