@@ -23,7 +23,8 @@ class UserUpdateCubit extends Cubit<UserUpdateState> {
       String? pregnantWeek,
       bool? firstChild,
       String? activeLanguage,
-      bool? enableNotifications}) async {
+      bool? enableNotifications,
+      File? image}) async {
     try {
       emit(state.copyWith(status: UserUpdateStatus.loading));
       log("User Update Loading");
