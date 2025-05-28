@@ -46,6 +46,10 @@ dependencies:
   intl_mobile_field: ^2.0.2
   
   
+dependency_overrides: 
+  intl: ^0.20.2
+
+
 
 dev_dependencies:
   flutter_test:
