@@ -12,6 +12,7 @@ import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_success_screen
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/reset_psw_screen.dart';
 import 'package:burla_xatun/ui/screens/main/views/profil_page/using_rules/using_rules_screen.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -66,7 +67,8 @@ import '../../ui/screens/onboarding/onboarding.dart';
 import '../../ui/screens/questions/questions.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/calculate_birth.dart';
 import '../../ui/screens/splash/splash_screen.dart';
-import '../di/locator.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class Routerapp {
   static Routerapp? _instance;
@@ -79,6 +81,7 @@ class Routerapp {
   // static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   final GoRouter router = GoRouter(
+    navigatorKey: navigatorKey,
     initialLocation: '/splash',
     routes: [
       GoRoute(

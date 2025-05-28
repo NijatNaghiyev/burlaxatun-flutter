@@ -93,12 +93,15 @@ class Questions extends StatelessWidget {
                 }
                 return DavamEt(
                   isActive: state.isActiveButton,
-                  onPressed: () {
-                    state.questionPageIndex != 3
+                  onPressed: () async {
+                    state.questionPageIndex != 2
                         ? state.iDontKnow
                             ? context.push('/calculate')
                             : questionsCubit.nextQuestion()
-                        : context.go('/home');
+                        : {
+                            await questionsCubit.nextQuestion(),
+                            context.go('/home')
+                          };
                   },
                 );
               },
