@@ -81,9 +81,12 @@ class Questions extends StatelessWidget {
                 } else if (state.userUpdateStatus == UserUpdateStatus.success) {
                   if (state.questionPageIndex == 0) {
                     context.go('/home');
+                    log('success');
+                  } else if (state.isFirstChild == true) {
+                    // context.go('/home');
+                    log('success');
                   } else if (state.isFirstChild == false) {
                     context.go('/add_child');
-                    log('go add child');
                   }
                 }
               },
@@ -94,12 +97,12 @@ class Questions extends StatelessWidget {
                 return DavamEt(
                   isActive: state.isActiveButton,
                   onPressed: () async {
-                    state.questionPageIndex != 2
+                    state.questionPageIndex != 3
                         ? state.iDontKnow
                             ? context.push('/calculate')
-                            : questionsCubit.nextQuestion()
+                            : await questionsCubit.nextQuestion()
                         : {
-                            await questionsCubit.nextQuestion(),
+                            // await questionsCubit.nextQuestion(),
                             context.go('/home')
                           };
                   },

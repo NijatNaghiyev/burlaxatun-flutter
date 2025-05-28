@@ -641,7 +641,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
           ));
         }
       } else {
-        // log('this is forst questions request');
+        // log('this is first questions request'); 
         await updateUser();
       }
     } else if (state.questionPageIndex == 2) {
