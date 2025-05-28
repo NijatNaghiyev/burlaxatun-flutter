@@ -620,7 +620,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
     }
   }
 
-  void nextQuestion() async {
+  Future<void> nextQuestion() async {
     if (state.questionPageIndex < 2) {
       if (state.questionPageIndex < 3 && questionOneButtonNotifier.value == 0) {
         emit(state.copyWith(

@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'package:burla_xatun/data/contractor/register_contractor.dart';
 import 'package:burla_xatun/data/models/remote/response/login_response_model.dart';
 import 'package:burla_xatun/data/services/local/login_token_service.dart';
-import 'package:burla_xatun/data/services/local/register_token_service.dart';
-import 'package:burla_xatun/data/services/local/token_hive_service.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
