@@ -15,7 +15,7 @@ class ContactUsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColorConstants.profileScaffoldColor,
+        backgroundColor: ColorConstants.scaffoldColor,
         appBar: GlobalAppbar(
           title: 'Bizimle elaqe saxla',
           onLeadingTap: () {

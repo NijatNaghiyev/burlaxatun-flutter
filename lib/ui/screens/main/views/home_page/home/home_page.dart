@@ -1,4 +1,5 @@
 import 'package:burla_xatun/cubits/tasks_by_weeks/tasks_by_weeks_cubit.dart';
+import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +18,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // final mainCubit = context.read<MainnCubit>();
     return Scaffold(
+      backgroundColor: ColorConstants.scaffoldColor,
       appBar: HomePageAppbar(),
       body: SingleChildScrollView(
         child: Center(

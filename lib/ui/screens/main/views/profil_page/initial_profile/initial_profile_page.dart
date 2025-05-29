@@ -18,7 +18,7 @@ class InitialProfilePage extends StatelessWidget {
     // final mainCubit = context.read<MainnCubit>();
     final userData = context.read<UserDataCubit>().getUserData();
     return Scaffold(
-      backgroundColor: ColorConstants.profileScaffoldColor,
+      backgroundColor: ColorConstants.scaffoldColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
