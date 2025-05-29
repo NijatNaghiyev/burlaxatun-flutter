@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:burla_xatun/cubits/indicator/indicator_cubit.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/body_weight_view/widgets/date_or_time_box.dart';
-import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/body_weight_view/widgets/pick_indicator_date_widget.dart';
+import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/indicator_data_screen/widgets/date_or_time_box.dart';
+import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/indicator_data_screen/widgets/pick_indicator_date_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

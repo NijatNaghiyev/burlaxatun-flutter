@@ -22,9 +22,7 @@ class _UltrasoundPageState extends State<UltrasoundPage> {
   @override
   void initState() {
     ultrasoundCubit = context.read<UltrasoundCubit>()..getUltraSound();
-    weekValue = ValueNotifier<int?>(10);
-
-    
+    weekValue = ValueNotifier<int?>(1);
 
     super.initState();
   }
@@ -51,38 +49,38 @@ class _UltrasoundPageState extends State<UltrasoundPage> {
                   return Center(child: CircularProgressIndicator());
                 }
                 if (state.ultraSoundStatus == UltraSoundStatus.success) {
-                  final ultrasoundByWeek = state.ultrasound?.results?.first;
+                  final ultrasoundList = state.ultrasound?.results ?? [];
+                  final ultrasoundByWeek =
+                      ultrasoundList.isEmpty ? null : ultrasoundList.first;
 
                   Future.delayed(Duration(seconds: 1), () {
                     weekValue.value = 30;
                   });
                   final format2d = ultrasoundByWeek?.image2D ?? '';
                   final format3d = ultrasoundByWeek?.image3D ?? '';
-                  return ultrasoundByWeek == null
-                      ? Text('data')
-                      : Column(
-                          children: [
-                            24.h,
-                            SelectableUltrasoundFormat(),
-                            24.h,
-                            BlocBuilder<MainnCubit, MainInitial>(
-                              buildWhen: (previous, current) {
-                                return previous.ultrasoundFormat !=
-                                    current.ultrasoundFormat;
-                              },
-                              builder: (context, state) {
-                                final isTwoD = state.ultrasoundFormat ==
-                                    UltrasoundFormat.format2d;
-                                return CachedNetworkImage(
-                                  imageUrl: isTwoD ? format2d : format3d,
-                                  errorWidget: (context, url, error) {
-                                    return Icon(Icons.error);
-                                  },
-                                );
-                              },
-                            ),
-                          ],
-                        );
+                  return Column(
+                    children: [
+                      24.h,
+                      SelectableUltrasoundFormat(),
+                      24.h,
+                      BlocBuilder<MainnCubit, MainInitial>(
+                        buildWhen: (previous, current) {
+                          return previous.ultrasoundFormat !=
+                              current.ultrasoundFormat;
+                        },
+                        builder: (context, state) {
+                          final isTwoD = state.ultrasoundFormat ==
+                              UltrasoundFormat.format2d;
+                          return CachedNetworkImage(
+                            imageUrl: isTwoD ? format2d : format3d,
+                            errorWidget: (context, url, error) {
+                              return Icon(Icons.image);
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  );
                 }
                 return SizedBox.shrink();
               },

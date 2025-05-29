@@ -28,16 +28,6 @@ class _ScrollableDaysAppbarState extends State<ScrollableDaysAppbar> {
   @override
   void initState() {
     _scrollController = ScrollController();
-    // final week = widget.weekValue?.value ?? 1;
-    // final scrollPixel = 30 * week;
-
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   _scrollController.animateTo(
-    //     scrollPixel.toDouble(),
-    //     duration: Duration(milliseconds: 500),
-    //     curve: Curves.easeInOut,
-    //   );
-    // });
     super.initState();
   }
 
@@ -47,8 +37,8 @@ class _ScrollableDaysAppbarState extends State<ScrollableDaysAppbar> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.animateTo(
         scrollPixel.toDouble(),
-        duration: Duration(milliseconds: 100),
-        curve: Curves.easeInCubic,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.linear,
       );
     });
   }

@@ -9,7 +9,7 @@ import '../../../../../../../../../utils/constants/color_constants.dart';
 import '../../../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../../../../utils/helper/date_picker_helper.dart';
 import '../../../../../../../../widgets/global_text.dart';
-import '../../../body_weight_view/widgets/add_indicator_input.dart';
+import '../../../indicator_data_screen/widgets/add_indicator_input.dart';
 
 class AddMedicineDialog extends StatefulWidget {
   const AddMedicineDialog({super.key});

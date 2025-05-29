@@ -43,7 +43,7 @@ import '../../ui/screens/main/views/home_page/blog/see_all_articles/see_all_arti
 import '../../ui/screens/main/views/home_page/doctor/initial_doctor_page/initial_doctor_page.dart';
 import '../../ui/screens/main/views/home_page/doctor/registration_doctor_page/registration_doctor_page.dart';
 import '../../ui/screens/main/views/home_page/home/home_page.dart';
-import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/indicator_data_screen.dart';
+import '../../ui/screens/main/views/home_page/my_healing_page/indicator_data_screen/indicator_data_screen.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/initial_my_healing_page/my_healing_page.dart';
 import '../../ui/screens/main/views/home_page/names/gender_names/gender_names.dart';
 import '../../ui/screens/main/views/home_page/names/initial_names/names_page.dart';
