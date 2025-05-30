@@ -53,9 +53,9 @@ class _UltrasoundPageState extends State<UltrasoundPage> {
                   final ultrasoundByWeek =
                       ultrasoundList.isEmpty ? null : ultrasoundList.first;
 
-                  Future.delayed(Duration(seconds: 1), () {
-                    weekValue.value = 30;
-                  });
+                  // Future.delayed(Duration(seconds: 1), () {
+                  //   weekValue.value = 30;
+                  // });
                   final format2d = ultrasoundByWeek?.image2D ?? '';
                   final format3d = ultrasoundByWeek?.image3D ?? '';
                   return Column(

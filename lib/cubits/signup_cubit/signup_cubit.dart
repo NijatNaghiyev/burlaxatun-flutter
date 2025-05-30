@@ -19,19 +19,15 @@ class SignupCubit extends Cubit<SignupState> {
   bool isActiveButton = false;
   bool isChecked = false;
   bool emailValidity = false;
-  // String fullName = '';
-  // String name = '';
-  // String surname = '';
-  // String fatherName = '';
-  // List<String> fullNameParts = [];
-  // final AuthService authService = AuthService();
   final fullNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final phoneController = TextEditingController();
 
-  final signFullNameFocusNode = FocusNode();
-  final signUpEmailFocusNode = FocusNode();
-  final signUpPasswordFocusNode = FocusNode();
+  final fullNameFocusNode = FocusNode();
+  final emailFocusNode = FocusNode();
+  final passwordFocusNode = FocusNode();
+  final phoneFocusNode = FocusNode();
 
   void checkBoxToggle(bool v) {
     isChecked = v;
@@ -41,39 +37,15 @@ class SignupCubit extends Cubit<SignupState> {
     ));
   }
 
-  // void splitFullName() {
-  //   fullName = signFullNameController.text;
-  //   if (fullName.contains(' ')) {
-  //     fullNameParts = fullName.split(' ');
-  //   }
-
-  //   if (fullNameParts.length == 3) {
-  //     name = fullNameParts[0].trim();
-  //     surname = fullNameParts[1].trim();
-  //     fatherName = fullNameParts[2].trim();
-  //   }
-  // }
-
   final _loginTokenService = locator<LoginTokenService>();
 
-  void checkEmailValidity() {
-    emailValidity = RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(emailController.text);
-
-    log('$emailValidity');
-  }
-
   void updateIsValid() {
-    // splitFullName();
-    checkEmailValidity();
     isActiveButton = emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty &&
         fullNameController.text.isNotEmpty &&
-        isChecked &&
+        phoneController.text.isNotEmpty &&
+        isChecked;
 
-        // fullNameParts.length == 3 &&
-        emailValidity;
     emit(SignupInitial(
       isActiveButton: isActiveButton,
       isChecked: isChecked,
@@ -86,6 +58,7 @@ class SignupCubit extends Cubit<SignupState> {
       log('Register loading');
 
       final response = await _contractor.register(
+        phone: phoneController.text,
         fullName: fullNameController.text,
         email: emailController.text,
         password: passwordController.text,
@@ -103,25 +76,6 @@ class SignupCubit extends Cubit<SignupState> {
 
       emit(SignupSuccess());
       log("Register success");
-
-      // if (response) {
-      //   // await _registerTokenService.saveLoginResponse(response);
-
-      //   return;
-      // }
-
-      // final token = await authService.register(
-      //   name,
-      //   surname,
-      //   fatherName,
-      //   signUpEmailController.text,
-      //   signUpPasswordController.text,
-      // );
-      // final isSavedToken = await TokenHiveService.instance.saveToken(token);
-      // log('$isSavedToken');
-      // if (isSavedToken) {
-      //   emit(SignupCubitSuccess());
-      // }
     } on DioException catch (e, s) {
       emit(SignupNetworkError(e.toString()));
 
@@ -138,9 +92,10 @@ class SignupCubit extends Cubit<SignupState> {
     emailController.dispose();
     fullNameController.dispose();
     passwordController.dispose();
-    signUpEmailFocusNode.dispose();
-    signUpPasswordFocusNode.dispose();
-    signFullNameFocusNode.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
+    fullNameFocusNode.dispose();
+    phoneController.dispose();
     return super.close();
   }
 }

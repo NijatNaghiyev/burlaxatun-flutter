@@ -27,9 +27,9 @@ class LoginInputs extends StatelessWidget {
               isError: state.isError,
               textController: loginCubit.loginEmailController,
               focusNode: loginCubit.loginEmailFocusNode,
-              inputName: TextConstants.email,
-              // prefixIcon: AssetConstants.emailIcon,
-              hintText: TextConstants.enterYourEmail,
+              inputName: 'Phone number',
+              hintText: '+994 xxx xxx xx xx',
+              isNumber: true,
               onFieldSubmitted: (p0) =>
                   loginCubit.loginPasswordFocusNode.requestFocus(),
               onChanged: (v) {

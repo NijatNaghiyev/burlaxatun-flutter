@@ -57,9 +57,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LanguageCubit(),
         ),
-        BlocProvider<SignupCubit>(
-          create: (context) => locator<SignupCubit>(),
-        ),
+        // BlocProvider<SignupCubit>(
+        //   create: (context) => locator<SignupCubit>(),
+        // ),
         BlocProvider<DailyRecCubit>(
           create: (context) => locator<DailyRecCubit>()..getDailyRec(),
         ),

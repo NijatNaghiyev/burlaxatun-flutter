@@ -1,6 +1,7 @@
 import 'package:burla_xatun/ui/screens/main/views/daily_advise_page/widgets/advise_image.dart';
 import 'package:burla_xatun/ui/screens/main/views/daily_advise_page/widgets/advise_text.dart';
 import 'package:burla_xatun/ui/screens/main/views/daily_advise_page/widgets/advise_title.dart';
+import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +29,7 @@ class AdviceDetailView extends StatelessWidget {
           final data = detailState.response;
 
           return Scaffold(
+            backgroundColor: ColorConstants.scaffoldColor,
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(175),
               child: ScrollableDaysAppbar(

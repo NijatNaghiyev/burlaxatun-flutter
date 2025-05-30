@@ -7,12 +7,14 @@ import 'package:burla_xatun/utils/extensions/statuscode_extension.dart';
 
 class RegisterService {
   Future<RegisterResponseModel> register({
+    required String phone,
     required String fullName,
     required String email,
     required String password,
   }) async {
     final endpoint = EndpointsConstants.register;
     final requestBody = {
+      'phone_number': phone,
       'email': email,
       'full_name': fullName,
       'password': password,

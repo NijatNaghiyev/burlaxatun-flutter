@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 import '../../utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,6 +24,7 @@ class GlobalInput extends StatelessWidget {
     this.textController,
     this.onChanged,
     this.isError = false,
+    this.isNumber = false,
   });
 
   final String? inputName;
@@ -30,6 +33,7 @@ class GlobalInput extends StatelessWidget {
   final String? suffixIcon;
   final bool isObsecure;
   final bool isError;
+  final bool isNumber;
   final TextEditingController? textController;
   final FocusNode? focusNode;
   final void Function()? onSuffixIconTap;
@@ -67,13 +71,16 @@ class GlobalInput extends StatelessWidget {
           onChanged: onChanged,
           focusNode: focusNode,
           obscureText: isObsecure,
+          keyboardType:
+              isNumber ? TextInputType.number : TextInputType.text,
           style: GoogleFonts.poppins(
             fontSize: 14,
             color: isError ? Color(0xffD62828) : Colors.black,
             fontWeight: FontWeight.w500,
           ),
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 18),
+            contentPadding:
+                EdgeInsets.symmetric(vertical: 18) + EdgeInsets.only(left: 24),
             hintText: hintText,
             hintStyle: GoogleFonts.poppins(
               fontSize: 12,
@@ -82,26 +89,26 @@ class GlobalInput extends StatelessWidget {
                   : ColorConstants.enabledInputColor,
               fontWeight: FontWeight.w500,
             ),
-            prefixIcon: prefixIcon == null
-                ? SizedBox.shrink()
-                : Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          prefixIcon!,
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                            isError
-                                ? Color(0xffD62828)
-                                : ColorConstants.customBlack,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+            // prefixIcon: prefixIcon == null
+            //     ? SizedBox.shrink()
+            //     : Padding(
+            //         padding: const EdgeInsets.only(left: 16, right: 10),
+            //         child: Column(
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children: [
+            //             SvgPicture.asset(
+            //               prefixIcon!,
+            //               fit: BoxFit.cover,
+            //               colorFilter: ColorFilter.mode(
+            //                 isError
+            //                     ? Color(0xffD62828)
+            //                     : ColorConstants.customBlack,
+            //                 BlendMode.srcIn,
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
             suffixIcon: suffixIcon == null
                 ? SizedBox.shrink()
                 : Padding(
@@ -138,6 +145,13 @@ class GlobalInput extends StatelessWidget {
               ),
             ),
             errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(34)),
+              borderSide: BorderSide(
+                color: ColorConstants.primaryRedColor,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(34)),
               borderSide: BorderSide(
                 color: ColorConstants.primaryRedColor,
               ),

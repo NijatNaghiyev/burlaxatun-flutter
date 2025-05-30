@@ -99,7 +99,9 @@ class Questions extends StatelessWidget {
                   onPressed: () async {
                     state.questionPageIndex != 3
                         ? state.iDontKnow
-                            ? context.push('/calculate')
+                            ? {
+                                context.push('/calculate'),
+                              }
                             : await questionsCubit.nextQuestion()
                         : {
                             // await questionsCubit.nextQuestion(),

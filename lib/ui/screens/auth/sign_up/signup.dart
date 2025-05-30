@@ -15,6 +15,8 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
+
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Qeydiyyat',
@@ -26,12 +28,12 @@ class SignUp extends StatelessWidget {
           padding: PaddingConstants.h20,
           child: Column(
             children: [
-              context.deviceHeight < 710 ? 10.h : 51.h,
-              SignupInputs(),
+              // context.deviceHeight < 710 ? 10.h : 51.h,
+              SignupInputs(formKey: formKey),
               context.deviceHeight < 710 ? 17.h : 15.h,
               AcceptPolicyCheckBox(),
               context.deviceHeight < 710 ? 14.h : 29.h,
-              GoOnButton(),
+              GoOnButton(formKey: formKey),
               context.deviceHeight < 710 ? 10.h : 20.h,
               LoginTextButton(),
               context.deviceHeight < 710 ? 8.h : 16.h,

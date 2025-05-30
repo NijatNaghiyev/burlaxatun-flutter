@@ -3,6 +3,7 @@ import 'package:burla_xatun/cubits/doctor_reservation/doctor_reservation_cubit.d
 import 'package:burla_xatun/cubits/forum_list/forum_list_cubit.dart';
 import 'package:burla_xatun/cubits/indicator/indicator_cubit.dart';
 import 'package:burla_xatun/cubits/notification/notification_cubit.dart';
+import 'package:burla_xatun/cubits/signup_cubit/signup_cubit.dart';
 import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
 import 'package:burla_xatun/data/models/remote/response/blog_cat_model.dart';
 import 'package:burla_xatun/ui/screens/add_child/add_your_child.dart';
@@ -108,7 +109,10 @@ class Routerapp {
       GoRoute(
         path: '/sign_up',
         builder: (context, state) {
-          return SignUp();
+          return BlocProvider(
+            create: (context) => locator<SignupCubit>(),
+            child: SignUp(),
+          );
         },
       ),
       GoRoute(

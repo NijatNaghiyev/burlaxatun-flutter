@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   spacing: 24,
                   children: [
-                    BabyInformation(),
+                    // BabyInformation(),
                     HomePageDailyAdvise(),
                     PregnancyGuide(),
                     HomePageBoxes(),

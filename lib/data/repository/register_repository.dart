@@ -7,11 +7,13 @@ class RegisterRepository implements RegisterContractor {
   final RegisterService _registerService;
   @override
   Future<RegisterResponseModel> register({
+    required String phone,
     required String fullName,
     required String email,
     required String password,
   }) {
     return _registerService.register(
+      phone: phone,
       fullName: fullName,
       email: email,
       password: password,

@@ -10,7 +10,11 @@ import '../../../../../cubits/signup_cubit/signup_cubit.dart';
 import '../../../../../utils/constants/color_constants.dart';
 
 class GoOnButton extends StatelessWidget {
-  const GoOnButton({super.key});
+  const GoOnButton({
+    super.key,
+    required this.formKey,
+  });
+  final GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +44,9 @@ class GoOnButton extends StatelessWidget {
           onPressed: state is SignupLoading
               ? () {}
               : () {
-                  if (signupCubit.fullNameController.text.isNotEmpty &&
-                      signupCubit.emailController.text.isNotEmpty &&
-                      signupCubit.passwordController.text.isNotEmpty &&
-                      signupCubit.isChecked) {
+                  if (state is SignupInitial &&
+                      state.isActiveButton &&
+                      formKey.currentState!.validate()) {
                     signupCubit.register();
                   }
                 },

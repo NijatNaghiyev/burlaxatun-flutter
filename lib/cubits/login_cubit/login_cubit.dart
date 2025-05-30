@@ -54,19 +54,7 @@ class LoginCubit extends Cubit<LoginCubitInitial> {
       emit(state.copyWith(loginStatus: LoginStatus.success));
       log("Login success");
       log("Saved access token (login): ${_loginTokenService.token}");
-
-      // final token = await authService.login(
-      //     loginEmailController.text, loginPasswordController.text);
-      // final isSavedToken = await TokenHiveService.instance.saveToken(token);
-      // if (isSavedToken) {
-      //   final savedToken = await TokenHiveService.instance.getToken();
-      //   final userData = await authService.getUser(savedToken!);
-      //   final data = userData.toHiveModel();
-      //   bool isSuccess = await UserHiveService.instance.saveUserData(data);
-      //   if (isSuccess) {
-      //     emit(state.copyWith(loginStatus: LoginStatus.success));
-      //   }
-      // }
+      
     } on DioException catch (e, s) {
       emit(state.copyWith(loginStatus: LoginStatus.networkError));
       log("Login Dio Exception: $e", stackTrace: s);
