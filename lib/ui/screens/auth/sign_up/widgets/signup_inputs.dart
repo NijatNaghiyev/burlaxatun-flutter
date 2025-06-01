@@ -58,9 +58,9 @@ class SignupInputs extends StatelessWidget {
             inputName: TextConstants.email,
             hintText: TextConstants.enterYourEmail,
             validator: (email) {
-              final emailValidity = RegExp(
-                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                  .hasMatch(email!);
+              final emailValidity =
+                  RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$')
+                      .hasMatch(email!);
               if (!emailValidity) {
                 return 'Email formati duzgun deyil';
               }
