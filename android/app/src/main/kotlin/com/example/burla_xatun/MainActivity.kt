@@ -1,4 +1,4 @@
-package com.aastudio.burlaxatunapp
+package com.burlaxatun.app
 
 import io.flutter.embedding.android.FlutterActivity
 

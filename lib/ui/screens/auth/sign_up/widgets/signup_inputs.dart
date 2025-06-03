@@ -47,7 +47,7 @@ class SignupInputs extends StatelessWidget {
             validator: (fullName) {
               final parts = fullName!.trim().split(' ');
               if (parts.length != 2) {
-                return 'Ad ve soyadi duzgun daxil edin';
+                return 'Ad, Soyad düzgün daxil edilməyib';
               }
               return null;
             },
@@ -58,11 +58,11 @@ class SignupInputs extends StatelessWidget {
             inputName: TextConstants.email,
             hintText: TextConstants.enterYourEmail,
             validator: (email) {
-              final emailValidity = RegExp(
-                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                  .hasMatch(email!);
+              final emailValidity =
+                  RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$')
+                      .hasMatch(email!);
               if (!emailValidity) {
-                return 'Email formati duzgun deyil';
+                return 'Email düzgün deyil';
               }
               return null;
             },
@@ -93,7 +93,7 @@ class SignupInputs extends StatelessWidget {
                 },
                 validator: (password) {
                   if (password!.length < 8) {
-                    return 'Sifre en azi 8 herfli olmalidir';
+                    return 'Şifrə ən azı 8 simvoldan ibarət olmalıdır';
                   }
                   return null;
                 },
