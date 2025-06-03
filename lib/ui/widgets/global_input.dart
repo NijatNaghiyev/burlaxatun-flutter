@@ -25,6 +25,7 @@ class GlobalInput extends StatelessWidget {
     this.onChanged,
     this.isError = false,
     this.isNumber = false,
+    this.onTapOutside,
   });
 
   final String? inputName;
@@ -40,6 +41,7 @@ class GlobalInput extends StatelessWidget {
   final void Function(String v)? onFieldSubmitted;
   final void Function(String v)? onChanged;
   final String? Function(String?)? validator;
+  final void Function(PointerDownEvent)? onTapOutside;
 
   @override
   Widget build(BuildContext context) {
@@ -65,14 +67,17 @@ class GlobalInput extends StatelessWidget {
               )
             : SizedBox.shrink(),
         TextFormField(
+          onTapOutside: onTapOutside ??
+              (event) {
+                FocusScope.of(context).unfocus();
+              },
           controller: textController,
           validator: validator,
           onFieldSubmitted: onFieldSubmitted,
           onChanged: onChanged,
           focusNode: focusNode,
           obscureText: isObsecure,
-          keyboardType:
-              isNumber ? TextInputType.number : TextInputType.text,
+          keyboardType: isNumber ? TextInputType.number : TextInputType.text,
           style: GoogleFonts.poppins(
             fontSize: 14,
             color: isError ? Color(0xffD62828) : Colors.black,
