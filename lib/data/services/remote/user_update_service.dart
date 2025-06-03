@@ -31,7 +31,8 @@ class UserUpdateService {
       if (wantToBePregnant != null) "want_to_be_pregnant": wantToBePregnant,
       if (wantToSeePeriod != null) "want_to_see_period": wantToSeePeriod,
       if (isPregnant != null) "is_pregnant": isPregnant,
-      if (pregnantWeek != null) "pregnant_week": pregnantWeek,
+      if (pregnantWeek != null || pregnantWeek != '0')
+        "pregnant_week": pregnantWeek,
       if (firstChild != null) "first_child": firstChild,
       if (activeLanguage != null) "active_language": activeLanguage,
       if (enableNotifications != null)

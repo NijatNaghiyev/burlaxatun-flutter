@@ -14,6 +14,9 @@ class CalculateButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
     return BlocConsumer<QuestionsCubit, QuestionsInitial>(
+      listenWhen: (previous, current) {
+        return previous.stateStatus != current.stateStatus;
+      },
       listener: (context, state) async {
         if (state.stateStatus == CalculateStateStatus.success) {
           showDialog(
@@ -43,7 +46,7 @@ class CalculateButton extends StatelessWidget {
             if (state.selectedCalculateOptionIndex == null) {
               questionsCubit.stateError();
             } else {
-              questionsCubit.stateLoading();
+              // questionsCubit.stateLoading();
               await questionsCubit.calculate();
             }
           },

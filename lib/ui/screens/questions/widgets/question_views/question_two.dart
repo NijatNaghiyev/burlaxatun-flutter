@@ -70,7 +70,7 @@ class _QuestionTwoState extends State<QuestionTwo>
                         child: ListWheelScrollView(
                           physics: FixedExtentScrollPhysics(),
                           onSelectedItemChanged: (i) {
-                            // log(' hefte: ');
+                            // log(' hefte: $i');
                             questionsCubit.updateFocusedWeekIndex(i);
                             questionsCubit.updateIsActiveButton();
                           },
@@ -95,9 +95,9 @@ class _QuestionTwoState extends State<QuestionTwo>
                                               current.focusedWeekIndex;
                                         },
                                         builder: (context, state) {
-                                          // log('builded scroll wheel index: ');
+                                          // log('builded scroll wheel index: $i');
                                           return GlobalText(
-                                            text: '',
+                                            text: '$i',
                                             fontSize: 32,
                                             fontWeight: FontWeight.w500,
                                             color: state.focusedWeekIndex == i
@@ -165,5 +165,5 @@ class _QuestionTwoState extends State<QuestionTwo>
 
   @override
   // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => false;
+  bool get wantKeepAlive => true;
 }

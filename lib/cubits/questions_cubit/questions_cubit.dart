@@ -470,7 +470,6 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   Future<void> calculate() async {
     try {
       stateLoading();
-      await updateUser();
       emit(state.copyWith(focusedWeekIndex: null));
 
       // Ensure we have a properly formatted date string (YYYY-MM-DD)
@@ -489,7 +488,11 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
         week: state.ultrasoundWeekCount ?? 0,
         day: state.ultrasoundDayCount ?? 0,
       );
-      emit(state.copyWith(stateStatus: CalculateStateStatus.success));
+      emit(state.copyWith(
+        focusedWeekIndex: calculatedData.data?.weeks ?? 0,
+        stateStatus: CalculateStateStatus.success,
+      ));
+      await updateUser();
       stateInitial();
     } catch (e, s) {
       log('Stack Trace: $s');
@@ -608,7 +611,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
         firstChild: state.isFirstChild,
         onboardingDone: true,
         phoneNumber: phoneNumber,
-        pregnantWeek:  state.focusedWeekIndex.toString(),
+        pregnantWeek: state.focusedWeekIndex.toString(),
       );
       emit(state.copyWith(userUpdateStatus: UserUpdateStatus.success));
     } on DioException catch (e, s) {
@@ -641,7 +644,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
           ));
         }
       } else {
-        // log('this is first questions request'); 
+        // log('this is first questions request');
         await updateUser();
       }
     } else if (state.questionPageIndex == 2) {
@@ -653,7 +656,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
         ));
         pageController.jumpToPage(state.questionPageIndex);
       }
-    } 
+    }
   }
 
   void goBack() {

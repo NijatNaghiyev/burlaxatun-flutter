@@ -54,8 +54,12 @@ class _IndicatorDataScreenState extends State<IndicatorDataScreen> {
                   border: Border.all(width: 1, color: Colors.grey)),
               child: BlocBuilder<IndicatorCubit, IndicatorState>(
                 buildWhen: (previous, current) {
-                  return current.indicatorList != null;
+                  return previous.indicatorList == current.indicatorList ||
+                      previous.indicatorStatus != current.indicatorStatus;
                 },
+                // buildWhen: (previous, current) {
+                //   return current.indicatorList != null;
+                // },
                 builder: (context, state) {
                   if (state.indicatorStatus == IndicatorStatus.loading) {
                     return Padding(
