@@ -56,6 +56,8 @@ class BaseNetwork {
 
     if (token != null) {
       _dio!.options.headers['Authorization'] = 'Bearer $token';
+    } else {
+      _dio!.options.headers['Authorization'] = null;
     }
 
     return _dio!;

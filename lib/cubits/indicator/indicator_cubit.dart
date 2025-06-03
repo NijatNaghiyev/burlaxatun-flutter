@@ -26,7 +26,7 @@ class IndicatorCubit extends Cubit<IndicatorState> {
     try {
       emit(state.copyWith(indicatorStatus: IndicatorStatus.loading));
       final response = await indicatorContract.getIndicator(
-        babyId: 96,
+        babyId: 86,
         indicatorName: indicatorName,
         range: range,
       );
@@ -38,6 +38,9 @@ class IndicatorCubit extends Cubit<IndicatorState> {
           indicatorStatus: IndicatorStatus.success,
           indicatorList: indicatorList,
         ));
+        // emit(state.copyWith(
+        //   indicatorList: indicatorList,
+        // ));
       }
     } on DioException catch (e, s) {
       if (e.type is SocketException) {
@@ -62,7 +65,7 @@ class IndicatorCubit extends Cubit<IndicatorState> {
       emit(state.copyWith(indicatorStatus: IndicatorStatus.loading));
 
       final postData = AddIndicatorRequestModel(
-        babyId: 96,
+        babyId: 86,
         indicator: indicator,
         name: indicatorName,
         date: date,
