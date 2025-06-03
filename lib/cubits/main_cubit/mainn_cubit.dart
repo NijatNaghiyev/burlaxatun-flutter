@@ -295,6 +295,8 @@ class MainnCubit extends Cubit<MainInitial> {
     emit(state.copyWith(commentBoxIndex: v));
   }
 
+  
+
   @override
   Future<void> close() {
     homePageScrollController.dispose();

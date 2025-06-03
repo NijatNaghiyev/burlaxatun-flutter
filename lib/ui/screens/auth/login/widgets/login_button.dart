@@ -38,6 +38,7 @@ class LoginButton extends StatelessWidget {
               : ColorConstants.disabledButtonColor,
           textColor: ColorConstants.white,
           onPressed: () {
+            if (state.loginStatus == LoginStatus.loading) return;
             if (loginCubit.loginEmailController.text.isNotEmpty &&
                 loginCubit.loginPasswordController.text.isNotEmpty) {
               state.isActiveButton ? loginCubit.login() : null;

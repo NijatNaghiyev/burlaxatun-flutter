@@ -15,4 +15,6 @@ abstract class UserUpdateContractor {
     String? activeLanguage,
     bool? enableNotifications,
   });
+
+  Future<bool> userProfileDelete();
 }

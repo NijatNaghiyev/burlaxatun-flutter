@@ -64,57 +64,17 @@ class UserUpdateCubit extends Cubit<UserUpdateState> {
       log("User Update Unknown Error: $e", stackTrace: s);
     }
   }
-}
 
-// class UserUpdateCubit extends Cubit<UserUpdateState> {
-//   UserUpdateCubit(this._contractor) : super(UserUpdateInitial());
-//
-//   final UserUpdateContractor _contractor;
-//
-//   // String? phoneNumber = "";
-//   // bool? onboardingDone = true;
-//   // bool? wantToBePregnant = true;
-//   // bool? wantToSeePeriod = true;
-//   // bool? isPregnant = true;
-//   // String? pregnantWeek = "";
-//   // bool? firstChild = true;
-//   // String? activeLanguage = "";
-//   // bool? enableNotifications = true;
-//
-//   Future<void> updateUser(
-//       {String? phoneNumber,
-//       bool? onboardingDone,
-//       bool? wantToBePregnant,
-//       bool? wantToSeePeriod,
-//       bool? isPregnant,
-//       String? pregnantWeek,
-//       String? image,
-//       bool? firstChild,
-//       String? activeLanguage,
-//       bool? enableNotifications}) async {
-//     try {
-//       emit(UserUpdateLoading());
-//       log("User Update Loading");
-//
-//       final response = await _contractor.updateUser(
-//         activeLanguage: activeLanguage,
-//         enableNotifications: enableNotifications,
-//         firstChild: firstChild,
-//         isPregnant: isPregnant,
-//         onboardingDone: onboardingDone,
-//         phoneNumber: phoneNumber,
-//         pregnantWeek: pregnantWeek,
-//         image: image,
-//         wantToBePregnant: wantToBePregnant,
-//         wantToSeePeriod: wantToSeePeriod,
-//       );
-//       emit(UserUpdateSuccess(response));
-//     } on DioException catch (e, s) {
-//       emit(UserUpdateNetworkError(e.toString()));
-//       log("User Update Dio Exception: $e", stackTrace: s);
-//     } catch (e, s) {
-//       emit(UserUpdateError(e.toString()));
-//       log("User Update Unknown Error: $e", stackTrace: s);
-//     }
-//   }
-// }
+  Future<bool> userProfileDelete() async {
+    try {
+      final response = await _contractor.userProfileDelete();
+      return response; 
+    } on DioException catch (e, s) {
+      log("User Profile Delete Dio Exception: $e", stackTrace: s);
+      return false;
+    } catch (e, s) {
+      log("User Profile Delete Unknown Error: $e", stackTrace: s);
+      return false;
+    }
+  }
+}

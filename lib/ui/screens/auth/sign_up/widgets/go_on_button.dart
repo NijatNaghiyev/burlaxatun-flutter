@@ -25,14 +25,22 @@ class GoOnButton extends StatelessWidget {
           context.push('/questions');
         }
         if (state is SignupError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Signup failed!')),
-          );
+          ScaffoldMessenger.of(context)
+            ..clearSnackBars()
+            ..showSnackBar(
+              SnackBar(content: Text('Signup failed!')),
+            );
         }
         if (state is SignupNetworkError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Signup failed!')),
-          );
+          ScaffoldMessenger.of(context)
+            ..clearSnackBars()
+            ..showSnackBar(
+              SnackBar(content: Text('Signup failed!')),
+            );
+        }
+
+        if (state is SignupError || state is SignupNetworkError) {
+          signupCubit.emitInitial();
         }
       },
       builder: (_, state) {

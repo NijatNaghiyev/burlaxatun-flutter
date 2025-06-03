@@ -22,8 +22,6 @@ class _LogOutButtonState extends State<LogOutButton> {
     isLoading = true;
     setState(() {});
     await locator<LoginTokenService>().deleteSaveByKey("login");
-
-    // await TokenHiveService.instance.clearToken();
   }
 
   @override

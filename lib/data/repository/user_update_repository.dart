@@ -34,4 +34,9 @@ class UserUpdateRepository implements UserUpdateContractor {
       enableNotifications: enableNotifications,
     );
   }
+
+  @override
+  Future<bool> userProfileDelete() {
+    return _userUpdateService.userProfileDelete();
+  }
 }
