@@ -34,7 +34,7 @@ class SignUp extends StatelessWidget {
               context.deviceHeight < 710 ? 17.h : 15.h,
               AcceptPolicyCheckBox(isCheckedPolicy: isCheckedPolicy),
               context.deviceHeight < 710 ? 14.h : 29.h,
-              GoOnButton(formKey: formKey, isCheckedPolicy: isCheckedPolicy),
+              GoOnButton(formKey: formKey),
               context.deviceHeight < 710 ? 10.h : 20.h,
               LoginTextButton(),
               context.deviceHeight < 710 ? 8.h : 16.h,

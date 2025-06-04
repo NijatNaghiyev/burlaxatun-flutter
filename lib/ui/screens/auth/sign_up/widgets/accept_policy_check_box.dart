@@ -34,9 +34,9 @@ class AcceptPolicyCheckBox extends StatelessWidget {
               activeColor: ColorConstants.primaryRedColor,
               value: value,
               onChanged: (v) {
-                // signupCubit.checkBoxToggle(v!);
-                // signupCubit.updateIsValid();
                 isCheckedPolicy.value = v!;
+                signupCubit.checkBoxToggle(isCheckedPolicy.value);
+                signupCubit.updateIsValid();
               },
             );
           },
