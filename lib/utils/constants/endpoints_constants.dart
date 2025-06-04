@@ -40,6 +40,7 @@ class EndpointsConstants {
 
   // A
   static const userData = '$baseUrl/A/me/';
+  static const userProfileDelete = '$baseUrl/A/delete-account/';
 
   // A1
   static const String babyIndicators = '$baseUrl/A1/baby-indicators/';

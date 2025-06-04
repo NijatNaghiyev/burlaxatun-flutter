@@ -22,7 +22,7 @@ class LogOutDialog extends StatelessWidget {
         children: [
           const SizedBox(height: 20),
           Text(
-            'Log out',
+            'Çıxış',
             style: const TextStyle(
               color: Colors.red,
               fontWeight: FontWeight.bold,
@@ -33,55 +33,63 @@ class LogOutDialog extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
-              'Are you sure want to log out?',
+              'Çıxmaq istədiyinizə əminsinizmi?',
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16),
             ),
           ),
           const SizedBox(height: 24),
           const Divider(height: 1),
-          Row(
-            children: [
-              Expanded(
-                child: InkWell(
-                  onTap: () async {
-                    await locator<LoginTokenService>().deleteSaveByKey("login");
-                    mainCubit.changeView(0);
-                    context.go('/login');
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Yes',
-                      style: const TextStyle(
-                        color: ColorConstants.primaryRedColor,
-                        fontSize: 16,
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: () async {
+                      await locator<LoginTokenService>()
+                          .deleteSaveByKey("login");
+                      mainCubit.changeView(0);
+                      context.go('/login');
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Bəli',
+                        style: const TextStyle(
+                          color: ColorConstants.primaryRedColor,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const VerticalDivider(width: 1),
-              Expanded(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop(false); // "No"
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'No',
-                      style: const TextStyle(
-                        color: ColorConstants.primaryRedColor,
-                        fontSize: 16,
+                SizedBox(
+                  width: 2,
+                  child: const VerticalDivider(
+                    width: 1,
+                  ),
+                ),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop(false); // "No"
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Xeyr",
+                        style: const TextStyle(
+                          color: ColorConstants.black800,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

@@ -39,6 +39,13 @@ class SignupCubit extends Cubit<SignupState> {
 
   final _loginTokenService = locator<LoginTokenService>();
 
+  void emitInitial() {
+    emit(SignupInitial(
+      isActiveButton: isActiveButton,
+      isChecked: isChecked,
+    ));
+  }
+
   void updateIsValid() {
     isActiveButton = emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty &&
@@ -58,10 +65,10 @@ class SignupCubit extends Cubit<SignupState> {
       log('Register loading');
 
       final response = await _contractor.register(
-        phone: phoneController.text,
-        fullName: fullNameController.text,
-        email: emailController.text,
-        password: passwordController.text,
+        phone: phoneController.text.trim(),
+        fullName: fullNameController.text.trim(),
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
       );
 
       final savedRegisterData = LoginResponseModel(
