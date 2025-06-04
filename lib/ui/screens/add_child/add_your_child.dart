@@ -62,7 +62,7 @@ class AddYourChild extends StatelessWidget {
                       },
                       textController: addChildCubit.childFullNameController,
                       inputName: 'Tam Ad',
-                      prefixIcon: 'assetsicon/child_user.svg',
+                      prefixIcon: AssetConstants.userChildIcon,
                       hintText: 'Tam adını qeyd edin',
                     ),
                     Column(
@@ -72,7 +72,7 @@ class AddYourChild extends StatelessWidget {
                           text: 'Doğum Tarixi',
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         context.deviceHeight < 750 ? 8.h : 16.h,
                         GestureDetector(
@@ -110,9 +110,9 @@ class AddYourChild extends StatelessWidget {
                                       builder: (context, state) {
                                         return GlobalText(
                                           text: state.birthDateString,
-                                          fontSize: 15,
+                                          fontSize: 14,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.grey,
+                                          color: ColorConstants.hintTextColor,
                                         );
                                       },
                                     ),

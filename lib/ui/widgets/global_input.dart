@@ -88,32 +88,31 @@ class GlobalInput extends StatelessWidget {
                 EdgeInsets.symmetric(vertical: 18) + EdgeInsets.only(left: 24),
             hintText: hintText,
             hintStyle: GoogleFonts.poppins(
-              fontSize: 12,
-              color: isError
-                  ? Color(0xffD62828)
-                  : ColorConstants.enabledInputColor,
+              fontSize: 14,
+              color: isError ? Color(0xffD62828) : ColorConstants.hintTextColor,
               fontWeight: FontWeight.w500,
             ),
-            // prefixIcon: prefixIcon == null
-            //     ? SizedBox.shrink()
-            //     : Padding(
-            //         padding: const EdgeInsets.only(left: 16, right: 10),
-            //         child: Column(
-            //           mainAxisAlignment: MainAxisAlignment.center,
-            //           children: [
-            //             SvgPicture.asset(
-            //               prefixIcon!,
-            //               fit: BoxFit.cover,
-            //               colorFilter: ColorFilter.mode(
-            //                 isError
-            //                     ? Color(0xffD62828)
-            //                     : ColorConstants.customBlack,
-            //                 BlendMode.srcIn,
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //       ),
+            isDense: true,
+            prefixIcon: prefixIcon == null
+                ? null
+                : Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          prefixIcon!,
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                            isError
+                                ? Color(0xffD62828)
+                                : ColorConstants.customBlack,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
             suffixIcon: suffixIcon == null
                 ? SizedBox.shrink()
                 : Padding(
