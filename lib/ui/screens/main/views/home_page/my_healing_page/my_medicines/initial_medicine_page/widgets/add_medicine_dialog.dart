@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/app/app_snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -43,15 +44,11 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
         listener: (context, state) {
           if (state.status == MedicineCreateStatus.success) {
             Navigator.pop(context);
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Dərman uğurla əlavə olundu")),
-            );
+            AppSnackbars.error(context, "Dərman uğurla əlavə olundu");
           } else if (state.status == MedicineCreateStatus.failure ||
               state.status == MedicineCreateStatus.networkError) {
             context.read<AddButtonStateCubit>().enable();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Xəta baş verdi")),
-            );
+            AppSnackbars.error(context, "Xəta baş verdi");
           }
         },
         child: AnimatedPadding(
@@ -199,13 +196,8 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
                                               frequency.isEmpty ||
                                               startDateText.isEmpty ||
                                               endDateText.isEmpty) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                content: Text(
-                                                    "Zəhmət olmasa bütün sahələri doldurun"),
-                                              ),
-                                            );
+                                            AppSnackbars.error(context,
+                                                "Zəhmət olmasa bütün sahələri doldurun");
                                             return;
                                           }
 
@@ -220,6 +212,7 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
                                             endDate = dateFormat
                                                 .parseStrict(endDateText);
                                           } catch (_) {
+                                            
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               const SnackBar(

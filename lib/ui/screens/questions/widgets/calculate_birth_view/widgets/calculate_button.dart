@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/app/app_snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,9 +31,7 @@ class CalculateButton extends StatelessWidget {
             },
           );
         } else if (state.stateStatus == CalculateStateStatus.error) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error while calculating')),
-          );
+          AppSnackbars.error(context, 'Hesablama zamanı xəta baş verdi');
         }
       },
       builder: (context, state) {

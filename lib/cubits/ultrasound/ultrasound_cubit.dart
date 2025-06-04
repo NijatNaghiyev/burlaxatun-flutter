@@ -36,7 +36,7 @@ class UltrasoundCubit extends Cubit<UltrasoundState> {
         emit(state.copyWith(ultraSoundStatus: UltraSoundStatus.error));
       }
     } on DioException catch (e, s) {
-      if (e.type is SocketException) {
+      if (e.type == DioExceptionType.connectionError) {
         log('Network error: $e');
         emit(state.copyWith(ultraSoundStatus: UltraSoundStatus.networkError));
       } else {

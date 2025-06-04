@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/utils/app/app_snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -72,12 +73,7 @@ class Questions extends StatelessWidget {
               },
               listener: (BuildContext context, QuestionsInitial state) {
                 if (state.userUpdateStatus == UserUpdateStatus.error) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      backgroundColor: Colors.red,
-                      content: Text('error'),
-                    ),
-                  );
+                  AppSnackbars.error(context, 'Xəta baş verdi');
                 } else if (state.userUpdateStatus == UserUpdateStatus.success) {
                   if (state.questionPageIndex == 0) {
                     context.go('/home');

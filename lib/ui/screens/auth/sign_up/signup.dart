@@ -16,6 +16,7 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
+    final ValueNotifier<bool> isCheckedPolicy = ValueNotifier<bool>(false);
 
     return Scaffold(
       appBar: GlobalAppbar(
@@ -31,9 +32,9 @@ class SignUp extends StatelessWidget {
               // context.deviceHeight < 710 ? 10.h : 51.h,
               SignupInputs(formKey: formKey),
               context.deviceHeight < 710 ? 17.h : 15.h,
-              AcceptPolicyCheckBox(),
+              AcceptPolicyCheckBox(isCheckedPolicy: isCheckedPolicy),
               context.deviceHeight < 710 ? 14.h : 29.h,
-              GoOnButton(formKey: formKey),
+              GoOnButton(formKey: formKey, isCheckedPolicy: isCheckedPolicy),
               context.deviceHeight < 710 ? 10.h : 20.h,
               LoginTextButton(),
               context.deviceHeight < 710 ? 8.h : 16.h,

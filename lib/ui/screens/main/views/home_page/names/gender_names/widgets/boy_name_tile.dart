@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/app/app_snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -56,9 +57,7 @@ class _BoyNameTileState extends State<BoyNameTile> {
             );
             if (isAdded == false) {
               isSelectedName.value = !isSelectedName.value;
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('failed add to list the name')),
-              );
+              AppSnackbars.error(context, 'failed add to list the name');
             }
           } else {
             babyNamesCubit.removeFromWishList(babyNameId: widget.babyNameId);

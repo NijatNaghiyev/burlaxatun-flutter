@@ -21,7 +21,7 @@ class SignupInputs extends StatelessWidget {
         spacing: context.deviceHeight < 740 ? 13 : 26,
         children: [
           GlobalInput(
-            inputName: 'Phone',
+            inputName: 'Mobil nömrə',
             hintText: '+994 xxx xxx xx xx',
             textController: signUpCubit.phoneController,
             focusNode: signUpCubit.phoneFocusNode,
@@ -36,8 +36,8 @@ class SignupInputs extends StatelessWidget {
           GlobalInput(
             focusNode: signUpCubit.fullNameFocusNode,
             textController: signUpCubit.fullNameController,
-            inputName: 'Name, Surname',
-            hintText: 'Enter your name and surname',
+            inputName: 'Ad Soyad',
+            hintText: 'Ad və soyadınızı daxil edin',
             onFieldSubmitted: (v) {
               signUpCubit.emailFocusNode.requestFocus();
             },

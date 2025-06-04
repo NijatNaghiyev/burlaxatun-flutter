@@ -24,8 +24,6 @@ class CustomAuthButton extends StatelessWidget {
       width: double.maxFinite,
       child: ElevatedButton(
         style: ButtonStyle(
-          // padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 16)),
-          // fixedSize: WidgetStatePropertyAll(Size(double.maxFinite, double.maxFinite)),
           shadowColor: const WidgetStatePropertyAll(Colors.transparent),
           backgroundColor: WidgetStatePropertyAll(buttonColor),
           foregroundColor: WidgetStatePropertyAll(Colors.white),

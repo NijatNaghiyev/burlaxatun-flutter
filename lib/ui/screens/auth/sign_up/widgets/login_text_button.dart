@@ -14,7 +14,7 @@ class LoginTextButton extends StatelessWidget {
       text: TextSpan(
         children: <TextSpan>[
           TextSpan(
-            text: 'Already have account?',
+            text: 'Mövcud hesabınız var?',
             style: GoogleFonts.poppins(
               fontSize: 12,
               color: Color(0xff070707),
@@ -23,7 +23,7 @@ class LoginTextButton extends StatelessWidget {
             ),
           ),
           TextSpan(
-            text: ' Login',
+            text: ' Daxil olun',
             style: GoogleFonts.poppins(
               fontSize: 12,
               color: ColorConstants.primaryRedColor,

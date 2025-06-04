@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../cubits/main_cubit/main_state.dart';
 import '../../../../../../cubits/main_cubit/mainn_cubit.dart';
@@ -45,6 +46,9 @@ class _UltrasoundPageState extends State<UltrasoundPage> {
               builder: (context, state) {
                 if (state.ultraSoundStatus == UltraSoundStatus.error) {
                   return Text('data not found');
+                } else if (state.ultraSoundStatus ==
+                    UltraSoundStatus.networkError) {
+                  return SvgPicture.asset('assets/svgs/forum_icon.svg');
                 } else if (state.ultraSoundStatus == UltraSoundStatus.loading) {
                   return Center(child: CircularProgressIndicator());
                 }

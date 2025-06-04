@@ -27,7 +27,7 @@ class LoginInputs extends StatelessWidget {
               isError: state.isError,
               textController: loginCubit.loginEmailController,
               focusNode: loginCubit.loginEmailFocusNode,
-              inputName: 'Phone number',
+              inputName: 'Mobil nömrə',
               hintText: '+994 xxx xxx xx xx',
               isNumber: true,
               onFieldSubmitted: (p0) =>
@@ -73,7 +73,7 @@ class LoginInputs extends StatelessWidget {
                         child: SizedBox(
                           child: GlobalText(
                             text:
-                                'Oops! Email or password incorrect try another one.',
+                                'E-poçt və ya parol səhvdir, başqasını sınayın.',
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             color: Color(0xffD62828),

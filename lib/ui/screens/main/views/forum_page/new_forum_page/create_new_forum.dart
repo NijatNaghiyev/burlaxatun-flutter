@@ -36,6 +36,7 @@
 
 import 'package:burla_xatun/cubits/forum_create/forum_create_cubit.dart';
 import 'package:burla_xatun/ui/screens/main/views/forum_page/new_forum_page/widgets/forum_thoughts_input.dart';
+import 'package:burla_xatun/utils/app/app_snackbars.dart';
 import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -81,9 +82,7 @@ class _CreateNewForumState extends State<CreateNewForum> {
           context.pop();
         } else if (state.status == ForumCreateStatus.failure ||
             state.status == ForumCreateStatus.networkError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Forum əlavə edilərkən xəta baş verdi')),
-          );
+          AppSnackbars.error(context, 'Forum əlavə edilərkən xəta baş verdi');
         }
       },
       child: Scaffold(

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:burla_xatun/cubits/indicator/indicator_cubit.dart';
 import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/indicator_data_screen/widgets/date_or_time_box.dart';
 import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/indicator_data_screen/widgets/pick_indicator_date_widget.dart';
+import 'package:burla_xatun/utils/app/app_snackbars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -185,19 +186,13 @@ class _AddNewIndicatorDialogState extends State<AddNewIndicatorDialog> {
                             if (state.indicatorStatus ==
                                 IndicatorStatus.error) {
                               context.pop();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('Adding indicator failed!'),
-                                ),
-                              );
+                              AppSnackbars.error(context,
+                                  'Göstərici əlavə edərkən xəta baş verdi');
                             } else if (state.indicatorStatus ==
                                 IndicatorStatus.success) {
                               context.pop();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('Adding indicator success!'),
-                                ),
-                              );
+                              AppSnackbars.error(
+                                  context, 'Göstərici uğurla əlavə olundu');
                             }
                           },
                           builder: (context, state) {

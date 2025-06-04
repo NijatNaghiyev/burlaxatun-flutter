@@ -1,6 +1,7 @@
 import 'package:burla_xatun/ui/screens/auth/widgets/custom_auth_button.dart';
 import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
 import 'package:burla_xatun/ui/widgets/global_text.dart';
+import 'package:burla_xatun/utils/app/app_snackbars.dart';
 import 'package:burla_xatun/utils/constants/text_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,8 +14,10 @@ class GoOnButton extends StatelessWidget {
   const GoOnButton({
     super.key,
     required this.formKey,
+    required this.isCheckedPolicy,
   });
   final GlobalKey<FormState> formKey;
+  final ValueNotifier<bool> isCheckedPolicy;
 
   @override
   Widget build(BuildContext context) {
@@ -25,36 +28,37 @@ class GoOnButton extends StatelessWidget {
           context.push('/questions');
         }
         if (state is SignupError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Signup failed!')),
-          );
+          AppSnackbars.error(context, 'Qeydiyyat uğursuz oldu!');
         }
         if (state is SignupNetworkError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Signup failed!')),
-          );
+          AppSnackbars.error(context, 'Qeydiyyat uğursuz oldu!');
         }
       },
       builder: (_, state) {
-        return CustomAuthButton(
-          buttonColor: signupCubit.isActiveButton
-              ? ColorConstants.primaryRedColor
-              : ColorConstants.disabledButtonColor,
-          textColor: ColorConstants.white,
-          onPressed: state is SignupLoading
-              ? () {}
-              : () {
-                  if (state is SignupInitial &&
-                      state.isActiveButton &&
-                      formKey.currentState!.validate()) {
-                    signupCubit.register();
-                  }
-                },
-          child: state is SignupLoading
-              ? CustomCircularProgressIndicator()
-              : GlobalText(
-                  text: TextConstants.davamEt,
-                ),
+        return ValueListenableBuilder(
+          valueListenable: isCheckedPolicy,
+          builder: (context, value, child) {
+            return CustomAuthButton(
+              buttonColor: value
+                  ? ColorConstants.primaryRedColor
+                  : ColorConstants.disabledButtonColor,
+              textColor: ColorConstants.white,
+              onPressed: state is SignupLoading
+                  ? () {}
+                  : () {
+                      if (
+                          // state is SignupInitial &&
+                          value && formKey.currentState!.validate()) {
+                        signupCubit.register();
+                      }
+                    },
+              child: state is SignupLoading
+                  ? CustomCircularProgressIndicator()
+                  : GlobalText(
+                      text: TextConstants.davamEt,
+                    ),
+            );
+          },
         );
       },
     );
