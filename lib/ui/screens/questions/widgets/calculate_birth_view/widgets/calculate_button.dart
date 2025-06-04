@@ -41,14 +41,15 @@ class CalculateButton extends StatelessWidget {
               : 'Hesabla',
           buttonColor: ColorConstants.primaryRedColor,
           textColor: Colors.white,
-          onPressed: () async {
-            if (state.selectedCalculateOptionIndex == null) {
-              questionsCubit.stateError();
-            } else {
-              // questionsCubit.stateLoading();
-              await questionsCubit.calculate();
-            }
-          },
+          onPressed: state.stateStatus == CalculateStateStatus.loading
+              ? () {}
+              : () async {
+                  if (state.selectedCalculateOptionIndex == null) {
+                    questionsCubit.stateError();
+                  } else {
+                    await questionsCubit.calculate();
+                  }
+                },
         );
       },
     );

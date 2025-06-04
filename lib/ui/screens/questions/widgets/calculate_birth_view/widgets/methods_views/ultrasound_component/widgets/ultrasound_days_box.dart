@@ -36,7 +36,7 @@ class UltrasoundDaysBox extends StatelessWidget {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(34)),
-                border: Border.all(color: Colors.black38),
+                border: Border.all(color: Color(0xffEAEAEA)),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -48,7 +48,7 @@ class UltrasoundDaysBox extends StatelessWidget {
                         return GlobalText(
                           text: state.ultrasoundDayCount == null
                               ? 'Gün sayı'
-                              : state.ultrasoundDayCount.toString(),
+                              : '${state.ultrasoundDayCount.toString()} gün',
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: Colors.black,

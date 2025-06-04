@@ -23,6 +23,7 @@ class RegisterSuccess extends StatelessWidget {
           SizedBox(
             width: 318,
             child: GlobalText(
+              textAlign: TextAlign.center,
               text: 'Qeydiyyat uğurla tamamlandı!',
               fontSize: 24,
               fontWeight: FontWeight.w500,
