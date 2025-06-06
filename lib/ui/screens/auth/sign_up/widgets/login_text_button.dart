@@ -30,7 +30,8 @@ class LoginTextButton extends StatelessWidget {
               fontWeight: FontWeight.w400,
               height: 1.1,
             ),
-            recognizer: TapGestureRecognizer()..onTap = () => context.pop(),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () => context.go('/login'),
           ),
         ],
       ),

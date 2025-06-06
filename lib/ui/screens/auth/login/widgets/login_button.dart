@@ -2,7 +2,6 @@ import 'package:burla_xatun/cubits/login_cubit/login_cubit_state.dart';
 import 'package:burla_xatun/ui/screens/auth/widgets/custom_auth_button.dart';
 import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
 import 'package:burla_xatun/ui/widgets/global_text.dart';
-import 'package:burla_xatun/utils/app/app_snackbars.dart';
 import 'package:burla_xatun/utils/constants/text_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -31,7 +31,7 @@ class SignupButton extends StatelessWidget {
               height: 1.1,
             ),
             recognizer: TapGestureRecognizer()
-              ..onTap = () => context.push('/sign_up'),
+              ..onTap = () => context.go('/sign_up'),
           ),
         ],
       ),

@@ -59,7 +59,7 @@ class LoginCubit extends Cubit<LoginCubitInitial> {
         state.copyWith(
           loginStatus: LoginStatus.networkError,
           errorMessage:
-              (e.response?.data as Map<String, dynamic>)['detail'] ?? e.toString(),
+              (e.response?.data as Map<String, dynamic>)['detail'] ?? '',
         ),
       );
       log("Login Dio Exception: $e", stackTrace: s);

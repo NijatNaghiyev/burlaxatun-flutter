@@ -84,11 +84,15 @@ class SignupCubit extends Cubit<SignupState> {
       emit(SignupSuccess());
       log("Register success");
     } on DioException catch (e, s) {
-      emit(SignupNetworkError(e.toString()));
+      emit(
+        SignupNetworkError(
+          (e.response?.data as Map<String, dynamic>)['detail'] ?? '',
+        ),
+      );
 
       log("Register Dio Exception: $e", stackTrace: s);
     } catch (e, s) {
-      emit(SignupError(e.toString()));
+      emit(SignupError(''));
 
       log("Register Unknown Error: $e", stackTrace: s);
     }
