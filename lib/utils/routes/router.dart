@@ -193,12 +193,16 @@ class Routerapp {
               ),
               GoRoute(
                 path: '/indicator_data',
-                builder: (context, state) => BlocProvider(
-                  create: (context) => locator<IndicatorCubit>(),
-                  child: IndicatorDataScreen(
-                    indicatorName: state.extra as String,
-                  ),
-                ),
+                builder: (context, state) {
+                  final indicator = state.extra as Map;
+                  return BlocProvider(
+                    create: (context) => locator<IndicatorCubit>(),
+                    child: IndicatorDataScreen(
+                      indicatorName: indicator['indicator']!,
+                      indicatorAppBarTitle: indicator['indicator_name']!,
+                    ),
+                  );
+                },
               ),
               GoRoute(
                 path: '/initial_doctors',

@@ -1,25 +1,24 @@
 import 'dart:developer';
 
-import 'package:burla_xatun/cubits/add_child/add_child_cubit.dart';
-import 'package:burla_xatun/data/models/remote/request/add_child_request_model.dart';
-import 'package:burla_xatun/ui/screens/add_child/widgets/add_child_success_dialog.dart';
-import 'package:burla_xatun/ui/screens/questions/widgets/calculate_birth_view/widgets/calculation_result_dialog.dart';
-import 'package:burla_xatun/ui/screens/questions/widgets/question_views/davam_et_button.dart';
-import 'package:burla_xatun/ui/widgets/global_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../cubits/add_child/add_child_cubit.dart';
 import '../../../cubits/questions_cubit/questions_cubit.dart';
 import '../../../cubits/questions_cubit/questions_state.dart';
+import '../../../data/models/remote/request/add_child_request_model.dart';
 import '../../../utils/constants/asset_constants.dart';
 import '../../../utils/constants/color_constants.dart';
 import '../../../utils/extensions/context_extensions.dart';
 import '../../../utils/extensions/num_extensions.dart';
+import '../../widgets/global_appbar.dart';
 import '../../widgets/global_input.dart';
 import '../../widgets/global_text.dart';
+import '../questions/widgets/question_views/davam_et_button.dart';
 import '../questions/widgets/question_views/pick_birth_date_widget.dart';
+import 'widgets/add_child_success_dialog.dart';
 
 class AddYourChild extends StatelessWidget {
   const AddYourChild({super.key});

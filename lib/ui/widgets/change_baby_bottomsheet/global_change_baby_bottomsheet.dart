@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:burla_xatun/cubits/user_data/user_data_cubit.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,7 @@ class GlobalChangeBabyBottomsheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final children = locator<UserDataCubit>().state.response?.babies ?? [];
+    log('children length: ${children.length}');
     return SizedBox(
       width: context.deviceWidth,
       child: Padding(
@@ -21,7 +24,7 @@ class GlobalChangeBabyBottomsheet extends StatelessWidget {
           child: Column(
             children: [
               24.h,
-              if (children.isEmpty)
+              if (children.isEmpty )
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 50),
                   child: Text('there is no any child'),

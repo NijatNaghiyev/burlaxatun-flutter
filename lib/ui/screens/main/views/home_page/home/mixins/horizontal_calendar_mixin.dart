@@ -36,19 +36,19 @@ mixin HorizontalCalendarMixin on State<HorizontalCalendar> {
   String getDayName(DateTime date) {
     switch (date.weekday) {
       case DateTime.monday:
-        return 'Mon';
+        return 'B.e';
       case DateTime.tuesday:
-        return 'Tue';
+        return 'Ç.a';
       case DateTime.wednesday:
-        return 'Wed';
+        return 'Ç';
       case DateTime.thursday:
-        return 'Thu';
+        return 'C.a';
       case DateTime.friday:
-        return 'Fri';
+        return 'C';
       case DateTime.saturday:
-        return 'Sat';
+        return 'Ş';
       case DateTime.sunday:
-        return 'Sun';
+        return 'B';
       default:
         return '';
     }

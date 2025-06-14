@@ -13,9 +13,11 @@ class IndicatorDataScreen extends StatefulWidget {
   const IndicatorDataScreen({
     super.key,
     required this.indicatorName,
+    required this.indicatorAppBarTitle,
   });
 
   final String indicatorName;
+  final String indicatorAppBarTitle;
 
   @override
   State<IndicatorDataScreen> createState() => _IndicatorDataScreenState();
@@ -38,7 +40,7 @@ class _IndicatorDataScreenState extends State<IndicatorDataScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GlobalAppbar(
-        title: 'Bədən çəkisi',
+        title: widget.indicatorAppBarTitle,
         onLeadingTap: () {
           context.pop();
         },

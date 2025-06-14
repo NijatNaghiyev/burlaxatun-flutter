@@ -58,7 +58,7 @@ class _HomePageAppbarState extends State<HomePageAppbar> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         GlobalText(
-                          text: 'Hello, ${data.fullName ?? 'User'}',
+                          text: 'Salam, ${data.fullName ?? 'User'}',
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                           color: const Color(0xff8C8A8A),
@@ -88,7 +88,7 @@ class _HomePageAppbarState extends State<HomePageAppbar> {
                   textAlign: TextAlign.left,
                   height: 1.3,
                   text:
-                      '${data.pregnantWeek ?? '0'}th Week of Pregnancy \nDay ${(int.tryParse(data.pregnantWeek ?? '0') ?? 0) * 7}',
+                      'Hamiləliyin ${data.pregnantWeek ?? '0'}. həftəsi \nDay ${(int.tryParse(data.pregnantWeek ?? '0') ?? 0) * 7}',
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                   color: Colors.black,

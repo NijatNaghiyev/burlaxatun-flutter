@@ -14,7 +14,7 @@ class AllIndicators extends StatelessWidget {
       children: [
         for (int i = 0; i < mainCubit.myHealingCardItems.length; i++)
           SingleIndicatorTile(
-            item: mainCubit.myHealingCardItems[i],
+            item: mainCubit.myHealingCardItems[i], 
           ),
       ],
     );

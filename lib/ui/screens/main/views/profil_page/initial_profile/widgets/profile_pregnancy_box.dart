@@ -91,19 +91,31 @@ class ProfilePregnancyBox extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GlobalText(
-                          text: 'Körpənin adi',
+                          text: 'Körpənin adı',
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
                           color: Color(0xff344054),
                         ),
-                        GlobalText(
-                          text: baby?.name?.isNotEmpty == true
-                              ? baby!.name!
-                              : 'Daxil edin',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff98A2B3),
-                        ),
+                        SizedBox(
+                          width: 75,
+                          height: 37,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: baby?.name?.isNotEmpty == true
+                                  ? baby!.name!
+                                  : 'Daxil edin',
+                              border: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                              hintStyle: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xff98A2B3),
+                              ),
+                            ),
+                          ),
+                        )
                       ],
                     ),
                     14.h,
@@ -119,7 +131,7 @@ class ProfilePregnancyBox extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GlobalText(
-                          text: 'Dogum tarixi',
+                          text: 'Doğum tarixi',
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
                           color: Color(0xff344054),

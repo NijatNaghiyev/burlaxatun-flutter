@@ -62,7 +62,7 @@ class _PregnancyGuideState extends State<PregnancyGuide> {
                     ),
                     13.h,
                     tasks.isEmpty
-                        ? Text('No tasks have been assigned for this week yet')
+                        ? Text('Bu həftə üçün hələlik tapşırıq əlavə edilməyib')
                         : Column(
                             spacing: 24,
                             children: [

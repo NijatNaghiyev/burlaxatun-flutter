@@ -51,7 +51,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 if (state.notificationStatus == NotificationStatus.success) {
                   final notificationList = state.notifications ?? [];
                   return notificationList.isEmpty
-                      ? Center(child: Text('There is no notification'))
+                      ? Center(child: Text('Bildiriş yoxdur'))
                       : Expanded(
                           child: ListView.separated(
                             itemCount: notificationList.length,

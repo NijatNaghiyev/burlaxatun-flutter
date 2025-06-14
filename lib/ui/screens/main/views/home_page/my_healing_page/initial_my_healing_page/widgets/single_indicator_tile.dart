@@ -22,10 +22,16 @@ class SingleIndicatorTile extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 16),
       child: GestureDetector(
         onTap: () {
-          if (item.route == '/my_medicines') {
+          if (item.indciatorName == 'medicines') {
             mainCubit.pushScaffoldMyMedicinesPage(context);
           } else {
-            context.push('/indicator_data', extra: item.indciatorName);
+            context.push(
+              '/indicator_data',
+              extra: {
+                'indicator': item.indciatorName,
+                'indicator_name': item.tileName,
+              },
+            );
           }
         },
         child: SizedBox(
@@ -35,11 +41,7 @@ class SingleIndicatorTile extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
-                Image.asset(
-                  item.icon,
-                  width: 24,
-                  height: 24,
-                ),
+                SvgPicture.asset(item.icon, width: 24, height: 24),
                 SizedBox(width: 16),
                 GlobalText(
                   text: item.tileName,
