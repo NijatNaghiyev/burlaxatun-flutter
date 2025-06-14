@@ -49,7 +49,7 @@ class _SelectedNamesWidgetState extends State<SelectedNamesWidget>
                       Padding(
                         padding: EdgeInsets.only(top: 100),
                         child: Center(
-                          child: Text('There is no any selected name'),
+                          child: Text('Hər hansı seçilmiş ad yoxdur'),
                         ),
                       )
                     ],
