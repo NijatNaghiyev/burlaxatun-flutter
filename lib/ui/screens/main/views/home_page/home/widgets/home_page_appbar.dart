@@ -88,7 +88,7 @@ class _HomePageAppbarState extends State<HomePageAppbar> {
                   textAlign: TextAlign.left,
                   height: 1.3,
                   text:
-                      'Hamiləliyin ${data.pregnantWeek ?? '0'}. həftəsi \nDay ${(int.tryParse(data.pregnantWeek ?? '0') ?? 0) * 7}',
+                      'Hamiləliyin ${data.pregnantWeek ?? '0'}. həftəsi \nGün ${(int.tryParse(data.pregnantWeek ?? '0') ?? 0) * 7}',
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                   color: Colors.black,
