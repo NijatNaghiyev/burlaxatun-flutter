@@ -1,6 +1,7 @@
 import 'package:burla_xatun/cubits/about/about_cubit.dart';
 import 'package:burla_xatun/cubits/blog_cat/blog_cat_cubit.dart';
 import 'package:burla_xatun/cubits/blog_sliders/blog_sliders_cubit.dart';
+import 'package:burla_xatun/cubits/change_pass/change_pass_cubit.dart';
 import 'package:burla_xatun/cubits/contact/contact_cubit.dart';
 import 'package:burla_xatun/cubits/countries/countries_cubit.dart';
 import 'package:burla_xatun/cubits/daily_rec/daily_rec_cubit.dart';
@@ -136,6 +137,10 @@ class MyApp extends StatelessWidget {
 
         BlocProvider(
           create: (context) => locator<UserDataCubit>()..getUserData(),
+        ),
+
+        BlocProvider<ChangePassCubit>(
+          create: (context) => locator<ChangePassCubit>(),
         ),
 
         // BlocProvider(

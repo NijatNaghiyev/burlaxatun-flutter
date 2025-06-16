@@ -7,6 +7,7 @@ class EndpointsConstants {
   static const login = '$baseUrl/A/users/access-token/';
   static const register = '$baseUrl/A/user-register/';
   static const userUpdate = "$baseUrl/A/user-update/";
+  static const changePass = "$baseUrl/A/user/change-password";
 
   static const users = '$baseUrl/users';
 
