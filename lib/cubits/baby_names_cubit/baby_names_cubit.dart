@@ -1,15 +1,13 @@
 import 'dart:developer';
 
-import 'package:burla_xatun/data/models/remote/response/names_model.dart';
-import 'package:burla_xatun/data/models/remote/response/selected_names_model.dart';
-import 'package:burla_xatun/generated/l10n.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/contractor/baby_names_contractor.dart';
 import '../../data/models/remote/response/countries_model.dart';
+import '../../data/models/remote/response/names_model.dart';
+import '../../data/models/remote/response/selected_names_model.dart';
 
 part 'baby_names_state.dart';
 

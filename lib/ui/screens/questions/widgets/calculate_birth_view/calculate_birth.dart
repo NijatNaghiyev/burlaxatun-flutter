@@ -41,12 +41,16 @@ class CalculateBirth extends StatelessWidget {
                   return previous.showOptions != current.showOptions;
                 },
                 builder: (context, state) {
-                  return state.showOptions
-                      ? Padding(
-                          padding: const EdgeInsets.only(top: 14),
-                          child: CalculationOptions(),
-                        )
-                      : SizedBox.shrink();
+                  return AnimatedSize(
+                    duration: Durations.short4,
+                    child: Visibility(
+                      visible: state.showOptions,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 14),
+                        child: CalculationOptions(),
+                      ),
+                    ),
+                  );
                 },
               ),
               20.h,
@@ -63,8 +67,11 @@ class CalculateBirth extends StatelessWidget {
                       : SizedBox.shrink();
                 },
               ),
-              // 35.h,
               BlocBuilder<QuestionsCubit, QuestionsInitial>(
+                buildWhen: (previous, current) {
+                  return previous.selectedCalculateOptionIndex !=
+                      current.selectedCalculateOptionIndex;
+                },
                 builder: (context, state) {
                   return Padding(
                     padding: EdgeInsets.only(bottom: 12),

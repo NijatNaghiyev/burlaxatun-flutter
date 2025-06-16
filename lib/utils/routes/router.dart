@@ -1,14 +1,19 @@
+import 'package:burla_xatun/cubits/add_child/add_child_cubit.dart';
 import 'package:burla_xatun/cubits/doctor_reservation/doctor_reservation_cubit.dart';
 import 'package:burla_xatun/cubits/forum_list/forum_list_cubit.dart';
+import 'package:burla_xatun/cubits/indicator/indicator_cubit.dart';
 import 'package:burla_xatun/cubits/notification/notification_cubit.dart';
+import 'package:burla_xatun/cubits/signup_cubit/signup_cubit.dart';
 import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
 import 'package:burla_xatun/data/models/remote/response/blog_cat_model.dart';
+import 'package:burla_xatun/ui/screens/add_child/add_your_child.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/email_request_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_otp_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/forgot_psw_success_screen.dart';
 import 'package:burla_xatun/ui/screens/auth/forgot_psw/reset_psw_screen.dart';
 import 'package:burla_xatun/ui/screens/main/views/profil_page/using_rules/using_rules_screen.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,7 +35,7 @@ import '../../ui/screens/main/views/home_page/blog/see_all_articles/see_all_arti
 import '../../ui/screens/main/views/home_page/doctor/initial_doctor_page/initial_doctor_page.dart';
 import '../../ui/screens/main/views/home_page/doctor/registration_doctor_page/registration_doctor_page.dart';
 import '../../ui/screens/main/views/home_page/home/home_page.dart';
-import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/body_weight_page.dart';
+import '../../ui/screens/main/views/home_page/my_healing_page/indicator_data_screen/indicator_data_screen.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/initial_my_healing_page/my_healing_page.dart';
 import '../../ui/screens/main/views/home_page/names/gender_names/gender_names.dart';
 import '../../ui/screens/main/views/home_page/names/initial_names/names_page.dart';
@@ -55,6 +60,8 @@ import '../../ui/screens/questions/questions.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/calculate_birth.dart';
 import '../../ui/screens/splash/splash_screen.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 class Routerapp {
   static Routerapp? _instance;
 
@@ -66,6 +73,7 @@ class Routerapp {
   // static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   final GoRouter router = GoRouter(
+    navigatorKey: navigatorKey,
     initialLocation: '/splash',
     routes: [
       GoRoute(
@@ -92,7 +100,26 @@ class Routerapp {
       GoRoute(
         path: '/sign_up',
         builder: (context, state) {
-          return SignUp();
+          return BlocProvider(
+            create: (context) => locator<SignupCubit>(),
+            child: SignUp(),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/add_child',
+        builder: (context, state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => locator<AddChildCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => locator<QuestionsCubit>(),
+              ),
+            ],
+            child: AddYourChild(),
+          );
         },
       ),
       GoRoute(
@@ -121,7 +148,7 @@ class Routerapp {
         path: '/questions',
         builder: (context, state) {
           return BlocProvider(
-            create: (context) => QuestionsCubit(),
+            create: (context) => locator<QuestionsCubit>(),
             child: Questions(),
           );
         },
@@ -130,7 +157,7 @@ class Routerapp {
         path: '/calculate',
         builder: (context, state) {
           return BlocProvider(
-            create: (context) => QuestionsCubit(),
+            create: (context) => locator<QuestionsCubit>(),
             child: CalculateBirth(),
           );
         },
@@ -165,8 +192,17 @@ class Routerapp {
                 builder: (context, state) => MyHealingPage(),
               ),
               GoRoute(
-                path: '/body_weight',
-                builder: (context, state) => BodyWeightPage(),
+                path: '/indicator_data',
+                builder: (context, state) {
+                  final indicator = state.extra as Map;
+                  return BlocProvider(
+                    create: (context) => locator<IndicatorCubit>(),
+                    child: IndicatorDataScreen(
+                      indicatorName: indicator['indicator']!,
+                      indicatorAppBarTitle: indicator['indicator_name']!,
+                    ),
+                  );
+                },
               ),
               GoRoute(
                 path: '/initial_doctors',

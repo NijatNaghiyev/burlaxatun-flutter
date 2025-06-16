@@ -1,6 +1,12 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/cubits/main_cubit/mainn_cubit.dart';
+import 'package:burla_xatun/data/services/local/login_token_service.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
+import 'package:burla_xatun/utils/routes/router.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart' show PrettyDioLogger;
 
 class BaseNetwork {
@@ -21,10 +27,37 @@ class BaseNetwork {
           requestHeader: true,
           requestBody: true,
         ),
+      )
+      ..interceptors.add(
+        InterceptorsWrapper(
+          onError: (DioException error, ErrorInterceptorHandler handler) {
+            log('Dio Error: ${error.message}');
+            // You can handle different error cases here
+            if (error.response?.statusCode == 401) {
+              // Handle unauthorized error (e.g., token expired)
+              log('Unauthorized: ${error.response?.data}');
+
+              //? If the token is expired or unauthorized, delete the saved login token
+              //? and redirect to the login page
+
+              locator<LoginTokenService>().deleteSaveByKey("login");
+
+              navigatorKey.currentContext?.go('/login');
+              navigatorKey.currentContext?.read<MainnCubit>().changeView(0);
+            } else if (error.response?.statusCode == 404) {
+              // Handle not found error
+              log('Not Found: ${error.response?.data}');
+            }
+            // Continue with the error
+            return handler.next(error);
+          },
+        ),
       );
 
     if (token != null) {
       _dio!.options.headers['Authorization'] = 'Bearer $token';
+    } else {
+      _dio!.options.headers['Authorization'] = null;
     }
 
     return _dio!;

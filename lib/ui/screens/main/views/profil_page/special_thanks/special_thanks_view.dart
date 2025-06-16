@@ -24,7 +24,7 @@ class _SpecialThanksViewState extends State<SpecialThanksView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstants.profileScaffoldColor,
+      backgroundColor: ColorConstants.scaffoldColor,
       appBar: GlobalAppbar(
         title: 'xususi teshekkurler',
         onLeadingTap: () {

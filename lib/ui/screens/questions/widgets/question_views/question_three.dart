@@ -39,18 +39,18 @@ class _QuestionThreeState extends State<QuestionThree>
             builder: (context, state) {
               return GlobalButton(
                 buttonName: 'Bəli',
-                buttonColor: state.isFirstChild == null
-                    ? Colors.white
-                    : state.isFirstChild!
-                        ? Color(0xffFFD3E2)
-                        : Colors.white,
-                borderColor: ColorConstants.primaryRedColor,
+                buttonColor: state.isFirstChild != null && state.isFirstChild!
+                    ? Color(0xffFFD3E2)
+                    : Colors.white,
+                borderColor: state.isFirstChild != null && state.isFirstChild!
+                    ? Colors.transparent
+                    : ColorConstants.primaryRedColor,
                 textColor: ColorConstants.primaryRedColor,
                 onPressed: () {
                   questionCubit.updateQuestionThreeAnswer(true);
                   questionCubit.updateIsActiveButton();
                   // userUpdateCubit.firstChild = true;
-                  userUpdateCubit.updateUser(firstChild: true);
+                  // userUpdateCubit.updateUser(firstChild: true);
                 },
               );
             },
@@ -60,18 +60,18 @@ class _QuestionThreeState extends State<QuestionThree>
             builder: (context, state) {
               return GlobalButton(
                 buttonName: 'Xeyr',
-                buttonColor: state.isFirstChild == null
-                    ? Colors.white
-                    : !state.isFirstChild!
-                        ? Color(0xffFFD3E2)
-                        : Colors.white,
-                borderColor: ColorConstants.primaryRedColor,
+                buttonColor: state.isFirstChild != null && !state.isFirstChild!
+                    ? Color(0xffFFD3E2)
+                    : Colors.white,
+                borderColor: state.isFirstChild != null && !state.isFirstChild!
+                    ? Colors.transparent
+                    : ColorConstants.primaryRedColor,
                 textColor: ColorConstants.primaryRedColor,
                 onPressed: () {
                   questionCubit.updateQuestionThreeAnswer(false);
                   questionCubit.updateIsActiveButton();
                   // userUpdateCubit.firstChild = false;
-                  userUpdateCubit.updateUser(firstChild: false);
+                  // userUpdateCubit.updateUser(firstChild: false);
                 },
               );
             },
@@ -83,5 +83,5 @@ class _QuestionThreeState extends State<QuestionThree>
 
   @override
   // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => false;
 }

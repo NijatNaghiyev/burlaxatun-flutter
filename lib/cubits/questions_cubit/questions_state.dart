@@ -29,6 +29,7 @@ class QuestionsInitial extends Equatable {
     required this.isShowUltrasoundDays,
     required this.isShowUltrasoundWeeks,
     required this.stateStatus,
+    required this.userUpdateStatus,
   });
 
   final int? currentQuestionOneOptionIndex;
@@ -52,9 +53,11 @@ class QuestionsInitial extends Equatable {
   final DateTime selectedDay;
   final DateTime initialDateTime;
   final CalculateStateStatus stateStatus;
+  final UserUpdateStatus userUpdateStatus;
 
   @override
   List<Object?> get props => [
+        userUpdateStatus,
         currentQuestionOneOptionIndex,
         selectedCalculateOptionIndex,
         questionPageIndex,
@@ -78,28 +81,30 @@ class QuestionsInitial extends Equatable {
         stateStatus,
       ];
 
-  QuestionsInitial copyWith(
-      {int? currentQuestionOneOptionIndex,
-      int? selectedCalculateOptionIndex,
-      int? questionPageIndex,
-      int? focusedWeekIndex,
-      int? ultrasoundWeekCount,
-      int? ultrasoundDayCount,
-      bool? iDontKnow,
-      bool? showOptions,
-      bool? showDays,
-      bool? showCalendar,
-      bool? isActiveButton,
-      bool? isFirstChild,
-      bool? isShowUltrasoundDays,
-      bool? isShowUltrasoundWeeks,
-      String? selectedCalculateOptionString,
-      String? selectedPeriodTimeString,
-      String? birthDateString,
-      int? ultrasoundRadioValue,
-      DateTime? selectedDay,
-      DateTime? initialDateTime,
-      CalculateStateStatus? stateStatus}) {
+  QuestionsInitial copyWith({
+    int? currentQuestionOneOptionIndex,
+    int? selectedCalculateOptionIndex,
+    int? questionPageIndex,
+    int? focusedWeekIndex,
+    int? ultrasoundWeekCount,
+    int? ultrasoundDayCount,
+    bool? iDontKnow,
+    bool? showOptions,
+    bool? showDays,
+    bool? showCalendar,
+    bool? isActiveButton,
+    bool? isFirstChild,
+    bool? isShowUltrasoundDays,
+    bool? isShowUltrasoundWeeks,
+    String? selectedCalculateOptionString,
+    String? selectedPeriodTimeString,
+    String? birthDateString,
+    int? ultrasoundRadioValue,
+    DateTime? selectedDay,
+    DateTime? initialDateTime,
+    CalculateStateStatus? stateStatus,
+    UserUpdateStatus? userUpdateStatus,
+  }) {
     return QuestionsInitial(
       currentQuestionOneOptionIndex: currentQuestionOneOptionIndex,
       selectedCalculateOptionIndex:
@@ -126,6 +131,7 @@ class QuestionsInitial extends Equatable {
       isShowUltrasoundWeeks:
           isShowUltrasoundWeeks ?? this.isShowUltrasoundWeeks,
       stateStatus: stateStatus ?? this.stateStatus,
+      userUpdateStatus: userUpdateStatus ?? this.userUpdateStatus,
     );
   }
 }

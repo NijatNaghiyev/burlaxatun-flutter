@@ -31,8 +31,8 @@ class LoginCubit extends Cubit<LoginCubitInitial> {
   }
 
   void updateIsValid() {
-    final isActiveButton = loginEmailController.text.isNotEmpty &&
-        loginPasswordController.text.isNotEmpty;
+    final isActiveButton = loginEmailController.text.trim().isNotEmpty &&
+        loginPasswordController.text.trim().isNotEmpty;
     emit(state.copyWith(isActiveButton: isActiveButton));
   }
 
@@ -46,32 +46,28 @@ class LoginCubit extends Cubit<LoginCubitInitial> {
       log("Login Loading");
 
       final response = await _contractor.login(
-        email: loginEmailController.text,
-        password: loginPasswordController.text,
+        email: loginEmailController.text.trim(),
+        password: loginPasswordController.text.trim(),
       );
 
       await _loginTokenService.saveLoginResponse(response);
       emit(state.copyWith(loginStatus: LoginStatus.success));
       log("Login success");
-      log("Saved access token: ${_loginTokenService.token}");
-
-      // final token = await authService.login(
-      //     loginEmailController.text, loginPasswordController.text);
-      // final isSavedToken = await TokenHiveService.instance.saveToken(token);
-      // if (isSavedToken) {
-      //   final savedToken = await TokenHiveService.instance.getToken();
-      //   final userData = await authService.getUser(savedToken!);
-      //   final data = userData.toHiveModel();
-      //   bool isSuccess = await UserHiveService.instance.saveUserData(data);
-      //   if (isSuccess) {
-      //     emit(state.copyWith(loginStatus: LoginStatus.success));
-      //   }
-      // }
+      log("Saved access token (login): ${_loginTokenService.token}");
     } on DioException catch (e, s) {
-      emit(state.copyWith(loginStatus: LoginStatus.networkError));
+      emit(
+        state.copyWith(
+          loginStatus: LoginStatus.networkError,
+          errorMessage:
+              (e.response?.data as Map<String, dynamic>)['detail'] ?? '',
+        ),
+      );
       log("Login Dio Exception: $e", stackTrace: s);
     } catch (e, s) {
-      emit(state.copyWith(loginStatus: LoginStatus.error));
+      emit(state.copyWith(
+        loginStatus: LoginStatus.error,
+        errorMessage: '',
+      ));
       log("Login Unknown Error: $e", stackTrace: s);
     }
   }

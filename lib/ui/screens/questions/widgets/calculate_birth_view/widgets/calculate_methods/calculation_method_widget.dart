@@ -38,7 +38,7 @@ class CalculationMethodWidget extends StatelessWidget {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(34)),
-                border: Border.all(color: Colors.black38),
+                border: Border.all(color: Color(0xffEAEAEA)),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),

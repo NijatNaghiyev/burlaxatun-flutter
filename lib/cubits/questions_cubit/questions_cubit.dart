@@ -362,7 +362,9 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:burla_xatun/cubits/user_update/user_update_cubit.dart';
+import 'package:burla_xatun/data/contractor/user_update_contractor.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
+import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 
 import 'package:burla_xatun/data/models/remote/response/pregnancy_calculate_model.dart';
@@ -374,7 +376,7 @@ import '../../ui/screens/main/views/home_page/home/home_page.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/first_day_of_last_period_component/first_day_of_last_period.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ivf_component/ivf.dart';
 import '../../ui/screens/questions/widgets/calculate_birth_view/widgets/methods_views/ultrasound_component/ultrasound.dart';
-import '../../ui/screens/questions/widgets/question_views/add_your_child.dart';
+import '../../ui/screens/add_child/add_your_child.dart';
 import '../../ui/screens/questions/widgets/question_views/question_one.dart';
 import '../../ui/screens/questions/widgets/question_views/question_three.dart';
 import '../../ui/screens/questions/widgets/question_views/question_two.dart';
@@ -383,8 +385,10 @@ import 'questions_state.dart';
 
 enum CalculateStateStatus { initial, success, error, loading }
 
+enum UserUpdateStatus { initial, success, error, loading, networkError }
+
 class QuestionsCubit extends Cubit<QuestionsInitial> {
-  QuestionsCubit()
+  QuestionsCubit({this.userUpdateContractor})
       : super(
           QuestionsInitial(
             currentQuestionOneOptionIndex: null,
@@ -409,8 +413,11 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
             isShowUltrasoundDays: false,
             isShowUltrasoundWeeks: false,
             stateStatus: CalculateStateStatus.initial,
+            userUpdateStatus: UserUpdateStatus.initial,
           ),
         );
+
+  final UserUpdateContractor? userUpdateContractor;
 
   final pageController = PageController();
   final scrollController = ScrollController();
@@ -463,6 +470,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   Future<void> calculate() async {
     try {
       stateLoading();
+      emit(state.copyWith(focusedWeekIndex: null));
 
       // Ensure we have a properly formatted date string (YYYY-MM-DD)
       String dateToSend = state.birthDateString;
@@ -480,7 +488,11 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
         week: state.ultrasoundWeekCount ?? 0,
         day: state.ultrasoundDayCount ?? 0,
       );
-      emit(state.copyWith(stateStatus: CalculateStateStatus.success));
+      emit(state.copyWith(
+        focusedWeekIndex: calculatedData.data?.weeks ?? 0,
+        stateStatus: CalculateStateStatus.success,
+      ));
+      await updateUser();
       stateInitial();
     } catch (e, s) {
       log('Stack Trace: $s');
@@ -576,32 +588,74 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
     emit(state.copyWith(focusedWeekIndex: v));
   }
 
-  void nextQuestion() {
-    if (state.questionPageIndex <= 2) {
-      emit(state.copyWith(questionPageIndex: state.questionPageIndex + 1));
+  Future<void> updateUser(
+      {String? phoneNumber,
+      bool? onboardingDone,
+      bool? wantToBePregnant,
+      bool? wantToSeePeriod,
+      bool? isPregnant,
+      String? pregnantWeek,
+      bool? firstChild,
+      String? activeLanguage,
+      bool? enableNotifications}) async {
+    try {
+      emit(state.copyWith(userUpdateStatus: UserUpdateStatus.loading));
+      log("User Update Loading");
 
-      if (state.questionPageIndex < 3) {
+      final response = await userUpdateContractor!.updateUser(
+        isPregnant: questionOneButtonNotifier.value == 0,
+        wantToSeePeriod: questionOneButtonNotifier.value == 1,
+        wantToBePregnant: questionOneButtonNotifier.value == 2,
+        activeLanguage: activeLanguage,
+        enableNotifications: true,
+        firstChild: state.isFirstChild,
+        onboardingDone: true,
+        phoneNumber: phoneNumber,
+        pregnantWeek: state.focusedWeekIndex.toString(),
+      );
+      emit(state.copyWith(userUpdateStatus: UserUpdateStatus.success));
+    } on DioException catch (e, s) {
+      emit(state.copyWith(userUpdateStatus: UserUpdateStatus.networkError));
+      log("User Update Dio Exception: $e", stackTrace: s);
+    } catch (e, s) {
+      emit(state.copyWith(userUpdateStatus: UserUpdateStatus.error));
+      log("User Update Unknown Error: $e", stackTrace: s);
+    }
+  }
+
+  Future<void> nextQuestion() async {
+    if (state.questionPageIndex < 2) {
+      if (state.questionPageIndex < 3 && questionOneButtonNotifier.value == 0) {
+        emit(state.copyWith(
+          questionPageIndex: state.questionPageIndex + 1,
+        ));
         pageController.animateToPage(
           state.questionPageIndex,
           duration: Durations.medium2,
           curve: Curves.linear,
         );
+        if (state.questionPageIndex == 1) {
+          emit(state.copyWith(
+            isActiveButton: state.focusedWeekIndex == 0 ? false : true,
+          ));
+        } else if (state.questionPageIndex == 2) {
+          emit(state.copyWith(
+            isActiveButton: state.isFirstChild == null ? false : true,
+          ));
+        }
+      } else {
+        // log('this is first questions request');
+        await updateUser();
+      }
+    } else if (state.questionPageIndex == 2) {
+      log('this question three request');
+      await updateUser();
+      if (state.isFirstChild!) {
         emit(state.copyWith(
-          isActiveButton:
-              state.focusedWeekIndex == 0 || state.isFirstChild == null
-                  ? false
-                  : true,
+          questionPageIndex: state.questionPageIndex + 1,
         ));
-      } else if (state.isFirstChild! && state.questionPageIndex < 4) {
-        pageController.jumpToPage(state.questionPageIndex);
-      } else if (!state.isFirstChild! && state.questionPageIndex < 4) {
-        emit(state.copyWith(questionPageIndex: state.questionPageIndex + 1));
         pageController.jumpToPage(state.questionPageIndex);
       }
-    } else if (state.questionPageIndex == 3) {
-      log('THIS WAS SUCCESS REGISTER AND GO TO MAIN PAGE');
-    } else {
-      log('THIS WAS ADD UR CHILD AND GO TO MAIN PAGE');
     }
   }
 
@@ -641,7 +695,10 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
   }
 
   void iDontKnowToggle(bool v) {
-    emit(state.copyWith(iDontKnow: !v));
+    emit(state.copyWith(
+      focusedWeekIndex: v == false ? 0 : state.focusedWeekIndex,
+      iDontKnow: !v,
+    ));
   }
 
   void showOptionsToggle() {

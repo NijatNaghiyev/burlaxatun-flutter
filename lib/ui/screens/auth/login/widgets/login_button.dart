@@ -29,6 +29,7 @@ class LoginButton extends StatelessWidget {
         }
         if (state.loginStatus == LoginStatus.networkError) {
           loginCubit.errorState();
+          // AppSnackbars.error(context, 'Şəbəkəni yoxlayın');
         }
       },
       builder: (_, state) {
@@ -38,6 +39,7 @@ class LoginButton extends StatelessWidget {
               : ColorConstants.disabledButtonColor,
           textColor: ColorConstants.white,
           onPressed: () {
+            if (state.loginStatus == LoginStatus.loading) return;
             if (loginCubit.loginEmailController.text.isNotEmpty &&
                 loginCubit.loginPasswordController.text.isNotEmpty) {
               state.isActiveButton ? loginCubit.login() : null;
@@ -51,19 +53,6 @@ class LoginButton extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
         );
-        //  GlobalButton(
-        //   buttonName: TextConstants.daxilOl,
-        // buttonColor: state.isActiveButton
-        //     ? ColorConstants.primaryRedColor
-        //     : Colors.grey,
-        //   textColor: Colors.white,
-        // onPressed: () {
-        //   if (loginCubit.loginEmailController.text.isNotEmpty &&
-        //       loginCubit.loginPasswordController.text.isNotEmpty) {
-        //     state.isActiveButton ? loginCubit.login() : null;
-        //   }
-        // },
-        // );
       },
     );
   }

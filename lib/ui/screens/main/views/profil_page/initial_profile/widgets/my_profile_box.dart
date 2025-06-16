@@ -41,11 +41,11 @@ class MyProfileBox extends StatelessWidget {
                 final data = state.response;
                 return Column(
                   children: [
-                    Row(
+                    Row( 
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         GlobalText(
-                          text: 'Hesabim',
+                          text: 'Hesabım',
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                           color: Colors.black,

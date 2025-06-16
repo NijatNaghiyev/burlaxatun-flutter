@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/utils/app/app_snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -22,6 +23,19 @@ class Questions extends StatelessWidget {
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Qeydiyyat',
+        leading: BlocBuilder<QuestionsCubit, QuestionsInitial>(
+          buildWhen: (previous, current) {
+            return previous.questionPageIndex != current.questionPageIndex;
+          },
+          builder: (context, state) {
+            return state.questionPageIndex == 3 || state.questionPageIndex == 0
+                ? SizedBox.fromSize()
+                : Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Color(0xff344054),
+                  );
+          },
+        ),
         onLeadingTap: () {
           // context.pop();
           questionsCubit.goBack();
@@ -47,21 +61,48 @@ class Questions extends StatelessWidget {
           QuestionsPageView(),
           Padding(
             padding: const EdgeInsets.only(bottom: 24),
-            child: BlocBuilder<QuestionsCubit, QuestionsInitial>(
+            child: BlocConsumer<QuestionsCubit, QuestionsInitial>(
               buildWhen: (previous, current) {
                 return previous.isActiveButton != current.isActiveButton ||
-                    previous.iDontKnow != current.iDontKnow;
+                    previous.iDontKnow != current.iDontKnow ||
+                    previous.userUpdateStatus != current.userUpdateStatus ||
+                    previous.questionPageIndex != current.questionPageIndex;
+              },
+              listenWhen: (previous, current) {
+                return previous.userUpdateStatus != current.userUpdateStatus;
+              },
+              listener: (BuildContext context, QuestionsInitial state) {
+                if (state.userUpdateStatus == UserUpdateStatus.error) {
+                  AppSnackbars.error(context, 'Xəta baş verdi');
+                } else if (state.userUpdateStatus == UserUpdateStatus.success) {
+                  if (state.questionPageIndex == 0) {
+                    context.go('/home');
+                    log('success');
+                  } else if (state.isFirstChild == true) {
+                    // context.go('/home');
+                    log('success');
+                  } else if (state.isFirstChild == false) {
+                    context.go('/add_child');
+                  }
+                }
               },
               builder: (context, state) {
+                if (state.userUpdateStatus == UserUpdateStatus.loading) {
+                  return CircularProgressIndicator.adaptive();
+                }
                 return DavamEt(
                   isActive: state.isActiveButton,
-                  onPressed: () {
-                    questionsCubit.questionOneButtonNotifier.value == 0
+                  onPressed: () async {
+                    state.questionPageIndex != 3
                         ? state.iDontKnow
-                            ? context.push('/calculate')
-                            : questionsCubit.nextQuestion()
-                        : // request if success go to home page
-                        context.go('/home');
+                            ? {
+                                context.push('/calculate'),
+                              }
+                            : await questionsCubit.nextQuestion()
+                        : {
+                            // await questionsCubit.nextQuestion(),
+                            context.go('/home')
+                          };
                   },
                 );
               },

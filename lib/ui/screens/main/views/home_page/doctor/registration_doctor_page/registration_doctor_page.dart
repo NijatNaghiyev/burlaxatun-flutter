@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:burla_xatun/cubits/doctor_reservation/doctor_reservation_cubit.dart';
 import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
+import 'package:burla_xatun/utils/app/app_snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -98,9 +99,8 @@ class RegistrationDoctorPage extends StatelessWidget {
           },
           listener: (context, state) {
             if (state.doctorReservStatus == DoctorReservStatus.error) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.errorMessage ?? 'error occured')),
-              );
+              AppSnackbars.error(
+                  context, state.errorMessage ?? 'error occured');
             } else if (state.doctorReservStatus == DoctorReservStatus.success) {
               context.go('/home');
               // ScaffoldMessenger.of(context).showSnackBar(

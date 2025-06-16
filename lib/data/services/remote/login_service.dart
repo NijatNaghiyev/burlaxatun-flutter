@@ -10,9 +10,9 @@ class LoginService {
   }) async {
     final endpoint = EndpointsConstants.login;
     final requestBody = {
-      "email": email,
+      "phone_number": email,
       "password": password,
-    };
+    }; 
     final response = await BaseNetwork.instance.getDio().post(
           endpoint,
           data: requestBody,

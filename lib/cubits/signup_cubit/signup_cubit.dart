@@ -1,6 +1,9 @@
 import 'dart:developer';
 
 import 'package:burla_xatun/data/contractor/register_contractor.dart';
+import 'package:burla_xatun/data/models/remote/response/login_response_model.dart';
+import 'package:burla_xatun/data/services/local/login_token_service.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,19 +19,15 @@ class SignupCubit extends Cubit<SignupState> {
   bool isActiveButton = false;
   bool isChecked = false;
   bool emailValidity = false;
-  // String fullName = '';
-  // String name = '';
-  // String surname = '';
-  // String fatherName = '';
-  // List<String> fullNameParts = [];
-  // final AuthService authService = AuthService();
   final fullNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final phoneController = TextEditingController();
 
-  final signFullNameFocusNode = FocusNode();
-  final signUpEmailFocusNode = FocusNode();
-  final signUpPasswordFocusNode = FocusNode();
+  final fullNameFocusNode = FocusNode();
+  final emailFocusNode = FocusNode();
+  final passwordFocusNode = FocusNode();
+  final phoneFocusNode = FocusNode();
 
   void checkBoxToggle(bool v) {
     isChecked = v;
@@ -38,37 +37,22 @@ class SignupCubit extends Cubit<SignupState> {
     ));
   }
 
-  // void splitFullName() {
-  //   fullName = signFullNameController.text;
-  //   if (fullName.contains(' ')) {
-  //     fullNameParts = fullName.split(' ');
-  //   }
+  final _loginTokenService = locator<LoginTokenService>();
 
-  //   if (fullNameParts.length == 3) {
-  //     name = fullNameParts[0].trim();
-  //     surname = fullNameParts[1].trim();
-  //     fatherName = fullNameParts[2].trim();
-  //   }
-  // }
-
-  void checkEmailValidity() {
-    emailValidity = RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(emailController.text);
-
-    log('$emailValidity');
+  void emitInitial() {
+    emit(SignupInitial(
+      isActiveButton: isActiveButton,
+      isChecked: isChecked,
+    ));
   }
 
   void updateIsValid() {
-    // splitFullName();
-    checkEmailValidity();
     isActiveButton = emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty &&
         fullNameController.text.isNotEmpty &&
-        isChecked &&
+        phoneController.text.isNotEmpty &&
+        isChecked;
 
-        // fullNameParts.length == 3 &&
-        emailValidity;
     emit(SignupInitial(
       isActiveButton: isActiveButton,
       isChecked: isChecked,
@@ -81,35 +65,34 @@ class SignupCubit extends Cubit<SignupState> {
       log('Register loading');
 
       final response = await _contractor.register(
-        fullName: fullNameController.text,
-        email: emailController.text,
-        password: passwordController.text,
+        phone: phoneController.text.trim(),
+        fullName: fullNameController.text.trim(),
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
       );
 
-      if (response) {
-        emit(SignupSuccess());
-        log("Register success");
-        return;
-      }
+      final savedRegisterData = LoginResponseModel(
+        refresh: response.refresh,
+        access: response.access,
+        activeLanguage: response.activeLanguage,
+        onboardingDone: response.onboardingDone,
+        enableNotifications: response.enableNotifications,
+      );
 
-      // final token = await authService.register(
-      //   name,
-      //   surname,
-      //   fatherName,
-      //   signUpEmailController.text,
-      //   signUpPasswordController.text,
-      // );
-      // final isSavedToken = await TokenHiveService.instance.saveToken(token);
-      // log('$isSavedToken');
-      // if (isSavedToken) {
-      //   emit(SignupCubitSuccess());
-      // }
+      _loginTokenService.saveLoginResponse(savedRegisterData);
+
+      emit(SignupSuccess());
+      log("Register success");
     } on DioException catch (e, s) {
-      emit(SignupNetworkError(e.toString()));
+      emit(
+        SignupNetworkError(
+          (e.response?.data as Map<String, dynamic>)['detail'] ?? '',
+        ),
+      );
 
       log("Register Dio Exception: $e", stackTrace: s);
     } catch (e, s) {
-      emit(SignupError(e.toString()));
+      emit(SignupError(''));
 
       log("Register Unknown Error: $e", stackTrace: s);
     }
@@ -120,9 +103,10 @@ class SignupCubit extends Cubit<SignupState> {
     emailController.dispose();
     fullNameController.dispose();
     passwordController.dispose();
-    signUpEmailFocusNode.dispose();
-    signUpPasswordFocusNode.dispose();
-    signFullNameFocusNode.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
+    fullNameFocusNode.dispose();
+    phoneController.dispose();
     return super.close();
   }
 }

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:burla_xatun/data/contractor/notifications_contract.dart';
 import 'package:burla_xatun/data/models/remote/response/notifications_model.dart';
+import 'package:burla_xatun/utils/extensions/statuscode_extension.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
@@ -20,7 +21,7 @@ class NotificationCubit extends Cubit<NotificationState> {
       emit(state.copyWith(notificationStatus: NotificationStatus.loading));
       final response = await notificationsContract.getNotifications();
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
+      if (response.statusCode.isSuccess) {
         final data = response.data as List;
         final notifications =
             data.map((e) => NotificationsModel.fromJson(e)).toList();

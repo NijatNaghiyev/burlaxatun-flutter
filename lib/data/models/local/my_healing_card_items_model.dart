@@ -2,28 +2,43 @@ class MyHealingCardItemsModel {
   const MyHealingCardItemsModel({
     required this.icon,
     required this.tileName,
-    required this.route,
+    this.indciatorName,
   });
 
   final String icon;
   final String tileName;
-  final String route;
+  final String? indciatorName;
 
   static const List items = [
     MyHealingCardItemsModel(
-      icon: 'assets/png/medicine_icon.png',
-      tileName: 'Bədən çəkisi',
-      route: '/body_weight',
-    ),
-    MyHealingCardItemsModel(
-      icon: 'assets/png/medicine_icon.png',
+      icon: 'assets/icons/indicator_medicine_icon.svg',
       tileName: 'Dərmanlarım',
-      route: '/my_medicines',
+      indciatorName: 'medicines',
     ),
     MyHealingCardItemsModel(
-      icon: 'assets/png/medicine_icon.png',
+      icon: 'assets/icons/indicator_weight_icon.svg',
+      tileName: 'Bədən çəkisi',
+      indciatorName: 'weight',
+    ),
+    MyHealingCardItemsModel(
+      icon: 'assets/icons/indicator_height_icon.svg',
       tileName: 'Boy',
-      route: '/body_height',
+      indciatorName: 'height',
+    ),
+    MyHealingCardItemsModel(
+      icon: 'assets/icons/indicator_blood_pressure_icon.svg',
+      tileName: 'Arterial təzyiq',
+      indciatorName: 'height',
+    ),
+    MyHealingCardItemsModel(
+      icon: 'assets/icons/indicator_coronary_icon.svg',
+      tileName: 'Nəbz',
+      indciatorName: 'height',
+    ),
+    MyHealingCardItemsModel(
+      icon: 'assets/icons/indicator_sugar_icon.svg',
+      tileName: 'Acqarına şəkər',
+      indciatorName: 'height',
     ),
   ];
 }

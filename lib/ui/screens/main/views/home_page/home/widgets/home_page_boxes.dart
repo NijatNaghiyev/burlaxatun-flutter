@@ -25,10 +25,8 @@ class HomePageBoxes extends StatelessWidget {
       itemBuilder: (_, i) {
         return HomeBox(
           boxName: mainCubit.boxItems[i].boxName,
-          boxIcon: 'assets/icons/email_icon.svg',
+          boxIcon: mainCubit.boxItems[i].boxIcon,
           onTap: () {
-            log('${mainCubit.boxItems[i].route}');
-            // mainCubit.changeHomeView(mainCubit.boxItems[i].boxName);
             context.push(mainCubit.boxItems[i].route);
           },
         );

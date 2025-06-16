@@ -6,39 +6,53 @@ import '../../../../../utils/constants/color_constants.dart';
 import '../../../../widgets/global_text.dart';
 
 class AcceptPolicyCheckBox extends StatelessWidget {
-  const AcceptPolicyCheckBox({super.key});
+  const AcceptPolicyCheckBox({
+    super.key,
+    required this.isCheckedPolicy,
+  });
+  final ValueNotifier<bool> isCheckedPolicy;
 
   @override
   Widget build(BuildContext context) {
     final signupCubit = context.read<SignupCubit>();
     return Row(
       children: [
-        BlocBuilder<SignupCubit, SignupState>(
-          builder: (context, state) {
-            if (state is SignupInitial) {
-              return Checkbox(
-                visualDensity: VisualDensity(
-                  horizontal: VisualDensity.minimumDensity,
-                  vertical: VisualDensity.minimumDensity,
-                ),
-                side: BorderSide(
-                  width: 2,
-                  color: Colors.grey,
-                ),
-                splashRadius: 0,
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                activeColor: ColorConstants.primaryRedColor,
-                value: state.isChecked,
-                onChanged: (v) {
-                  signupCubit.checkBoxToggle(v!);
-                  signupCubit.updateIsValid();
-                },
-              );
-            } else {
-              return SizedBox.shrink();
-            }
+        ValueListenableBuilder(
+          valueListenable: isCheckedPolicy,
+          builder: (context, value, child) {
+            return Checkbox(
+              visualDensity: VisualDensity(
+                horizontal: VisualDensity.minimumDensity,
+                vertical: VisualDensity.minimumDensity,
+              ),
+              side: BorderSide(
+                width: 2,
+                color: Colors.grey,
+              ),
+              splashRadius: 0,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              activeColor: ColorConstants.primaryRedColor,
+              value: value,
+              onChanged: (v) {
+                isCheckedPolicy.value = v!;
+                signupCubit.checkBoxToggle(isCheckedPolicy.value);
+                signupCubit.updateIsValid();
+              },
+            );
           },
         ),
+        // BlocBuilder<SignupCubit, SignupState>(
+        //   buildWhen: (previous, current) {
+        //     return true;
+        //   },
+        //   builder: (context, state) {
+        //     if (state is SignupInitial) {
+        //       return
+        //     } else {
+        //       return SizedBox.shrink();
+        //     }
+        //   },
+        // ),
         SizedBox(width: 9),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.75,

@@ -1,6 +1,7 @@
 import 'package:burla_xatun/ui/screens/auth/widgets/custom_auth_button.dart';
 import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
 import 'package:burla_xatun/ui/widgets/global_text.dart';
+import 'package:burla_xatun/utils/app/app_snackbars.dart';
 import 'package:burla_xatun/utils/constants/text_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +11,11 @@ import '../../../../../cubits/signup_cubit/signup_cubit.dart';
 import '../../../../../utils/constants/color_constants.dart';
 
 class GoOnButton extends StatelessWidget {
-  const GoOnButton({super.key});
+  const GoOnButton({
+    super.key,
+    required this.formKey,
+  });
+  final GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +26,21 @@ class GoOnButton extends StatelessWidget {
           context.push('/questions');
         }
         if (state is SignupError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Signup failed!')),
-          );
+          final errorMessage = state.error;
+          AppSnackbars.error(
+              context,
+              errorMessage.isNotEmpty
+                  ? errorMessage
+                  : 'Qeydiyyat uğursuz oldu!');
         }
         if (state is SignupNetworkError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Signup failed!')),
-          );
+          final errorMessage = state.error;
+
+          AppSnackbars.error(
+              context,
+              errorMessage.isNotEmpty
+                  ? errorMessage
+                  : 'Qeydiyyat uğursuz oldu!');
         }
       },
       builder: (_, state) {
@@ -40,10 +52,9 @@ class GoOnButton extends StatelessWidget {
           onPressed: state is SignupLoading
               ? () {}
               : () {
-                  if (signupCubit.fullNameController.text.isNotEmpty &&
-                      signupCubit.emailController.text.isNotEmpty &&
-                      signupCubit.passwordController.text.isNotEmpty &&
-                      signupCubit.isChecked) {
+                  if (state is SignupInitial &&
+                      state.isActiveButton &&
+                      formKey.currentState!.validate()) {
                     signupCubit.register();
                   }
                 },

@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 import '../../utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,6 +24,8 @@ class GlobalInput extends StatelessWidget {
     this.textController,
     this.onChanged,
     this.isError = false,
+    this.isNumber = false,
+    this.onTapOutside,
   });
 
   final String? inputName;
@@ -30,12 +34,14 @@ class GlobalInput extends StatelessWidget {
   final String? suffixIcon;
   final bool isObsecure;
   final bool isError;
+  final bool isNumber;
   final TextEditingController? textController;
   final FocusNode? focusNode;
   final void Function()? onSuffixIconTap;
   final void Function(String v)? onFieldSubmitted;
   final void Function(String v)? onChanged;
   final String? Function(String?)? validator;
+  final void Function(PointerDownEvent)? onTapOutside;
 
   @override
   Widget build(BuildContext context) {
@@ -61,29 +67,34 @@ class GlobalInput extends StatelessWidget {
               )
             : SizedBox.shrink(),
         TextFormField(
+          onTapOutside: onTapOutside ??
+              (event) {
+                FocusScope.of(context).unfocus();
+              },
           controller: textController,
           validator: validator,
           onFieldSubmitted: onFieldSubmitted,
           onChanged: onChanged,
           focusNode: focusNode,
           obscureText: isObsecure,
+          keyboardType: isNumber ? TextInputType.number : TextInputType.text,
           style: GoogleFonts.poppins(
             fontSize: 14,
             color: isError ? Color(0xffD62828) : Colors.black,
             fontWeight: FontWeight.w500,
           ),
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 18),
+            contentPadding:
+                EdgeInsets.symmetric(vertical: 18) + EdgeInsets.only(left: 24),
             hintText: hintText,
             hintStyle: GoogleFonts.poppins(
-              fontSize: 12,
-              color: isError
-                  ? Color(0xffD62828)
-                  : ColorConstants.enabledInputColor,
+              fontSize: 14,
+              color: isError ? Color(0xffD62828) : ColorConstants.hintTextColor,
               fontWeight: FontWeight.w500,
             ),
+            isDense: true,
             prefixIcon: prefixIcon == null
-                ? SizedBox.shrink()
+                ? null
                 : Padding(
                     padding: const EdgeInsets.only(left: 16, right: 10),
                     child: Column(
@@ -138,6 +149,13 @@ class GlobalInput extends StatelessWidget {
               ),
             ),
             errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(34)),
+              borderSide: BorderSide(
+                color: ColorConstants.primaryRedColor,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(34)),
               borderSide: BorderSide(
                 color: ColorConstants.primaryRedColor,
               ),

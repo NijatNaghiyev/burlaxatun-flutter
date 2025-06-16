@@ -61,7 +61,6 @@ class ImagePickerHelper {
           firstChild: user.firstChild,
           activeLanguage: user.activeLanguage,
           enableNotifications: user.enableNotifications,
-          image: pickedImage,
         );
       }
     }

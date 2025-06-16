@@ -58,7 +58,7 @@ class _HomePageAppbarState extends State<HomePageAppbar> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         GlobalText(
-                          text: 'Hello ${data.fullName ?? 'User'}',
+                          text: 'Salam, ${data.fullName ?? 'User'}',
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                           color: const Color(0xff8C8A8A),
@@ -74,12 +74,12 @@ class _HomePageAppbarState extends State<HomePageAppbar> {
                             context.push('/notification');
                           },
                         ),
-                        const SizedBox(width: 25),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: SvgPicture.asset(
-                              'assets/icons/side_navbar_icon.svg'),
-                        ),
+                        // const SizedBox(width: 25),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(bottom: 8),
+                        //   child: SvgPicture.asset(
+                        //       'assets/icons/side_navbar_icon.svg'),
+                        // ),
                       ],
                     ),
                   ],
@@ -88,7 +88,7 @@ class _HomePageAppbarState extends State<HomePageAppbar> {
                   textAlign: TextAlign.left,
                   height: 1.3,
                   text:
-                      '${data.pregnantWeek ?? '0'}th Week of Pregnancy \nDay ${(int.tryParse(data.pregnantWeek ?? '0') ?? 0) * 7}',
+                      'Hamiləliyin ${data.pregnantWeek ?? '0'}. həftəsi \nGün ${(int.tryParse(data.pregnantWeek ?? '0') ?? 0) * 7}',
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                   color: Colors.black,

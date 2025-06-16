@@ -13,21 +13,21 @@ class SignupOptions extends StatelessWidget {
     return Column(
       children: [
         GlobalText(
-          text: 'OR',
+          text: 'VƏ YA',
           fontSize: 10,
           fontWeight: FontWeight.w400,
           color: Colors.black,
         ),
         context.deviceHeight < 710 ? 10.h : 24.h,
-        OptionWidget(
-          optionName: TextConstants.signUpWithGoogle,
-          child: Image.asset(
-            'assets/png/google_logo.png',
-            width: 25,
-            height: 25,
-          ),
-        ),
-        10.h,
+        // OptionWidget(
+        //   optionName: TextConstants.signUpWithGoogle,
+        //   child: Image.asset(
+        //     'assets/png/google_logo.png',
+        //     width: 25,
+        //     height: 25,
+        //   ),
+        // ),
+        // 10.h,
         OptionWidget(
           paddingRight: 39,
           optionName: TextConstants.videoDoktor,

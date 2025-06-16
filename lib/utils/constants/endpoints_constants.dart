@@ -7,7 +7,7 @@ class EndpointsConstants {
   static const login = '$baseUrl/A/users/access-token/';
   static const register = '$baseUrl/A/user-register/';
   static const userUpdate = "$baseUrl/A/user-update/";
-  static const changePass = "$baseUrl/A/user/change-password";
+  static const babyAdd = "$baseUrl/A/baby-add/";
 
   static const users = '$baseUrl/users';
 
@@ -40,9 +40,18 @@ class EndpointsConstants {
 
   // A
   static const userData = '$baseUrl/A/me/';
+  static const userProfileDelete = '$baseUrl/A/delete-account/';
+
+  // A1
+  static const String babyIndicators = '$baseUrl/A1/baby-indicators/';
+  static const String createIndicator = '$baseUrl/A1/indicators/';
+
+  // B
+  static const String tasksByWeek = '$baseUrl/B/guider/tasks-by-weeks/';
 
   // B1
   static const String notifications = '$baseUrl/B1/notifications/';
+  static const String ultraSound = '$baseUrl/B1/ultra-sound/';
 
   // C
   static const String medicines = '$baseUrl/C/medicines/';

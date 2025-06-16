@@ -58,7 +58,7 @@ class _ProfilePictureAndNameState extends State<ProfilePictureAndName> {
           return Column(
             children: [
               const GlobalText(
-                text: 'My Profile',
+                text: 'Mənim Profilim',
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
                 color: Colors.black,

@@ -22,8 +22,8 @@ import '../../ui/screens/main/views/forum_page/forum_comments/widgets/menu_and_e
 import '../../ui/screens/main/views/forum_page/main_forum_page.dart/forum_page.dart';
 import '../../ui/screens/main/views/home_page/home.dart';
 import '../../ui/screens/main/views/home_page/home/home_page.dart';
-import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/widgets/add_new_indicator_dialog.dart';
-import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/widgets/calendar_dialog.dart';
+import '../../ui/screens/main/views/home_page/my_healing_page/indicator_data_screen/widgets/add_new_indicator_dialog.dart';
+import '../../ui/screens/main/views/home_page/my_healing_page/indicator_data_screen/widgets/calendar_dialog.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/initial_my_healing_page/my_healing_page.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/my_medicines/initial_medicine_page/my_medicines_page.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/my_medicines/initial_medicine_page/widgets/add_medicine_dialog.dart';
@@ -229,15 +229,15 @@ class MainnCubit extends Cubit<MainInitial> {
     );
   }
 
-  void showChangeBabyBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      context: context,
-      builder: (_) {
-        return GlobalChangeBabyBottomsheet();
-      },
-    );
-  }
+  // void showChangeBabyBottomSheet(BuildContext context) {
+  //   showModalBottomSheet(
+  //     isScrollControlled: true,
+  //     context: context,
+  //     builder: (_) {
+  //       return GlobalChangeBabyBottomsheet();
+  //     },
+  //   );
+  // }
 
   void showCalendar(BuildContext context) {
     showDialog(
@@ -266,14 +266,14 @@ class MainnCubit extends Cubit<MainInitial> {
     );
   }
 
-  void showAddIndicator(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) {
-        return AddNewIndicatorDialog();
-      },
-    );
-  }
+  // void showAddIndicator(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (_) {
+  //       return AddNewIndicatorDialog();
+  //     },
+  //   );
+  // }
 
   void firstChildToggle(bool v) {
     emit(state.copyWith(isFirstChild: v));
@@ -294,6 +294,8 @@ class MainnCubit extends Cubit<MainInitial> {
   void updateCommentBoxIndex(int v) {
     emit(state.copyWith(commentBoxIndex: v));
   }
+
+  
 
   @override
   Future<void> close() {

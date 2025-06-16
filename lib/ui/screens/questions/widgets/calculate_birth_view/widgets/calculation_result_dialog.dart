@@ -4,6 +4,7 @@ import 'package:burla_xatun/ui/screens/questions/widgets/calculate_birth_view/wi
 import 'package:burla_xatun/utils/constants/asset_constants.dart';
 import 'package:burla_xatun/utils/constants/padding_constants.dart';
 import 'package:burla_xatun/utils/extensions/context_extensions.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -32,6 +33,7 @@ class CalculationResultDialog extends StatelessWidget {
           child: Padding(
             padding: PaddingConstants.v20 + PaddingConstants.h15,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Center(
                   child: Row(
@@ -48,6 +50,15 @@ class CalculationResultDialog extends StatelessWidget {
                         AssetConstants.arrowRight,
                       ),
                       10.w,
+                      // CachedNetworkImage(
+                      //   imageUrl:
+                      //       questionsCubit.calculatedData.data?.iconUrl2 ?? '',
+                      // width: context.deviceWidth * 0.69,
+                      // height: context.deviceHeight * 0.12,
+                      //   errorWidget: (context, url, error) {
+                      //     return Icon(Icons.error);
+                      //   },
+                      // ),
                       SvgPicture.asset(
                         AssetConstants.baby,
                         width: context.deviceWidth * 0.69,
@@ -67,7 +78,8 @@ class CalculationResultDialog extends StatelessWidget {
                 ),
                 12.h,
                 GlobalText(
-                  text: 'Körpəniz isə Alma boydadır!',
+                  text:
+                      'Körpəniz isə ${questionsCubit.calculatedData.data?.iconName} boydadır!',
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                   color: Colors.black,
