@@ -29,7 +29,7 @@ class ResetPasswordPage extends StatelessWidget {
               32.h,
               GlobalText(
                 textAlign: TextAlign.left,
-                text: 'Reset password',
+                text: 'Parolu sıfırlayın',
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
                 color: Colors.black,
@@ -38,7 +38,7 @@ class ResetPasswordPage extends StatelessWidget {
               GlobalText(
                 height: 1.3,
                 textAlign: TextAlign.left,
-                text: 'Please type something you’ll remember',
+                text: 'Xahiş edirəm xatırlayacağınız bir şey yazın',
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
                 color: const Color.fromARGB(130, 0, 0, 0),
@@ -55,7 +55,7 @@ class ResetPasswordPage extends StatelessWidget {
                 bottom: MediaQuery.of(context).viewInsets.bottom + 32),
         child: GlobalButton(
           height: 50,
-          buttonName: 'Reset password',
+          buttonName: 'Parolu sıfırlayın',
           buttonColor: ColorConstants.primaryRedColor,
           textColor: Colors.white,
           onPressed: () {

@@ -34,7 +34,7 @@ class PickBirthDateWidget extends StatelessWidget {
                     questionCubit.state.initialDateTime
                   ]);
                 },
-                child: Text('Seç'),
+                child: Text('Seçin'),
               ),
             ],
           ),

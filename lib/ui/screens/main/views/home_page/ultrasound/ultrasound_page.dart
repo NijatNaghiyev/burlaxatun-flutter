@@ -45,7 +45,7 @@ class _UltrasoundPageState extends State<UltrasoundPage> {
             child: BlocBuilder<UltrasoundCubit, UltrasoundState>(
               builder: (context, state) {
                 if (state.ultraSoundStatus == UltraSoundStatus.error) {
-                  return Text('data not found');
+                  return Text('Məlumat tapılmadı');
                 } else if (state.ultraSoundStatus ==
                     UltraSoundStatus.networkError) {
                   return SvgPicture.asset('assets/svgs/forum_icon.svg');

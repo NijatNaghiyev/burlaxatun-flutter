@@ -65,7 +65,7 @@ class DoctorCategories extends StatelessWidget {
               GestureDetector(
                 onTap: () => onSelect(position),
                 child: CategoryBox(
-                  doctorCategory: position.name ?? 'Unknown',
+                  doctorCategory: position.name ?? 'Bilinmir',
                   isSelected: isSelected,
                 ),
               ),

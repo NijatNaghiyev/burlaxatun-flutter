@@ -29,7 +29,7 @@ class OtpPage extends StatelessWidget {
             50.h,
             GlobalText(
               textAlign: TextAlign.left,
-              text: 'Please check your email',
+              text: 'E-poçtunuzu yoxlayın',
               fontSize: 30,
               fontWeight: FontWeight.w700,
               color: Colors.black,
@@ -49,7 +49,7 @@ class OtpPage extends StatelessWidget {
                 bottom: MediaQuery.of(context).viewInsets.bottom + 32),
         child: GlobalButton(
           height: 50,
-          buttonName: 'Send code',
+          buttonName: 'Kod göndər',
           buttonColor: ColorConstants.primaryRedColor,
           textColor: Colors.white,
           onPressed: () {

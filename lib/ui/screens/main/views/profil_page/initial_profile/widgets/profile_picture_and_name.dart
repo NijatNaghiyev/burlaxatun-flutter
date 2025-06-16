@@ -45,12 +45,12 @@ class _ProfilePictureAndNameState extends State<ProfilePictureAndName> {
         }
         if (state.status == UserDataStatus.failure) {
           return const Center(
-            child: Text('Error'),
+            child: Text('Xəta'),
           );
         }
         if (state.status == UserDataStatus.networkError) {
           return const Center(
-            child: Text('Network Error'),
+            child: Text('Şəbəkə xətası'),
           );
         }
         if (state.status == UserDataStatus.success) {
@@ -119,7 +119,7 @@ class _ProfilePictureAndNameState extends State<ProfilePictureAndName> {
               ),
               16.h,
               GlobalText(
-                text: data?.fullName ?? 'User',
+                text: data?.fullName ?? 'İstifadəçi',
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
                 color: Colors.black,

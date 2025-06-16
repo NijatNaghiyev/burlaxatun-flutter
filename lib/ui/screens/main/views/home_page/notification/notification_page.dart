@@ -43,7 +43,7 @@ class _NotificationPageState extends State<NotificationPage> {
             BlocBuilder<NotificationCubit, NotificationState>(
               builder: (context, state) {
                 if (state.notificationStatus == NotificationStatus.error) {
-                  return Center(child: Text('data not found'));
+                  return Center(child: Text('Məlumat tapılmadı'));
                 } else if (state.notificationStatus ==
                     NotificationStatus.loading) {
                   return Center(child: CircularProgressIndicator.adaptive());

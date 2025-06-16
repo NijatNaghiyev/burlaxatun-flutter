@@ -31,7 +31,7 @@ class SuccessChangePassword extends StatelessWidget {
             Spacer(),
             GlobalText(
               height: 1.4,
-              text: 'Şifrə uğurla \n dəyişildi!',
+              text: 'Şifrə uğurla \n dəyişdirildi!',
               fontSize: 24,
               fontWeight: FontWeight.w500,
               color: Colors.black,
@@ -46,7 +46,7 @@ class SuccessChangePassword extends StatelessWidget {
                 bottom: MediaQuery.of(context).viewInsets.bottom + 32),
         child: GlobalButton(
           height: 50,
-          buttonName: 'Back at home',
+          buttonName: 'Ana səhifəyə qayıdın',
           buttonColor: ColorConstants.primaryRedColor,
           textColor: Colors.white,
           onPressed: () {

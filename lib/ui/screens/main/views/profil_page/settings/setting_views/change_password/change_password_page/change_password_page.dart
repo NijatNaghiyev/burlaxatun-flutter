@@ -40,7 +40,7 @@ class ChangePasswordPage extends StatelessWidget {
               height: 1.3,
               textAlign: TextAlign.left,
               text:
-                  'Don’t worry! It happens. Please enter the email associated with your account.',
+                  'Narahat olma! Bu baş verir. Zəhmət olmasa hesabınızla əlaqəli e-mail daxil edin.',
               fontSize: 16,
               fontWeight: FontWeight.w400,
               color: const Color.fromARGB(130, 0, 0, 0),
@@ -60,7 +60,7 @@ class ChangePasswordPage extends StatelessWidget {
                 bottom: MediaQuery.of(context).viewInsets.bottom + 32),
         child: GlobalButton(
           height: 50,
-          buttonName: 'Send code',
+          buttonName: 'Kod göndər',
           buttonColor: ColorConstants.primaryRedColor,
           textColor: Colors.white,
           onPressed: () {

@@ -23,7 +23,7 @@ class AdviceDetailView extends StatelessWidget {
           );
         } else if (detailState.status == DailyRecDetailStatus.failure) {
           return const Center(
-            child: Text('Error'),
+            child: Text('Xəta'),
           );
         } else if (detailState.status == DailyRecDetailStatus.success) {
           final data = detailState.response;

@@ -57,7 +57,7 @@ class _BoyNameTileState extends State<BoyNameTile> {
             );
             if (isAdded == false) {
               isSelectedName.value = !isSelectedName.value;
-              AppSnackbars.error(context, 'failed add to list the name');
+              AppSnackbars.error(context, 'ad siyahıya əlavə edilmədi');
             }
           } else {
             babyNamesCubit.removeFromWishList(babyNameId: widget.babyNameId);

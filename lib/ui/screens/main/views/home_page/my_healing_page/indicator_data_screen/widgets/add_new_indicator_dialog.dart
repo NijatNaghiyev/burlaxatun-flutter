@@ -1,13 +1,9 @@
-import 'dart:developer';
-
 import 'package:burla_xatun/cubits/indicator/indicator_cubit.dart';
 import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/indicator_data_screen/widgets/date_or_time_box.dart';
 import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/indicator_data_screen/widgets/pick_indicator_date_widget.dart';
 import 'package:burla_xatun/utils/app/app_snackbars.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -71,7 +67,8 @@ class _AddNewIndicatorDialogState extends State<AddNewIndicatorDialog> {
                   ),
                 ),
                 GlobalText(
-                  text: 'New indicator',
+                  //text: 'New indicator',
+                  text: 'Yeni göstərici',
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                   color: Colors.black,
@@ -150,7 +147,7 @@ class _AddNewIndicatorDialogState extends State<AddNewIndicatorDialog> {
                           Navigator.pop(context);
                         },
                         child: GlobalText(
-                          text: 'Imtina Et',
+                          text: 'İmtina Et',
                           fontSize: 14,
                           height: 1.1,
                           fontWeight: FontWeight.w500,

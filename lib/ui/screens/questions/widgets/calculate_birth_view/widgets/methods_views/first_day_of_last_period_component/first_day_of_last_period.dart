@@ -138,7 +138,7 @@ class _FirstDayOfLastPeriodState extends State<FirstDayOfLastPeriod> {
                           ListWheelScrollView(
                             physics: FixedExtentScrollPhysics(),
                             onSelectedItemChanged: (i) {
-                              log(' hefte: $i');
+                              log('həftə: $i');
                               questionsCubit.updateFocusedWeekIndex(i);
                               questionsCubit.updatePeriodTime("${i + 1} gün");
                             },

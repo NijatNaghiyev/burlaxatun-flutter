@@ -37,11 +37,11 @@ class _HomePageAppbarState extends State<HomePageAppbar> {
           }
 
           if (state.status == UserDataStatus.failure) {
-            return const Center(child: Text('Error'));
+            return const Center(child: Text('Xəta'));
           }
 
           if (state.status == UserDataStatus.networkError) {
-            return const Center(child: Text('Network Error'));
+            return const Center(child: Text('Şəbəkə xətası'));
           }
 
           if (state.status == UserDataStatus.success &&
@@ -58,7 +58,7 @@ class _HomePageAppbarState extends State<HomePageAppbar> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         GlobalText(
-                          text: 'Salam, ${data.fullName ?? 'User'}',
+                          text: 'Salam, ${data.fullName ?? 'İstifadəçi'}',
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                           color: const Color(0xff8C8A8A),

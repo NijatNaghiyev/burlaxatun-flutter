@@ -38,9 +38,8 @@ class _DoctorsNotificationState extends State<DoctorsNotification> {
             24.h,
             BlocBuilder<DoctorNotificationCubit, DoctorNotificationState>(
               builder: (context, state) {
-                if (state.drNotificationStatus ==
-                    DrNotificationStatus.error) {
-                  return Text('error');
+                if (state.drNotificationStatus == DrNotificationStatus.error) {
+                  return Text('Xəta');
                 } else if (state.drNotificationStatus ==
                     DrNotificationStatus.loading) {
                   return CircularProgressIndicator.adaptive();

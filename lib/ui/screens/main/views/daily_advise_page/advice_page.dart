@@ -33,11 +33,11 @@ class _AdvicePageState extends State<AdvicePage> {
           );
         } else if (dailyRecState.status == DailyRecStatus.failure) {
           return const Center(
-            child: Text('Error'),
+            child: Text('Xəta'),
           );
         } else if (dailyRecState.status == DailyRecStatus.networkError) {
           return const Center(
-            child: Text('Network Error'),
+            child: Text('Şəbəkə xətası'),
           );
         } else if (dailyRecState.status == DailyRecStatus.success) {
           // Create a slug one time

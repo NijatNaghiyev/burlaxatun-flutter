@@ -19,7 +19,7 @@ class SuccessForgotPswScreen extends StatelessWidget {
               SvgPicture.asset(AssetConstants.taddaaImage),
               Spacer(),
               GlobalText(
-                text: 'Şifrə uğurla \n dəyişildi!',
+                text: 'Şifrə uğurla \n dəyişdirildi!',
                 fontSize: 24,
                 fontWeight: FontWeight.w500,
                 color: Colors.black,
@@ -32,7 +32,8 @@ class SuccessForgotPswScreen extends StatelessWidget {
           padding: PaddingConstants.h15 + PaddingConstants.b32,
           child: GlobalButton(
             height: 50,
-            buttonName: 'Back at home',
+            //buttonName: 'Back at home',
+            buttonName: 'Ana səhifəyə qayıt',
             buttonColor: ColorConstants.primaryRedColor,
             textColor: Colors.white,
             onPressed: () {},

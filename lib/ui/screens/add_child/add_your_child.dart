@@ -159,10 +159,10 @@ class AddYourChild extends StatelessWidget {
               },
               listener: (context, state) {
                 if (state.addChildStatus == AddChildStatus.error) {
-                  log('Error occured while adding child');
+                  log('Uşaq əlavə edərkən xəta baş verdi');
                 } else if (state.addChildStatus ==
                     AddChildStatus.networkError) {
-                  ('Network Error');
+                  ('Şəbəkə xətası');
                 } else if (state.addChildStatus == AddChildStatus.success) {
                   showDialog(
                     barrierDismissible: false,

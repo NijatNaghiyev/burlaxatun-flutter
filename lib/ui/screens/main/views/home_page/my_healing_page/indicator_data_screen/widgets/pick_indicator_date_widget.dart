@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,13 +32,13 @@ class PickIndicatorDateWidget extends StatelessWidget {
                 child: Text('Bağla'),
               ),
               Text(
-                isTimeSelecting ? 'Vaxt secin' : 'Tarix secin',
+                isTimeSelecting ? 'Vaxt seçin' : 'Tarix seçin',
               ),
               TextButton(
                 onPressed: () {
                   context.pop();
                 },
-                child: Text('Seç'),
+                child: Text('Seçin'),
               ),
             ],
           ),

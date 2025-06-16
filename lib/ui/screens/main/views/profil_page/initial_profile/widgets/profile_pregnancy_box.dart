@@ -33,12 +33,12 @@ class ProfilePregnancyBox extends StatelessWidget {
               }
               if (state.status == UserDataStatus.failure) {
                 return Center(
-                  child: Text('Error'),
+                  child: Text('Xəta'),
                 );
               }
               if (state.status == UserDataStatus.networkError) {
                 return Center(
-                  child: Text('Network Error'),
+                  child: Text('Şəbəkə xətası'),
                 );
               }
 
@@ -232,7 +232,7 @@ class ProfilePregnancyBox extends StatelessWidget {
                       children: [
                         Flexible(
                           child: GlobalText(
-                            text: 'Körpəniz doğulubmu artıq?',
+                            text: 'Körpəniz artıq doğulubmu?',
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
                             color: Color(0xff344054),

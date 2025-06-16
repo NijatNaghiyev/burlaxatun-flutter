@@ -20,7 +20,7 @@ class UsingRulesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorConstants.scaffoldColor,
       appBar: GlobalAppbar(
-        title: 'İstifade Qaydalari',
+        title: 'İstifadə Qaydaları',
         onLeadingTap: () {
           context.pop();
         },
@@ -39,13 +39,13 @@ class UsingRulesScreen extends StatelessWidget {
 
               if (state.status == UsingRulesStatus.failure) {
                 return Center(
-                  child: Text('Error'),
+                  child: Text('Xəta'),
                 );
               }
 
               if (state.status == UsingRulesStatus.networkError) {
                 return Center(
-                  child: Text('Network error'),
+                  child: Text('Şəbəkə xətası'),
                 );
               }
 

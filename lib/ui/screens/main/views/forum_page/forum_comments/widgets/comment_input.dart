@@ -74,7 +74,7 @@ class _CommentInputState extends State<CommentInput> {
                         filled: true,
                         fillColor: Color.fromRGBO(245, 245, 245, 1),
                         contentPadding: EdgeInsets.only(left: 16),
-                        hintText: 'Mesajinizi qeyd edin',
+                        hintText: 'Mesajınızı qeyd edin',
                         hintStyle: GoogleFonts.poppins(
                           fontSize: 16,
                           color: Color(0xff595959),

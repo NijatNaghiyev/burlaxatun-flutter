@@ -33,13 +33,13 @@ class FaqView extends StatelessWidget {
 
           if (state.status == FaqsStatus.failure) {
             return Center(
-              child: Text('Error'),
+              child: Text('Xəta'),
             );
           }
 
           if (state.status == FaqsStatus.networkError) {
             return Center(
-              child: Text('Network error'),
+              child: Text('Şəbəkə xətası'),
             );
           }
 

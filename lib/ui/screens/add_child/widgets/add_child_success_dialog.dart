@@ -1,6 +1,3 @@
-import 'dart:math' as math;
-
-import 'package:burla_xatun/ui/screens/questions/widgets/calculate_birth_view/widgets/apple_circle.dart';
 import 'package:burla_xatun/ui/widgets/global_button.dart';
 import 'package:burla_xatun/ui/widgets/global_text.dart';
 import 'package:burla_xatun/utils/constants/asset_constants.dart';

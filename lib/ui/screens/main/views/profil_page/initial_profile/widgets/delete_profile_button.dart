@@ -1,4 +1,3 @@
-import 'package:burla_xatun/cubits/main_cubit/mainn_cubit.dart';
 import 'package:burla_xatun/cubits/user_update/user_update_cubit.dart';
 import 'package:burla_xatun/data/services/local/login_token_service.dart';
 import 'package:burla_xatun/utils/constants/color_constants.dart';
@@ -34,7 +33,7 @@ class _DeleteProfileButtonState extends State<DeleteProfileButton> {
       ScaffoldMessenger.of(context)
         ..clearSnackBars()
         ..showSnackBar(
-          SnackBar(content: Text('Profil silinərkən xəta baş verdi!')),
+          SnackBar(content: Text('Profil silinərkən xəta baş verdi')),
         );
     }
   }

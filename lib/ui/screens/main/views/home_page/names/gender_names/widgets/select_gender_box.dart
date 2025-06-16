@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../../../cubits/main_cubit/main_state.dart';
-import '../../../../../../../../cubits/main_cubit/mainn_cubit.dart';
 import '../../widgets/select_option.dart';
 import '../../widgets/single_option.dart';
 
@@ -23,7 +20,7 @@ class SelectGenderBox extends StatelessWidget {
       builder: (context, value, child) {
         return SelectOption(
           optionOne: SingleOption(
-            boxTitle: 'Oglan',
+            boxTitle: 'Oğlan',
             boxColors: value == 0 ? Colors.white : Colors.transparent,
             onTap: () {
               genderScreenIndex.value = 0;
@@ -31,7 +28,7 @@ class SelectGenderBox extends StatelessWidget {
             },
           ),
           optionTwo: SingleOption(
-            boxTitle: 'Qiz',
+            boxTitle: 'Qız',
             boxColors: value == 1 ? Colors.white : Colors.transparent,
             onTap: () {
               genderScreenIndex.value = 1;

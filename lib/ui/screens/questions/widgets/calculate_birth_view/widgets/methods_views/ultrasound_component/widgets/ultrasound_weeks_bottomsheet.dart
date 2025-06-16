@@ -1,4 +1,3 @@
-import 'package:burla_xatun/ui/screens/main/views/profil_page/initial_profile/widgets/delete_profile_button.dart';
 import 'package:burla_xatun/ui/widgets/global_text.dart';
 import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -58,7 +57,7 @@ class _UltrasoundWeeksBottomsheetState
                   context.pop();
                 },
                 child: Text(
-                  'Seç',
+                  'Seçin',
                   style: TextStyle(
                     color: ColorConstants.primaryRedColor,
                   ),

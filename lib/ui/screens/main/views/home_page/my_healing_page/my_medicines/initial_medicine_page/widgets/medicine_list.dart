@@ -23,10 +23,10 @@ class MedicineList extends StatelessWidget {
             );
           }
           if (state.status == MedicineStatus.failure) {
-            return const Center(child: Text('Error'));
+            return const Center(child: Text('Xəta'));
           }
           if (state.status == MedicineStatus.networkError) {
-            return const Center(child: Text('Network Error'));
+            return const Center(child: Text('Şəbəkə xətası'));
           }
 
           if (state.status == MedicineStatus.success) {

@@ -26,7 +26,7 @@ class _SpecialThanksViewState extends State<SpecialThanksView> {
     return Scaffold(
       backgroundColor: ColorConstants.scaffoldColor,
       appBar: GlobalAppbar(
-        title: 'xususi teshekkurler',
+        title: 'Xüsusi təşəkkürlər',
         onLeadingTap: () {
           context.pop();
         },

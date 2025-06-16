@@ -56,7 +56,7 @@ class ForumBox extends StatelessWidget {
                   Row(
                     children: [
                       GlobalText(
-                        text: 'Daha etrafli',
+                        text: 'Daha ətraflı',
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
                         color: Color(0xff97989D),
@@ -89,21 +89,21 @@ class ForumBox extends StatelessWidget {
                 children: [
                   GlobalText(
                     textAlign: TextAlign.left,
-                    text: '$viewCount Views',
+                    text: '$viewCount Baxış',
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Colors.black,
                   ),
                   GlobalText(
                     textAlign: TextAlign.left,
-                    text: '$likeCount Likes',
+                    text: '$likeCount Bəyənmə',
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Colors.black,
                   ),
                   GlobalText(
                     textAlign: TextAlign.left,
-                    text: '$commentCount comments',
+                    text: '$commentCount Rəy',
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Colors.black,

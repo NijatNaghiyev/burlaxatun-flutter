@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_appbar.dart';
-import 'widgets/chart_widget.dart';
 import 'widgets/calendar_and_add_buttons.dart';
+import 'widgets/chart_widget.dart';
 import 'widgets/time_intervals_widget.dart';
 
 class IndicatorDataScreen extends StatefulWidget {
@@ -70,7 +70,7 @@ class _IndicatorDataScreenState extends State<IndicatorDataScreen> {
                           Center(child: CircularProgressIndicator.adaptive()),
                     );
                   } else if (state.indicatorStatus == IndicatorStatus.error) {
-                    return Center(child: Text('Error occured'));
+                    return Center(child: Text('Xəta baş verdi'));
                   }
                   if (state.indicatorStatus == IndicatorStatus.success) {
                     return Padding(

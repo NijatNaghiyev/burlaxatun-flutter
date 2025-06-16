@@ -28,7 +28,7 @@ class _PregnancyGuideState extends State<PregnancyGuide> {
         if (state.tasksByWeekStatus == TasksByWeekStatus.loading) {
           return Center(child: CircularProgressIndicator.adaptive());
         } else if (state.tasksByWeekStatus == TasksByWeekStatus.error) {
-          return Center(child: Text('Data not found'));
+          return Center(child: Text('Məlumat tapılmadı'));
         } else if (state.tasksByWeekStatus == TasksByWeekStatus.networkError) {
           return Center(child: Text(state.networkErrorMessage!));
         }
@@ -68,9 +68,9 @@ class _PregnancyGuideState extends State<PregnancyGuide> {
                             children: [
                               for (int i = 0; i < tasks.length; i++)
                                 PregnancyGuideBox(
-                                  title: tasks[i].name ?? 'data not found',
+                                  title: tasks[i].name ?? 'Məlumat tapılmadı',
                                   description:
-                                      tasks[i].text ?? 'data not found',
+                                      tasks[i].text ?? 'Məlumat tapılmadı',
                                 ),
                             ],
                           )

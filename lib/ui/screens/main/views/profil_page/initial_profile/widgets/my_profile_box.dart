@@ -29,19 +29,19 @@ class MyProfileBox extends StatelessWidget {
               }
               if (state.status == UserDataStatus.failure) {
                 return Center(
-                  child: Text('Error'),
+                  child: Text('Xəta'),
                 );
               }
               if (state.status == UserDataStatus.networkError) {
                 return Center(
-                  child: Text('Network Error'),
+                  child: Text('Şəbəkə xətası'),
                 );
               }
               if (state.status == UserDataStatus.success) {
                 final data = state.response;
                 return Column(
                   children: [
-                    Row( 
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         GlobalText(
@@ -111,7 +111,7 @@ class MyProfileBox extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GlobalText(
-                          text: 'Siz kimsiniz',
+                          text: 'Siz kimsiniz?',
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
                           color: Color(0xff344054),

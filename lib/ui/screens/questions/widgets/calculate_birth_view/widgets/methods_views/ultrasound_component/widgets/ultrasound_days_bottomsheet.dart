@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../../../../cubits/questions_cubit/questions_cubit.dart';
-import '../../../../../../../../../utils/extensions/num_extensions.dart';
 
 class UltrasoundDaysBottomsheet extends StatefulWidget {
   const UltrasoundDaysBottomsheet({super.key});
@@ -58,7 +57,7 @@ class _UltrasoundDaysBottomsheetState extends State<UltrasoundDaysBottomsheet> {
                   context.pop();
                 },
                 child: Text(
-                  'Seç',
+                  'Seçin',
                   style: TextStyle(
                     color: ColorConstants.primaryRedColor,
                   ),

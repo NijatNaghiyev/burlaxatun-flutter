@@ -11,7 +11,7 @@ import 'widgets/child_account_box.dart';
 
 class GlobalChangeBabyBottomsheet extends StatelessWidget {
   const GlobalChangeBabyBottomsheet({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     final children = locator<UserDataCubit>().state.response?.babies ?? [];
@@ -24,15 +24,15 @@ class GlobalChangeBabyBottomsheet extends StatelessWidget {
           child: Column(
             children: [
               24.h,
-              if (children.isEmpty )
+              if (children.isEmpty)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 50),
-                  child: Text('there is no any child'),
+                  child: Text('Uşaq yoxdur'),
                 )
               else
                 for (int i = 0; i < 3; i++) ...[
                   ChildAccountBox(
-                    babyName: children[i].name ?? 'baby name not found',
+                    babyName: children[i].name ?? 'Körpə adı tapılmadı',
                   ),
                   12.h,
                 ],
