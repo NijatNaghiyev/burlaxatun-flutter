@@ -21,7 +21,7 @@ class CalculateButton extends StatelessWidget {
       listener: (context, state) async {
         if (state.stateStatus == CalculateStateStatus.success) {
           showDialog(
-            barrierDismissible: true,
+            barrierDismissible: false,
             context: context,
             builder: (_) {
               return BlocProvider.value(

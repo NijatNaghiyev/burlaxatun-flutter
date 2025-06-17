@@ -4,7 +4,6 @@ import 'package:burla_xatun/ui/screens/questions/widgets/calculate_birth_view/wi
 import 'package:burla_xatun/utils/constants/asset_constants.dart';
 import 'package:burla_xatun/utils/constants/padding_constants.dart';
 import 'package:burla_xatun/utils/extensions/context_extensions.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -21,82 +20,85 @@ class CalculationResultDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
-    return Center(
-      child: SizedBox(
-        width: context.deviceWidth * 0.78,
-        height: context.deviceHeight * 0.45,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(38)),
-          ),
-          child: Padding(
-            padding: PaddingConstants.v20 + PaddingConstants.h15,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AppleCircle(),
-                      Transform.rotate(
-                        angle: -math.pi,
-                        child: SvgPicture.asset(
-                          AssetConstants.arrowLeft,
+    return PopScope(
+      canPop: false,
+      child: Center(
+        child: SizedBox(
+          width: context.deviceWidth * 0.78,
+          height: context.deviceHeight * 0.45,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(38)),
+            ),
+            child: Padding(
+              padding: PaddingConstants.v20 + PaddingConstants.h15,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AppleCircle(),
+                        Transform.rotate(
+                          angle: -math.pi,
+                          child: SvgPicture.asset(
+                            AssetConstants.arrowLeft,
+                          ),
                         ),
-                      ),
-                      SvgPicture.asset(
-                        AssetConstants.arrowRight,
-                      ),
-                      10.w,
-                      // CachedNetworkImage(
-                      //   imageUrl:
-                      //       questionsCubit.calculatedData.data?.iconUrl2 ?? '',
-                      // width: context.deviceWidth * 0.69,
-                      // height: context.deviceHeight * 0.12,
-                      //   errorWidget: (context, url, error) {
-                      //     return Icon(Icons.error);
-                      //   },
-                      // ),
-                      SvgPicture.asset(
-                        AssetConstants.baby,
-                        width: context.deviceWidth * 0.69,
-                        height: context.deviceHeight * 0.12,
-                      )
-                    ],
+                        SvgPicture.asset(
+                          AssetConstants.arrowRight,
+                        ),
+                        10.w,
+                        // CachedNetworkImage(
+                        //   imageUrl:
+                        //       questionsCubit.calculatedData.data?.iconUrl2 ?? '',
+                        // width: context.deviceWidth * 0.69,
+                        // height: context.deviceHeight * 0.12,
+                        //   errorWidget: (context, url, error) {
+                        //     return Icon(Icons.error);
+                        //   },
+                        // ),
+                        SvgPicture.asset(
+                          AssetConstants.baby,
+                          width: context.deviceWidth * 0.69,
+                          height: context.deviceHeight * 0.12,
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                (context.deviceHeight * 0.04).h,
-                GlobalText(
-                  text:
-                      'Siz hamiləliyinizin ${questionsCubit.calculatedData.data?.weeks} həftəsindəsiniz',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                  textAlign: TextAlign.center,
-                ),
-                12.h,
-                GlobalText(
-                  text:
-                      'Körpəniz isə ${questionsCubit.calculatedData.data?.iconName} boydadır!',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                ),
-                12.h,
-                GlobalButton(
-                  buttonName: 'Davam et',
-                  textFSize: 14,
-                  textHeight: 0,
-                  buttonColor: ColorConstants.primaryRedColor,
-                  textColor: Colors.white,
-                  height: 44,
-                  onPressed: () {
-                    context.go('/home');
-                  },
-                ),
-              ],
+                  (context.deviceHeight * 0.04).h,
+                  GlobalText(
+                    text:
+                        'Siz hamiləliyinizin ${questionsCubit.calculatedData.data?.weeks} həftəsindəsiniz',
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                    textAlign: TextAlign.center,
+                  ),
+                  12.h,
+                  GlobalText(
+                    text:
+                        'Körpəniz isə ${questionsCubit.calculatedData.data?.iconName} boydadır!',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  ),
+                  12.h,
+                  GlobalButton(
+                    buttonName: 'Davam et',
+                    textFSize: 14,
+                    textHeight: 0,
+                    buttonColor: ColorConstants.primaryRedColor,
+                    textColor: Colors.white,
+                    height: 44,
+                    onPressed: () {
+                      context.go('/home');
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
