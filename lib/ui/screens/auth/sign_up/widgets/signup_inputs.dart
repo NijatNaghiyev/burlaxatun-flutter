@@ -22,7 +22,7 @@ class SignupInputs extends StatelessWidget {
         children: [
           GlobalInput(
             inputName: 'Mobil nömrə',
-            hintText: '+994 xxx xxx xx xx',
+            hintText: 'xxx xxx xx xx',
             textController: signUpCubit.phoneController,
             focusNode: signUpCubit.phoneFocusNode,
             isNumber: true,

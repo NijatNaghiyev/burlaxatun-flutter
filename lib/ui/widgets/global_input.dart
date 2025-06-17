@@ -77,7 +77,7 @@ class GlobalInput extends StatelessWidget {
           onChanged: onChanged,
           focusNode: focusNode,
           obscureText: isObsecure,
-          keyboardType: isNumber ? TextInputType.number : TextInputType.text,
+          keyboardType: isNumber ? TextInputType.phone : TextInputType.text,
           style: GoogleFonts.poppins(
             fontSize: 14,
             color: isError ? Color(0xffD62828) : Colors.black,
@@ -94,7 +94,26 @@ class GlobalInput extends StatelessWidget {
             ),
             isDense: true,
             prefixIcon: prefixIcon == null
-                ? null
+                ? isNumber
+                    ? Padding(
+                        padding: const EdgeInsets.only(left: 16, right: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '+994',
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                color: isError
+                                    ? Color(0xffD62828)
+                                    : ColorConstants.hintTextColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : null
                 : Padding(
                     padding: const EdgeInsets.only(left: 16, right: 10),
                     child: Column(

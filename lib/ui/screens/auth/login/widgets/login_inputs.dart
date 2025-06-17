@@ -28,7 +28,7 @@ class LoginInputs extends StatelessWidget {
               textController: loginCubit.loginEmailController,
               focusNode: loginCubit.loginEmailFocusNode,
               inputName: 'Mobil nömrə',
-              hintText: '+994 xxx xxx xx xx',
+              hintText: 'xxx xxx xx xx',
               isNumber: true,
               onFieldSubmitted: (p0) =>
                   loginCubit.loginPasswordFocusNode.requestFocus(),
