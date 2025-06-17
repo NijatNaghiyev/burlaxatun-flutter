@@ -23,7 +23,7 @@ class _ChangePhoneNumberViewState extends State<ChangePhoneNumberView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Change number'),
+        title: const Text('Nömrəni dəyişdirin'),
       ),
       body: BlocBuilder<UserDataCubit, UserDataState>(
         builder: (_, state) {
@@ -35,13 +35,13 @@ class _ChangePhoneNumberViewState extends State<ChangePhoneNumberView> {
 
           if (state.status == UserDataStatus.failure) {
             return const Center(
-              child: Text('Error'),
+              child: Text('Xəta'),
             );
           }
 
           if (state.status == UserDataStatus.networkError) {
             return const Center(
-              child: Text('Network error'),
+              child: Text('Şəbəkə xətası'),
             );
           }
 

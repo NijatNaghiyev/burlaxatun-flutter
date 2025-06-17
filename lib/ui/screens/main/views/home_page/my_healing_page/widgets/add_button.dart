@@ -27,7 +27,7 @@ class AddButton extends StatelessWidget {
           spacing: 3,
           children: [
             GlobalText(
-              text: 'Elave et',
+              text: 'Əlavə et',
               fontSize: 14,
               height: 1.1,
               fontWeight: FontWeight.w500,

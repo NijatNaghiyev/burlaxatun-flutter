@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:burla_xatun/cubits/user_data/user_data_cubit.dart';
 import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +11,11 @@ import 'widgets/child_account_box.dart';
 
 class GlobalChangeBabyBottomsheet extends StatelessWidget {
   const GlobalChangeBabyBottomsheet({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     final children = locator<UserDataCubit>().state.response?.babies ?? [];
+    log('children length: ${children.length}');
     return SizedBox(
       width: context.deviceWidth,
       child: Padding(
@@ -24,12 +27,12 @@ class GlobalChangeBabyBottomsheet extends StatelessWidget {
               if (children.isEmpty)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 50),
-                  child: Text('there is no any child'),
+                  child: Text('Uşaq yoxdur'),
                 )
               else
                 for (int i = 0; i < 3; i++) ...[
                   ChildAccountBox(
-                    babyName: children[i].name ?? 'baby name not found',
+                    babyName: children[i].name ?? 'Körpə adı tapılmadı',
                   ),
                   12.h,
                 ],

@@ -34,9 +34,9 @@ class _CountriesWidgetState extends State<CountriesWidget>
         if (state.nameStateStatus == NameStateStatus.loading) {
           return Center(child: CircularProgressIndicator.adaptive());
         } else if (state.nameStateStatus == NameStateStatus.networkError) {
-          return Center(child: Text('Connection error'));
+          return Center(child: Text('Şəbəkə xətası'));
         } else if (state.nameStateStatus == NameStateStatus.error) {
-          return Center(child: Text('Data not found'));
+          return Center(child: Text('Məlumat tapılmadı'));
         }
         if (state.nameStateStatus == NameStateStatus.success) {
           final countryResponse = state.countries;

@@ -26,14 +26,14 @@ class ChangeLanguageView extends StatelessWidget {
               onPressed: () {
                 languageCubit.changeLanguage('az');
               },
-              child: Text('Azerbaycan dili'),
+              child: Text('Azərbaycan dili'),
             ),
             30.h,
             ElevatedButton(
               onPressed: () {
                 languageCubit.changeLanguage('en');
               },
-              child: Text('Ingilis dili'),
+              child: Text('İngilis dili'),
             ),
             50.h,
             Text(language.language),

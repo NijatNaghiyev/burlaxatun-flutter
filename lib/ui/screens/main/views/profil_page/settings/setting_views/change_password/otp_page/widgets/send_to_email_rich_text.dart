@@ -13,7 +13,9 @@ class SendToEmailRichText extends StatelessWidget {
         ),
         children: [
           TextSpan(
-            text: "We’ve sent a code to ",
+            //text: "We’ve sent a code to ",
+            text: "Kodu göndərdik: ",
+
             style: TextStyle(color: const Color.fromARGB(130, 0, 0, 0)),
           ),
           TextSpan(

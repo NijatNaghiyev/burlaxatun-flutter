@@ -13,7 +13,7 @@ class ResetPasswordInputs extends StatelessWidget {
       spacing: 25,
       children: [
         GlobalInput(
-          inputName: 'New password',
+          inputName: 'Yeni şifrə',
           prefixIcon: 'assets/icons/lock_2.svg',
           hintText: 'Yeni şifrəni qeyd edin',
           isObsecure: true,
@@ -22,7 +22,7 @@ class ResetPasswordInputs extends StatelessWidget {
               : AssetConstants.eyeOpenedIcon,
         ),
         GlobalInput(
-          inputName: 'Confirm new password',
+          inputName: 'Yeni şifrəni təsdiqləyin',
           prefixIcon: 'assets/icons/lock_2.svg',
           hintText: 'Yeni şifrəni təsdiq edin',
           isObsecure: true,

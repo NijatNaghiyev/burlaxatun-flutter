@@ -22,7 +22,7 @@ class DoctorNotificationStatus extends StatelessWidget {
             height: 1.4,
             textAlign: TextAlign.left,
             text:
-                'Təəsüfki, qeyd ettiyiniz tarix həkim tərəfindən qəbul edilmədi.',
+                'Təəssüf ki, qeyd attitudinize tarix həkim tərəfindən qəbul edilmədi.',
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: Color(0xffF04438),

@@ -24,11 +24,11 @@ class HomePageDailyAdvise extends StatelessWidget {
           }
 
           if (state.status == DailyRecStatus.failure) {
-            return const Center(child: Text('ERROR'));
+            return const Center(child: Text('Xəta'));
           }
 
           if (state.status == DailyRecStatus.networkError) {
-            return const Center(child: Text('Network error'));
+            return const Center(child: Text('Şəbəkə xətası'));
           }
 
           if (state.status == DailyRecStatus.success) {

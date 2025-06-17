@@ -26,11 +26,11 @@ class BlogBanner extends StatelessWidget {
         }
 
         if (state.status == BlogSlidersStatus.failure) {
-          return const Center(child: Text('Error'));
+          return const Center(child: Text('Xəta'));
         }
 
         if (state.status == BlogSlidersStatus.networkError) {
-          return const Center(child: Text('Network error'));
+          return const Center(child: Text('Şəbəkə xətası'));
         }
 
         if (state.status == BlogSlidersStatus.success) {

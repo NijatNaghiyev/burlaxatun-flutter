@@ -180,7 +180,7 @@ class SelectDateWidget extends StatelessWidget {
       // Format initial date when widget first builds to ensure we have a valid date
       String formattedDate =
           DateFormat('yyyy-MM-dd').format(questionsCubit.state.selectedDay);
-      if (questionsCubit.state.birthDateString == 'Dogum tarixini qeyd edinn') {
+      if (questionsCubit.state.birthDateString == 'Doğum tarixini qeyd edin') {
         questionsCubit.updateBirthDate(
             formattedDate, questionsCubit.state.selectedDay);
       }
@@ -224,7 +224,7 @@ class SelectDateWidget extends StatelessWidget {
                       builder: (context, state) {
                         return GlobalText(
                           text: state.birthDateString ==
-                                  'Dogum tarixini qeyd edinn'
+                                  'Doğum tarixini qeyd edin'
                               ? DateFormat('yyyy-MM-dd')
                                   .format(state.selectedDay)
                               : state.birthDateString,

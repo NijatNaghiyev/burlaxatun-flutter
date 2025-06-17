@@ -8,7 +8,7 @@ class LastDays extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GlobalText(
-      text: 'Last 7 days',
+      text: 'Son 7 gün',
       fontSize: 16,
       fontWeight: FontWeight.w600,
       color: Colors.black,

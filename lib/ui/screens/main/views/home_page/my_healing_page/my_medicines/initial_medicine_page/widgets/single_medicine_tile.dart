@@ -60,7 +60,7 @@ class SingleMedicineTile extends StatelessWidget {
                     Row(
                       children: [
                         GlobalText(
-                          text: 'Daha etrafli',
+                          text: 'Daha ətraflı',
                           fontSize: 10,
                           fontWeight: FontWeight.w500,
                           color: Color(0xff97989D),

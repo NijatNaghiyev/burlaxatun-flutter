@@ -36,11 +36,11 @@ class _SecondaryForumPageCustomScrollState
         }
         if (state is ForumListError) {
           log("Forum list ui error: ${state.message}");
-          return const Text("Error");
+          return const Text("Xəta");
         }
         if (state is ForumListNetworkError) {
           log("Forum list ui network error: ${state.message}");
-          return const Text("Network Error");
+          return const Text("Şəbəkə xətası");
         }
         if (state is ForumListSuccess) {
           final allResults = state.forumListResponse.results ?? [];
@@ -55,7 +55,7 @@ class _SecondaryForumPageCustomScrollState
           if (filteredResults.isEmpty) {
             return const Center(
               child: Text(
-                "No element yet",
+                "Hələ heç bir element yoxdur",
                 style: TextStyle(
                   fontSize: 18,
                   color: ColorConstants.primaryRedColor,

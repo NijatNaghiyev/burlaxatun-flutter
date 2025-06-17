@@ -20,7 +20,7 @@ class PrivacyPolicyView extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorConstants.scaffoldColor,
       appBar: GlobalAppbar(
-        title: 'Mexfilik siyaseti',
+        title: 'Məxfilik siyasəti',
         onLeadingTap: () {
           context.pop();
         },
@@ -41,13 +41,13 @@ class PrivacyPolicyView extends StatelessWidget {
 
               if (state.status == PrivacyPolicyStatus.failure) {
                 return Center(
-                  child: Text('Error'),
+                  child: Text('Xəta'),
                 );
               }
 
               if (state.status == PrivacyPolicyStatus.networkError) {
                 return Center(
-                  child: Text('Network error'),
+                  child: Text('Şəbəkə xətası'),
                 );
               }
 

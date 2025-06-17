@@ -63,7 +63,7 @@ class NotificationBox extends StatelessWidget {
                     child: GlobalText(
                       height: 1.3,
                       textAlign: TextAlign.left,
-                      text: notification.text ?? 'not found',
+                      text: notification.text ?? 'tapılmadı',
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       color: Colors.black,
@@ -71,7 +71,8 @@ class NotificationBox extends StatelessWidget {
                   ),
                   4.h,
                   GlobalText(
-                    text: '${DateTime.now().difference(notification.createdAt!).inMinutes} dq evvel',
+                    text:
+                        '${DateTime.now().difference(notification.createdAt!).inMinutes} dəqiqə əvvəl',
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Color(0xff8E8E93),

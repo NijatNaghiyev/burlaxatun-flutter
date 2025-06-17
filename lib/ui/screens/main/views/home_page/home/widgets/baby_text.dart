@@ -15,7 +15,7 @@ class BabyText extends StatelessWidget {
         GlobalText(
           height: 1.5,
           textAlign: TextAlign.left,
-          text: 'Hamiləliyin 6 həftəsində nə baş verir?',
+          text: 'Hamiləliyin 6-cı həftəsində nə baş verir?',
           fontSize: 24,
           fontWeight: FontWeight.w600,
           color: Colors.black,

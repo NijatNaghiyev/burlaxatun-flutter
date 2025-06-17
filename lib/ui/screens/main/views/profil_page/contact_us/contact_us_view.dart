@@ -17,7 +17,7 @@ class ContactUsView extends StatelessWidget {
     return Scaffold(
         backgroundColor: ColorConstants.scaffoldColor,
         appBar: GlobalAppbar(
-          title: 'Bizimle elaqe saxla',
+          title: 'Bizimlə əlaqə saxla',
           onLeadingTap: () {
             context.pop();
           },
@@ -36,13 +36,13 @@ class ContactUsView extends StatelessWidget {
 
               if (state.status == ContactStatus.failure) {
                 return Center(
-                  child: Text('Error'),
+                  child: Text('Xəta'),
                 );
               }
 
               if (state.status == ContactStatus.networkError) {
                 return Center(
-                  child: Text('Network error'),
+                  child: Text('Şəbəkə xətası'),
                 );
               }
               if (state.status == ContactStatus.success) {
@@ -55,7 +55,7 @@ class ContactUsView extends StatelessWidget {
                       contactDescription: result?.callBottom ?? '',
                       icon: result?.callIcon,
                       onTap: () =>
-                          UrlLauncherHelper.launchPhoneCall('+994552516420'),
+                          UrlLauncherHelper.launchPhoneCall('+994512063813'),
                       // icon: 'assets/icons/contact_us_call_icon.svg',
                       // iconColor: Color(0xffEC407A),
                     ),
@@ -65,7 +65,7 @@ class ContactUsView extends StatelessWidget {
                       contactDescription: result?.whatsappBottom ?? '',
                       icon: result?.whatsappIcon,
                       onTap: () => UrlLauncherHelper.launchWhatsApp(
-                        '994552516420',
+                        '994512063813',
                         message: 'Salam Anayam komandası!',
                       ),
                     ),
@@ -75,7 +75,7 @@ class ContactUsView extends StatelessWidget {
                       contactDescription: result?.emailBottom ?? '',
                       icon: result?.emailIcon ?? '',
                       onTap: () => UrlLauncherHelper.launchEmail(
-                        toEmail: 'uzeyir.nev@gmail.com',
+                        toEmail: 'info@uptodate.az',
                         subject: 'Anayam Əlaqə',
                         body: 'Salam!',
                       ),

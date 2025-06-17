@@ -22,7 +22,7 @@ class ForumCommentsCustomScroll extends StatelessWidget {
                 hasScrollBody: false,
                 child: Center(
                   child: Text(
-                    'No elements',
+                    'Element yoxdur',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey,

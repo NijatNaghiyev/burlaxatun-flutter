@@ -25,7 +25,7 @@ class BabyInformation extends StatelessWidget {
               children: [
                 GlobalText(
                   textAlign: TextAlign.left,
-                  text: 'Your baby is the size of an apple',
+                  text: 'Körpəniz alma ölçüsündədir',
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: Color(0xff8C8A8A),

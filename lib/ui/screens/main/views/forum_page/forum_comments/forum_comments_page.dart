@@ -20,7 +20,7 @@ class ForumCommentsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GlobalAppbar(
-        title: 'Forum Comments',
+        title: 'Forum Rəyləri',
         onLeadingTap: () {
           context.pop();
         },
@@ -46,7 +46,7 @@ class ForumCommentsPage extends StatelessWidget {
                   comments: comments,
                 );
               } else if (state.status == ForumCommentsStatus.failure) {
-                return Center(child: Text("Error loading comments"));
+                return Center(child: Text("Rəylər yüklənmədi"));
               } else {
                 return const SizedBox.shrink();
               }

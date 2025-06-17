@@ -37,16 +37,16 @@ class _GirlNamesState extends State<GirlNames>
         if (state.nameStateStatus == NameStateStatus.loading) {
           return Center(child: CircularProgressIndicator.adaptive());
         } else if (state.nameStateStatus == NameStateStatus.error) {
-          return Center(child: Text('data not found'));
+          return Center(child: Text('Məlumat tapılmadı'));
         } else if (state.nameStateStatus == NameStateStatus.networkError) {
-          return Center(child: Text('connection error'));
+          return Center(child: Text('Şəbəkə xətası'));
         }
         if (state.nameStateStatus == NameStateStatus.success) {
           final girlNames = state.femaleNamesList;
           return ListView.separated(
             itemCount: girlNames?.length ?? 0,
             itemBuilder: (_, i) {
-              final name = girlNames?[i].name ?? 'name not found';
+              final name = girlNames?[i].name ?? 'ad tapılmadı';
               return GirlNameTile(name: name);
             },
             separatorBuilder: (_, index) {

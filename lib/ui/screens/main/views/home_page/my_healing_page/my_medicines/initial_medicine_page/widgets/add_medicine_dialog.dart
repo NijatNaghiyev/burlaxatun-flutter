@@ -82,7 +82,7 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
                         ),
                       ),
                       const GlobalText(
-                        text: 'New indicator',
+                        text: 'Yeni göstərici',
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
@@ -158,7 +158,7 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
                               ),
                               onPressed: () => Navigator.pop(context),
                               child: const GlobalText(
-                                text: 'Imtina Et',
+                                text: 'İmtina Et',
                                 fontSize: 14,
                                 height: 1.1,
                                 fontWeight: FontWeight.w500,
@@ -212,7 +212,6 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
                                             endDate = dateFormat
                                                 .parseStrict(endDateText);
                                           } catch (_) {
-                                            
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               const SnackBar(

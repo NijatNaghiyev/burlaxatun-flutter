@@ -31,7 +31,7 @@ class ReportCommentOrBlockUser extends StatelessWidget {
             ),
             6.h,
             GlobalText(
-              text: 'Comment',
+              text: 'Rəy',
               fontSize: 12,
               fontWeight: FontWeight.w500,
               color: Color(0xff414651),
@@ -42,7 +42,7 @@ class ReportCommentOrBlockUser extends StatelessWidget {
                 SvgPicture.asset('assets/svgs/report_icon.svg'),
                 SizedBox(width: 8),
                 GlobalText(
-                  text: 'Report',
+                  text: 'Hesabat',
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                   color: Color(0xff252B37),
@@ -55,7 +55,7 @@ class ReportCommentOrBlockUser extends StatelessWidget {
                 SvgPicture.asset('assets/svgs/block_user_icon.svg'),
                 SizedBox(width: 8),
                 GlobalText(
-                  text: 'Block user',
+                  text: 'İstifadəçini bloklayın',
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                   color: Color(0xff252B37),

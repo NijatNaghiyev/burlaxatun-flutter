@@ -5,17 +5,19 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_appbar.dart';
-import 'widgets/chart_widget.dart';
 import 'widgets/calendar_and_add_buttons.dart';
+import 'widgets/chart_widget.dart';
 import 'widgets/time_intervals_widget.dart';
 
 class IndicatorDataScreen extends StatefulWidget {
   const IndicatorDataScreen({
     super.key,
     required this.indicatorName,
+    required this.indicatorAppBarTitle,
   });
 
   final String indicatorName;
+  final String indicatorAppBarTitle;
 
   @override
   State<IndicatorDataScreen> createState() => _IndicatorDataScreenState();
@@ -38,7 +40,7 @@ class _IndicatorDataScreenState extends State<IndicatorDataScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GlobalAppbar(
-        title: 'Bədən çəkisi',
+        title: widget.indicatorAppBarTitle,
         onLeadingTap: () {
           context.pop();
         },
@@ -68,7 +70,7 @@ class _IndicatorDataScreenState extends State<IndicatorDataScreen> {
                           Center(child: CircularProgressIndicator.adaptive()),
                     );
                   } else if (state.indicatorStatus == IndicatorStatus.error) {
-                    return Center(child: Text('Error occured'));
+                    return Center(child: Text('Xəta baş verdi'));
                   }
                   if (state.indicatorStatus == IndicatorStatus.success) {
                     return Padding(

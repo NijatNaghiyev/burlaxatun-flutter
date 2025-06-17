@@ -89,7 +89,7 @@ class _VideoBoxState extends State<VideoBox> {
             ),
       boxTitle: 'Doğuşdan Sonra Emosional və Fiziki Dəyişikliklər',
       boxDescription:
-          'Pregnancy Yoga helps alleviate the effect of common symptoms such as morning sickness, painful leg cramps, swollen ankles, and constipation.',
+          'Hamiləlik Yogası səhər xəstəliyi, ağrılı ayaq krampları, şişkin ayaq biləyi və qəbizlik kimi ümumi simptomların təsirini azaltmağa kömək edir.',
     );
   }
 }

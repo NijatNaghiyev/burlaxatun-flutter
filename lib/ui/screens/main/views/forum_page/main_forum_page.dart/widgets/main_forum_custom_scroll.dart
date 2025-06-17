@@ -23,11 +23,11 @@ class MainForumCustomScroll extends StatelessWidget {
         }
         if (state is ForumCategoryError) {
           log("Forum Category UI error: ${state.message}");
-          return Center(child: Text("Error"));
+          return Center(child: Text("Xəta"));
         }
         if (state is ForumCategoryNetworkError) {
           log("Forum Category UI network error: ${state.message}");
-          return Center(child: Text("Network Error"));
+          return Center(child: Text("Şəbəkə xətası"));
         }
         if (state is ForumCategorySuccess) {
           final data = state.response;

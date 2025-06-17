@@ -10,7 +10,7 @@ class ChartDataNotFoundWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Melumat tapilmadi'),
+          Text('Məlumat tapılmadı'),
         ],
       ),
     );

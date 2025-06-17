@@ -36,13 +36,13 @@ class AboutUsView extends StatelessWidget {
 
             if (state.status == AboutStatus.failure) {
               return Center(
-                child: Text('Error'),
+                child: Text('Xəta'),
               );
             }
 
             if (state.status == AboutStatus.networkError) {
               return Center(
-                child: Text('Network error'),
+                child: Text('Şəbəkə xətası'),
               );
             }
 
