@@ -11,13 +11,23 @@ import 'widgets/profile_page_sections.dart';
 import 'widgets/profile_picture_and_name.dart';
 import 'widgets/profile_pregnancy_box.dart';
 
-class InitialProfilePage extends StatelessWidget {
+class InitialProfilePage extends StatefulWidget {
   const InitialProfilePage({super.key});
+
+  @override
+  State<InitialProfilePage> createState() => _InitialProfilePageState();
+}
+
+class _InitialProfilePageState extends State<InitialProfilePage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserDataCubit>().getUserData();
+  }
 
   @override
   Widget build(BuildContext context) {
     // final mainCubit = context.read<MainnCubit>();
-    final userData = context.read<UserDataCubit>().getUserData();
     return Scaffold(
       backgroundColor: ColorConstants.scaffoldColor,
       body: SafeArea(
