@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +20,14 @@ class UserDataCubit extends Cubit<UserDataState> {
       emit(state.copyWith(status: UserDataStatus.loading));
 
       final response = await _userDataContractor.getUserData();
+      log('babies count: ${response.babies?.length}');
 
       emit(state.copyWith(
         status: UserDataStatus.success,
         response: response,
+        babies: response.babies,
       ));
+      log('babies count after save: ${state.babies?.length}');
     } on DioException catch (e) {
       emit(state.copyWith(
         status: UserDataStatus.networkError,

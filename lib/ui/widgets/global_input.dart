@@ -96,7 +96,7 @@ class GlobalInput extends StatelessWidget {
             prefixIcon: prefixIcon == null
                 ? isNumber
                     ? Padding(
-                        padding: const EdgeInsets.only(left: 16, right: 10),
+                        padding: const EdgeInsets.only(left: 16, right: 10, bottom: 1),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

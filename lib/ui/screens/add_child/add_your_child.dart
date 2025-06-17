@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:burla_xatun/cubits/user_data/user_data_cubit.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -27,6 +29,9 @@ class AddYourChild extends StatelessWidget {
   Widget build(BuildContext context) {
     final questionCubit = context.read<QuestionsCubit>();
     final addChildCubit = context.read<AddChildCubit>();
+    final userDataCubit = context.read<UserDataCubit>();
+
+    //  context.read<UserDataCubit>();
     return Scaffold(
       appBar: GlobalAppbar(
         title: 'Övladınızı əlavə edin',
@@ -177,14 +182,15 @@ class AddYourChild extends StatelessWidget {
                 return DavamEt(
                   isLoading: state.addChildStatus == AddChildStatus.loading,
                   isActive: true,
-                  onPressed: () {
+                  onPressed: () async {
                     final childData = AddChildRequestModel(
                       name: addChildCubit.childFullNameController.text.trim(),
                       weight: addChildCubit.childWeightController.text.trim(),
                       height: addChildCubit.childHeightController.text.trim(),
                       birthDate: questionCubit.state.birthDateString,
                     );
-                    addChildCubit.addChild(childData: childData);
+                    await addChildCubit.addChild(childData: childData);
+                    await userDataCubit.getUserData();
                   },
                 );
               },

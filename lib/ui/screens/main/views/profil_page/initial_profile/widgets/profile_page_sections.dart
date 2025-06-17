@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../../../cubits/main_cubit/mainn_cubit.dart';
+import '../../../../../../../data/models/local/profile_sections_items_model.dart';
 import 'section_box.dart';
 
 class ProfilePageSections extends StatelessWidget {
@@ -12,17 +9,18 @@ class ProfilePageSections extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainnCubit>();
+    final profileSectionItems = ProfileSectionsItemsModel.items;
     return Column(
       spacing: 12,
       children: [
-        for (int i = 0; i < mainCubit.profileSectionItems.length; i++)
+        for (int i = 0; i < profileSectionItems.length; i++)
           SectionBox(
-            sectionicon: mainCubit.profileSectionItems[i].icon,
-            sectionName: mainCubit.profileSectionItems[i].sectionName,
+            sectionicon: profileSectionItems[i].icon,
+            sectionName: profileSectionItems[i].sectionName,
             onTap: () {
-              log(mainCubit.profileSectionItems[i].sectionRoute);
-              context.push(mainCubit.profileSectionItems[i].sectionRoute);
+              profileSectionItems[i].sectionRoute != null
+                  ? context.push(profileSectionItems[i].sectionRoute!)
+                  : null;
             },
           ),
       ],

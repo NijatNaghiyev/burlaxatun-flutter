@@ -76,7 +76,7 @@ class MainnCubit extends Cubit<MainInitial> {
 
   final navbarItems = BottomNavbarItemsModel.items;
   final boxItems = MainPageBoxModel.items;
-  final profileSectionItems = ProfileSectionsItemsModel.items;
+  
   final myHealingCardItems = MyHealingCardItemsModel.items;
   final settingItems = SettingsItemModel.items;
   final medicineDetailItems = MedicineDetailItemsModel.items;

@@ -1,5 +1,12 @@
+import 'dart:developer';
+
+import 'package:burla_xatun/ui/screens/main/views/profil_page/pricavy_policy/privacy_policy_view.dart';
+import 'package:burla_xatun/ui/screens/main/views/profil_page/using_rules/using_rules_screen.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../cubits/signup_cubit/signup_cubit.dart';
 import '../../../../../utils/constants/color_constants.dart';
@@ -56,15 +63,57 @@ class AcceptPolicyCheckBox extends StatelessWidget {
         SizedBox(width: 9),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.75,
-          child: GlobalText(
-            height: 1.2,
-            textAlign: TextAlign.left,
-            text: 'İstifadə qaydalalrı və məxfilik siyasəti ilə razıyam',
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-            color: Color(0xff8D8D8D),
+          child: RichText(
+            text: TextSpan(
+              style: GoogleFonts.poppins(
+                fontSize: 12,
+                color: Color(0xff8D8D8D),
+                fontWeight: FontWeight.w400,
+              ),
+              children: [
+                TextSpan(
+                  text: 'İstifadə qaydaları ',
+                  style: TextStyle(color: ColorConstants.primaryRedColor),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => UsingRulesScreen(),
+                        ),
+                      );
+                    },
+                ),
+                TextSpan(text: 'və '),
+                TextSpan(
+                  text: 'Məxfilik siyasəti ',
+                  style: TextStyle(color: ColorConstants.primaryRedColor),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => PrivacyPolicyView(),
+                        ),
+                      );
+                    },
+                ),
+                TextSpan(text: 'ilə razıyam'),
+              ],
+            ),
           ),
-        )
+        ),
+        // SizedBox(
+        //   width: MediaQuery.of(context).size.width * 0.75,
+        //   child: GlobalText(
+        //     height: 1.2,
+        //     textAlign: TextAlign.left,
+        //     text: 'İstifadə qaydalalrı və məxfilik siyasəti ilə razıyam',
+        //     fontSize: 12,
+        //     fontWeight: FontWeight.w400,
+        //     color: Color(0xff8D8D8D),
+        //   ),
+        // )
       ],
     );
   }
