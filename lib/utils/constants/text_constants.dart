@@ -2,11 +2,11 @@ class TextConstants {
   TextConstants._();
 
   static const String companySupport =
-      'The app will provide a community support feature to help users connect with other users, share experiences, and receive support.';
+      'Şirkət dəstəyi və həkimlərimizlə birbaşa əlaqə qurun.';
   static const String addYourPartner =
-      'Invite and add your partner and close ones to the app. Super fast and easy sync!';
+      'Hamiləlik dövründə həyat yoldaşınızı və ya partnyorunuzu əlavə edin.';
   static const String trustedCompanion =
-      'Your trusted companion on the beautiful journey of pregnancy.';
+      'Etibarlı yoldaşınızla hamiləlik dövrünü keçirin.';
   static const String davamEt = 'Davam et';
   static const String email = 'Email';
   static const String sifre = 'Şifrə';
@@ -15,9 +15,9 @@ class TextConstants {
   static const String forgotPsw = 'Şifrənizi unutmusunuzmu?';
   static const String signUpWithGoogle = 'Sign up with Google';
   static const String videoDoktor = 'Video Doktor';
-  static const String welcomeTo = 'Welcome to';
+  static const String welcomeTo = 'Xoş gəlmisiniz';
   static const String burlaXatun = 'Anayam';
-  static const navigatePregnancy = "Navigate Pregnancy";
+  static const navigatePregnancy = 'Hamiləlik dövrünüzü izləyin';
   static const together = 'Birlikdə';
   static const community = 'İcma';
   static const support = 'Dəstək';
@@ -31,7 +31,7 @@ class TextConstants {
   static const typeSomething = "Xatırlayacağınız bir şey yazın";
   static const newPsw = "Yeni şifrə";
   static const confirmNewPsw = "Yeni şifrəni təsdiqləyin";
-  static const password = 'Password';
+  static const password = 'Şifrə';
   static const enterYourPsw = 'Şifrənizi daxil edin';
   static const daxilOl = "Daxil ol";
 }
