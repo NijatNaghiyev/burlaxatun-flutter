@@ -120,7 +120,7 @@ class MyApp extends StatelessWidget {
           create: (context) => locator<DoctorDetailCubit>(),
         ),
         BlocProvider(
-          create: (context) => locator<UserDataCubit>()..getUserData(),
+          create: (context) => locator<UserDataCubit>(),
         ),
         BlocProvider(
           create: (context) => locator<TasksByWeeksCubit>(),
