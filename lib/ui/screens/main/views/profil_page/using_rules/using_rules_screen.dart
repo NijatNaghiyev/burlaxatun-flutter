@@ -68,7 +68,7 @@ class UsingRulesScreen extends StatelessWidget {
                             children: [
                               HeaderText(
                                 title:
-                                    '“Burla Xatun” mobil tətbiqindən istifadə qaydaları',
+                                    '“Anayam” mobil tətbiqindən istifadə qaydaları',
                               ),
                               //LastEditText(),
                               LastEditText(

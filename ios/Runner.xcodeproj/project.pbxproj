@@ -473,7 +473,7 @@
 				DEVELOPMENT_TEAM = MAX258C6MJ;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Burla Xatun";
+				INFOPLIST_KEY_CFBundleDisplayName = "Anayam";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -662,7 +662,7 @@
 				DEVELOPMENT_TEAM = MAX258C6MJ;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Burla Xatun";
+				INFOPLIST_KEY_CFBundleDisplayName = "Anayam";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -691,7 +691,7 @@
 				DEVELOPMENT_TEAM = MAX258C6MJ;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Burla Xatun";
+				INFOPLIST_KEY_CFBundleDisplayName = "Anayam";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

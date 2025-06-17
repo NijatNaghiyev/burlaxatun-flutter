@@ -66,7 +66,7 @@ class ContactUsView extends StatelessWidget {
                       icon: result?.whatsappIcon,
                       onTap: () => UrlLauncherHelper.launchWhatsApp(
                         '994552516420',
-                        message: 'Salam Burla Xatun komandası!',
+                        message: 'Salam Anayam komandası!',
                       ),
                     ),
                     SizedBox(height: 24),
@@ -76,7 +76,7 @@ class ContactUsView extends StatelessWidget {
                       icon: result?.emailIcon ?? '',
                       onTap: () => UrlLauncherHelper.launchEmail(
                         toEmail: 'uzeyir.nev@gmail.com',
-                        subject: 'Burla Xatun Əlaqə',
+                        subject: 'Anayam Əlaqə',
                         body: 'Salam!',
                       ),
                     ),

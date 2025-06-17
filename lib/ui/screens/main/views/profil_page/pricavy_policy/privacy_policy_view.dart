@@ -69,7 +69,7 @@ class PrivacyPolicyView extends StatelessWidget {
                             children: [
                               HeaderText(
                                   title:
-                                      '“Burla Xatun” internet portalı və mobil tətbiq üzrə Məxfilik Siyasəti'),
+                                      '“Anayam” internet portalı və mobil tətbiq üzrə Məxfilik Siyasəti'),
                               LastEditText(
                                 lastEditText:
                                     result?.updatedAt?.toLocal().toString() ??

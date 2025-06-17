@@ -16,7 +16,7 @@ class TextConstants {
   static const String signUpWithGoogle = 'Sign up with Google';
   static const String videoDoktor = 'Video Doktor';
   static const String welcomeTo = 'Welcome to';
-  static const String burlaXatun = 'Burla Xatun';
+  static const String burlaXatun = 'Anayam';
   static const navigatePregnancy = "Navigate Pregnancy";
   static const together = 'Birlikdə';
   static const community = 'İcma';
