@@ -1,16 +1,12 @@
-import 'dart:developer';
-
-import 'package:burla_xatun/ui/screens/main/views/profil_page/pricavy_policy/privacy_policy_view.dart';
-import 'package:burla_xatun/ui/screens/main/views/profil_page/using_rules/using_rules_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../cubits/signup_cubit/signup_cubit.dart';
 import '../../../../../utils/constants/color_constants.dart';
-import '../../../../widgets/global_text.dart';
+import '../../../main/views/profil_page/pricavy_policy/privacy_policy_view.dart';
+import '../../../main/views/profil_page/using_rules/using_rules_screen.dart';
 
 class AcceptPolicyCheckBox extends StatelessWidget {
   const AcceptPolicyCheckBox({
