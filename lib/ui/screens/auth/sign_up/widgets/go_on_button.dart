@@ -20,6 +20,7 @@ class GoOnButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final signupCubit = context.read<SignupCubit>();
+    bool? isActiveButton;
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (_, state) {
         if (state is SignupSuccess) {
@@ -52,9 +53,11 @@ class GoOnButton extends StatelessWidget {
           onPressed: state is SignupLoading
               ? () {}
               : () {
-                  if (state is SignupInitial &&
-                      state.isActiveButton &&
-                      formKey.currentState!.validate()) {
+                  if (state is SignupInitial) {
+                    isActiveButton = state.isActiveButton;
+                  }
+
+                  if (isActiveButton! && formKey.currentState!.validate()) {
                     signupCubit.register();
                   }
                 },
