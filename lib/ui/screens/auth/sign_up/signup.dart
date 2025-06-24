@@ -1,4 +1,6 @@
+import 'package:burla_xatun/cubits/signup_cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../utils/constants/padding_constants.dart';
 import '../../../../utils/extensions/context_extensions.dart';
@@ -30,7 +32,14 @@ class SignUp extends StatelessWidget {
           child: Column(
             children: [
               // context.deviceHeight < 710 ? 10.h : 51.h,
-              SignupInputs(formKey: formKey),
+              BlocBuilder<SignupCubit, SignupState>(
+                builder: (context, state) {
+                  final isLoading = state is SignupLoading;
+                  return IgnorePointer(
+                      ignoring: isLoading,
+                      child: SignupInputs(formKey: formKey));
+                },
+              ),
               context.deviceHeight < 710 ? 17.h : 15.h,
               AcceptPolicyCheckBox(isCheckedPolicy: isCheckedPolicy),
               context.deviceHeight < 710 ? 14.h : 29.h,

@@ -30,7 +30,7 @@ class _GoOnButtonState extends State<GoOnButton> {
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (_, state) {
         if (state is SignupSuccess) {
-          context.push('/questions');
+          context.go('/questions');
         }
         if (state is SignupError) {
           final errorMessage = state.error;
