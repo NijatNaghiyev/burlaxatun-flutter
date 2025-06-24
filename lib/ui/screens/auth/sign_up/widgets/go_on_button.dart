@@ -10,7 +10,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../cubits/signup_cubit/signup_cubit.dart';
 import '../../../../../utils/constants/color_constants.dart';
 
-class GoOnButton extends StatelessWidget {
+class GoOnButton extends StatefulWidget {
   const GoOnButton({
     super.key,
     required this.formKey,
@@ -18,9 +18,15 @@ class GoOnButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
 
   @override
+  State<GoOnButton> createState() => _GoOnButtonState();
+}
+
+class _GoOnButtonState extends State<GoOnButton> {
+  bool? isActiveButton;
+
+  @override
   Widget build(BuildContext context) {
     final signupCubit = context.read<SignupCubit>();
-    bool? isActiveButton;
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (_, state) {
         if (state is SignupSuccess) {
@@ -57,7 +63,8 @@ class GoOnButton extends StatelessWidget {
                     isActiveButton = state.isActiveButton;
                   }
 
-                  if (isActiveButton! && formKey.currentState!.validate()) {
+                  if (isActiveButton! &&
+                      widget.formKey.currentState!.validate()) {
                     signupCubit.register();
                   }
                 },
