@@ -84,9 +84,20 @@ class SignupCubit extends Cubit<SignupState> {
       emit(SignupSuccess());
       log("Register success");
     } on DioException catch (e, s) {
+      final errorMap = e.response?.data as Map<String, dynamic>?;
+      String errorMessage = '';
+
+      if (errorMap != null) {
+        errorMessage =
+            errorMap.values.expand((messages) => messages).join(', ');
+
+        emit(SignupError(errorMessage));
+      } else {
+        emit(SignupError('An unknown error occurred'));
+      }
       emit(
         SignupNetworkError(
-          (e.response?.data as Map<String, dynamic>)['detail'] ?? '',
+          errorMessage,
         ),
       );
 
