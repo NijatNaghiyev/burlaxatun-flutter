@@ -79,7 +79,7 @@ class Routerapp {
       GoRoute(
         path: '/splash',
         builder: (context, state) => BlocProvider(
-          create: (context) => SplashCubit(),
+          create: (context) => locator<SplashCubit>(),
           child: SplashScreen(),
         ),
       ),

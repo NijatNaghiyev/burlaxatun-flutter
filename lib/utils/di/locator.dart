@@ -22,6 +22,7 @@ import 'package:burla_xatun/cubits/notification/notification_cubit.dart';
 import 'package:burla_xatun/cubits/privacy_policy/privacy_policy_cubit.dart';
 import 'package:burla_xatun/cubits/questions_cubit/questions_cubit.dart';
 import 'package:burla_xatun/cubits/signup_cubit/signup_cubit.dart';
+import 'package:burla_xatun/cubits/splash/splash_cubit.dart';
 import 'package:burla_xatun/cubits/tasks_by_weeks/tasks_by_weeks_cubit.dart';
 import 'package:burla_xatun/cubits/ultrasound/ultrasound_cubit.dart';
 import 'package:burla_xatun/cubits/user_data/user_data_cubit.dart';
@@ -50,6 +51,7 @@ import 'package:burla_xatun/data/contractor/medicine/medicine_create_contractor.
 import 'package:burla_xatun/data/contractor/medicine/medicine_patch_contractor.dart';
 import 'package:burla_xatun/data/contractor/notifications_contract.dart';
 import 'package:burla_xatun/data/contractor/privacy_policy_contractor.dart';
+import 'package:burla_xatun/data/contractor/refresh_token_contract.dart';
 import 'package:burla_xatun/data/contractor/register_contractor.dart';
 import 'package:burla_xatun/data/contractor/tasks_by_week_contract.dart';
 import 'package:burla_xatun/data/contractor/ultrasound_contract.dart';
@@ -78,6 +80,7 @@ import 'package:burla_xatun/data/repository/medicine/medicine_patch_repository.d
 import 'package:burla_xatun/data/repository/medicine/medicine_repository.dart';
 import 'package:burla_xatun/data/repository/notifications_repo.dart';
 import 'package:burla_xatun/data/repository/privacy_policy_repository.dart';
+import 'package:burla_xatun/data/repository/refresh_token_repo.dart';
 import 'package:burla_xatun/data/repository/register_repository.dart';
 import 'package:burla_xatun/data/repository/task_by_weeks_repo.dart';
 import 'package:burla_xatun/data/repository/ultrasound_repo.dart';
@@ -109,6 +112,7 @@ import 'package:burla_xatun/data/services/remote/medicine/medicine_patch_service
 import 'package:burla_xatun/data/services/remote/medicine/medicine_service.dart';
 import 'package:burla_xatun/data/services/remote/notification_service.dart';
 import 'package:burla_xatun/data/services/remote/privacy_policy_service.dart';
+import 'package:burla_xatun/data/services/remote/refresh_token_service.dart';
 import 'package:burla_xatun/data/services/remote/register_service.dart';
 import 'package:burla_xatun/data/services/remote/tasks_by_week_service.dart';
 import 'package:burla_xatun/data/services/remote/ultrasound_service.dart';
@@ -175,6 +179,7 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton(() => AddChildService());
   locator.registerLazySingleton(() => UltrasoundService());
   locator.registerLazySingleton(() => IndicatorService());
+  locator.registerLazySingleton(() => RefreshTokenService());
 
   // contractor
   locator.registerLazySingleton<LoginContractor>(
@@ -273,6 +278,9 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton<UltrasoundContract>(
       () => UltrasoundRepo(locator<UltrasoundService>()));
 
+  locator.registerLazySingleton<RefreshTokenContract>(
+      () => RefreshTokenRepo(locator<RefreshTokenService>()));
+
   // cubit
   locator.registerFactory(() => LoginCubit(locator()));
   locator.registerFactory(() => DailyRecCubit(locator()));
@@ -318,4 +326,6 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => UltrasoundCubit(locator<UltrasoundContract>()));
 
   locator.registerFactory(() => IndicatorCubit(locator<IndicatorContract>()));
+
+  locator.registerFactory(() => SplashCubit(locator<RefreshTokenContract>()));
 }

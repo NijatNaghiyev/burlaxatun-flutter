@@ -1,3 +1,6 @@
+import 'package:burla_xatun/data/services/local/login_token_service.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
+
 class LoginResponseModel {
   final String? refresh;
   final String? access;

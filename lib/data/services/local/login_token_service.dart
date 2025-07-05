@@ -29,9 +29,23 @@ class LoginTokenService {
   }
 
   String? get token => loginResponse?.access;
-  
+
   Future<bool> isUserLoggedIn() async {
     final currentToken = token;
     return currentToken != null && currentToken.isNotEmpty;
+  }
+
+  LoginResponseModel copyWith({
+    String? refreshToken,
+    String? accessToken,
+  }) {
+    return LoginResponseModel(
+      refresh: refreshToken ?? loginResponse?.refresh,
+      access: accessToken ?? loginResponse?.access,
+      activeLanguage: loginResponse?.activeLanguage,
+      onboardingDone: loginResponse?.onboardingDone,
+      enableNotifications: loginResponse?.enableNotifications,
+      pregnantWeek: loginResponse?.pregnantWeek,
+    );
   }
 }

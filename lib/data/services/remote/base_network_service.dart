@@ -1,9 +1,10 @@
 import 'dart:developer';
 
-import 'package:burla_xatun/cubits/main_cubit/mainn_cubit.dart';
-import 'package:burla_xatun/data/services/local/login_token_service.dart';
-import 'package:burla_xatun/utils/di/locator.dart';
-import 'package:burla_xatun/utils/routes/router.dart';
+import '../../../cubits/main_cubit/mainn_cubit.dart';
+import '../../../cubits/splash/splash_cubit.dart';
+import '../local/login_token_service.dart';
+import '../../../utils/di/locator.dart';
+import '../../../utils/routes/router.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -40,10 +41,10 @@ class BaseNetwork {
               //? If the token is expired or unauthorized, delete the saved login token
               //? and redirect to the login page
 
-              locator<LoginTokenService>().deleteSaveByKey("login");
+              // locator<LoginTokenService>().deleteSaveByKey("login");
 
-              navigatorKey.currentContext?.go('/login');
-              navigatorKey.currentContext?.read<MainnCubit>().changeView(0);
+              // navigatorKey.currentContext?.go('/login');
+              // navigatorKey.currentContext?.read<MainnCubit>().changeView(0);
             } else if (error.response?.statusCode == 404) {
               // Handle not found error
               log('Not Found: ${error.response?.data}');
