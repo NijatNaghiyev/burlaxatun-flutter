@@ -37,6 +37,7 @@ class BaseNetwork {
             if (error.response?.statusCode == 401) {
               // Handle unauthorized error (e.g., token expired)
               log('Unauthorized: ${error.response?.data}');
+              log('ERROR WHILE SPLASHING');
 
               //? If the token is expired or unauthorized, delete the saved login token
               //? and redirect to the login page
@@ -45,6 +46,7 @@ class BaseNetwork {
 
               // navigatorKey.currentContext?.go('/login');
               // navigatorKey.currentContext?.read<MainnCubit>().changeView(0);
+              locator<SplashCubit>().refreshToken();
             } else if (error.response?.statusCode == 404) {
               // Handle not found error
               log('Not Found: ${error.response?.data}');

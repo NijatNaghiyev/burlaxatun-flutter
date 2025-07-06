@@ -401,7 +401,7 @@ class QuestionsCubit extends Cubit<QuestionsInitial> {
             showCalendar: false,
             selectedCalculateOptionString: 'Hesablama üsulunu seçin...',
             selectedPeriodTimeString: 'Period muddetini secin...',
-            birthDateString: 'Dogum tarixini qeyd edinn',
+            birthDateString: 'Tarixi seçin...',
             selectedDay: DateTime.now(),
             isActiveButton: false,
             isFirstChild: null,

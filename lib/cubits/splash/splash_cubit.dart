@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:burla_xatun/data/contractor/refresh_token_contract.dart';
 import 'package:burla_xatun/data/models/remote/response/refresh_token_model.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
@@ -26,13 +27,14 @@ class SplashCubit extends Cubit<SplashState> {
     final bool onboardingShown = await _isOnboardingShown();
 
     if (isLoggedIn) {
-      try {
-        await userDataContractor.getUserData();
-        emit(SplashSuccess()); // Navigate to home if logged in
-      } catch (e) {
-        log('unautorized or timed out token: $e');
-        await refreshToken();
-      }
+      // try {
+      //   await userDataContractor.getUserData();
+      //   emit(SplashSuccess()); // Navigate to home if logged in
+      // } catch (e) {
+      //   await refreshToken();
+      // }
+      await userDataContractor.getUserData();
+      emit(SplashSuccess()); // Navigate to home if logged in
     } else if (!onboardingShown) {
       emit(SplashAuth()); // Navigate to onboarding
     } else {
@@ -58,6 +60,18 @@ class SplashCubit extends Cubit<SplashState> {
       await loginTokenService
           .saveLoginResponse(updatedLoginResponse); // updating tokens for local
       emit(SplashSuccess());
+    } on DioException catch (e, s) {
+      final connectionError = e.type == DioExceptionType.connectionError ||
+          e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.sendTimeout ||
+          e.type == DioExceptionType.sendTimeout;
+      if (connectionError) return;
+
+      // if (e.response?.statusCode == 401) {
+      log('unauthorized refresh token: $e', stackTrace: s);
+      loginTokenService.deleteSaveByKey('login');
+      emit(SplashLogin());
+      // }
     } catch (e, s) {
       log('Error occured while refreshing token: $e', stackTrace: s);
       emit(SplashLogin());
