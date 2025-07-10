@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../../../../widgets/global_text.dart';
 
 class ForumTitle extends StatelessWidget {
-  const ForumTitle({super.key});
+  const ForumTitle({
+    super.key,
+    this.title,
+  });
+
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +16,7 @@ class ForumTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         GlobalText(
-          text: 'Hamiləlik və reproduktiv sağlamlıq',
+          text: title ?? 'Hamiləlik və reproduktiv sağlamlıq',
           fontSize: 14,
           fontWeight: FontWeight.w600,
           color: Colors.black,

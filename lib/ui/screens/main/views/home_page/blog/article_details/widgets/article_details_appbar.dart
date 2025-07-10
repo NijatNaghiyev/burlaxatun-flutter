@@ -1,73 +1,82 @@
+import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
+import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:video_player/video_player.dart';
 
 class ArticleDetailsAppbar extends StatelessWidget
     implements PreferredSizeWidget {
-  const ArticleDetailsAppbar({super.key});
+  final String imagePath;
+  final bool isVideo;
+  final bool isPlaying;
+  final VideoPlayerController? videoController;
+  final VoidCallback? onPlayPause;
+
+  const ArticleDetailsAppbar({
+    super.key,
+    required this.imagePath,
+    this.isVideo = false,
+    this.isPlaying = false,
+    this.videoController,
+    this.onPlayPause,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 74),
-              child: GestureDetector(
-                onTap: () {
-                  context.pop();
-                },
-                child: SizedBox(
-                  width: 44,
-                  height: 44,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
+    return SizedBox(
+      height: 182,
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: isVideo &&
+                    videoController != null &&
+                    videoController!.value.isInitialized
+                ? GestureDetector(
+                    onTap: onPlayPause,
+                    child: AspectRatio(
+                      aspectRatio: videoController!.value.aspectRatio,
+                      child: VideoPlayer(videoController!),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.arrow_back_ios_new_rounded),
-                      ],
-                    ),
+                  )
+                : Image.network(imagePath,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) =>
+                        CustomCircularProgressIndicator()),
+          ),
+          if (isVideo && !isPlaying)
+            Positioned.fill(
+              child: Center(
+                child: GestureDetector(
+                  onTap: onPlayPause,
+                  child: Icon(
+                    Icons.play_circle_outline,
+                    size: 40,
+                    color: ColorConstants.primaryRedColor,
                   ),
                 ),
               ),
             ),
-            SizedBox(
-              child: Image.asset(
-                'assets/png/postnatal.png',
-                scale: 2.9,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 74),
-              child: SizedBox(
+          Positioned(
+            top: 26,
+            left: 15,
+            child: GestureDetector(
+              onTap: () => context.pop(),
+              child: Container(
                 width: 44,
                 height: 44,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.more_vert_rounded),
-                    ],
-                  ),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
                 ),
+                child: const Icon(Icons.arrow_back_ios_new_rounded),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
   @override
-  Size get preferredSize => Size(double.maxFinite, 175);
+  Size get preferredSize => const Size(double.maxFinite, 182);
 }

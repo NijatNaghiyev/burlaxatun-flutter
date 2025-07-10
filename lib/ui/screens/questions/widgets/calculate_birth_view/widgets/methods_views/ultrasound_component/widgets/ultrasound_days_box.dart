@@ -20,7 +20,7 @@ class UltrasoundDaysBox extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GlobalText(
-          text: 'Gun',
+          text: 'Gün',
           fontSize: 14,
           fontWeight: FontWeight.w500,
           color: Color(0xff667085),
@@ -32,11 +32,11 @@ class UltrasoundDaysBox extends StatelessWidget {
           },
           child: SizedBox(
             height: 56,
-            width: context.deviceWidth * 0.45,
+            width: context.deviceWidth * 0.43,
             child: DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(34)),
-                border: Border.all(color: Colors.black38),
+                border: Border.all(color: Color(0xffEAEAEA)),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -47,8 +47,8 @@ class UltrasoundDaysBox extends StatelessWidget {
                       builder: (context, state) {
                         return GlobalText(
                           text: state.ultrasoundDayCount == null
-                              ? 'Gun sayi'
-                              : state.ultrasoundDayCount.toString(),
+                              ? 'Gün sayı'
+                              : '${state.ultrasoundDayCount.toString()} gün',
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: Colors.black,

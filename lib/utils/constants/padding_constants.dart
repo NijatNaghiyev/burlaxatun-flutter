@@ -12,6 +12,8 @@ class PaddingConstants {
   static const h15 = EdgeInsets.symmetric(horizontal: 15);
   static const EdgeInsets h18 = EdgeInsets.symmetric(horizontal: 18);
   static const EdgeInsets h20 = EdgeInsets.symmetric(horizontal: 20);
+  static const EdgeInsets v20 = EdgeInsets.symmetric(vertical: 20);
+
 
   // Padding All
   static const EdgeInsets a40 = EdgeInsets.all(40);

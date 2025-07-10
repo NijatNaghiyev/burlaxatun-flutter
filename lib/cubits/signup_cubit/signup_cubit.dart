@@ -1,109 +1,123 @@
 import 'dart:developer';
 
-import 'package:burla_xatun/data/services/local/token_hive_service.dart';
-import 'package:burla_xatun/data/services/remote/auth_service.dart';
+import 'package:burla_xatun/data/contractor/register_contractor.dart';
+import 'package:burla_xatun/data/models/remote/response/login_response_model.dart';
+import 'package:burla_xatun/data/services/local/login_token_service.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'signup_state.dart';
 
-class SignupCubit extends Cubit<SignupCubitState> {
-  SignupCubit()
-      : super(SignupCubitInitial(
-          isChecked: false,
-          isActiveButton: false,
-        ));
+class SignupCubit extends Cubit<SignupState> {
+  SignupCubit(this._contractor)
+      : super(SignupInitial(isChecked: false, isActiveButton: false));
+
+  final RegisterContractor _contractor;
 
   bool isActiveButton = false;
   bool isChecked = false;
   bool emailValidity = false;
-  String fullName = '';
-  String name = '';
-  String surname = '';
-  String fatherName = '';
-  List<String> fullNameParts = [];
-  final AuthService authService = AuthService();
-  final signFullNameController = TextEditingController();
-  final signUpEmailController = TextEditingController();
-  final signUpPasswordController = TextEditingController();
+  final fullNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final phoneController = TextEditingController();
 
-  final signFullNameFocusNode = FocusNode();
-  final signUpEmailFocusNode = FocusNode();
-  final signUpPasswordFocusNode = FocusNode();
+  final fullNameFocusNode = FocusNode();
+  final emailFocusNode = FocusNode();
+  final passwordFocusNode = FocusNode();
+  final phoneFocusNode = FocusNode();
 
   void checkBoxToggle(bool v) {
     isChecked = v;
-    emit(SignupCubitInitial(
+    emit(SignupInitial(
       isActiveButton: isActiveButton,
       isChecked: isChecked,
     ));
   }
 
-  void splitFullName() {
-    fullName = signFullNameController.text;
-    if (fullName.contains(' ')) {
-      fullNameParts = fullName.split(' ');
-    }
+  final _loginTokenService = locator<LoginTokenService>();
 
-    if (fullNameParts.length == 3) {
-      name = fullNameParts[0].trim();
-      surname = fullNameParts[1].trim();
-      fatherName = fullNameParts[2].trim();
-    }
-  }
-
-  void checkEmailValidity() {
-    emailValidity = RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(signUpEmailController.text);
-
-    log('$emailValidity');
+  void emitInitial() {
+    emit(SignupInitial(
+      isActiveButton: isActiveButton,
+      isChecked: isChecked,
+    ));
   }
 
   void updateIsValid() {
-    splitFullName();
-    checkEmailValidity();
-    isActiveButton = signUpEmailController.text.isNotEmpty &&
-        signUpPasswordController.text.isNotEmpty &&
-        signFullNameController.text.isNotEmpty &&
-        fullNameParts.length == 3 &&
-        emailValidity;
-    emit(SignupCubitInitial(
+    isActiveButton = emailController.text.isNotEmpty &&
+        passwordController.text.isNotEmpty &&
+        fullNameController.text.isNotEmpty &&
+        phoneController.text.isNotEmpty &&
+        isChecked;
+
+    emit(SignupInitial(
       isActiveButton: isActiveButton,
       isChecked: isChecked,
     ));
   }
 
   Future<void> register() async {
-    emit(SignupCubitLoading());
     try {
-      log('register button clicked');
-      final token = await authService.register(
-        name,
-        surname,
-        fatherName,
-        signUpEmailController.text,
-        signUpPasswordController.text,
+      emit(SignupLoading());
+      log('Register loading');
+
+      final response = await _contractor.register(
+        phone: phoneController.text.trim(),
+        fullName: fullNameController.text.trim(),
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
       );
-      final isSavedToken = await TokenHiveService.instance.saveToken(token);
-      log('$isSavedToken');
-      if (isSavedToken) {
-        emit(SignupCubitSuccess());
+
+      final savedRegisterData = LoginResponseModel(
+        refresh: response.refresh,
+        access: response.access,
+        activeLanguage: response.activeLanguage,
+        onboardingDone: response.onboardingDone,
+        enableNotifications: response.enableNotifications,
+      );
+
+      _loginTokenService.saveLoginResponse(savedRegisterData);
+
+      emit(SignupSuccess());
+      log("Register success");
+    } on DioException catch (e, s) {
+      final errorMap = e.response?.data as Map<String, dynamic>?;
+      String errorMessage = '';
+
+      if (errorMap != null) {
+        errorMessage =
+            errorMap.values.expand((messages) => messages).join(', ');
+
+        emit(SignupError(errorMessage));
+      } else {
+        emit(SignupError('An unknown error occurred'));
       }
-    } catch (e) {
-      emit(SignupCubitError());
-      throw Exception('$e');
+      emit(
+        SignupNetworkError(
+          errorMessage,
+        ),
+      );
+
+      log("Register Dio Exception: $e", stackTrace: s);
+    } catch (e, s) {
+      emit(SignupError(''));
+
+      log("Register Unknown Error: $e", stackTrace: s);
     }
   }
 
   @override
   Future<void> close() {
-    signUpEmailController.dispose();
-    signFullNameController.dispose();
-    signUpPasswordController.dispose();
-    signUpEmailFocusNode.dispose();
-    signUpPasswordFocusNode.dispose();
-    signFullNameFocusNode.dispose();
+    emailController.dispose();
+    fullNameController.dispose();
+    passwordController.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
+    fullNameFocusNode.dispose();
+    phoneController.dispose();
     return super.close();
   }
 }

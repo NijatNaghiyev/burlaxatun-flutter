@@ -23,7 +23,7 @@ class ForgotPswOtpScreen extends StatelessWidget {
         appBar: GlobalAppbar(
           title: "",
           onLeadingTap: () {
-            context.go("/email_request");
+            context.pop();
           },
         ),
         resizeToAvoidBottomInset: true,

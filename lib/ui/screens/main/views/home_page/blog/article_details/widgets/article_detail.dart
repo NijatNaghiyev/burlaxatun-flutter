@@ -1,9 +1,18 @@
-import '../../../../../../../widgets/global_text.dart';
-import '../../../../../../../../utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+
+import '../../../../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../../../widgets/global_text.dart';
 
 class ArticleDetail extends StatelessWidget {
-  const ArticleDetail({super.key});
+  final String title;
+  final String text;
+
+  const ArticleDetail({
+    super.key,
+    required this.title,
+    required this.text,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,34 +27,45 @@ class ArticleDetail extends StatelessWidget {
             topRight: Radius.circular(12),
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 16,
+              horizontal: 26,
+            ),
             child: Column(
               children: [
-                26.h,
+                //26.h,
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.84,
-                  child: GlobalText(
-                    height: 1.2,
-                    textAlign: TextAlign.left,
-                    text: 'Postnatal sağlamlıq',
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff1D2939),
+                  //width: MediaQuery.of(context).size.width * 0.84,
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: GlobalText(
+                      height: 1.2,
+                      textAlign: TextAlign.left,
+                      text: title,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff1D2939),
+                    ),
                   ),
                 ),
-                29.h,
+                20.h,
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.84,
-                  child: GlobalText(
-                    height: 1.4,
-                    textAlign: TextAlign.left,
-                    text:
-                        'Doğuşdan sonra bədənin və zehnin bərpası hər bir qadın üçün fərqli olur və bu dövrdə özünüzə diqqət göstərmək çox vacibdir. Hamiləlikdən sonra düzgün qidalanma, vitamin və minerallarla zəngin qidaların qəbul edilməsi, yüngül fiziki fəaliyyətlər və istirahət bədənin təbii bərpasını dəstəkləyir. Körpənin yuxu rejimi ilə uyğunlaşaraq özünüzə kifayət qədər istirahət etməyə çalışın. Hormonların təsiri ilə emosional dəyişikliklər normaldır, lakin uzunmüddətli narahatlıq və ya depressiya əlamətləri varsa, mütəxəssis yardımı alın. Ətrafınızdakı insanlardan dəstək istəməkdən çəkinməyin və özünüzə vaxt ayırmaq üçün kiçik anlar yaradın. Sağlam və xoşbəxt bir ana olmaq üçün bədəninizin ehtiyaclarına qulaq asmaq və zəruri hallarda həkimə müraciət etmək, həm sizin, həm də körpənizin rifahını təmin edəcək.',
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff667085),
+                  width: double.infinity,
+                  child: Html(
+                    data: text,
+                    style: {
+                      "body": Style(
+                        margin: Margins.zero,
+                        padding: HtmlPaddings.zero,
+                        fontSize: FontSize(14),
+                        color: const Color(0xff667085),
+                        fontWeight: FontWeight.w400,
+                        lineHeight: const LineHeight(1.4),
+                        textAlign: TextAlign.left,
+                      ),
+                    },
                   ),
                 ),
               ],

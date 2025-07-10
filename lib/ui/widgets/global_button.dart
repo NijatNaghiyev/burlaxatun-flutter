@@ -1,3 +1,4 @@
+import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 import 'global_text.dart';
@@ -11,6 +12,9 @@ class GlobalButton extends StatelessWidget {
     required this.textColor,
     required this.onPressed,
     this.height = 55,
+    this.textFSize = 16,
+    this.textHeight = 1.3,
+    this.isLoading = false,
   });
 
   final double height;
@@ -18,7 +22,10 @@ class GlobalButton extends StatelessWidget {
   final Color buttonColor;
   final Color borderColor;
   final Color textColor;
+  final double? textFSize;
+  final double? textHeight;
   final void Function()? onPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +47,15 @@ class GlobalButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
-        child: GlobalText(
-          text: buttonName,
-          fontSize: 16,
-          height: 1.3,
-          fontWeight: FontWeight.w500,
-          color: textColor,
-        ),
+        child: isLoading
+            ? CustomCircularProgressIndicator()
+            : GlobalText(
+                text: buttonName,
+                fontSize: textFSize,
+                height: textHeight,
+                fontWeight: FontWeight.w500,
+                color: textColor,
+              ),
       ),
     );
   }

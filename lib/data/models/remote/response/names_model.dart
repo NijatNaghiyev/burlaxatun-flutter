@@ -1,83 +1,72 @@
-import 'package:equatable/equatable.dart';
+class NamesModel {
+  final int? count;
+  final String? next;
+  final String? previous;
+  final List<GenderName>? results;
 
-class NamesModel extends Equatable {
-  final int status;
-  final String message;
-  final NamesData data;
-
-  const NamesModel({
-    required this.status,
-    required this.message,
-    required this.data,
+  NamesModel({
+    this.count,
+    this.next,
+    this.previous,
+    this.results,
   });
 
   factory NamesModel.fromJson(Map<String, dynamic> json) => NamesModel(
-        status: json["status"],
-        message: json["message"],
-        data: NamesData.fromJson(json["data"]),
+        count: json["count"],
+        next: json["next"],
+        previous: json["previous"],
+        results: json["results"] == null
+            ? []
+            : List<GenderName>.from(
+                json["results"]!.map((x) => GenderName.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "status": status,
-        "message": message,
-        "data": data.toJson(),
+        "count": count,
+        "next": next,
+        "previous": previous,
+        "results": results == null
+            ? []
+            : List<dynamic>.from(results!.map((x) => x.toJson())),
       };
-
-  @override
-  List<Object?> get props => [status, message, data];
 }
 
-class NamesData extends Equatable {
-  final List<Gender> boys;
-  final List<Gender> girls;
+class GenderName {
+  final int? id;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final String? gender;
+  final String? name;
+  final int? country;
 
-  const NamesData({
-    required this.boys,
-    required this.girls,
+  GenderName({
+    this.id,
+    this.createdAt,
+    this.updatedAt,
+    this.gender,
+    this.name,
+    this.country,
   });
 
-  factory NamesData.fromJson(Map<String, dynamic> json) => NamesData(
-        boys: List<Gender>.from(json["boys"].map((x) => Gender.fromJson(x))),
-        girls: List<Gender>.from(json["girls"].map((x) => Gender.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "boys": List<dynamic>.from(boys.map((x) => x.toJson())),
-        "girls": List<dynamic>.from(girls.map((x) => x.toJson())),
-      };
-
-  @override
-  List<Object?> get props => [
-        // DeepCollectionEquality().hash(boys),
-        boys,
-        girls,
-        // DeepCollectionEquality().hash(girls),
-      ];
-}
-
-class Gender extends Equatable {
-  final String id;
-  final String name;
-  final int selected;
-
-  const Gender({
-    required this.id,
-    required this.name,
-    required this.selected,
-  });
-
-  factory Gender.fromJson(Map<String, dynamic> json) => Gender(
+  factory GenderName.fromJson(Map<String, dynamic> json) => GenderName(
         id: json["id"],
+        createdAt: json["created_at"] == null
+            ? null
+            : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null
+            ? null
+            : DateTime.parse(json["updated_at"]),
+        gender: json["gender"],
         name: json["name"],
-        selected: json["selected"],
+        country: json["country"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "created_at": createdAt?.toIso8601String(),
+        "updated_at": updatedAt?.toIso8601String(),
+        "gender": gender,
         "name": name,
-        "selected": selected,
+        "country": country,
       };
-
-  @override
-  List<Object?> get props => [id, name, selected];
 }

@@ -4,7 +4,11 @@ import '../../../../utils/extensions/context_extensions.dart';
 import '../../global_text.dart';
 
 class ChildAccountBox extends StatelessWidget {
-  const ChildAccountBox({super.key});
+  const ChildAccountBox({
+    super.key,
+    required this.babyName,
+  });
+  final String babyName;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,7 @@ class ChildAccountBox extends StatelessWidget {
               child: GlobalText(
                 height: 1.4,
                 textAlign: TextAlign.left,
-                text: 'Baby 1',
+                text: babyName,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 color: Colors.grey,

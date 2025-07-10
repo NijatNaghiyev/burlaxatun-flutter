@@ -12,7 +12,7 @@ class MainPageBoxModel {
   static const List items = [
     MainPageBoxModel(
       boxName: 'Mənim şəfa kartım',
-      boxIcon: 'assets/icons/medicine_icon.svg',
+      boxIcon: 'assets/svgs/my_healing_page_icon.svg',
       route: '/my_healing_card',
     ),
     MainPageBoxModel(

@@ -1,20 +1,26 @@
-import '../../../../../widgets/global_text.dart';
+import 'package:burla_xatun/utils/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../widgets/global_text.dart';
+
 class AdviseTitle extends StatelessWidget {
-  const AdviseTitle({super.key});
+  final String adviceTitle;
+
+  const AdviseTitle({super.key, required this.adviceTitle});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        GlobalText(
-          textAlign: TextAlign.left,
-          text: 'O qədər yorğunam ki',
-          fontSize: 24,
-          fontWeight: FontWeight.w600,
-          color: Colors.black,
+        Expanded(
+          child: GlobalText(
+            textAlign: TextAlign.left,
+            text: adviceTitle,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: ColorConstants.black800,
+          ),
         ),
       ],
     );

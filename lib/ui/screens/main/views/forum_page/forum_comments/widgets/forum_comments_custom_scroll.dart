@@ -1,28 +1,45 @@
+import 'package:burla_xatun/data/models/remote/response/forum_comments_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/forum_box.dart';
 import 'comments_box.dart';
 
 class ForumCommentsCustomScroll extends StatelessWidget {
-  const ForumCommentsCustomScroll({super.key});
+  final int forumId;
+  final List<Result> comments;
+
+  const ForumCommentsCustomScroll({
+    super.key,
+    required this.forumId,
+    required this.comments,
+  });
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      slivers: [
-        SliverPadding(
-          padding: EdgeInsets.symmetric(vertical: 24),
-          sliver: SliverToBoxAdapter(
-            child: ForumBox(),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 105),
-            child: CommentsBox(),
-          ),
-        ),
-      ],
+      slivers: comments.isEmpty
+          ? [
+              const SliverFillRemaining(
+                hasScrollBody: false,
+                child: Center(
+                  child: Text(
+                    'Element yoxdur',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              )
+            ]
+          : [
+              SliverPadding(
+                padding: const EdgeInsets.only(bottom: 105),
+                sliver: CommentsBox(
+                  forumId: forumId,
+                  comments: comments,
+                ),
+              ),
+            ],
     );
   }
 }

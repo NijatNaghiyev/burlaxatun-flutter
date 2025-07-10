@@ -1,57 +1,107 @@
+import 'package:burla_xatun/utils/constants/asset_constants.dart';
+import 'package:burla_xatun/utils/constants/text_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../cubits/signup_cubit/signup_cubit.dart';
-import '../../../../../utils/constants/asset_constants.dart';
 import '../../../../../utils/extensions/context_extensions.dart';
 import '../../../../widgets/global_input.dart';
 
 class SignupInputs extends StatelessWidget {
-  const SignupInputs({super.key});
+  const SignupInputs({super.key, required this.formKey});
 
+  final GlobalKey<FormState> formKey;
   @override
   Widget build(BuildContext context) {
     final signUpCubit = context.read<SignupCubit>();
-    return Column(
-      spacing: context.deviceHeight < 740 ? 13 : 26,
-      children: [
-        GlobalInput(
-          focusNode: signUpCubit.signFullNameFocusNode,
-          textController: signUpCubit.signFullNameController,
-          inputName: 'Ad, soyad və ata adı qeyd edin',
-          prefixIcon: AssetConstants.userIcon,
-          hintText: 'Adınızı qeyd edin',
-          onFieldSubmitted: (v) {
-            signUpCubit.signUpEmailFocusNode.requestFocus();
-          },
-          onChanged: (v) {
-            signUpCubit.updateIsValid();
-          },
-        ),
-        GlobalInput(
-          textController: signUpCubit.signUpEmailController,
-          focusNode: signUpCubit.signUpEmailFocusNode,
-          inputName: 'Email',
-          prefixIcon: AssetConstants.emailIcon,
-          hintText: 'Email qeyd edin',
-          onFieldSubmitted: (v) {
-            signUpCubit.signUpPasswordFocusNode.requestFocus();
-          },
-          onChanged: (v) {
-            signUpCubit.updateIsValid();
-          },
-        ),
-        GlobalInput(
-          textController: signUpCubit.signUpPasswordController,
-          focusNode: signUpCubit.signUpPasswordFocusNode,
-          inputName: 'Şifrə',
-          prefixIcon: AssetConstants.lockIcon,
-          hintText: 'Şifrənizi qeyd edin',
-          onChanged: (v) {
-            signUpCubit.updateIsValid();
-          },
-        ),
-      ],
+    final ValueNotifier<bool> isObsecure = ValueNotifier<bool>(true);
+    return Form(
+      key: formKey,
+      child: Column(
+        spacing: context.deviceHeight < 740 ? 13 : 26,
+        children: [
+          GlobalInput(
+            inputName: 'Mobil nömrə',
+            hintText: 'xxx xxx xx xx',
+            textController: signUpCubit.phoneController,
+            focusNode: signUpCubit.phoneFocusNode,
+            isNumber: true,
+            onFieldSubmitted: (v) {
+              signUpCubit.fullNameFocusNode.requestFocus();
+            },
+            onChanged: (v) {
+              signUpCubit.updateIsValid();
+            },
+          ),
+          GlobalInput(
+            focusNode: signUpCubit.fullNameFocusNode,
+            textController: signUpCubit.fullNameController,
+            inputName: 'Ad Soyad',
+            hintText: 'Ad və soyadınızı daxil edin',
+            onFieldSubmitted: (v) {
+              signUpCubit.emailFocusNode.requestFocus();
+            },
+            onChanged: (v) {
+              signUpCubit.updateIsValid();
+            },
+            validator: (fullName) {
+              final parts = fullName!.trim().split(' ');
+              if (parts.length != 2) {
+                return 'Ad, Soyad düzgün daxil edilməyib';
+              }
+              return null;
+            },
+          ),
+          GlobalInput(
+            textController: signUpCubit.emailController,
+            focusNode: signUpCubit.emailFocusNode,
+            inputName: TextConstants.email,
+            hintText: TextConstants.enterYourEmail,
+            validator: (email) {
+              final emailValidity =
+                  RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$')
+                      .hasMatch(email!);
+              if (!emailValidity) {
+                return 'Email düzgün deyil';
+              }
+              return null;
+            },
+            onFieldSubmitted: (v) {
+              signUpCubit.passwordFocusNode.requestFocus();
+            },
+            onChanged: (v) {
+              signUpCubit.updateIsValid();
+            },
+          ),
+          ValueListenableBuilder(
+            valueListenable: isObsecure,
+            builder: (context, value, child) {
+              return GlobalInput(
+                textController: signUpCubit.passwordController,
+                focusNode: signUpCubit.passwordFocusNode,
+                inputName: TextConstants.password,
+                hintText: TextConstants.enterYourPsw,
+                isObsecure: value,
+                suffixIcon: value
+                    ? AssetConstants.eyeClosedIcon
+                    : AssetConstants.eyeOpenedIcon,
+                onSuffixIconTap: () {
+                  isObsecure.value = !isObsecure.value;
+                },
+                onChanged: (v) {
+                  signUpCubit.updateIsValid();
+                },
+                validator: (password) {
+                  if (password!.length < 8) {
+                    return 'Şifrə ən azı 8 simvoldan ibarət olmalıdır';
+                  }
+                  return null;
+                },
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

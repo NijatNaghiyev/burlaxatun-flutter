@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,29 +9,34 @@ class LoginTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-        children: <TextSpan>[
-          TextSpan(
-            text: 'Already have account?',
-            style: GoogleFonts.poppins(
-              fontSize: 12,
-              color: Color(0xff070707),
-              fontWeight: FontWeight.w400,
-              height: 1.1,
-            ),
+    return InkWell(
+      onTap: () => context.go('/login'),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: RichText(
+          text: TextSpan(
+            children: <TextSpan>[
+              TextSpan(
+                text: 'Mövcud hesabınız var?',
+                style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  color: Color(0xff070707),
+                  fontWeight: FontWeight.w400,
+                  height: 1.1,
+                ),
+              ),
+              TextSpan(
+                text: ' Daxil olun',
+                style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  color: ColorConstants.primaryRedColor,
+                  fontWeight: FontWeight.w400,
+                  height: 1.1,
+                ),
+              ),
+            ],
           ),
-          TextSpan(
-            text: ' Login',
-            style: GoogleFonts.poppins(
-              fontSize: 12,
-              color: ColorConstants.primaryRedColor,
-              fontWeight: FontWeight.w400,
-              height: 1.1,
-            ),
-            recognizer: TapGestureRecognizer()..onTap = () => context.pop(),
-          ),
-        ],
+        ),
       ),
     );
   }

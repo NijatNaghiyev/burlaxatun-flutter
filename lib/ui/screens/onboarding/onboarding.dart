@@ -1,5 +1,3 @@
-import 'package:burla_xatun/utils/extensions/context_extensions.dart';
-import 'package:burla_xatun/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/onboard_button.dart';

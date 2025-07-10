@@ -6,7 +6,12 @@ import '../../../../../../widgets/global_text.dart';
 class PregnancyGuideBox extends StatelessWidget {
   const PregnancyGuideBox({
     super.key,
+    required this.title,
+    required this.description,
   });
+
+  final String title;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +39,7 @@ class PregnancyGuideBox extends StatelessWidget {
                   GlobalText(
                     height: 1.3,
                     textAlign: TextAlign.left,
-                    text: 'Fol turşusunun qəbulu',
+                    text: title,
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: Color(0xff484848),
@@ -44,8 +49,7 @@ class PregnancyGuideBox extends StatelessWidget {
                     child: GlobalText(
                       height: 1.3,
                       textAlign: TextAlign.left,
-                      text:
-                          'Hamilə qadına gün ərzində 600-800 mkq fol turşusu lazımdır',
+                      text: description,
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       color: Color(0xff484848),

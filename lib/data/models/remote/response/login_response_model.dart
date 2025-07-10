@@ -1,40 +1,39 @@
+import 'package:burla_xatun/data/services/local/login_token_service.dart';
+import 'package:burla_xatun/utils/di/locator.dart';
+
 class LoginResponseModel {
-  final int status;
-  final String message;
-  final Data data;
+  final String? refresh;
+  final String? access;
+  final String? activeLanguage;
+  final bool? onboardingDone;
+  final bool? enableNotifications;
+  final String? pregnantWeek;
 
   LoginResponseModel({
-    required this.status,
-    required this.message,
-    required this.data,
+    this.refresh,
+    this.access,
+    this.activeLanguage,
+    this.onboardingDone,
+    this.enableNotifications,
+    this.pregnantWeek,
   });
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
       LoginResponseModel(
-        status: json["status"],
-        message: json["message"],
-        data: Data.fromJson(json["data"]),
+        refresh: json["refresh"],
+        access: json["access"],
+        activeLanguage: json["active_language"],
+        onboardingDone: json["onboarding_done"],
+        enableNotifications: json["enable_notifications"],
+        pregnantWeek: json["pregnant_week"],
       );
 
   Map<String, dynamic> toJson() => {
-        "status": status,
-        "message": message,
-        "data": data.toJson(),
-      };
-}
-
-class Data {
-  final String token;
-
-  Data({
-    required this.token,
-  });
-
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        token: json["token"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "token": token,
+        "refresh": refresh,
+        "access": access,
+        "active_language": activeLanguage,
+        "onboarding_done": onboardingDone,
+        "enable_notifications": enableNotifications,
+        "pregnant_week": pregnantWeek,
       };
 }

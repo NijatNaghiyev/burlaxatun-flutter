@@ -36,6 +36,7 @@ class HomeBox extends StatelessWidget {
               SizedBox(
                 width: 90,
                 child: GlobalText(
+                  textAlign: TextAlign.center,
                   height: 1.2,
                   text: boxName,
                   fontSize: 14,

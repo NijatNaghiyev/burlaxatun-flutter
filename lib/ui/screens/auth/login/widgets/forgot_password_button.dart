@@ -15,7 +15,7 @@ class ForgotPasswordButton extends StatelessWidget {
       children: [
         TextButton(
           onPressed: () {
-            context.go("/email_request");
+            context.push("/email_request");
           },
           style:
               ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.all(0))),

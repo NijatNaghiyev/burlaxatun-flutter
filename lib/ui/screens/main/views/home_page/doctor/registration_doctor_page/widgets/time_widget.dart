@@ -1,12 +1,21 @@
+import 'dart:developer';
+
+import 'package:burla_xatun/cubits/doctor_reservation/doctor_reservation_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'time_box.dart';
 
 class TimeWidget extends StatelessWidget {
-  const TimeWidget({super.key});
+  final List<String> timeList;
+
+  const TimeWidget({super.key, required this.timeList});
 
   @override
   Widget build(BuildContext context) {
+    final DoctorReservationCubit doctorReservationCubit =
+        context.read<DoctorReservationCubit>();
+    ValueNotifier<String?> selectedTimeValue = ValueNotifier<String?>(null);
     return SizedBox(
       height: 52,
       child: DecoratedBox(
@@ -15,18 +24,32 @@ class TimeWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(32)),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6),
+          padding: const EdgeInsets.all(6),
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(27)),
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: timeList.length,
               itemBuilder: (_, i) {
-                return TimeBox(time: '11:00');
+                return GestureDetector(
+                  onTap: () {
+                    doctorReservationCubit.saveTime(timeList[i]);
+                    selectedTimeValue.value = timeList[i];
+                  },
+                  child: ValueListenableBuilder(
+                    valueListenable: selectedTimeValue,
+                    builder: (context, value, child) {
+                      return TimeBox(
+                        time: timeList[i],
+                        isSelected: value == null
+                            ? false
+                            : timeList.indexOf(value) == i,
+                      );
+                    },
+                  ),
+                );
               },
-              separatorBuilder: (_, i) {
-                return SizedBox(width: 4);
-              },
+              separatorBuilder: (_, i) => SizedBox(width: 4),
             ),
           ),
         ),

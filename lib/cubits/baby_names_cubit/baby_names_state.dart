@@ -1,54 +1,47 @@
 part of 'baby_names_cubit.dart';
 
-// abstract class BabyNamesState {}
-
-class BabyNamesInitial extends Equatable {
-  const BabyNamesInitial({
-    required this.selectedNames,
-    required this.names,
-    required this.countryList,
-    required this.nameStateStatus,
-    required this.selectNameStatus,
-    required this.selectedNameIndex,
-    required this.isSelected,
+class BabyNamesState extends Equatable {
+  const BabyNamesState({
+    this.nameStateStatus = NameStateStatus.initial,
+    this.selectNameStatus = SelectNameStatus.initial,
+    this.countries,
+    this.maleNamesList,
+    this.femaleNamesList,
+    this.selectedNamesList,
   });
 
   final NameStateStatus? nameStateStatus;
   final SelectNameStatus? selectNameStatus;
-  final List<CountryData>? countryList;
-  final List<SelectedNameData>? selectedNames;
-  final NamesData? names;
-  final int? selectedNameIndex;
-  final int? isSelected;
+  final CountriesResponse? countries;
+  final List<GenderName>? maleNamesList;
+  final List<GenderName>? femaleNamesList;
+  final List<SelectedName>? selectedNamesList;
 
   @override
   List<Object?> get props => [
-        names,
-        selectedNames,
-        countryList,
         nameStateStatus,
-        selectedNameIndex,
         selectNameStatus,
-        isSelected
+        countries,
+        maleNamesList,
+        femaleNamesList,
+        selectedNamesList
       ];
 
-  BabyNamesInitial copyWith({
+  BabyNamesState copyWith({
     NameStateStatus? nameStateStatus,
-    SelectNameStatus? selectNameStatus,
-    List<CountryData>? countryList,
-    List<SelectedNameData>? selectedNames,
-    NamesData? names,
-    int? selectedNameIndex,
-    int? isSelected,
+    final SelectNameStatus? selectNameStatus,
+    CountriesResponse? countries,
+    List<GenderName>? maleNamesList,
+    List<GenderName>? femaleNamesList,
+    List<SelectedName>? selectedNamesList,
   }) {
-    return BabyNamesInitial(
-      selectedNames: selectedNames ?? this.selectedNames,
-      names: names ?? this.names,
-      countryList: countryList ?? this.countryList,
+    return BabyNamesState(
       nameStateStatus: nameStateStatus ?? this.nameStateStatus,
-      selectedNameIndex: selectedNameIndex ?? this.selectedNameIndex,
       selectNameStatus: selectNameStatus ?? this.selectNameStatus,
-      isSelected: isSelected ?? this.isSelected,
+      countries: countries ?? this.countries,
+      maleNamesList: maleNamesList ?? this.maleNamesList,
+      femaleNamesList: femaleNamesList ?? this.femaleNamesList,
+      selectedNamesList: selectedNamesList ?? this.selectedNamesList,
     );
   }
 }

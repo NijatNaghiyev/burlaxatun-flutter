@@ -16,22 +16,22 @@ class GlobalBottomNavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mainCubit = context.read<MainnCubit>();
+    final mq = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: double.maxFinite,
-      height: 84,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 27),
-        child: Row(
-          spacing: 21,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            for (int i = 0; i < mainCubit.views.length; i++)
-              BottomNavbarItem(
+      height: 93,
+      child: Row(
+        // spacing: 21,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          for (int i = 0; i < mainCubit.views.length; i++)
+            SizedBox(
+              width: mq / 4,
+              child: BottomNavbarItem(
                 i: i,
                 navigationShell: navigationShell,
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }

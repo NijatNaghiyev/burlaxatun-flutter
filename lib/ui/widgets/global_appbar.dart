@@ -22,14 +22,14 @@ class GlobalAppbar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
         centerTitle: true,
-        leading: leading ??
-            GestureDetector(
-              onTap: onLeadingTap,
-              child: Icon(
+        leading: GestureDetector(
+          onTap: onLeadingTap,
+          child: leading ??
+              Icon(
                 Icons.arrow_back_ios_new,
                 color: Color(0xff344054),
               ),
-            ),
+        ),
         title: GlobalText(
           text: title,
           fontSize: 20,

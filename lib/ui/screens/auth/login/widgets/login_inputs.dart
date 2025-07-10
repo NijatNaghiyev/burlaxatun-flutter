@@ -20,16 +20,16 @@ class LoginInputs extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isError != current.isError ||
           previous.loginStatus != current.loginStatus,
-      builder: (context, state) {
+      builder: (_, state) {
         return Column(
           children: [
             GlobalInput(
               isError: state.isError,
               textController: loginCubit.loginEmailController,
               focusNode: loginCubit.loginEmailFocusNode,
-              inputName: TextConstants.email,
-              // prefixIcon: AssetConstants.emailIcon,
-              hintText: TextConstants.enterYourEmail,
+              inputName: 'Mobil nömrə',
+              hintText: 'xxx xxx xx xx',
+              isNumber: true,
               onFieldSubmitted: (p0) =>
                   loginCubit.loginPasswordFocusNode.requestFocus(),
               onChanged: (v) {
@@ -41,7 +41,7 @@ class LoginInputs extends StatelessWidget {
               buildWhen: (previous, current) =>
                   previous.isObsecure != current.isObsecure ||
                   previous.isError != current.isError,
-              builder: (context, state) {
+              builder: (_, state) {
                 return GlobalInput(
                   isError: state.isError,
                   textController: loginCubit.loginPasswordController,
@@ -72,8 +72,10 @@ class LoginInputs extends StatelessWidget {
                       Expanded(
                         child: SizedBox(
                           child: GlobalText(
-                            text:
-                                'Oops! Email or password incorrect try another one.',
+                            text: (state.errorMessage != null &&
+                                    state.errorMessage!.isNotEmpty)
+                                ? state.errorMessage!
+                                : 'Oops! Email or password incorrect try another one.',
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             color: Color(0xffD62828),

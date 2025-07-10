@@ -1,47 +1,52 @@
-import 'package:burla_xatun/ui/screens/main/views/home_page/widgets/article_image.dart';
+import 'package:burla_xatun/utils/helper/get_blog_img_helper.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../../data/models/remote/response/blog_cat_model.dart';
 import '../../../../../../../utils/extensions/num_extensions.dart';
+import '../../../../../../widgets/custom_circular_progress_indicator.dart';
 import '../../../../../../widgets/global_appbar.dart';
 import '../../widgets/article_box.dart';
 
 class SeeAllArticlesPage extends StatelessWidget {
-  const SeeAllArticlesPage({super.key});
+  const SeeAllArticlesPage({super.key, required this.category});
+
+  final Result category; //
 
   @override
   Widget build(BuildContext context) {
+    final blogs = category.blogs ?? [];
+
     return Scaffold(
       appBar: GlobalAppbar(
-        title: 'Doğuştan sonra Bərpa',
-        onLeadingTap: () {
-          context.pop();
-        },
+        title: category.name ?? 'Blog',
+        onLeadingTap: () => context.pop(),
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              children: [
-                22.h,
-                ArticleBox(
-                  onTap: () => context.push('/article_details'),
-                  videoOrImage: ArticleImage(),
-                  boxTitle: 'Doğuşdan Sonra Emosional və Fiziki Dəyişikliklər',
-                  boxDescription:
-                      'Pregnancy Yoga helps alleviate the effect of common symptoms such as morning sickness, painful leg cramps, swollen ankles, and constipation.',
-                ),
-                24.h,
-                ArticleBox(
-                  onTap: () => context.push('/article_details'),
-                  videoOrImage: ArticleImage(),
-                  boxTitle: 'Doğuşdan Sonra Emosional və Fiziki Dəyişikliklər',
-                  boxDescription:
-                      'Pregnancy Yoga helps alleviate the effect of common symptoms such as morning sickness, painful leg cramps, swollen ankles, and constipation.',
-                ),
-              ],
-            ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            children: [
+              22.h,
+              ...blogs.map((blog) => Padding(
+                    padding: const EdgeInsets.only(bottom: 24),
+                    child: ArticleBox(
+                      onTap: () =>
+                          context.push('/article_details', extra: blog),
+                      videoOrImage: CachedNetworkImage(
+                        imageUrl: getBlogImageHelper(blog),
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) =>
+                            Center(child: CustomCircularProgressIndicator()),
+                        errorWidget: (context, url, error) =>
+                            Center(child: CustomCircularProgressIndicator()),
+                      ),
+                      boxTitle: blog.name ?? '',
+                      boxDescription: blog.text ?? '',
+                    ),
+                  )),
+            ],
           ),
         ),
       ),

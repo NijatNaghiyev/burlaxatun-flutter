@@ -8,15 +8,29 @@ import '../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../widgets/global_text.dart';
 
 class ForumBox extends StatelessWidget {
-  const ForumBox({super.key});
+  const ForumBox({
+    super.key,
+    required this.authorName,
+    required this.forumTitle,
+    required this.likeCount,
+    required this.viewCount,
+    required this.commentCount,
+    required this.forumId,
+    this.onTap,
+  });
+  final int forumId;
+  final VoidCallback? onTap;
+  final String authorName;
+  final String forumTitle;
+  final int likeCount;
+  final int viewCount;
+  final int commentCount;
 
   @override
   Widget build(BuildContext context) {
     final mainCubit = context.read<MainnCubit>();
     return GestureDetector(
-      onTap: () {
-        mainCubit.pushScaffoldForumComments(context);
-      },
+      onTap: onTap,
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -31,23 +45,26 @@ class ForumBox extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GlobalText(
-                    text: 'Samira',
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
+                  Flexible(
+                    child: GlobalText(
+                      text: authorName,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
                   ),
                   Row(
                     children: [
                       GlobalText(
-                        text: 'Daha etrafli',
+                        text: 'Daha ətraflı',
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
                         color: Color(0xff97989D),
                       ),
                       SizedBox(width: 7),
                       SvgPicture.asset(
-                          'assets/icons/medicine_arrow_right_icon.svg'),
+                        'assets/icons/medicine_arrow_right_icon.svg',
+                      ),
                     ],
                   ),
                 ],
@@ -58,11 +75,12 @@ class ForumBox extends StatelessWidget {
                 child: GlobalText(
                   height: 1.4,
                   textAlign: TextAlign.left,
-                  text:
-                      'Hamilə qadının havanın çirklənməsi haqqında nəyi bilməsi lazımdır?',
+                  text: forumTitle,
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                   color: Colors.black,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               20.h,
@@ -71,21 +89,21 @@ class ForumBox extends StatelessWidget {
                 children: [
                   GlobalText(
                     textAlign: TextAlign.left,
-                    text: '651,324 Views',
+                    text: '$viewCount Baxış',
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Colors.black,
                   ),
                   GlobalText(
                     textAlign: TextAlign.left,
-                    text: '36,6545 Likes',
+                    text: '$likeCount Bəyənmə',
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Colors.black,
                   ),
                   GlobalText(
                     textAlign: TextAlign.left,
-                    text: '56 comments',
+                    text: '$commentCount Rəy',
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Colors.black,

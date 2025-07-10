@@ -1,3 +1,9 @@
+import 'dart:math' as math;
+
+import 'package:burla_xatun/ui/screens/questions/widgets/calculate_birth_view/widgets/apple_circle.dart';
+import 'package:burla_xatun/utils/constants/asset_constants.dart';
+import 'package:burla_xatun/utils/constants/padding_constants.dart';
+import 'package:burla_xatun/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,48 +20,85 @@ class CalculationResultDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
-    return Center(
-      child: SizedBox(
-        width: 313,
-        height: 349,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(38)),
-          ),
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 21.7, vertical: 24.5),
-            child: Column(
-              children: [
-                SvgPicture.asset('assets/svgs/baby_size.svg'),
-                55.h,
-                GlobalText(
-                  height: 1.4,
-                  text:
-                      'Siz hamiləliyinizin ${questionsCubit.calculatedData.weeks} həftəsindəsiniz',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
-                12.h,
-                GlobalText(
-                  text: 'Körpəniz isə Alma boydadır!',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                ),
-                17.h,
-                GlobalButton(
-                  buttonName: 'Davam et',
-                  buttonColor: ColorConstants.primaryRedColor,
-                  textColor: Colors.white,
-                  height: 44,
-                  onPressed: () {
-                    context.go('/home');
-                  },
-                ),
-              ],
+    return PopScope(
+      canPop: false,
+      child: Center(
+        child: SizedBox(
+          width: context.deviceWidth * 0.78,
+          height: context.deviceHeight * 0.45,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(38)),
+            ),
+            child: Padding(
+              padding: PaddingConstants.v20 + PaddingConstants.h15,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AppleCircle(),
+                        Transform.rotate(
+                          angle: -math.pi,
+                          child: SvgPicture.asset(
+                            AssetConstants.arrowLeft,
+                          ),
+                        ),
+                        SvgPicture.asset(
+                          AssetConstants.arrowRight,
+                        ),
+                        10.w,
+                        // CachedNetworkImage(
+                        //   imageUrl:
+                        //       questionsCubit.calculatedData.data?.iconUrl2 ?? '',
+                        // width: context.deviceWidth * 0.69,
+                        // height: context.deviceHeight * 0.12,
+                        //   errorWidget: (context, url, error) {
+                        //     return Icon(Icons.error);
+                        //   },
+                        // ),
+                        SvgPicture.asset(
+                          AssetConstants.baby,
+                          width: context.deviceWidth * 0.69,
+                          height: context.deviceHeight * 0.12,
+                        )
+                      ],
+                    ),
+                  ),
+                  (context.deviceHeight * 0.04).h,
+                  GlobalText(
+                    text:
+                        'Siz hamiləliyinizin ${questionsCubit.calculatedData.data?.weeks} həftəsindəsiniz',
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                    textAlign: TextAlign.center,
+                  ),
+                  12.h,
+                  GlobalText(
+                    text:
+                        'Körpəniz isə ${questionsCubit.calculatedData.data?.iconName} boydadır!',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  ),
+                  12.h,
+                  GlobalButton(
+                    buttonName: 'Davam et',
+                    textFSize: 14,
+                    textHeight: 0,
+                    buttonColor: ColorConstants.primaryRedColor,
+                    textColor: Colors.white,
+                    height: 44,
+                    onPressed: () {
+                      context.go('/home');
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -1,8 +1,12 @@
 import 'dart:developer';
 
 import 'package:burla_xatun/data/models/local/medicine_detail_items_model.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_password/change_password_page/change_password_page.dart';
-import 'package:burla_xatun/ui/screens/main/views/profie_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
+import 'package:burla_xatun/data/models/remote/response/medicine/medicines_model.dart';
+import 'package:burla_xatun/ui/screens/main/views/daily_advise_page/advice_page.dart';
+import 'package:burla_xatun/ui/screens/main/views/home_page/my_healing_page/my_medicines/initial_medicine_page/widgets/edit_medicine_dialog.dart';
+import 'package:burla_xatun/ui/screens/main/views/profil_page/settings/setting_views/change_password/change_password_page/change_password_page.dart';
+import 'package:burla_xatun/ui/screens/main/views/profil_page/settings/setting_views/change_phone_number/change_phone_number_view.dart';
+import 'package:burla_xatun/ui/screens/main/views/profil_page/using_rules/using_rules_screen.dart';
 import 'package:burla_xatun/ui/widgets/change_baby_bottomsheet/global_change_baby_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,29 +17,26 @@ import '../../data/models/local/main_page_box_model.dart';
 import '../../data/models/local/my_healing_card_items_model.dart';
 import '../../data/models/local/profile_sections_items_model.dart';
 import '../../data/models/local/settings_items_model.dart';
-import '../../ui/screens/main/views/daily_advise_page/advises_page.dart';
 import '../../ui/screens/main/views/forum_page/forum_comments/forum_comments_page.dart';
 import '../../ui/screens/main/views/forum_page/forum_comments/widgets/menu_and_emoji_dialog.dart';
 import '../../ui/screens/main/views/forum_page/main_forum_page.dart/forum_page.dart';
-import '../../ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/doctors_notification.dart';
 import '../../ui/screens/main/views/home_page/home.dart';
 import '../../ui/screens/main/views/home_page/home/home_page.dart';
-import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/widgets/add_new_indicator_dialog.dart';
-import '../../ui/screens/main/views/home_page/my_healing_page/body_weight_view/widgets/calendar_dialog.dart';
+import '../../ui/screens/main/views/home_page/my_healing_page/indicator_data_screen/widgets/add_new_indicator_dialog.dart';
+import '../../ui/screens/main/views/home_page/my_healing_page/indicator_data_screen/widgets/calendar_dialog.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/initial_my_healing_page/my_healing_page.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/my_medicines/initial_medicine_page/my_medicines_page.dart';
 import '../../ui/screens/main/views/home_page/my_healing_page/my_medicines/initial_medicine_page/widgets/add_medicine_dialog.dart';
 import '../../ui/screens/main/views/home_page/notification/notification_page.dart';
 import '../../ui/screens/main/views/home_page/ultrasound/ultrasound_page.dart';
 import '../../ui/screens/main/views/home_page/video/video_page.dart';
-import '../../ui/screens/main/views/profie_page/about_us/about_us_view.dart';
-import '../../ui/screens/main/views/profie_page/contact_us/contact_us_view.dart';
-import '../../ui/screens/main/views/profie_page/faq/faq_view.dart';
-import '../../ui/screens/main/views/profie_page/initial_profile/initial_profile_page.dart';
-import '../../ui/screens/main/views/profie_page/pricavy_policy/privacy_policy_view.dart';
-import '../../ui/screens/main/views/profie_page/settings/setting_view.dart';
-import '../../ui/screens/main/views/profie_page/special_thanks/special_thanks_view.dart';
-import '../../ui/screens/main/views/profie_page/terms_of_use/terms_of_use_view.dart';
+import '../../ui/screens/main/views/profil_page/about_us/about_us_view.dart';
+import '../../ui/screens/main/views/profil_page/contact_us/contact_us_view.dart';
+import '../../ui/screens/main/views/profil_page/faq/faq_view.dart';
+import '../../ui/screens/main/views/profil_page/initial_profile/initial_profile_page.dart';
+import '../../ui/screens/main/views/profil_page/pricavy_policy/privacy_policy_view.dart';
+import '../../ui/screens/main/views/profil_page/settings/setting_view.dart';
+import '../../ui/screens/main/views/profil_page/special_thanks/special_thanks_view.dart';
 import 'main_state.dart';
 
 enum UltrasoundFormat { format2d, format3d }
@@ -75,7 +76,7 @@ class MainnCubit extends Cubit<MainInitial> {
 
   final navbarItems = BottomNavbarItemsModel.items;
   final boxItems = MainPageBoxModel.items;
-  final profileSectionItems = ProfileSectionsItemsModel.items;
+  
   final myHealingCardItems = MyHealingCardItemsModel.items;
   final settingItems = SettingsItemModel.items;
   final medicineDetailItems = MedicineDetailItemsModel.items;
@@ -93,14 +94,14 @@ class MainnCubit extends Cubit<MainInitial> {
     'faq': FaqView(),
     'about_us': AboutUsView(),
     'contact_us': ContactUsView(),
-    'terms_of_use': TermsOfUseView(),
+    'terms_of_use': UsingRulesScreen(),
     'privacy_policy': PrivacyPolicyView(),
     'special_thanks': SpecialThanksView(),
   };
 
   final Map<String, Widget> homePageViews = {
     'Home': HomePage(),
-    'Gündəlik Tövsiyyələr': AdvisesPage(),
+    'Gündəlik Tövsiyyələr': AdvicePage(),
     'Ultrasəs': UltrasoundPage(),
     'Notification': NotificationPage(),
     'Videolar': VideoPage(),
@@ -135,9 +136,7 @@ class MainnCubit extends Cubit<MainInitial> {
     });
   }
 
-  void onEmoji(){
-    
-  }
+  void onEmoji() {}
 
   void setShellContext(v) {
     emit(state.copyWith(navigationShellContext: v));
@@ -187,10 +186,12 @@ class MainnCubit extends Cubit<MainInitial> {
     );
   }
 
-  void pushScaffoldForumComments(BuildContext context) {
+  void pushScaffoldForumComments(BuildContext context, int forumID) {
     Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(
-        builder: (_) => ForumCommentsPage(),
+        builder: (_) => ForumCommentsPage(
+          forumId: forumID,
+        ),
       ),
     );
   }
@@ -228,26 +229,15 @@ class MainnCubit extends Cubit<MainInitial> {
     );
   }
 
-  void showChangeBabyBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      context: context,
-      builder: (_) {
-        return GlobalChangeBabyBottomsheet();
-      },
-    );
-  }
-
-  void showDoctorsNotification(BuildContext context) {
-    showModalBottomSheet(
-      showDragHandle: true,
-      isScrollControlled: true,
-      context: context,
-      builder: (_) {
-        return DoctorsNotification();
-      },
-    );
-  }
+  // void showChangeBabyBottomSheet(BuildContext context) {
+  //   showModalBottomSheet(
+  //     isScrollControlled: true,
+  //     context: context,
+  //     builder: (_) {
+  //       return GlobalChangeBabyBottomsheet();
+  //     },
+  //   );
+  // }
 
   void showCalendar(BuildContext context) {
     showDialog(
@@ -267,14 +257,23 @@ class MainnCubit extends Cubit<MainInitial> {
     );
   }
 
-  void showAddIndicator(BuildContext context) {
-    showDialog(
+  Future<Result?> showEditMedicine(BuildContext context, Result data) {
+    return showModalBottomSheet<Result>(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
       context: context,
-      builder: (_) {
-        return AddNewIndicatorDialog();
-      },
+      builder: (_) => EditMedicineDialog(data: data),
     );
   }
+
+  // void showAddIndicator(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (_) {
+  //       return AddNewIndicatorDialog();
+  //     },
+  //   );
+  // }
 
   void firstChildToggle(bool v) {
     emit(state.copyWith(isFirstChild: v));
@@ -295,6 +294,8 @@ class MainnCubit extends Cubit<MainInitial> {
   void updateCommentBoxIndex(int v) {
     emit(state.copyWith(commentBoxIndex: v));
   }
+
+  
 
   @override
   Future<void> close() {

@@ -1,40 +1,78 @@
+import 'package:burla_xatun/ui/screens/auth/widgets/custom_auth_button.dart';
+import 'package:burla_xatun/ui/widgets/custom_circular_progress_indicator.dart';
+import 'package:burla_xatun/ui/widgets/global_text.dart';
+import 'package:burla_xatun/utils/app/app_snackbars.dart';
+import 'package:burla_xatun/utils/constants/text_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../cubits/signup_cubit/signup_cubit.dart';
 import '../../../../../utils/constants/color_constants.dart';
-import '../../../../widgets/global_button.dart';
 
-class GoOnButton extends StatelessWidget {
-  const GoOnButton({super.key});
+class GoOnButton extends StatefulWidget {
+  const GoOnButton({
+    super.key,
+    required this.formKey,
+  });
+  final GlobalKey<FormState> formKey;
+
+  @override
+  State<GoOnButton> createState() => _GoOnButtonState();
+}
+
+class _GoOnButtonState extends State<GoOnButton> {
+  bool? isActiveButton;
 
   @override
   Widget build(BuildContext context) {
     final signupCubit = context.read<SignupCubit>();
-    return BlocConsumer<SignupCubit, SignupCubitState>(
-      listener: (context, state) {
-        if (state is SignupCubitSuccess) {
-          context.push('/questions');
-        } else if (state is SignupCubitError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Login failed!')),
-          );
+    return BlocConsumer<SignupCubit, SignupState>(
+      listener: (_, state) {
+        if (state is SignupSuccess) {
+          context.go('/questions');
+        }
+        if (state is SignupError) {
+          final errorMessage = state.error;
+          AppSnackbars.error(
+              context,
+              errorMessage.isNotEmpty
+                  ? errorMessage
+                  : 'Qeydiyyat uğursuz oldu!');
+        }
+        if (state is SignupNetworkError) {
+          final errorMessage = state.error;
+
+          AppSnackbars.error(
+              context,
+              errorMessage.isNotEmpty
+                  ? errorMessage
+                  : 'Qeydiyyat uğursuz oldu!');
         }
       },
-      builder: (context, state) {
-        if (state is SignupCubitLoading) {
-          return CircularProgressIndicator.adaptive();
-        }
-        return GlobalButton(
-          buttonName: 'Davam et',
+      builder: (_, state) {
+        return CustomAuthButton(
           buttonColor: signupCubit.isActiveButton
               ? ColorConstants.primaryRedColor
-              : ColorConstants.inactiveDotColor,
-          textColor: Colors.white,
-          onPressed: () {
-            signupCubit.register();
-          },
+              : ColorConstants.disabledButtonColor,
+          textColor: ColorConstants.white,
+          onPressed: state is SignupLoading
+              ? () {}
+              : () {
+                  if (state is SignupInitial) {
+                    isActiveButton = state.isActiveButton;
+                  }
+
+                  if (isActiveButton! &&
+                      widget.formKey.currentState!.validate()) {
+                    signupCubit.register();
+                  }
+                },
+          child: state is SignupLoading
+              ? CustomCircularProgressIndicator()
+              : GlobalText(
+                  text: TextConstants.davamEt,
+                ),
         );
       },
     );

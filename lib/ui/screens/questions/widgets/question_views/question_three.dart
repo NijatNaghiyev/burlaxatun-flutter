@@ -1,3 +1,4 @@
+import 'package:burla_xatun/cubits/user_update/user_update_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,12 +10,20 @@ import '../../../../../utils/extensions/num_extensions.dart';
 import '../../../../widgets/global_button.dart';
 import '../../../../widgets/global_text.dart';
 
-class QuestionThree extends StatelessWidget {
+class QuestionThree extends StatefulWidget {
   const QuestionThree({super.key});
 
   @override
+  State<QuestionThree> createState() => _QuestionThreeState();
+}
+
+class _QuestionThreeState extends State<QuestionThree>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
     final questionCubit = context.read<QuestionsCubit>();
+    final userUpdateCubit = context.read<UserUpdateCubit>();
+
     return Padding(
       padding: PaddingConstants.h20 + EdgeInsets.only(top: 56),
       child: Column(
@@ -30,16 +39,18 @@ class QuestionThree extends StatelessWidget {
             builder: (context, state) {
               return GlobalButton(
                 buttonName: 'Bəli',
-                buttonColor: state.isFirstChild == null
-                    ? Colors.white
-                    : state.isFirstChild!
-                        ? Color(0xffFFD3E2)
-                        : Colors.white,
-                borderColor: ColorConstants.primaryRedColor,
+                buttonColor: state.isFirstChild != null && state.isFirstChild!
+                    ? Color(0xffFFD3E2)
+                    : Colors.white,
+                borderColor: state.isFirstChild != null && state.isFirstChild!
+                    ? Colors.transparent
+                    : ColorConstants.primaryRedColor,
                 textColor: ColorConstants.primaryRedColor,
                 onPressed: () {
                   questionCubit.updateQuestionThreeAnswer(true);
                   questionCubit.updateIsActiveButton();
+                  // userUpdateCubit.firstChild = true;
+                  // userUpdateCubit.updateUser(firstChild: true);
                 },
               );
             },
@@ -49,16 +60,18 @@ class QuestionThree extends StatelessWidget {
             builder: (context, state) {
               return GlobalButton(
                 buttonName: 'Xeyr',
-                buttonColor: state.isFirstChild == null
-                    ? Colors.white
-                    : !state.isFirstChild!
-                        ? Color(0xffFFD3E2)
-                        : Colors.white,
-                borderColor: ColorConstants.primaryRedColor,
+                buttonColor: state.isFirstChild != null && !state.isFirstChild!
+                    ? Color(0xffFFD3E2)
+                    : Colors.white,
+                borderColor: state.isFirstChild != null && !state.isFirstChild!
+                    ? Colors.transparent
+                    : ColorConstants.primaryRedColor,
                 textColor: ColorConstants.primaryRedColor,
                 onPressed: () {
                   questionCubit.updateQuestionThreeAnswer(false);
                   questionCubit.updateIsActiveButton();
+                  // userUpdateCubit.firstChild = false;
+                  // userUpdateCubit.updateUser(firstChild: false);
                 },
               );
             },
@@ -67,4 +80,8 @@ class QuestionThree extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => false;
 }

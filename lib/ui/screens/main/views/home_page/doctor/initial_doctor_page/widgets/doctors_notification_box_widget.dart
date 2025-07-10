@@ -1,7 +1,7 @@
+import 'package:burla_xatun/ui/screens/main/views/home_page/doctor/initial_doctor_page/widgets/doctor_info.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../../utils/extensions/num_extensions.dart';
-import 'doctor_info.dart';
 import 'doctor_notification_status.dart';
 import 're_registration_button.dart';
 

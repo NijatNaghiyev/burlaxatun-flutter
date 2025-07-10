@@ -2,12 +2,12 @@ class ProfileSectionsItemsModel {
   ProfileSectionsItemsModel({
     required this.icon,
     required this.sectionName,
-    required this.sectionRoute,
+    this.sectionRoute,
   });
 
   final String icon;
   final String sectionName;
-  final String sectionRoute;
+  final String? sectionRoute;
 
   static List<ProfileSectionsItemsModel> items = [
     ProfileSectionsItemsModel(
@@ -23,7 +23,7 @@ class ProfileSectionsItemsModel {
     ProfileSectionsItemsModel(
       icon: 'assets/icons/share_arrow_icon.svg',
       sectionName: 'Dostunla paylaş',
-      sectionRoute: '/share',
+      // sectionRoute: '/share',
     ),
     ProfileSectionsItemsModel(
       icon: 'assets/icons/info_icon.svg',

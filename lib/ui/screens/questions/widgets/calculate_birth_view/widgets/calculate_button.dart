@@ -1,3 +1,4 @@
+import 'package:burla_xatun/utils/app/app_snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,10 +15,13 @@ class CalculateButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final questionsCubit = context.read<QuestionsCubit>();
     return BlocConsumer<QuestionsCubit, QuestionsInitial>(
+      listenWhen: (previous, current) {
+        return previous.stateStatus != current.stateStatus;
+      },
       listener: (context, state) async {
         if (state.stateStatus == CalculateStateStatus.success) {
           showDialog(
-            barrierDismissible: true,
+            barrierDismissible: false,
             context: context,
             builder: (_) {
               return BlocProvider.value(
@@ -27,9 +31,7 @@ class CalculateButton extends StatelessWidget {
             },
           );
         } else if (state.stateStatus == CalculateStateStatus.error) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error while calculating')),
-          );
+          AppSnackbars.error(context, 'Hesablama zamanı xəta baş verdi');
         }
       },
       builder: (context, state) {
@@ -39,14 +41,15 @@ class CalculateButton extends StatelessWidget {
               : 'Hesabla',
           buttonColor: ColorConstants.primaryRedColor,
           textColor: Colors.white,
-          onPressed: () async {
-            if (state.selectedCalculateOptionIndex == null) {
-              questionsCubit.stateError();
-            } else {
-              questionsCubit.stateLoading();
-              await questionsCubit.calculate();
-            }
-          },
+          onPressed: state.stateStatus == CalculateStateStatus.loading
+              ? () {}
+              : () async {
+                  if (state.selectedCalculateOptionIndex == null) {
+                    questionsCubit.stateError();
+                  } else {
+                    await questionsCubit.calculate();
+                  }
+                },
         );
       },
     );

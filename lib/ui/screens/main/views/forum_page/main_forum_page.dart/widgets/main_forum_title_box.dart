@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../../../utils/extensions/context_extensions.dart';
 import '../../../../../../../utils/extensions/num_extensions.dart';
 import '../../../../../../widgets/global_text.dart';
 
 class MainForumTitleBox extends StatelessWidget {
-  const MainForumTitleBox({super.key});
+  const MainForumTitleBox({
+    super.key,
+    required this.title,
+    this.topicCount,
+    this.messageCount,
+    this.viewsCount,
+    this.onTap,
+  });
+
+  final String title;
+  final int? topicCount;
+  final int? messageCount;
+  final int? viewsCount;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.push('/secondary_forum'),
+      onTap: onTap,
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Color(0xffF7F7F7),
@@ -29,7 +41,7 @@ class MainForumTitleBox extends StatelessWidget {
                     width: context.deviceWidth * 0.58,
                     child: GlobalText(
                       textAlign: TextAlign.left,
-                      text: 'Hamiləlik və Reproduktiv sağlamlıq',
+                      text: title,
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
@@ -40,7 +52,7 @@ class MainForumTitleBox extends StatelessWidget {
                     children: [
                       GlobalText(
                         textAlign: TextAlign.left,
-                        text: '17 mövzu',
+                        text: '$topicCount mövzu',
                         fontSize: 10,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
@@ -48,7 +60,7 @@ class MainForumTitleBox extends StatelessWidget {
                       SizedBox(width: 14),
                       GlobalText(
                         textAlign: TextAlign.left,
-                        text: '46 mesaj',
+                        text: '$messageCount baxış',
                         fontSize: 10,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,

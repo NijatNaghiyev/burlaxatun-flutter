@@ -1,50 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../../../cubits/main_cubit/main_state.dart';
-import '../../../../../../../../cubits/main_cubit/mainn_cubit.dart';
 import '../../widgets/select_option.dart';
 import '../../widgets/single_option.dart';
 
 class SelectGenderBox extends StatelessWidget {
-  const SelectGenderBox({super.key});
+  const SelectGenderBox({
+    super.key,
+    required this.genderScreenIndex,
+    required this.pageController,
+  });
+
+  final ValueNotifier<int> genderScreenIndex;
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainnCubit>();
-    return SelectOption(
-      optionOne: BlocBuilder<MainnCubit, MainInitial>(
-        buildWhen: (previous, current) {
-          return previous.genderOption != current.genderOption;
-        },
-        builder: (context, state) {
-          return SingleOption(
-            boxTitle: 'Oglan',
-            boxColors: state.genderOption == GenderOption.boy
-                ? Colors.white
-                : Colors.transparent,
+    return ValueListenableBuilder(
+      valueListenable: genderScreenIndex,
+      builder: (context, value, child) {
+        return SelectOption(
+          optionOne: SingleOption(
+            boxTitle: 'Oğlan',
+            boxColors: value == 0 ? Colors.white : Colors.transparent,
             onTap: () {
-              mainCubit.changeGender(GenderOption.boy);
+              genderScreenIndex.value = 0;
+              pageController.jumpToPage(genderScreenIndex.value);
             },
-          );
-        },
-      ),
-      optionTwo: BlocBuilder<MainnCubit, MainInitial>(
-        buildWhen: (previous, current) {
-          return previous.genderOption != current.genderOption;
-        },
-        builder: (context, state) {
-          return SingleOption(
-            boxTitle: 'Qiz',
-            boxColors: state.genderOption == GenderOption.girl
-                ? Colors.white
-                : Colors.transparent,
+          ),
+          optionTwo: SingleOption(
+            boxTitle: 'Qız',
+            boxColors: value == 1 ? Colors.white : Colors.transparent,
             onTap: () {
-              mainCubit.changeGender(GenderOption.girl);
+              genderScreenIndex.value = 1;
+              pageController.jumpToPage(genderScreenIndex.value);
             },
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

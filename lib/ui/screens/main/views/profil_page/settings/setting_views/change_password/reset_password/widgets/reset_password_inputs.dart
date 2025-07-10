@@ -1,0 +1,37 @@
+import 'package:burla_xatun/utils/extensions/num_extensions.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../../../../../../../utils/constants/asset_constants.dart';
+import '../../../../../../../../../widgets/global_input.dart';
+
+class ResetPasswordInputs extends StatelessWidget {
+  const ResetPasswordInputs({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      spacing: 25,
+      children: [
+        GlobalInput(
+          inputName: 'Yeni şifrə',
+          prefixIcon: 'assets/icons/lock_2.svg',
+          hintText: 'Yeni şifrəni qeyd edin',
+          isObsecure: true,
+          suffixIcon: 5 == 5
+              ? AssetConstants.eyeClosedIcon
+              : AssetConstants.eyeOpenedIcon,
+        ),
+        GlobalInput(
+          inputName: 'Yeni şifrəni təsdiqləyin',
+          prefixIcon: 'assets/icons/lock_2.svg',
+          hintText: 'Yeni şifrəni təsdiq edin',
+          isObsecure: true,
+          suffixIcon: 5 == 5
+              ? AssetConstants.eyeClosedIcon
+              : AssetConstants.eyeOpenedIcon,
+        ),
+        5.h,
+      ],
+    );
+  }
+}
